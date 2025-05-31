@@ -1,0 +1,118 @@
+:root {
+    --font-color: rgba(245, 245, 245, 0.85)
+}
+
+hr {
+    overflow: visible;
+    padding: 0;
+    border: none;
+    border-top: medium double #333;
+    color: #333;
+    text-align: center;
+}
+
+hr:after {
+    position: relative;
+    top: -0.85em;
+    font-size: 1.5em;
+    padding: 0 0.25em;
+    background: white;
+}
+
+.article-hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+body {
+    position: relative;
+    background-image: linear-gradient(to bottom, #e6d8b5, #a78f63);
+    font-family: "Times New Roman", sans-serif;
+    color: var(--font-color);
+}
+
+.scroll-top .navbar {
+    background: transparent !important;
+}
+
+.bg-ancient {
+    background-image: linear-gradient(to bottom, #3d3a36, #272421);
+}
+
+.fs-10 {
+    font-size: 1.8rem;
+}
+
+.padding {
+    padding: 20px;
+}
+
+#spy-header {
+    background-position: center;
+    background-repeat: repeat-x;
+    background-image: url("https://www.oxfordartonline.com/fileasset/images/OAO/Kano_Sansetsu.jpg")
+}
+
+#footer {
+    border-radius: 5px;
+    background-position: center;
+    background-size: contain;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.55)),
+            url("https://designcuts.b-cdn.net/wp-content/uploads/2023/05/asian-art-collection-1.jpg");
+}
+
+#spy-about .row .col-12 {
+    color: white;
+    background-position: center;
+    background-size: cover;
+    filter: brightness(80%);
+}
+
+#spy-about .row .col-12:first-child {
+    background-image: url("https://cdn4.tuscanynowandmore.com/storage/app/uploads/public/690/8cb/baa/thumb__1920_0_0_0_auto.jpg");
+}
+
+#spy-about .row .col-12:nth-child(2) {
+    background-image: url("https://www.shutterstock.com/image-photo/ancient-etruscan-tombs-tarquinia-italy-260nw-1871125633.jpg");
+}
+
+.color-white {
+    color: rgba(245, 245, 245, 0.85);
+}
+
+.row-gap-2 {
+    gap: 25px 0;
+}
+
+.btn-primary {
+    border: inherit;
+    background: #663d00;
+}
+
+.btn-primary:hover, .btn-primary:active {
+    background: #653d00;
+    border-color: #663d00;
+}
+
+.card-body {
+    color: #663d00;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h3 {
+    font-weight: 650;
+    text-align: center;
+}
+
+.col-6, article{
+    font-size: 1.1rem;
+}
+
+#spy-wall-target, #spy-header-target, #spy-landscape-painting-target, #spy-service1, #spy-service2, #spy-service3{
+    position: relative;
+    top: -60px;
+}

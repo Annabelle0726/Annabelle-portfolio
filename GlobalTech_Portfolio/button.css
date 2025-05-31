@@ -1,0 +1,64 @@
+.btn-transparent {
+    background: transparent;
+    outline: none;
+    border: none;
+}
+
+.button-round {
+    width: 50px;
+    height: 50px;
+}
+
+.icon {
+    position: relative;
+    display: inline-block;
+}
+
+.inline-accordion-item__heading-icon {
+    width: 100%;
+}
+
+.icon__solid, .icon__blur, .icon__solid-icon {
+    display: block;
+    width: 100%;
+}
+
+.icon__blur {
+    -webkit-font-smoothing: antialiased;
+    --content-padding: 2rem;
+    white-space: break-spaces;
+    cursor: pointer;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    transition: opacity .3s ease-in-out;
+    filter: blur(.2rem);
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+svg {
+    fill: none;
+    width: 46px;
+    height: 47px;
+}
+
+.gradient-stop--2--1 {
+    stop-color: #ff38bb;
+}
+
+.gradient-stop--2--2 {
+    stop-color: #ff8038;
+}
+
+.gradient-stop--2--3 {
+    stop-color: #f5be66;
+}
+
+.gradient-stop--2--4 {
+    stop-color: #f4dca8;
+}
+
+

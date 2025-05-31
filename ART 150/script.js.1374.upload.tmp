@@ -1,0 +1,78 @@
+
+const SHOWS = [
+  {
+    title: "Doom at Your Service",
+    genre: "Drama",
+    img: "img/drama/Doom at Your Service.jpg",
+  },
+  {
+    title: "Squid Game",
+    genre: "Drama",
+    img: "img/drama/Squid Game.jpg",
+  },
+  {
+    title: "The Glory",
+    genre: "Drama",
+    img: "img/drama/The Glory.jpg",
+  },
+  {
+    title: "Backstreet Rookie",
+    genre: "Comedy",
+    img: "img/comedy/Backstreet Rookie.jpg",
+  },
+  {
+    title: "A Korean Odyssey",
+    genre: "Drama",
+    img: "img/fantasy/A Korean Odyssey.jpg",
+  },
+  {
+    title: "Hotel Del Luna",
+    genre: "Fantasy",
+    img: "img/fantasy/Hotel Del Luna.jpg",
+  },
+  {
+    title: "The K2",
+    genre: "Drama",
+    img: "img/drama/The K2.jpg",
+  },
+  {
+    title: "Strongest Deliveryman",
+    genre: "Fantasy",
+    img: "img/fantasy/Strongest Deliveryman.jpg",
+  },
+  {
+    title: "Mr. Queen",
+    genre: "Comedy",
+    img: "img/comedy/Mr. Queen.jpg",
+  },
+  {
+    title: "Remarriage & Desires",
+    genre: "Drama",
+    img: "img/drama/Remarriage & Desires.jpg",
+  },
+  {
+    title: "All of Us Are Dead",
+    genre: "Fantasy",
+    img: "img/fantasy/All of Us Are Dead.jpg",
+  },
+  {
+    title: "Her Private Life",
+    genre: "Comedy",
+    img: "img/comedy/Her Private Life.jpg",
+  },
+  {
+    title: "The Third Charm",
+    genre: "Comedy",
+    img: "img/comedy/The Third Charm.jpg",
+  },
+  {
+    title: "The Bride of Habaek",
+    genre: "Drama",
+    img: "img/drama/The Bride of Habaek.jpg",
+  },
+  {
+    title: "My Sassy Girl",
+    genre: "Fantasy",
+    img: "img/fantasy/My Sassy Girl.jpg",
+  }
+]

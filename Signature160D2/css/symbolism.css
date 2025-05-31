@@ -1,0 +1,21 @@
+.flex-wrap {
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+#Symbolism{
+  margin-bottom: 15vh;
+}
+
+.article-container {
+  padding: 1rem;
+}
+
+.article-container p{
+  letter-spacing: 0.05rem;
+  font-family: "Times New Roman", sans-serif;
+  color: #fff3cd;
+}
+

@@ -1,0 +1,45 @@
+#story p {
+  font-family: "Times New Roman", sans-serif;
+  color: #fff3cd;
+}
+
+#story {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15vh;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: row;
+  gap: 5vmin;
+  flex-wrap: wrap;
+}
+
+.card-header {
+  font-weight: 600;
+}
+
+#first-child {
+  background: #e83283;
+  color: #8b1e4f;
+}
+
+#second-child {
+  background: #ffc107;
+  color: #984c0c;
+}
+
+#third-child {
+  background: #8b1e4f;
+  color: red;
+}
+
+#fourth-child {
+  background: #b0eafd;
+  color: #1a5643;
+}
+
+.card h5 {
+  font-family: lovers_quarrelregular, serif;
+}

@@ -1,0 +1,27 @@
+.bg-color {
+    background-image: var(--gradients1);
+}
+
+.scroll-top .navbar {
+    background: transparent !important;
+}
+
+.nav-height {
+    height: var(--navbar-height);
+}
+
+.scroll-top .nav-link, .scroll-top .navbar-brand {
+    color: #fff !important;
+}
+
+.nav-link,.navbar-brand {
+    color: #f9f871;
+}
+
+.navbar-nav .nav-link.active, .navbar-nav .show>.nav-link {
+    color: #d98100;
+}
+
+.navbar{
+    width: 100%;
+}

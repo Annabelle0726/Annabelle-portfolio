@@ -1,0 +1,50 @@
+.bubble {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    animation: bubble 10s ease-in-out infinite;
+    cursor: pointer;
+    border: 1px solid white;
+}
+
+@keyframes bubble {
+    0% {
+        transform: translateY(0);
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+    }
+    50% {
+        transform: translateY(-50px);
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+    }
+    100% {
+        transform: translateY(0);
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+    }
+}
+
+.bubble:hover {
+    animation-play-state: paused;
+}
+
+.bubble-clicked {
+    animation: explode 0.5s linear;
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(5);
+        opacity: 0;
+    }
+}

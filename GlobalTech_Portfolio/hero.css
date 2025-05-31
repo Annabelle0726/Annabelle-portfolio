@@ -1,0 +1,189 @@
+#hero-section {
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    gap: 15px;
+    color: white;
+    overflow: hidden;
+    background-position: center;
+    background-color: #ef96ff;
+    background-size: cover;
+    background-image: linear-gradient(#ef96ff, #ef9671, #ff595e);
+}
+
+.title-h1 {
+    display: flex;
+    max-height: 25%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: var(--title-weight);
+    font-family: 'Send Flowers', cursive;
+}
+
+.sub-title-h1, .hero-text {
+    font-family: "Times New Roman", sans-serif;
+}
+
+.hero-text {
+}
+
+#hello::after {
+    content: "👋🏻";
+    animation-name: wave-animation;
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+    transform-origin: 70% 70%;
+    display: inline-block;
+}
+
+@keyframes wave-animation {
+    0% {
+        transform: rotate(0.0deg)
+    }
+    10% {
+        transform: rotate(14.0deg)
+    }
+    20% {
+        transform: rotate(-8.0deg)
+    }
+    30% {
+        transform: rotate(14.0deg)
+    }
+    40% {
+        transform: rotate(-4.0deg)
+    }
+    50% {
+        transform: rotate(10.0deg)
+    }
+    60% {
+        transform: rotate(0.0deg)
+    }
+    100% {
+        transform: rotate(0.0deg)
+    }
+}
+
+@keyframes pointing {
+    0% {
+        transform: translateY(2px);
+    }
+    33% {
+        transform: translateY(0);
+    }
+    66% {
+        transform: translateY(-2px);
+    }
+    99% {
+        transform: translateY(0);
+    }
+}
+
+#imgs {
+  display: flex;
+    flex-direction: row;
+    width: min-content;
+    height: var(--imgs-height);
+    gap: 0px 40px;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+#imgs img {
+    height: var(--img-height);
+    width: var(--img-height);
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0.8rem 0.8rem 1rem var(--greyLight-3), -0.2rem -0.2rem 1rem var(--greyLight-1);
+    border: 1px solid rgba(250, 250, 250, 0.8);
+}
+
+@media screen and (max-width: 1200px) {
+      #hero-section {
+        --hero-secion-80-s: 80dvh;
+        height: var(--hero-secion-80-s);
+    }
+
+      #hello {
+        margin: 0;
+        font-size: 2.1rem;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .hero-text {
+        font-size: 1.5rem;
+    }
+
+    .sub-small {
+        font-size: 1.7rem;
+        text-wrap: normal;
+    }
+
+    #hero-section {
+        --hero-secion-90-s: 90dvh;
+        height: var(--hero-secion-90-s);
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .hero-text {
+        font-size: 2rem;
+    }
+
+    .sub-small {
+        font-size: 2.3rem;
+    }
+
+    #hello {
+        position: relative;
+        font-size: 3.2rem;
+    }
+
+    #hello::after {
+        position: absolute;
+        transform: scale(1.2) translateX(30px);
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    #imgs {
+        --imgs-height: calc(var(--hero-section-height-800) * .75);
+    }
+
+    #imgs img {
+        --img-height: calc(var(--imgs-height) * 0.78);
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    #imgs {
+        --imgs-height: calc(var(--hero-section-height-800) * .65);
+    }
+
+    #imgs img {
+        --img-height: calc(var(--imgs-height) * 0.7);
+    }
+}
+
+.carousel-item {
+    width: 100%;
+    height: 90%;
+}
+
+.carousel-caption {
+    bottom: -4em;
+    width: 100%;
+    left: 0;
+    right: 0;
+    height: 90%;
+}
+
+.carousel-item h6 {
+    font-size: 1.7rem;
+}
+
+.carousel-item p {
+    font-size: 1rem;
+}
+

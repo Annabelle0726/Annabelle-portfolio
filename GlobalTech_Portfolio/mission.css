@@ -1,0 +1,100 @@
+#mission-section, #contact-section {
+    color: #f7ede2;
+    z-index: 2;
+    overflow: visible;
+    text-align: center;
+    height: max-content;
+}
+
+#mission-section {
+    display: grid;
+    background: url("https://images.blz-contentstack.com/v3/assets/bltc965041283bac56c/blt87edf02f20f6dafb/5f974530ab20b60bdceae855/red-felt-bg.jpg") center top / cover no-repeat;
+}
+
+.mission-part {
+    display: flex;
+}
+
+.mission-title {
+    grid-area: title;
+    margin-top: 5vh;
+    color: white;
+    font-size: var(--default-font-size);
+}
+
+article {
+    font-size: 1.5rem;
+    padding: 20px 15px;
+}
+
+article:first-of-type {
+    grid-area: text1;
+}
+
+article:nth-of-type(2) {
+    grid-area: text2;
+}
+
+article:nth-of-type(3) {
+    grid-area: text3;
+}
+
+article:last-of-type {
+    grid-area: text4;
+}
+
+.mission-img {
+    display: inline-block;
+    border-radius: 50%;
+    padding: 20px;
+    grid-area: img;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 1000px) {
+    .mission-img {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+@media screen and (max-width: 1000px){
+    #mission-section {
+        grid-template-areas: "title"
+    "img"
+        "text1"
+    "text2"
+    "text3"
+      "text4";
+        place-content: center;
+    }
+}
+
+@media screen and (min-width: 1000px) and (max-width: 1200px){
+    #mission-section {
+        grid-template-areas: "title title"
+    "img img"
+        "text1 text1"
+    "text2 text3"
+    "text2 text4";
+        place-content: center;
+    }
+  .mission-img {
+        width: 320px;
+        height: 320px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    #mission-section {
+        grid-template-areas: "title title title"
+    "img text1 text1"
+    "text2 text3 text3"
+    "text2 text4 text4";
+    }
+
+    .mission-img {
+        width: 250px;
+        height: 250px;
+    }
+}

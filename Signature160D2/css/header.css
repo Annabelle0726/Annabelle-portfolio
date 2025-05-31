@@ -1,0 +1,28 @@
+#header {
+  margin-top: 4vh;
+
+}
+
+#introduction {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  color: #fff3cd;
+  font-family: "Times New Roman", serif;
+}
+
+#introduction h1 {
+  font-weight: 700;
+  width: 90%;
+}
+
+#introduction sub{
+  float: right;
+  margin-bottom: 3vh;
+  font-style: italic;
+}
+
+#introduction p {
+  color: #f2f9fa;
+}

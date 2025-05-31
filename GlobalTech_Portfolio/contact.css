@@ -1,0 +1,120 @@
+#contact-section {
+    background: url("https://images.blz-contentstack.com/v3/assets/bltc965041283bac56c/bltce7bd012a7273e91/5f602445b013c94f2078d0e4/homepage_blue_felt_update.jpg") center top / cover no-repeat;
+    height: max-content;
+    width: 100%;
+    display: grid;
+    padding: 20px;
+    flex-direction: column;
+}
+
+.contact-ul {
+    display: flex;
+    gap: 18px;
+    justify-content: space-between;
+}
+
+.contact-ul:first-of-type {
+    flex-direction: column;
+}
+
+.contact-ul:nth-of-type(2) {
+    flex-wrap: wrap;
+}
+
+.contact-ul li {
+    display: inline-flex;
+    gap: 10px;
+}
+
+svg {
+    fill: #f7ede2;
+}
+
+@media screen and (min-width: 768px) {
+    .contact-ul {
+        font-size: var(--default-font-size);
+    }
+}
+
+@media screen and (max-width: 400px){
+    .collapse-1{
+        display: none;
+    }
+
+  
+}
+
+.contact-text {
+    text-align: left;
+}
+
+.contact-ul svg {
+    fill: white;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: fill var(--cubic-bezier) 300ms;
+}
+
+.bi-linkedin:hover {
+    fill: #0c63e0;
+}
+
+.bi-youtube:hover {
+    fill: red;
+}
+
+.feather-codepen:first-child:hover {
+    fill: black;
+}
+
+.octicon-mark-github:first-child:hover {
+    fill: black;
+}
+
+.contact-ul a{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    text-decoration: none;
+    color: #5DDDE2;
+}
+
+.display-1 {
+    margin: 0 auto;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-caption {
+    bottom: -3em;
+    width: 100%;
+    left: 0;
+    right: 0;
+    height: 90%;
+} 
+
+
+@media screen and (max-width: 900px){
+  .display-1{
+      height: 70vh;
+      width: 75%
+  }
+
+  .carousel-inner{
+    width:80%
+  }
+}
+
+@media screen and (min-width: 900px){
+  .display-1{
+    height: 80vh;
+      width: 60%;
+  }
+
+  .carousel-inner{
+    width: 67%
+  }
+}
