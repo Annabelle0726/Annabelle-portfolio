@@ -12,7 +12,7 @@
 .sidebar-name { display: inline-block; max-width: 100%; color: var(--color-text); font: 600 1.125rem/1.2 'Outfit', sans-serif; letter-spacing: -.03em; text-decoration: none; overflow-wrap: anywhere; }
 .sidebar-brand-dot { color: var(--color-accent); }
 /* Selected option 03: Art Deco navy mount with a champagne-gold inlay. */
-.sidebar-portrait-frame { position: relative; isolation: isolate; width: 64px; height: 80px; padding: 3px; background: var(--color-ink-navy); clip-path: polygon(12% 0,88% 0,100% 10%,100% 90%,88% 100%,12% 100%,0 90%,0 10%); }
+.sidebar-portrait-frame { position: relative; left: -4px; isolation: isolate; width: 64px; height: 80px; padding: 3px; background: var(--color-ink-navy); clip-path: polygon(12% 0,88% 0,100% 10%,100% 90%,88% 100%,12% 100%,0 90%,0 10%); }
 .sidebar-portrait-frame::before { content: ''; position: absolute; inset: 1px; z-index: -1; background: linear-gradient(135deg,var(--color-pale-gold),var(--color-champagne-gold) 45%,var(--color-pale-gold)); clip-path: polygon(12% 0,88% 0,100% 10%,100% 90%,88% 100%,12% 100%,0 90%,0 10%); }
 .sidebar-portrait { width: 100%; height: 100%; display: block; object-fit: cover; object-position: 47% 40%; border: 0; clip-path: polygon(10% 0,90% 0,100% 9%,100% 91%,90% 100%,10% 100%,0 91%,0 9%); }
 .sidebar-socials { display: flex; gap: 3px; align-items: center; margin-top: 6px; }
