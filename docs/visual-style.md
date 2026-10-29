@@ -40,4 +40,4 @@ The user approved an editorial About layout: original portrait and original hand
 
 Keep the title and handwritten mark inline. Use the two existing type families, with a compact 34-42px title, 16px body and 17px lead. On wide screens, let prose wrap around the portrait and continue at full width beneath it. The footer arrow links to #portfolio through the existing navigation handler.
 
-The About decoration follows a mouse with bounded 12px horizontal and 8px vertical displacement, time-based damping and a slower return to rest. The portrait and text stay stationary. Touch, reduced motion, hidden documents and offscreen content do not run the effect.
+The About decoration follows page scroll with gentle time-based damping, countering 12% of the page movement up to 40px on desktop and 18px on mobile. It does not respond to the mouse. The portrait and text stay stationary, and a fixed clip keeps the moving decoration outside prose. Reduced motion disables the effect; hidden documents and offscreen content suspend frame updates.
