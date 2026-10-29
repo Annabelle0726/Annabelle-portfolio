@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Icon from './SidebarIcon';
+import useNavigationIndicator from '../hooks/useNavigationIndicator';
 import brandMark from '../assets/brand-mark.svg';
 import instagram from '../assets/sidebar-icons/instagram.svg';
 import github from '../assets/sidebar-icons/github.svg';
@@ -66,6 +67,7 @@ function AccountDialog({ account, language, onClose }) {
 export default function Sidebar({ isMobile, isOpen, activeSection, activeGroup, onClose, language, onLanguageChange }) {
   const t = copy[language];
   const header = useRef(null);
+  const { nav, indicator } = useNavigationIndicator(activeGroup);
   const [expanded, setExpanded] = useState({ home: true, projects: false, favorites: false, contact: false });
   const [account, setAccount] = useState(null);
   const accountTrigger = useRef(null);
@@ -105,15 +107,15 @@ export default function Sidebar({ isMobile, isOpen, activeSection, activeGroup, 
       onClose(event);
     }
   };
-  const child = (id, label, download = false) => <a href={download ? 'Annabelle Zhu Resume.pdf' : `#${id}`} download={download || undefined} aria-current={!download && (activeSection === id || (activeSection === 'skills' && id === 'about')) ? 'location' : undefined} onClick={download ? undefined : onClose}><span>{label}</span>{download && <Icon name="download"/>}</a>;
-  const group = (key, target, children) => <div className={`sidebar-group${activeGroup === key ? ' is-active' : ''}`}>
+  const child = (id, label, download = false) => <li><a href={download ? 'Annabelle Zhu Resume.pdf' : `#${id}`} download={download || undefined} aria-current={!download && (activeSection === id || (activeSection === 'skills' && id === 'about')) ? 'page' : undefined} onClick={download ? undefined : onClose}><span>{label}</span>{download && <Icon name="download"/>}</a></li>;
+  const group = (key, target, children) => <li data-group={key} className={`sidebar-group${activeGroup === key ? ' is-active' : ''}`}>
     <div className="sidebar-nav-row">
-      <a className="sidebar-parent" href={`#${target}`} onClick={event => openGroup(key, target, event)} aria-expanded={expanded[key]} aria-controls={`sidebar-${key}`}><span className="sidebar-icon-tray"><Icon name={key}/></span><span>{t[key]}</span></a>
+      <a className="sidebar-parent" href={`#${target}`} onClick={event => openGroup(key, target, event)} aria-current={activeSection === target ? 'page' : undefined} aria-expanded={expanded[key]} aria-controls={`sidebar-${key}`}><span className="sidebar-icon-tray"><Icon name={key}/></span><span>{t[key]}</span></a>
     </div>
     <div id={`sidebar-${key}`} className={`sidebar-children-shell${expanded[key] ? ' is-expanded' : ''}`} inert={!expanded[key]} aria-hidden={!expanded[key]}>
-      <div className="sidebar-children-clip"><div className="sidebar-children">{children}</div></div>
+      <div className="sidebar-children-clip"><ul className="sidebar-children">{children}</ul></div>
     </div>
-  </div>;
+  </li>;
   return <>
     <aside id="header" className="site-sidebar" ref={header} inert={isMobile && !isOpen} lang={language === 'zh' ? 'zh-CN' : 'en'} role={isMobile ? 'dialog' : undefined} aria-modal={isMobile && isOpen ? true : undefined} aria-label={t.nav}>
       <div className="sidebar-mobile-tools"><LanguageSwitch language={language} onChange={onLanguageChange}/><button className="sidebar-close" type="button" aria-label={t.close} onClick={onClose}><Icon name="close"/></button></div>
@@ -129,12 +131,15 @@ export default function Sidebar({ isMobile, isOpen, activeSection, activeGroup, 
           <img className="sidebar-portrait" src="assets/img/optimized/profile.webp" width="64" height="80" alt="Annabelle Zhu" fetchPriority="high"/>
         </div>
       </div>
-      <nav id="navbar" className="sidebar-navigation" aria-label={t.nav}>
+      <nav ref={nav} id="navbar" className="sidebar-navigation" aria-label={t.nav}>
+        <span ref={indicator} className="sidebar-selection" aria-hidden="true"/>
+        <ul className="sidebar-menu">
         {group('home', 'hero', <>{child('hero', t.overview)}{child('about', t.about)}</>)}
         {group('projects', 'portfolio', <>{child('portfolio', t.web)}{child('XD', t.design)}{child('services', t.data)}</>)}
-        <button className="sidebar-account-link" type="button" onClick={event => openAccount('wechat', event)} aria-haspopup="dialog"><span className="sidebar-icon-tray"><Icon name="wechat"/></span><span>{t.wechat}</span><Icon name="qr" className="sidebar-qr-mark"/></button>
+        <li><button className="sidebar-account-link" type="button" onClick={event => openAccount('wechat', event)} aria-haspopup="dialog"><span className="sidebar-icon-tray"><Icon name="wechat"/></span><span>{t.wechat}</span><Icon name="qr" className="sidebar-qr-mark"/></button></li>
         {group('favorites', 'models', <>{child('models', t.models)}{child('quotes', t.quotes)}{child('model-skills', t.skills)}</>)}
         {group('contact', 'contact', <>{child('contact', t.contactInfo)}{child('resume', t.resume)}{child(null, t.download, true)}</>)}
+        </ul>
       </nav>
       <div className="sidebar-footer"><img className="sidebar-footer-mark" src={brandMark} alt="" aria-hidden="true"/><span>© {new Date().getFullYear()} Annabelle Zhu</span></div>
     </aside>

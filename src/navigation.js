@@ -21,3 +21,7 @@ export function resolveNavigation(hash) {
   const [view, group] = views[id];
   return { id, view, group };
 }
+
+export function sameContentView(first, second) {
+  return first.view === second.view && (first.view !== 'favorites' || first.id === second.id);
+}

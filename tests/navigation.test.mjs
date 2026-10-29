@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { resolveNavigation } from '../src/navigation.js';
+import { resolveNavigation, sameContentView } from '../src/navigation.js';
 
 test('published anchors retain their destinations and navigation groups', () => {
   assert.deepEqual(resolveNavigation('#portfolio'), { id: 'portfolio', view: 'portfolio', group: 'projects' });
@@ -19,4 +19,10 @@ test('favorites entries have individual addresses in the favorites group', () =>
 test('malformed or unknown fragments and the skip target are not routes', () => {
   for (const hash of ['#%E0%A4%A', '#main', '#missing', '#toString', '#__proto__', '']) assert.equal(resolveNavigation(hash), null);
   assert.equal(resolveNavigation('#%58D').id, 'XD');
+});
+
+test('anchors within About share a view, but separate Favorites pages do not', () => {
+  assert.equal(sameContentView(resolveNavigation('#about'), resolveNavigation('#skills')), true);
+  assert.equal(sameContentView(resolveNavigation('#models'), resolveNavigation('#quotes')), false);
+  assert.equal(sameContentView(resolveNavigation('#hero'), resolveNavigation('#about')), false);
 });

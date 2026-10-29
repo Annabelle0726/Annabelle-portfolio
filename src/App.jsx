@@ -8,17 +8,7 @@ import Portfolio from './sections/Portfolio';
 import DesignPortfolio from './sections/DesignPortfolio';
 import Projects from './sections/Projects';
 import Contact from './sections/Contact';
-import { resolveNavigation } from './navigation';
-
-function focusView(id) {
-  window.requestAnimationFrame(() => {
-    const target = document.getElementById(id) || document.getElementById('main');
-    target.setAttribute('tabindex', '-1');
-    target.focus({ preventScroll: true });
-    if (id === 'skills') target.scrollIntoView({ behavior: 'instant', block: 'start' });
-    else window.scrollTo({ top: 0, behavior: 'instant' });
-  });
-}
+import useContentNavigation from './hooks/useContentNavigation';
 
 function Hero() {
   return (
@@ -35,15 +25,15 @@ function Hero() {
 export default function App() {
   const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 767px)').matches);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [route, setRoute] = useState(() => resolveNavigation(window.location.hash) || resolveNavigation('#hero'));
-  const initialView = useRef(true);
+  const { route, navigate } = useContentNavigation();
   const [language, setLanguage] = useNavigationLanguage();
   const menuButton = useRef(null);
   const closeMenu = (event) => {
-    const destination = event?.currentTarget?.hash?.slice(1);
+    if (event?.metaKey || event?.ctrlKey || event?.shiftKey || event?.altKey) return;
+    const destination = event?.currentTarget?.hash;
+    if (destination) navigate(event);
     setMenuOpen(false);
-    if (destination === route.id) focusView(destination);
-    else if (!destination && isMobile) window.requestAnimationFrame(() => menuButton.current?.focus());
+    if (!destination && isMobile) window.requestAnimationFrame(() => menuButton.current?.focus());
   };
 
   useEffect(() => {
@@ -68,20 +58,7 @@ export default function App() {
     };
   }, [isMobile, menuOpen]);
 
-  useEffect(() => {
-    const onHashChange = () => {
-      const next = resolveNavigation(window.location.hash || '#hero');
-      if (next) setRoute(next);
-    };
-    window.addEventListener('hashchange', onHashChange);
-    return () => window.removeEventListener('hashchange', onHashChange);
-  }, []);
-
-  useEffect(() => {
-    setMenuOpen(false);
-    if (!initialView.current || resolveNavigation(window.location.hash)) focusView(route.id);
-    initialView.current = false;
-  }, [route.id]);
+  useEffect(() => { setMenuOpen(false); }, [route.id]);
 
   const favoritesTitle = {
     models: language === 'zh' ? '模型与工具' : 'Models & tools',

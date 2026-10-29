@@ -33,7 +33,10 @@
   --scrollbar-thumb: color-mix(in srgb, var(--color-primary) 70%, var(--color-page));
   --scrollbar-thumb-hover: var(--color-primary);
   --scrollbar-thumb-active: var(--color-deep-sapphire);
-  --motion-quick: 140ms;
-  --motion-panel: 180ms;
+  --motion-quick: 160ms;
+  --motion-panel: 200ms;
+  --motion-nav: 230ms;
+  --motion-content: 200ms;
+  --motion-content-exit: 120ms;
   --ease-ui: cubic-bezier(.2,.8,.2,1);
 }
