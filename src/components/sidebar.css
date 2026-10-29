@@ -134,6 +134,8 @@
 .sidebar-parent:focus-visible { outline-color: var(--color-accent) !important; outline-offset: 2px; }
 .sidebar-children a:focus-visible { outline-offset: -2px; }
 .sidebar-parent, .sidebar-account-link, .sidebar-children a { transition: background-color var(--motion-quick) ease-out, color var(--motion-quick) ease-out; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+/* Keep the label contrast in sync with the selected gradient immediately. */
+.sidebar-parent { transition: background-color var(--motion-quick) ease-out; }
 .site-sidebar button, .social-item { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
 .sidebar-children a { border-radius: 4px; }
 .sidebar-group:not(.is-active) .sidebar-parent:active, .sidebar-account-link:active, .sidebar-children a:active { background-color: var(--color-highlight); }
