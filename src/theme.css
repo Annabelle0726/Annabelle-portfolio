@@ -1,5 +1,6 @@
 /* Shared semantic palette from docs/visual-style.md. */
 :root {
+  --color-paper: #FAF8F2;
   --color-sapphire: #0055A4;
   --color-royal-blue: #0042A8;
   --color-deep-sapphire: #003B78;

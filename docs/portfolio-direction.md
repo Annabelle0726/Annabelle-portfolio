@@ -19,7 +19,7 @@ Help first-time visitors understand Annabelle's positioning and see her data ana
 
 ### About and personal information
 
-The user plans to revise About later. Preserve the current text and personal information for now; do not infer or silently rewrite them. Check potentially outdated or inconsistent details such as degree and age against the user's updated information.
+The About copy now follows the user's supplied Chinese and English text. Preserve personal details unless the user requests a change.
 
 ### Project selection
 

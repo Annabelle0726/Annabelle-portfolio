@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import Sidebar, { LanguageSwitch, useNavigationLanguage } from './components/Sidebar';
 import SidebarIcon from './components/SidebarIcon';
 import About from './sections/About';
-import Skills from './sections/Skills';
 import Resume from './sections/Resume';
 import Portfolio from './sections/Portfolio';
 import DesignPortfolio from './sections/DesignPortfolio';
@@ -62,7 +61,7 @@ export default function App() {
     'agency-bloom-value': <AgencyBloomSecond />,
     'agency-bloom-applause': <AgencyBloomThird />,
     home: <Hero language={language} onNavigate={navigate} />,
-    about: <><About /><Skills /></>,
+    about: <About language={language} onNavigate={navigate} />,
     portfolio: <Portfolio />,
     design: <DesignPortfolio />,
     data: <Projects />,
@@ -84,7 +83,7 @@ export default function App() {
       <main id="main" tabIndex={-1} className={`content-views${route.view === 'home' ? ' is-home' : ''}`}>
         {views[route.view]}
       </main>
-      {route.view !== 'home' && <button type="button" className="back-to-top-link" aria-label={language === 'zh' ? '回到顶部' : 'Back to top'} onClick={() => window.scrollTo({ top: 0, behavior: 'auto' })}><i className="bi bi-arrow-up-short" aria-hidden="true" /></button>}
+      {route.view !== 'home' && route.view !== 'about' && <button type="button" className="back-to-top-link" aria-label={language === 'zh' ? '回到顶部' : 'Back to top'} onClick={() => window.scrollTo({ top: 0, behavior: 'auto' })}><i className="bi bi-arrow-up-short" aria-hidden="true" /></button>}
       </div>
     </>
   );

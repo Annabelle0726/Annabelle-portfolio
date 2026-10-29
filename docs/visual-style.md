@@ -33,3 +33,11 @@ Define shared semantic CSS variables for sidebar, buttons, text, borders and bac
 ## Scope
 
 This guidance does not itself change existing CSS, layout, personal details or historical work. See [portfolio-direction.md](portfolio-direction.md) for content decisions.
+
+### About page
+
+The user approved an editorial About layout: original portrait and original handwritten mark near the introduction, gently pointer-responsive blue/gold artwork behind the portrait, a compact city/work/study strip with expandable personal facts, and three numbered prose chapters. Preserve the full approved Chinese and English copy. The neutral `--color-paper` surface (`#FAF8F2`) is used for About; the shared ivory palette remains available elsewhere. On mobile and narrow tablets, show the heading, portrait, introduction, summary and chapters in reading order. Keep decorative curves away from text and place the About project link in the footer.
+
+Keep the title and handwritten mark inline. Use the two existing type families, with a compact 34-42px title, 16px body and 17px lead. On wide screens, let prose wrap around the portrait and continue at full width beneath it. The footer arrow links to #portfolio through the existing navigation handler.
+
+The About decoration follows a mouse with bounded 12px horizontal and 8px vertical displacement, time-based damping and a slower return to rest. The portrait and text stay stationary. Touch, reduced motion, hidden documents and offscreen content do not run the effect.

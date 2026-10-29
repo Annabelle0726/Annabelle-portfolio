@@ -18,7 +18,7 @@
 
 - Read [docs/portfolio-direction.md](docs/portfolio-direction.md) before planning visual or content changes. It records the direction discussed with the user and decisions still awaiting their input; it is not authorization to implement a redesign.
 - The user selected the soft yellow-and-blue direction and wants content accessed through the sidebar instead of one continuous scrolling page. Follow [docs/visual-style.md](docs/visual-style.md) and `src/AGENTS.md` when working on the main React site. The existing anchor-based page is the current implementation, not the desired final navigation model.
-- The user plans to revise About content and has noted that some historical work is outdated. Do not guess which work to remove, change biographical details, or delete project files. Confirm the intended display and treatment of each project before changing it.
+- Some historical work may be outdated. Do not guess which work to remove, change biographical details, or delete project files. Confirm the intended display and treatment of each project before changing it.
 
 ## Assets and publishing
 
