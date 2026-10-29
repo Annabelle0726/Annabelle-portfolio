@@ -68,7 +68,7 @@ export default function Sidebar({ isMobile, isOpen, activeSection, activeGroup, 
   const t = copy[language];
   const header = useRef(null);
   const { nav, indicator } = useNavigationIndicator(activeGroup);
-  const [expanded, setExpanded] = useState({ home: true, projects: false, favorites: false, contact: false });
+  const [expanded, setExpanded] = useState({ home: true, projects: false, wechat: false, favorites: false, contact: false });
   const [account, setAccount] = useState(null);
   const accountTrigger = useRef(null);
   const openAccount = (key, event) => {
@@ -131,7 +131,9 @@ export default function Sidebar({ isMobile, isOpen, activeSection, activeGroup, 
         <ul className="sidebar-menu">
         {group('home', 'hero', <>{child('hero', t.overview)}{child('about', t.about)}</>)}
         {group('projects', 'portfolio', <>{child('portfolio', t.web)}{child('XD', t.design)}{child('services', t.data)}</>)}
-        <li><button className="sidebar-account-link" type="button" onClick={event => openAccount('wechat', event)} aria-haspopup="dialog"><span className="sidebar-icon-tray"><Icon name="wechat"/></span><span>{t.wechat}</span><Icon name="qr" className="sidebar-qr-mark"/></button></li>
+        {group('wechat', 'agency-bloom', <>
+              {['https://mp.weixin.qq.com/s/xbY_lSzfr1YvotELeE3LsA', 'https://mp.weixin.qq.com/s/byApMNE4pbO2M4OX62F4Cg', 'https://mp.weixin.qq.com/s/pThuorA_l3hqmpPardULOg', 'https://mp.weixin.qq.com/s/VSMctNqPAuP6FyYJsgE6_A'].map((url, index) => <li key={url}><a href={index === 0 ? '#agency-bloom' : index === 1 ? '#agency-bloom-value' : url} target={index < 2 ? undefined : '_blank'} rel={index < 2 ? undefined : 'noopener noreferrer'} aria-current={((index === 0 && activeSection === 'agency-bloom') || (index === 1 && activeSection === 'agency-bloom-value')) ? 'page' : undefined} onClick={index < 2 ? onClose : undefined}><span>{index === 0 ? (language === 'zh' ? 'Agency Bloom：想抵达的生活' : 'Agency Bloom: A life of our own') : index === 1 ? (language === 'zh' ? '在变化中寻找自己的价值' : 'Finding our value') : `${language === 'zh' ? '文章' : 'Article'} ${String(index + 1).padStart(2, '0')}`}</span>{index >= 2 && <Icon name="external"/>}</a></li>)}
+        </>)}
         {group('favorites', 'models', <>{child('models', t.models)}{child('quotes', t.quotes)}{child('model-skills', t.skills)}</>)}
         {group('contact', 'contact', <>{child('contact', t.contactInfo)}{child('resume', t.resume)}{child(null, t.download, true)}</>)}
         </ul>

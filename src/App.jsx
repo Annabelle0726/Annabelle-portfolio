@@ -10,6 +10,8 @@ import Projects from './sections/Projects';
 import Contact from './sections/Contact';
 import useContentNavigation from './hooks/useContentNavigation';
 import Hero from './sections/Hero';
+import AgencyBloom from './sections/AgencyBloom';
+import AgencyBloomSecond from './sections/AgencyBloomSecond';
 
 export default function App() {
   const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 767px)').matches);
@@ -55,6 +57,8 @@ export default function App() {
     'model-skills': language === 'zh' ? '模型 Skills' : 'Model skills',
   }[route.id];
   const views = {
+    'agency-bloom': <AgencyBloom />,
+    'agency-bloom-value': <AgencyBloomSecond />,
     home: <Hero language={language} onNavigate={navigate} />,
     about: <><About /><Skills /></>,
     portfolio: <Portfolio />,

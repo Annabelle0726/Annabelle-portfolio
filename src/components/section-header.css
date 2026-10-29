@@ -1,0 +1,25 @@
+:root {
+  --section-title-size: clamp(34px, 3vw, 42px);
+  --section-title-gap: 24px;
+  --section-eyebrow-size: 11px;
+  --section-eyebrow-tracking: .16em;
+  --section-eyebrow-gap: 14px;
+  --section-eyebrow-margin: 14px;
+  --section-rule-width: 72px;
+  --section-signature-width: 78px;
+  --section-signature-height: 42px;
+}
+.section-header { margin-bottom: 20px; min-width: 0; }
+.section-header .section-eyebrow { display: flex; align-items: center; gap: var(--section-eyebrow-gap); margin: 0 0 var(--section-eyebrow-margin); color: var(--color-text-secondary); font: 400 var(--section-eyebrow-size)/1.6 system-ui, sans-serif; letter-spacing: var(--section-eyebrow-tracking); }
+.section-eyebrow span { color: var(--color-imperial-gold); }
+.section-eyebrow::after { content: ''; height: 1px; width: var(--section-rule-width); flex-shrink: 0; background: var(--color-champagne-gold); opacity: .6; }
+.section-title-line { display: flex; align-items: center; gap: var(--section-title-gap); }
+.section-header .section-header-title { margin: 0; padding: 0; color: var(--color-text); font: 500 var(--section-title-size)/1.25 Georgia, 'Songti SC', 'STSong', SimSun, serif; letter-spacing: .025em; text-wrap: balance; }
+.section-signature { display: block; flex: 0 0 auto; width: var(--section-signature-width); height: var(--section-signature-height); margin: 0; overflow: visible; }
+.section-signature path { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 100; }
+.section-signature .signature-ink { stroke: var(--color-sapphire); }
+.section-signature .signature-gold { stroke: var(--color-champagne-gold); }
+@media (max-width: 767px) {
+  :root { --section-title-size: 34px; --section-title-gap: 18px; --section-eyebrow-size: 10px; --section-eyebrow-tracking: .18em; --section-eyebrow-gap: 12px; --section-eyebrow-margin: 20px; --section-rule-width: 32px; --section-signature-width: 68px; --section-signature-height: 36px; }
+  .section-header { margin-bottom: 0; }
+}
