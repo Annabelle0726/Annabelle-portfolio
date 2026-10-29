@@ -2,13 +2,13 @@
 :root { view-transition-name: none; }
 ::view-transition { pointer-events: none; }
 #main.content-views { view-transition-name: main-content; }
-#main.content-views:not(.is-home) { padding-top: 40px; }
-.content-views:not(.is-home) > section:first-child { padding-top: 32px; scroll-margin-top: 40px; }
-.content-views > section { scroll-margin-top: 12px; }
+#main.content-views:not(.is-home) { padding-top: 24px; }
+.content-views:not(.is-home) > section { padding-top: 20px; scroll-margin-top: 24px; }
+.content-views:not(.is-home) .section-title { padding-bottom: 16px; }
+.content-views:not(.is-home) .section-title h2 { margin-bottom: 12px; padding-bottom: 12px; }
 @media (max-width: 767px) {
-  #main.content-views:not(.is-home) { padding-top: 64px; }
-  .content-views:not(.is-home) > section:first-child { padding-top: 16px; scroll-margin-top: 64px; }
-  .content-views > section { scroll-margin-top: 32px; }
+  #main.content-views:not(.is-home) { padding-top: 56px; }
+  .content-views:not(.is-home) > section { padding-top: 12px; scroll-margin-top: 56px; }
 }
 ::view-transition-group(main-content) { animation: none; }
 ::view-transition-old(main-content) { animation: content-leave var(--motion-content-exit) ease-out both; }

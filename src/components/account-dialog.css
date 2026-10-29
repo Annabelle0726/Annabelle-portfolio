@@ -1,0 +1,17 @@
+/* A QR card should fit normal windows without borrowing the app scrollbar.
+   Keep overflow accessible on genuinely short screens or enlarged text. */
+html:has(.account-dialog[open]) { overflow: hidden; }
+html:has(.account-dialog[open]) #header.site-sidebar { overflow-y: hidden; }
+.account-dialog[open] { box-sizing: border-box; width: min(360px,calc(100vw - 24px)); max-height: calc(100dvh - 24px); padding: 20px; overflow-x: hidden; overflow-y: auto; scrollbar-gutter: auto; }
+.account-dialog .account-platform { width: 34px; height: 34px; border-radius: 10px; margin-bottom: 8px; }
+.account-dialog .account-platform img { width: 21px; height: 21px; }
+.account-dialog .account-platform-name { margin-bottom: 4px; font-size: .75rem; }
+.account-dialog h2 { font-size: 1.25rem; line-height: 1.35; }
+.account-dialog .account-id { margin-top: 6px; }
+.account-dialog .account-qr { width: min(212px,100%,max(120px,calc(100dvh - 340px))); margin: 14px auto 10px; }
+.account-dialog .account-instruction { margin-bottom: 12px; line-height: 1.5; }
+.account-dialog .account-save { padding-top: 10px; }
+@media (max-width: 380px) {
+  .account-dialog[open] { padding: 18px; }
+  .account-dialog .account-qr { width: min(212px,100%,max(120px,calc(100dvh - 400px))); }
+}

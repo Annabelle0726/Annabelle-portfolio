@@ -21,7 +21,7 @@ Secondary links use 8px/12px padding, 10px corners and no underline in any inter
 
 `useContentNavigation` coordinates hash URLs, native browser history and main-only View Transitions. The root has no snapshot name; the sidebar remains mounted and interactive. Unsupported browsers get a Web Animations fallback on main only. Rapid navigation cancels stale transitions and ignores stale callbacks. Existing `#skills` loads still focus and scroll to Skills inside About. Home and About are separate views, so they use the content transition; About/Skills or a repeated current anchor uses native smooth scrolling. Favorites pages share a template but get separate content transitions.
 
-Top spacing was tightened following the user's clarification: a first title lands roughly 72px from the desktop top (40px main + 32px section), or 80px on mobile (64px + 16px). First-section anchor offsets match these values; subsequent section offsets account for their retained padding. Home layout is unaffected.
+Top spacing was tightened again after user feedback: a title lands roughly 44px from the desktop top (24px main + 20px section), or 68px on mobile (56px + 12px). Anchor offsets use 24px/56px, matching those landing positions. Heading-to-body spacing is also reduced. Home layout is unaffected.
 
 Reduced motion skips content View Transitions and fallback movement, snaps the indicator and submenu, disables control displacement, and keeps 160ms background/text color feedback. Collapsed panels remain inert and hidden from assistive technology, and the mobile focus trap excludes their links.
 
