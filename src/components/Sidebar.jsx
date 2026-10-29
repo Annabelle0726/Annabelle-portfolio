@@ -125,7 +125,7 @@ export default function Sidebar({ isMobile, isOpen, activeSection, onClose, lang
         {group('favorites', null, <><p className="sidebar-soon">{t.soon}</p><span>{t.models}</span><span>{t.quotes}</span><span>{t.skills}</span></>)}
         {group('contact', 'contact', <>{child('contact', t.contactInfo)}{child('resume', t.resume)}{child(null, t.download, true)}</>)}
       </nav>
-      <div className="sidebar-footer"><span className="sidebar-footer-mark" aria-hidden="true">az.</span><span>© {new Date().getFullYear()} Annabelle Zhu</span></div>
+      <div className="sidebar-footer"><img className="sidebar-footer-mark" src={`${import.meta.env.BASE_URL}brand-mark.svg`} alt="" aria-hidden="true"/><span>© {new Date().getFullYear()} Annabelle Zhu</span></div>
     </aside>
     {account && <AccountDialog key={account} account={account} language={language} onClose={closeAccount}/>}
   </>;
