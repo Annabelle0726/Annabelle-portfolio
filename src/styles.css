@@ -12,7 +12,7 @@ img { max-width: 100%; height: auto; }
 .nav-menu a { min-height: 48px; }
 .nav-menu a:focus-visible { outline-color: #fff; outline-offset: -3px; }
 .mobile-nav-toggle { display: none; }
-.nav-backdrop { position: fixed; inset: 0; z-index: 9996; border: 0; background: color-mix(in srgb, var(--color-text) 45%, transparent); }
+.nav-backdrop { position: fixed; inset: 0; z-index: 9996; border: 0; background: color-mix(in srgb, var(--color-page) 96%, transparent); }
 
 #hero { box-sizing: border-box; width: calc(100% - 300px); min-height: 100vh; min-height: 100svh; height: auto; margin-left: 300px; padding: 72px 30px; }
 #hero .hero-container { width: min(100%, 650px); min-width: 0; }

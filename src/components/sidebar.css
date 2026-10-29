@@ -2,7 +2,7 @@
 @font-face { font-family: 'Outfit'; src: url('../assets/fonts/outfit.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Annabelle Noto Sans SC'; src: url('../assets/fonts/noto-sidebar.woff2') format('woff2'); font-weight: 400 700; font-style: normal; font-display: swap; }
 :root { --sidebar-type: 'Outfit', 'Annabelle Noto Sans SC', 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif; }
-#header.site-sidebar { padding: 24px 18px 18px; display: flex; flex-direction: column; gap: 22px; color: var(--color-text); background: var(--color-page); border-right: 1px solid var(--color-border); font-family: var(--sidebar-type); transition: transform 280ms cubic-bezier(.2,.8,.2,1); overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--color-border) transparent; }
+#header.site-sidebar { padding: 24px 18px 18px; display: flex; flex-direction: column; gap: 22px; color: var(--color-text); background: var(--color-page); border-right: 1px solid var(--color-border); font-family: var(--sidebar-type); transition: transform 280ms cubic-bezier(.2,.8,.2,1); overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: color-mix(in srgb, var(--color-primary) 25%, var(--color-page)) transparent; }
 .site-sidebar *, .account-dialog *, .shell-controls * { box-sizing: border-box; }
 .site-sidebar button, .site-sidebar a, .account-dialog button, .account-dialog a, .shell-controls button { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 :where(.site-sidebar, .account-dialog) button { font: inherit; cursor: pointer; }
@@ -25,16 +25,15 @@
 .social-tooltip { position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%); z-index: 2; white-space: nowrap; background: var(--color-text); color: var(--color-surface); font-size: 12px; line-height: 1.5; padding: 5px 8px; border-radius: 5px; visibility: hidden; pointer-events: none; }
 .social-item:first-child .social-tooltip { left: 0; transform: none; }
 .social-item:focus-visible .social-tooltip { visibility: visible; }
-.sidebar-navigation { display: flex; flex-direction: column; gap: 8px; }
-.sidebar-nav-row { position: relative; display: flex; min-height: 50px; align-items: stretch; border-radius: 13px; overflow: hidden; transition: background 170ms ease, box-shadow 170ms ease; }
-.sidebar-parent, .sidebar-account-link { color: var(--color-text); display: flex; align-items: center; gap: 13px; text-decoration: none; text-align: left; font: 500 .96875rem/1.45 var(--sidebar-type); border: 0; background: transparent; padding: 12px; min-width: 0; }
-.sidebar-parent { flex: 1; border-radius: 13px; }
+.sidebar-navigation { display: flex; flex-direction: column; gap: 6px; }
+.sidebar-nav-row { display: flex; min-height: 44px; align-items: stretch; border-radius: 10px; transition: background 170ms ease; }
+.sidebar-parent, .sidebar-account-link { color: var(--color-text); display: flex; align-items: center; gap: 12px; text-decoration: none; text-align: left; font: 500 .96875rem/1.45 var(--sidebar-type); border: 0; background: transparent; padding: 8px 10px; min-width: 0; min-height: 44px; }
+.sidebar-parent { flex: 1; border-radius: 10px; }
 .sidebar-parent > span, .sidebar-account-link > span { min-width: 0; overflow-wrap: anywhere; }
 .sidebar-icon { width: 24px; height: 24px; flex: 0 0 24px; display: block; }
 .icon-wash { fill: var(--color-highlight); stroke: none; }
 .icon-accent { fill: var(--color-photo-mat); stroke: currentColor; stroke-width: 1.2; }
 .sidebar-group.is-active .sidebar-nav-row { color: var(--color-surface); background: var(--color-selected); }
-.sidebar-group.is-active .sidebar-nav-row::before { content: ''; position: absolute; left: 0; top: 12px; bottom: 12px; width: 3px; border-radius: 2px; background: var(--color-accent); pointer-events: none; }
 .sidebar-group.is-active .sidebar-parent { color: var(--color-surface); font-weight: 600; }
 .sidebar-group.is-active .icon-wash { fill: none; }
 .sidebar-group.is-active .icon-accent { stroke: var(--color-photo-mat); fill: var(--color-photo-mat); }
@@ -45,7 +44,7 @@
 .sidebar-children > a[aria-current] { color: var(--color-text); font-weight: 600; }
 .sidebar-children > a[aria-current]::before { content: ''; position: absolute; left: 21px; width: 7px; height: 7px; background: var(--color-accent); border-radius: 50%; box-shadow: 0 0 0 3px var(--color-page); }
 .sidebar-children .sidebar-icon { width: 15px; height: 15px; flex-basis: 15px; }
-.sidebar-account-link { width: 100%; border-radius: 13px; min-height: 50px; }
+.sidebar-account-link { width: 100%; border-radius: 10px; }
 .sidebar-soon { font: 500 12px/1.5 var(--sidebar-type); margin: 3px 0 5px; color: var(--color-text-secondary); }
 .sidebar-footer { display: flex; align-items: center; gap: 10px; margin-top: auto; padding: 24px 8px 2px; color: var(--color-text-secondary); font: 400 .625rem/1.5 var(--sidebar-type); }
 .sidebar-footer-mark { display: block; width: 48px; height: auto; flex: 0 0 48px; }
@@ -119,9 +118,8 @@
 .social-glyph { display: block; width: 15px; height: 15px; background: currentColor; mask: var(--social-icon) center / contain no-repeat; }
 .social-xiaohongshu .social-glyph { width: 20px; height: 20px; }
 .site-sidebar .sidebar-qr-mark { margin-left: auto; width: 18px; height: 18px; flex-basis: 18px; }
-.sidebar-group:last-child:not(.is-active) .sidebar-nav-row { background: var(--color-gold-light); box-shadow: inset 0 0 0 1px var(--color-accent); }
 .social-item:focus-visible .social-tile { background: var(--color-primary); color: var(--color-surface); }
 @media (hover: hover) and (pointer: fine) {
   .social-item:hover .social-tile { background: var(--color-primary); color: var(--color-surface); transform: none; box-shadow: none; }
 }
-.sidebar-parent:focus-visible { outline-color: var(--color-accent) !important; outline-offset: -4px; }
+.sidebar-parent:focus-visible { outline-color: var(--color-accent) !important; outline-offset: 2px; }
