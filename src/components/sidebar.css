@@ -11,10 +11,10 @@
 .sidebar-identity-copy { min-width: 0; }
 .sidebar-name { display: inline-block; max-width: 100%; color: var(--color-text); font: 600 1.25rem/1.2 'Outfit', sans-serif; letter-spacing: -.03em; text-decoration: none; overflow-wrap: anywhere; }
 .sidebar-brand-dot { color: var(--color-accent); }
-/* A portrait crop and offset paper mat; the original photo stays intact. */
-.sidebar-portrait-frame { position: relative; isolation: isolate; width: 78px; height: 96px; }
-.sidebar-portrait-frame::before { content: ''; position: absolute; inset: 5px -4px -5px 4px; z-index: -1; background: var(--color-photo-mat); border-radius: 18px 18px 21px 18px; }
-.sidebar-portrait { width: 100%; height: 100%; display: block; object-fit: cover; object-position: 47% 40%; border-radius: 17px; border: 3px solid var(--color-surface); outline: 1px solid var(--color-border); }
+/* Selected option 03: Art Deco navy mount with a champagne-gold inlay. */
+.sidebar-portrait-frame { position: relative; isolation: isolate; width: 78px; height: 96px; padding: 5px; background: var(--color-ink-navy); clip-path: polygon(12% 0,88% 0,100% 10%,100% 90%,88% 100%,12% 100%,0 90%,0 10%); }
+.sidebar-portrait-frame::before { content: ''; position: absolute; inset: 2px; z-index: -1; background: linear-gradient(135deg,var(--color-pale-gold),var(--color-champagne-gold) 45%,var(--color-pale-gold)); clip-path: polygon(12% 0,88% 0,100% 10%,100% 90%,88% 100%,12% 100%,0 90%,0 10%); }
+.sidebar-portrait { width: 100%; height: 100%; display: block; object-fit: cover; object-position: 47% 40%; border: 2px solid var(--color-ink-navy); clip-path: polygon(10% 0,90% 0,100% 9%,100% 91%,90% 100%,10% 100%,0 91%,0 9%); }
 .sidebar-socials { display: flex; gap: 3px; align-items: center; margin-top: 10px; }
 .social-item { display: grid; place-items: center; position: relative; flex: 0 0 30px; width: 30px; min-height: 34px; padding: 0; border: 0; background: transparent; border-radius: 10px; }
 .social-tile { display: grid; place-items: center; width: 28px; height: 28px; background: var(--social-color); border: 1px solid color-mix(in srgb, var(--color-surface) 35%, transparent); border-radius: 9px; box-shadow: 0 2px 4px color-mix(in srgb, var(--color-text) 12%, transparent), inset 0 1px 0 color-mix(in srgb, var(--color-surface) 20%, transparent); transition: transform 160ms ease, box-shadow 160ms ease; }
@@ -34,14 +34,14 @@
 .sidebar-parent { flex: 1; border-radius: 13px 0 0 13px; }
 .sidebar-parent > span, .sidebar-account-link > span { min-width: 0; overflow-wrap: anywhere; }
 .sidebar-icon { width: 24px; height: 24px; flex: 0 0 24px; display: block; }
-.icon-wash { fill: var(--color-selected); stroke: none; }
+.icon-wash { fill: var(--color-highlight); stroke: none; }
 .icon-accent { fill: var(--color-photo-mat); stroke: currentColor; stroke-width: 1.2; }
 .sidebar-disclosure { display: grid; place-items: center; flex: 0 0 40px; padding: 0; border: 0; color: inherit; background: transparent; border-radius: 0 13px 13px 0; }
 .sidebar-disclosure .sidebar-icon { width: 13px; height: 13px; flex-basis: 13px; transition: transform 180ms ease; }
 .sidebar-disclosure[aria-expanded='true'] .sidebar-icon { transform: rotate(90deg); }
-.sidebar-group.is-active .sidebar-nav-row { color: var(--color-text); background: var(--color-selected); box-shadow: inset 3px 0 0 var(--color-accent); }
-.sidebar-group.is-active .sidebar-parent { color: var(--color-text); font-weight: 600; }
-.sidebar-group.is-active .icon-wash { fill: var(--color-selected); }
+.sidebar-group.is-active .sidebar-nav-row { color: var(--color-surface); background: var(--color-selected); box-shadow: inset 3px 0 0 var(--color-accent); }
+.sidebar-group.is-active .sidebar-parent { color: var(--color-surface); font-weight: 600; }
+.sidebar-group.is-active .icon-wash { fill: var(--color-lake); }
 .sidebar-group.is-active .icon-accent { stroke: var(--color-photo-mat); fill: var(--color-photo-mat); }
 .sidebar-children { position: relative; padding: 7px 0 5px 48px; }
 .sidebar-children::before { content: ''; position: absolute; top: 13px; bottom: 12px; left: 24px; width: 1px; background: var(--color-border); }
@@ -86,7 +86,7 @@
 @media (hover: hover) and (pointer: fine) {
   .social-item:hover .social-tile { transform: translateY(-2px); box-shadow: 0 4px 7px color-mix(in srgb, var(--color-text) 20%, transparent); }
   .social-item:hover .social-tooltip { visibility: visible; }
-  .sidebar-group:not(.is-active) .sidebar-nav-row:hover, .sidebar-account-link:hover { background: var(--color-selected); }
+  .sidebar-group:not(.is-active) .sidebar-nav-row:hover, .sidebar-account-link:hover { background: var(--color-highlight); }
   .sidebar-children a:hover { color: var(--color-primary-hover); text-decoration: underline; text-underline-offset: 4px; }
   .sidebar-name:hover { color: var(--color-text); }
 }
@@ -110,6 +110,8 @@
 @media (prefers-reduced-motion: reduce) { #header.site-sidebar, .social-tile, .sidebar-disclosure .sidebar-icon { transition: none; } }
 
 .sidebar-language button[aria-pressed='true']:focus-visible,
+.sidebar-group.is-active .sidebar-parent:focus-visible,
+.sidebar-group.is-active .sidebar-disclosure:focus-visible,
 .shell-controls .mobile-nav-toggle:focus-visible,
 .account-actions button:focus-visible { outline-color: var(--color-surface) !important; box-shadow: 0 0 0 5px var(--color-focus); }
 @media (hover: hover) and (pointer: fine) {
@@ -118,5 +120,5 @@
   .account-actions button:hover { background: var(--color-primary-hover); }
   .sidebar-language button:not([aria-pressed='true']):hover,
   .sidebar-close:hover, .account-close:hover,
-  .account-actions a:hover { background: var(--color-selected); }
+  .account-actions a:hover { background: var(--color-highlight); }
 }

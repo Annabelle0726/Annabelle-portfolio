@@ -1,15 +1,21 @@
 /* Shared semantic palette from docs/visual-style.md. */
 :root {
-  --color-page: #FAF8EE;
-  --color-text: #163961;
-  --color-primary: #173B6C;
+  --color-sapphire: #0055A4;
+  --color-lake: #00A8B5;
+  --color-champagne-gold: #D4A43A;
+  --color-pale-gold: #F4DA91;
+  --color-ivory: #FCFAF3;
+  --color-ink-navy: #082D49;
+  --color-page: var(--color-ivory);
+  --color-text: var(--color-ink-navy);
+  --color-primary: var(--color-sapphire);
   --color-surface: #FFFFFF;
-  --color-accent: #E8BB3F;
-  --color-photo-mat: #F3D878;
-  --color-border: #DEDDD4;
-  --color-text-secondary: #425B70;
-  --color-selected: #E8EFF4;
-  --color-highlight: #FFF3C8;
-  --color-primary-hover: #102E55;
-  --color-focus: #173B6C;
+  --color-accent: var(--color-champagne-gold);
+  --color-photo-mat: var(--color-pale-gold);
+  --color-border: color-mix(in srgb, var(--color-champagne-gold) 48%, var(--color-ivory));
+  --color-text-secondary: var(--color-primary-hover);
+  --color-selected: var(--color-sapphire);
+  --color-highlight: color-mix(in srgb, var(--color-lake) 12%, var(--color-ivory));
+  --color-primary-hover: color-mix(in srgb, var(--color-sapphire) 72%, var(--color-ink-navy));
+  --color-focus: var(--color-sapphire);
 }
