@@ -2,7 +2,6 @@ import React from 'react';
 import SectionHeader from '../components/SectionHeader';
 import openai from '../assets/tool-icons/openai.svg';
 import claude from '../assets/tool-icons/claude.svg';
-import modelsOrb from '../assets/models-orb.webp';
 import './models-tools.css';
 
 const content = {
@@ -49,7 +48,7 @@ const content = {
 export default function ModelsTools({ language = 'zh', onNavigate, id = 'models' }) {
   const t = content[language] || content.zh;
   return <section id={id} className="models-tools" lang={language === 'en' ? 'en' : 'zh-CN'}>
-    <div className="models-art" aria-hidden="true"><div className="models-orb-float"><img className="models-orb" src={modelsOrb} width="640" height="640" alt="" decoding="async" draggable="false" /></div></div>
+    <div className="models-art" aria-hidden="true"><div className="models-ribbon" /></div>
     <div className="models-page">
       <div className="models-opening">
         <SectionHeader eyebrow="TOOLS" title={t.title} />

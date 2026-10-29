@@ -22,7 +22,7 @@
 ## Decisions
 User approved implementation; no additional approval gate. Existing contact/article work untouched.
 No source-mirroring unit tests for presentational changes; use interaction/layout checks.
-No commit or publication requested.
+The user subsequently requested a local commit; publication is not requested.
 
 ## Verification record
 - Node 22.23.3: production build passed; existing 10 tests passed.
@@ -38,7 +38,7 @@ No commit or publication requested.
 - A broad git whitespace check reports pre-existing trailing spaces in about.css at lines 91 and 94; that unrelated file was not changed. Scoped App/Sidebar whitespace checks passed.
 
 ## Decorative motion refinement
-User approved a blue/gold/white spherical image with subtle motion and requested a commit.
-Generated a transparent glass/pearl ribbon orb; web delivery uses a 640px WebP (112216 bytes). The original PNG is retained with the generated image record.
-Replaced the static corner ribbon with a decorative image. Two CSS transform animations provide a 10px vertical float / 5px lateral drift over 11s and an 11-degree swing over 17s (21s on mobile). The corner clips only the decorative layer; text remains in natural flow. Reduced-motion disables both animations. Desktop copy leaves space for the ornament; mobile uses a smaller, fainter crop.
-Browser visual verification remains blocked by environment policy; build and source checks are performed before commit. Only this page and its precise App/Sidebar integration changes are included in the commit.
+The user clarified that the original blue/gold ribbon was correct and requested subtle floating motion, with no spherical decoration. This supersedes the earlier orb interpretation committed in 2254181.
+Restore the existing hero-art.png ribbon and its original desktop/mobile corner treatment. A 14-second alternating CSS transform adds 8px of vertical float, 6px of lateral drift and a subtle 0.8-degree sway. A stationary mask clips only the decorative layer; reduced-motion disables animation. Remove the orb asset and its desktop text reservation.
+Keep the shared signature, page content, placeholders, index alignment and #quotes link unchanged. This correction is a separate scoped commit.
+Browser visual verification remains blocked by environment policy; build and existing tests are checked before commit.
