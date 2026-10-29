@@ -1,0 +1,37 @@
+/* Main content scrolls on the document; the fixed sidebar scrolls separately. */
+html, #header.site-sidebar, .account-dialog {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+html { scrollbar-gutter: stable; overscroll-behavior-y: none; }
+#header.site-sidebar { scrollbar-gutter: stable; }
+
+/* Standard scrollbar properties override WebKit sizing in Chromium. Let the
+   pseudo-elements own desktop geometry, retaining the thin Firefox fallback. */
+@media (hover: hover) and (pointer: fine) {
+  @supports selector(::-webkit-scrollbar) {
+    html, #header.site-sidebar, .account-dialog { scrollbar-width: auto; scrollbar-color: auto; }
+    :is(html, #header.site-sidebar, .account-dialog)::-webkit-scrollbar { width: var(--scrollbar-size); height: var(--scrollbar-size); }
+    :is(html, #header.site-sidebar, .account-dialog)::-webkit-scrollbar-button { display: none; }
+    :is(html, #header.site-sidebar, .account-dialog)::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+    :is(html, #header.site-sidebar, .account-dialog)::-webkit-scrollbar-thumb {
+      --scrollbar-current: var(--scrollbar-thumb);
+      border: 0;
+      /* Four triangular corners form a small diamond point at either end. */
+      background:
+        linear-gradient(to bottom right, transparent calc(50% - var(--scrollbar-edge)), var(--scrollbar-current) calc(50% + var(--scrollbar-edge))) left top / calc(50% + .5px) var(--scrollbar-tip) no-repeat,
+        linear-gradient(to bottom left, transparent calc(50% - var(--scrollbar-edge)), var(--scrollbar-current) calc(50% + var(--scrollbar-edge))) right top / calc(50% + .5px) var(--scrollbar-tip) no-repeat,
+        linear-gradient(to top right, transparent calc(50% - var(--scrollbar-edge)), var(--scrollbar-current) calc(50% + var(--scrollbar-edge))) left bottom / calc(50% + .5px) var(--scrollbar-tip) no-repeat,
+        linear-gradient(to top left, transparent calc(50% - var(--scrollbar-edge)), var(--scrollbar-current) calc(50% + var(--scrollbar-edge))) right bottom / calc(50% + .5px) var(--scrollbar-tip) no-repeat,
+        linear-gradient(var(--scrollbar-current), var(--scrollbar-current)) center / 100% calc(100% - 2 * var(--scrollbar-tip) + 1px) no-repeat;
+    }
+    :is(html, #header.site-sidebar, .account-dialog)::-webkit-scrollbar-thumb:hover { --scrollbar-current: var(--scrollbar-thumb-hover); }
+    :is(html, #header.site-sidebar, .account-dialog)::-webkit-scrollbar-thumb:active { --scrollbar-current: var(--scrollbar-thumb-active); }
+    :is(html, #header.site-sidebar, .account-dialog)::-webkit-scrollbar-corner { background: var(--scrollbar-track); }
+  }
+}
+
+/* Touch scrolling keeps the platform's native overlay indicator and physics. */
+@media (pointer: coarse) {
+  html, #header.site-sidebar, .account-dialog { scrollbar-width: auto; scrollbar-color: auto; scrollbar-gutter: auto; }
+}

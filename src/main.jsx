@@ -7,5 +7,6 @@ import '../assets/css/style.css';
 import './theme.css';
 import './styles.css';
 import App from './App';
+import './scrollbars.css';
 
 createRoot(document.getElementById('root')).render(<App />);

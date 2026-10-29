@@ -87,7 +87,7 @@ export default function Sidebar({ isMobile, isOpen, activeSection, activeGroup, 
     header.current.querySelector('.sidebar-close').focus();
     const trap = event => {
       if (event.key !== 'Tab' || document.querySelector('dialog[open]')) return;
-      const focusable = [...header.current.querySelectorAll('a[href], button:not([disabled])')].filter(el => el.getClientRects().length && !el.closest('[hidden]'));
+      const focusable = [...header.current.querySelectorAll('a[href], button:not([disabled])')].filter(el => el.getClientRects().length && !el.closest('[hidden], [inert]'));
       const first = focusable[0], last = focusable.at(-1);
       if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
       else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
@@ -95,13 +95,24 @@ export default function Sidebar({ isMobile, isOpen, activeSection, activeGroup, 
     document.addEventListener('keydown', trap);
     return () => document.removeEventListener('keydown', trap);
   }, [isMobile, isOpen]);
-  const toggle = key => setExpanded(previous => ({ ...previous, [key]: !previous[key] }));
+  const openGroup = (key, target, event) => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    if (activeSection === target) {
+      event.preventDefault();
+      setExpanded(previous => ({ ...previous, [key]: !previous[key] }));
+    } else {
+      setExpanded(previous => ({ ...previous, [key]: true }));
+      onClose(event);
+    }
+  };
   const child = (id, label, download = false) => <a href={download ? 'Annabelle Zhu Resume.pdf' : `#${id}`} download={download || undefined} aria-current={!download && (activeSection === id || (activeSection === 'skills' && id === 'about')) ? 'location' : undefined} onClick={download ? undefined : onClose}><span>{label}</span>{download && <Icon name="download"/>}</a>;
-  const group = (key, children) => <div className={`sidebar-group${activeGroup === key ? ' is-active' : ''}`}>
+  const group = (key, target, children) => <div className={`sidebar-group${activeGroup === key ? ' is-active' : ''}`}>
     <div className="sidebar-nav-row">
-      <button className="sidebar-parent" type="button" onClick={() => toggle(key)} aria-expanded={expanded[key]} aria-controls={`sidebar-${key}`}><span className="sidebar-icon-tray"><Icon name={key}/></span><span>{t[key]}</span></button>
+      <a className="sidebar-parent" href={`#${target}`} onClick={event => openGroup(key, target, event)} aria-expanded={expanded[key]} aria-controls={`sidebar-${key}`}><span className="sidebar-icon-tray"><Icon name={key}/></span><span>{t[key]}</span></a>
     </div>
-    <div id={`sidebar-${key}`} className="sidebar-children" hidden={!expanded[key]}>{children}</div>
+    <div id={`sidebar-${key}`} className={`sidebar-children-shell${expanded[key] ? ' is-expanded' : ''}`} inert={!expanded[key]} aria-hidden={!expanded[key]}>
+      <div className="sidebar-children-clip"><div className="sidebar-children">{children}</div></div>
+    </div>
   </div>;
   return <>
     <aside id="header" className="site-sidebar" ref={header} inert={isMobile && !isOpen} lang={language === 'zh' ? 'zh-CN' : 'en'} role={isMobile ? 'dialog' : undefined} aria-modal={isMobile && isOpen ? true : undefined} aria-label={t.nav}>
@@ -119,11 +130,11 @@ export default function Sidebar({ isMobile, isOpen, activeSection, activeGroup, 
         </div>
       </div>
       <nav id="navbar" className="sidebar-navigation" aria-label={t.nav}>
-        {group('home', <>{child('hero', t.overview)}{child('about', t.about)}</>)}
-        {group('projects', <>{child('portfolio', t.web)}{child('XD', t.design)}{child('services', t.data)}</>)}
+        {group('home', 'hero', <>{child('hero', t.overview)}{child('about', t.about)}</>)}
+        {group('projects', 'portfolio', <>{child('portfolio', t.web)}{child('XD', t.design)}{child('services', t.data)}</>)}
         <button className="sidebar-account-link" type="button" onClick={event => openAccount('wechat', event)} aria-haspopup="dialog"><span className="sidebar-icon-tray"><Icon name="wechat"/></span><span>{t.wechat}</span><Icon name="qr" className="sidebar-qr-mark"/></button>
-        {group('favorites', <>{child('models', t.models)}{child('quotes', t.quotes)}{child('model-skills', t.skills)}</>)}
-        {group('contact', <>{child('contact', t.contactInfo)}{child('resume', t.resume)}{child(null, t.download, true)}</>)}
+        {group('favorites', 'models', <>{child('models', t.models)}{child('quotes', t.quotes)}{child('model-skills', t.skills)}</>)}
+        {group('contact', 'contact', <>{child('contact', t.contactInfo)}{child('resume', t.resume)}{child(null, t.download, true)}</>)}
       </nav>
       <div className="sidebar-footer"><img className="sidebar-footer-mark" src={brandMark} alt="" aria-hidden="true"/><span>© {new Date().getFullYear()} Annabelle Zhu</span></div>
     </aside>

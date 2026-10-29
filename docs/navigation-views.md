@@ -16,6 +16,8 @@ The user authorized splitting the existing long page into independent content vi
 
 Native fragment links keep the existing GitHub Pages/subdirectory deployment and published deep links working without a new router dependency. `src/navigation.js` resolves supported fragments; unknown fragments do not replace the current view, and an unknown initial fragment falls back to Home. The skip link focuses the main content without adding a history entry.
 
+Primary menu labels are real links: Home opens `#hero`, Projects opens `#portfolio`, Favorites opens `#models`, and Contact & résumé opens `#contact`. Selecting a different destination expands that group and closes the mobile drawer. Repeating the current destination toggles its children without closing the drawer, so secondary links remain accessible. Modified link clicks keep normal browser behavior.
+
 Route changes mount only the selected view, close the mobile menu, focus the destination and reset scroll. The retained Skills fragment scrolls to Skills within About. Browser back/forward and reload restore the view. Scrolling within long content does not change the selected sidebar group. Back-to-top scrolls within the current view. Download and external project URLs are untouched. Menu headings continue to expand/collapse their child links; WeChat continues to open the account dialog.
 
 The social icon bottom edge is reduced from 2px to 1px (hover 3px to 2px). Selected navigation depth is reduced from 2px to 1px, with a smaller and lighter diffuse shadow. Colors still come from shared theme variables.

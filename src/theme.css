@@ -26,4 +26,14 @@
   --color-highlight: var(--color-aqua-light);
   --color-primary-hover: var(--color-deep-sapphire);
   --color-focus: var(--color-sapphire);
+  --scrollbar-size: 5px;
+  --scrollbar-tip: 3px;
+  --scrollbar-edge: .35px;
+  --scrollbar-track: color-mix(in srgb, var(--color-primary) 4%, var(--color-page));
+  --scrollbar-thumb: color-mix(in srgb, var(--color-primary) 70%, var(--color-page));
+  --scrollbar-thumb-hover: var(--color-primary);
+  --scrollbar-thumb-active: var(--color-deep-sapphire);
+  --motion-quick: 140ms;
+  --motion-panel: 180ms;
+  --ease-ui: cubic-bezier(.2,.8,.2,1);
 }
