@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Icon from './SidebarIcon';
+import brandMark from '../assets/brand-mark.svg';
 import instagram from '../assets/sidebar-icons/instagram.svg';
 import github from '../assets/sidebar-icons/github.svg';
 import linkedin from '../assets/sidebar-icons/linkedin.svg';
@@ -125,7 +126,7 @@ export default function Sidebar({ isMobile, isOpen, activeSection, onClose, lang
         {group('favorites', null, <><p className="sidebar-soon">{t.soon}</p><span>{t.models}</span><span>{t.quotes}</span><span>{t.skills}</span></>)}
         {group('contact', 'contact', <>{child('contact', t.contactInfo)}{child('resume', t.resume)}{child(null, t.download, true)}</>)}
       </nav>
-      <div className="sidebar-footer"><img className="sidebar-footer-mark" src={`${import.meta.env.BASE_URL}brand-mark.svg`} alt="" aria-hidden="true"/><span>© {new Date().getFullYear()} Annabelle Zhu</span></div>
+      <div className="sidebar-footer"><img className="sidebar-footer-mark" src={brandMark} alt="" aria-hidden="true"/><span>© {new Date().getFullYear()} Annabelle Zhu</span></div>
     </aside>
     {account && <AccountDialog key={account} account={account} language={language} onClose={closeAccount}/>}
   </>;
