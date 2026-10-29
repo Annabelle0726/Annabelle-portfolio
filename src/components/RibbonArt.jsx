@@ -15,6 +15,9 @@ export default function RibbonArt() {
     let frame = 0, previous = 0, elapsed = 0, loaded = false, disposed = false, visible = true;
     let width = 1, height = 1;
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const hero = canvas.closest('#hero');
+    const pointer = { x: 0, y: 0, targetX: 0, targetY: 0 };
     const compile = (type, source) => {
       const shader = gl.createShader(type);
       shaders.push(shader);
@@ -33,6 +36,7 @@ export default function RibbonArt() {
         uniform vec2 resolution;
         uniform vec2 imageSize;
         uniform float time;
+        uniform vec2 pointer;
         void main(){
           vec2 p=vec2(uv.x,1.-uv.y);
           float aspect=resolution.x/resolution.y;
@@ -43,6 +47,7 @@ export default function RibbonArt() {
           p.x+=.019*wave;
           p.y+=.011*sin(p.x*7.+p.y*4.-time*.7);
           p=(p-.5)*.94+.5;
+          p-=pointer*vec2(.018,.012);
           vec2 sampleUV=p*crop+(1.-crop)*vec2(.55,.5);
           vec3 color=texture2D(art,sampleUV).rgb;
           // Restrict the changing light to blue pigment; ivory stays quiet.
@@ -74,16 +79,22 @@ export default function RibbonArt() {
     }
     const time = gl.getUniformLocation(program, 'time');
     const resolution = gl.getUniformLocation(program, 'resolution');
+    const pointerLocation = gl.getUniformLocation(program, 'pointer');
     const render = () => {
       if (!loaded || disposed || gl.isContextLost()) return;
       gl.viewport(0, 0, width, height);
       gl.uniform2f(resolution, width, height);
       gl.uniform1f(time, media.matches ? 0 : elapsed);
+      gl.uniform2f(pointerLocation, media.matches ? 0 : pointer.x, media.matches ? 0 : pointer.y);
       gl.drawArrays(gl.TRIANGLES, 0, 6);
     };
     const tick = now => {
       if (disposed) return;
-      if (!media.matches && previous) elapsed += Math.min((now - previous) / 1000, .05) * .16;
+      const delta = previous ? Math.min((now - previous) / 1000, .05) : 0;
+      if (!media.matches) elapsed += delta * .16;
+      const blend = 1 - Math.exp(-4 * delta);
+      pointer.x += (pointer.targetX - pointer.x) * blend;
+      pointer.y += (pointer.targetY - pointer.y) * blend;
       previous = now;
       render();
       frame = requestAnimationFrame(tick);
@@ -116,6 +127,18 @@ export default function RibbonArt() {
       sync();
     };
     source.src = artwork;
+    const resetPointer = () => { pointer.targetX = 0; pointer.targetY = 0; };
+    const movePointer = event => {
+      if (event.pointerType !== 'mouse' || !finePointer.matches || media.matches) return;
+      const rect = hero.getBoundingClientRect();
+      pointer.targetX = Math.max(-1, Math.min(1, (event.clientX - rect.left) / rect.width * 2 - 1));
+      pointer.targetY = Math.max(-1, Math.min(1, (event.clientY - rect.top) / rect.height * 2 - 1));
+    };
+    hero.addEventListener('pointermove', movePointer, { passive: true });
+    hero.addEventListener('pointerleave', resetPointer);
+    window.addEventListener('blur', resetPointer);
+    finePointer.addEventListener('change', resetPointer);
+    media.addEventListener('change', resetPointer);
     const lost = event => { event.preventDefault(); cancelAnimationFrame(frame); delete canvas.dataset.ready; };
     canvas.addEventListener('webglcontextlost', lost);
     document.addEventListener('visibilitychange', sync);
@@ -129,6 +152,11 @@ export default function RibbonArt() {
       canvas.removeEventListener('webglcontextlost', lost);
       document.removeEventListener('visibilitychange', sync);
       media.removeEventListener('change', sync);
+      hero.removeEventListener('pointermove', movePointer);
+      hero.removeEventListener('pointerleave', resetPointer);
+      window.removeEventListener('blur', resetPointer);
+      finePointer.removeEventListener('change', resetPointer);
+      media.removeEventListener('change', resetPointer);
       shaders.forEach(shader => gl.deleteShader(shader));
       gl.deleteTexture(texture);
       gl.deleteBuffer(buffer);
