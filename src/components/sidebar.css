@@ -34,7 +34,7 @@
 .icon-shadow { fill: var(--color-pale-gold); stroke: none; }
 .icon-wash { fill: var(--color-aqua-light); stroke: none; }
 .icon-accent { fill: var(--color-photo-mat); stroke: currentColor; stroke-width: 1.2; }
-.sidebar-group.is-active .sidebar-nav-row { color: var(--color-surface); background: linear-gradient(160deg,var(--color-royal-blue),var(--color-sapphire) 55%,var(--color-deep-sapphire)); box-shadow: inset 0 0 0 1px color-mix(in srgb,var(--color-pale-gold) 35%,transparent), inset 0 1px 0 color-mix(in srgb,var(--color-surface) 25%,transparent), 0 2px 0 var(--color-deep-sapphire), 0 7px 14px -8px color-mix(in srgb,var(--color-deep-sapphire) 55%,transparent); }
+.sidebar-group.is-active .sidebar-nav-row { color: var(--color-surface); background: linear-gradient(160deg,var(--color-royal-blue),var(--color-sapphire) 55%,var(--color-deep-sapphire)); box-shadow: inset 0 0 0 1px color-mix(in srgb,var(--color-pale-gold) 35%,transparent), inset 0 1px 0 color-mix(in srgb,var(--color-surface) 25%,transparent), 0 1px 0 var(--color-deep-sapphire), 0 4px 8px -6px color-mix(in srgb,var(--color-deep-sapphire) 35%,transparent); }
 .sidebar-group.is-active .sidebar-nav-row::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(180deg,color-mix(in srgb,var(--color-surface) 18%,transparent),transparent 55%); pointer-events: none; }
 .sidebar-group.is-active .sidebar-parent { color: var(--color-surface); font-weight: 600; }
 .sidebar-group.is-active .icon-shadow { fill: var(--color-deep-sapphire); }
@@ -126,10 +126,10 @@
 .site-sidebar .sidebar-qr-mark { margin-left: auto; width: 18px; height: 18px; flex-basis: 18px; }
 .social-item:focus-visible .social-tile { background: var(--color-primary); color: var(--color-surface); }
 @media (hover: hover) and (pointer: fine) {
-  .social-item:hover .social-tile { background: var(--color-primary); color: var(--color-surface); transform: translateY(-1px); box-shadow: 0 3px 0 var(--color-pale-gold); }
+  .social-item:hover .social-tile { background: var(--color-primary); color: var(--color-surface); transform: translateY(-1px); box-shadow: 0 2px 0 var(--color-pale-gold); }
 }
 .sidebar-parent:focus-visible { outline-color: var(--color-accent) !important; outline-offset: 2px; }
-.social-tile { box-shadow: 0 2px 0 var(--color-pale-gold); transition: background 160ms ease,color 160ms ease,transform 160ms ease,box-shadow 160ms ease; }
+.social-tile { box-shadow: 0 1px 0 var(--color-pale-gold); transition: background 160ms ease,color 160ms ease,transform 160ms ease,box-shadow 160ms ease; }
 .social-instagram .social-glyph { width: 14px; height: 14px; }
 .social-item:active .social-tile { transform: translateY(1px); box-shadow: 0 1px 0 var(--color-pale-gold); }
 @media (prefers-reduced-motion: reduce) { .sidebar-nav-row, .social-tile { transition: none; } }

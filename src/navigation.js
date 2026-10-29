@@ -1,0 +1,23 @@
+// Keep the published anchor URLs, but mount only their content view.
+const views = {
+  hero: ['home', 'home'],
+  about: ['about', 'home'],
+  skills: ['about', 'home'],
+  portfolio: ['portfolio', 'projects'],
+  XD: ['design', 'projects'],
+  services: ['data', 'projects'],
+  contact: ['contact', 'contact'],
+  resume: ['resume', 'contact'],
+  models: ['favorites', 'favorites'],
+  quotes: ['favorites', 'favorites'],
+  'model-skills': ['favorites', 'favorites'],
+};
+
+export function resolveNavigation(hash) {
+  let id;
+  try { id = decodeURIComponent(hash.replace(/^#/, '')); }
+  catch { return null; }
+  if (!Object.hasOwn(views, id)) return null;
+  const [view, group] = views[id];
+  return { id, view, group };
+}

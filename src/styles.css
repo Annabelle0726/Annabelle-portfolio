@@ -4,6 +4,14 @@ button, a { touch-action: manipulation; }
 button:focus-visible, a:focus-visible { outline: 3px solid #173b6c; outline-offset: 3px; }
 img { max-width: 100%; height: auto; }
 
+#main.content-views { min-height: 100vh; min-height: 100svh; padding-top: 64px; background: var(--color-page); }
+#main.content-views.is-home { padding-top: 0; }
+#main.content-views #hero { width: 100%; margin-left: 0; }
+.content-views > section:focus, #main.content-views:focus { outline: none; }
+.favorites-view { font-family: var(--sidebar-type); }
+.content-views ~ .back-to-top-link { border: 0; background: var(--color-primary); }
+@media (max-width: 767px) { #main.content-views:not(.is-home) { padding-top: 72px; } }
+
 .skip-link { position: fixed; top: 8px; left: 8px; z-index: 10002; padding: 10px 14px; background: white; transform: translateY(-150%); }
 .skip-link:focus { transform: translateY(0); }
 #header .profile { display: flex; flex-direction: column; align-items: center; padding-top: 22px; }

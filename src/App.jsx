@@ -8,8 +8,17 @@ import Portfolio from './sections/Portfolio';
 import DesignPortfolio from './sections/DesignPortfolio';
 import Projects from './sections/Projects';
 import Contact from './sections/Contact';
+import { resolveNavigation } from './navigation';
 
-const navigation = ['hero', 'about', 'skills', 'resume', 'portfolio', 'XD', 'services', 'contact'];
+function focusView(id) {
+  window.requestAnimationFrame(() => {
+    const target = document.getElementById(id) || document.getElementById('main');
+    target.setAttribute('tabindex', '-1');
+    target.focus({ preventScroll: true });
+    if (id === 'skills') target.scrollIntoView({ behavior: 'instant', block: 'start' });
+    else window.scrollTo({ top: 0, behavior: 'instant' });
+  });
+}
 
 function Hero() {
   return (
@@ -26,23 +35,15 @@ function Hero() {
 export default function App() {
   const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 767px)').matches);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('hero');
+  const [route, setRoute] = useState(() => resolveNavigation(window.location.hash) || resolveNavigation('#hero'));
+  const initialView = useRef(true);
   const [language, setLanguage] = useNavigationLanguage();
   const menuButton = useRef(null);
   const closeMenu = (event) => {
     const destination = event?.currentTarget?.hash?.slice(1);
     setMenuOpen(false);
-    if (isMobile) window.requestAnimationFrame(() => {
-      const target = destination && document.getElementById(destination);
-      if (target) {
-        const alreadyFocusable = target.hasAttribute('tabindex');
-        if (!alreadyFocusable) {
-          target.setAttribute('tabindex', '-1');
-          target.addEventListener('blur', () => target.removeAttribute('tabindex'), { once: true });
-        }
-        target.focus({ preventScroll: true });
-      } else menuButton.current?.focus();
-    });
+    if (destination === route.id) focusView(destination);
+    else if (!destination && isMobile) window.requestAnimationFrame(() => menuButton.current?.focus());
   };
 
   useEffect(() => {
@@ -58,7 +59,7 @@ export default function App() {
   useEffect(() => {
     document.body.classList.toggle('mobile-nav-active', isMobile && menuOpen);
     const onKeyDown = (event) => {
-      if (event.key === 'Escape' && !document.querySelector('dialog[open]')) closeMenu();
+      if (event.key === 'Escape' && menuOpen && !document.querySelector('dialog[open]')) closeMenu();
     };
     window.addEventListener('keydown', onKeyDown);
     return () => {
@@ -68,62 +69,50 @@ export default function App() {
   }, [isMobile, menuOpen]);
 
   useEffect(() => {
-    let frame = 0;
-    const updateActive = () => {
-      frame = 0;
-      let current = 'hero';
-      for (const id of navigation) {
-        const section = document.getElementById(id);
-        if (section && section.getBoundingClientRect().top <= 140) current = id;
-      }
-      setActiveSection(current);
+    const onHashChange = () => {
+      const next = resolveNavigation(window.location.hash || '#hero');
+      if (next) setRoute(next);
     };
-    const onScroll = () => {
-      if (!frame) frame = window.requestAnimationFrame(updateActive);
-    };
-    updateActive();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      if (frame) window.cancelAnimationFrame(frame);
-    };
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
 
   useEffect(() => {
-    if (!window.location.hash) return undefined;
-    let targetId;
-    try {
-      targetId = decodeURIComponent(window.location.hash.slice(1));
-    } catch {
-      return undefined;
-    }
-    const target = document.getElementById(targetId);
-    if (!target) return undefined;
-    const frame = window.requestAnimationFrame(() => target.scrollIntoView({ behavior: 'instant', block: 'start' }));
-    return () => window.cancelAnimationFrame(frame);
-  }, []);
+    setMenuOpen(false);
+    if (!initialView.current || resolveNavigation(window.location.hash)) focusView(route.id);
+    initialView.current = false;
+  }, [route.id]);
+
+  const favoritesTitle = {
+    models: language === 'zh' ? '模型与工具' : 'Models & tools',
+    quotes: language === 'zh' ? '团队与语录' : 'Teams & quotes',
+    'model-skills': language === 'zh' ? '模型 Skills' : 'Model skills',
+  }[route.id];
+  const views = {
+    home: <Hero />,
+    about: <><About /><Skills /></>,
+    portfolio: <Portfolio />,
+    design: <DesignPortfolio />,
+    data: <Projects />,
+    contact: <Contact />,
+    resume: <Resume />,
+    favorites: <section id={route.id} className="favorites-view" lang={language === 'zh' ? 'zh-CN' : 'en'}><div className="container"><div className="section-title"><h2>{favoritesTitle}</h2></div><p>{language === 'zh' ? '即将更新' : 'Coming soon'}</p></div></section>,
+  };
 
   return (
     <>
-      <a className="skip-link" href="#main">Skip to main content</a>
+      <a className="skip-link" href="#main" onClick={event => { event.preventDefault(); document.getElementById('main').focus(); }}>Skip to main content</a>
       <div className={`shell-controls${isMobile && menuOpen ? ' is-drawer-open' : ''}`}>
         <LanguageSwitch language={language} onChange={setLanguage}/>
         <button ref={menuButton} className="mobile-nav-toggle" type="button" aria-label={language === 'zh' ? '打开导航' : 'Open navigation'} aria-controls="header" aria-expanded={menuOpen} onClick={() => setMenuOpen(true)}><SidebarIcon name="menu"/></button>
       </div>
       {isMobile && menuOpen && <button className="nav-backdrop" type="button" aria-label={language === 'zh' ? '关闭导航' : 'Close navigation'} tabIndex={-1} onClick={closeMenu} />}
-      <Sidebar isMobile={isMobile} isOpen={menuOpen} activeSection={activeSection} onClose={closeMenu} language={language} onLanguageChange={setLanguage}/>
+      <Sidebar isMobile={isMobile} isOpen={menuOpen} activeSection={route.id} activeGroup={route.group} onClose={closeMenu} language={language} onLanguageChange={setLanguage}/>
       <div inert={isMobile && menuOpen}>
-      <Hero />
-      <main id="main">
-        <About />
-        <Skills />
-        <Resume />
-        <Portfolio />
-        <DesignPortfolio />
-        <Projects />
-        <Contact />
+      <main id="main" tabIndex={-1} className={`content-views${route.view === 'home' ? ' is-home' : ''}`}>
+        {views[route.view]}
       </main>
-      <a href="#hero" className="back-to-top-link" aria-label="Back to top"><i className="bi bi-arrow-up-short" aria-hidden="true" /></a>
+      {route.view !== 'home' && <button type="button" className="back-to-top-link" aria-label={language === 'zh' ? '回到顶部' : 'Back to top'} onClick={() => window.scrollTo({ top: 0, behavior: 'auto' })}><i className="bi bi-arrow-up-short" aria-hidden="true" /></button>}
       </div>
     </>
   );

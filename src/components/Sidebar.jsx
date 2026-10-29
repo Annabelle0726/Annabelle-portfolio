@@ -63,7 +63,7 @@ function AccountDialog({ account, language, onClose }) {
   </dialog>, document.body);
 }
 
-export default function Sidebar({ isMobile, isOpen, activeSection, onClose, language, onLanguageChange }) {
+export default function Sidebar({ isMobile, isOpen, activeSection, activeGroup, onClose, language, onLanguageChange }) {
   const t = copy[language];
   const header = useRef(null);
   const [expanded, setExpanded] = useState({ home: true, projects: false, favorites: false, contact: false });
@@ -81,7 +81,6 @@ export default function Sidebar({ isMobile, isOpen, activeSection, onClose, lang
       else document.querySelector('.shell-controls .mobile-nav-toggle')?.focus();
     });
   };
-  const activeGroup = ['hero', 'about', 'skills'].includes(activeSection) ? 'home' : ['portfolio', 'XD', 'services'].includes(activeSection) ? 'projects' : 'contact';
   useEffect(() => { setExpanded(previous => ({ ...previous, [activeGroup]: true })); }, [activeGroup]);
   useEffect(() => {
     if (!isMobile || !isOpen) return;
@@ -97,7 +96,7 @@ export default function Sidebar({ isMobile, isOpen, activeSection, onClose, lang
     return () => document.removeEventListener('keydown', trap);
   }, [isMobile, isOpen]);
   const toggle = key => setExpanded(previous => ({ ...previous, [key]: !previous[key] }));
-  const child = (id, label, download = false) => <a href={download ? 'Annabelle Zhu Resume.pdf' : `#${id}`} download={download || undefined} aria-current={!download && activeSection === id ? 'location' : undefined} onClick={download ? undefined : onClose}><span>{label}</span>{download && <Icon name="download"/>}</a>;
+  const child = (id, label, download = false) => <a href={download ? 'Annabelle Zhu Resume.pdf' : `#${id}`} download={download || undefined} aria-current={!download && (activeSection === id || (activeSection === 'skills' && id === 'about')) ? 'location' : undefined} onClick={download ? undefined : onClose}><span>{label}</span>{download && <Icon name="download"/>}</a>;
   const group = (key, children) => <div className={`sidebar-group${activeGroup === key ? ' is-active' : ''}`}>
     <div className="sidebar-nav-row">
       <button className="sidebar-parent" type="button" onClick={() => toggle(key)} aria-expanded={expanded[key]} aria-controls={`sidebar-${key}`}><span className="sidebar-icon-tray"><Icon name={key}/></span><span>{t[key]}</span></button>
@@ -123,7 +122,7 @@ export default function Sidebar({ isMobile, isOpen, activeSection, onClose, lang
         {group('home', <>{child('hero', t.overview)}{child('about', t.about)}</>)}
         {group('projects', <>{child('portfolio', t.web)}{child('XD', t.design)}{child('services', t.data)}</>)}
         <button className="sidebar-account-link" type="button" onClick={event => openAccount('wechat', event)} aria-haspopup="dialog"><span className="sidebar-icon-tray"><Icon name="wechat"/></span><span>{t.wechat}</span><Icon name="qr" className="sidebar-qr-mark"/></button>
-        {group('favorites', <><p className="sidebar-soon">{t.soon}</p><span>{t.models}</span><span>{t.quotes}</span><span>{t.skills}</span></>)}
+        {group('favorites', <>{child('models', t.models)}{child('quotes', t.quotes)}{child('model-skills', t.skills)}</>)}
         {group('contact', <>{child('contact', t.contactInfo)}{child('resume', t.resume)}{child(null, t.download, true)}</>)}
       </nav>
       <div className="sidebar-footer"><img className="sidebar-footer-mark" src={brandMark} alt="" aria-hidden="true"/><span>© {new Date().getFullYear()} Annabelle Zhu</span></div>
