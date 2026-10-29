@@ -1,15 +1,15 @@
 /* Scoped brand language: existing main/section typography remains untouched. */
 @font-face { font-family: 'Outfit'; src: url('../assets/fonts/outfit.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Annabelle Noto Sans SC'; src: url('../assets/fonts/noto-sidebar.woff2') format('woff2'); font-weight: 400 700; font-style: normal; font-display: swap; }
-:root { --sidebar-ink: var(--color-text); --sidebar-blue: var(--color-page); --sidebar-yellow: var(--color-accent); --sidebar-type: 'Outfit', 'Annabelle Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif; }
-#header.site-sidebar { padding: 30px 18px 18px; display: flex; flex-direction: column; gap: 28px; color: var(--sidebar-ink); background: var(--color-page); border-right: 1px solid var(--color-border); font-family: var(--sidebar-type); transition: transform 280ms cubic-bezier(.2,.8,.2,1); overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--color-border) transparent; }
+:root { --sidebar-type: 'Outfit', 'Annabelle Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+#header.site-sidebar { padding: 30px 18px 18px; display: flex; flex-direction: column; gap: 28px; color: var(--color-text); background: var(--color-page); border-right: 1px solid var(--color-border); font-family: var(--sidebar-type); transition: transform 280ms cubic-bezier(.2,.8,.2,1); overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--color-border) transparent; }
 .site-sidebar *, .account-dialog *, .shell-controls * { box-sizing: border-box; }
 .site-sidebar button, .site-sidebar a, .account-dialog button, .account-dialog a, .shell-controls button { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 :where(.site-sidebar, .account-dialog) button { font: inherit; cursor: pointer; }
 .site-sidebar button:focus-visible, .site-sidebar a:focus-visible, .account-dialog button:focus-visible, .account-dialog a:focus-visible, .shell-controls button:focus-visible { outline: 2px solid var(--color-focus) !important; outline-offset: 3px; }
 .sidebar-identity { display: grid; grid-template-columns: minmax(0,1fr) 78px; align-items: center; gap: 12px; padding: 5px 4px 26px 0; border-bottom: 1px solid var(--color-border); }
 .sidebar-identity-copy { min-width: 0; }
-.sidebar-name { display: inline-block; max-width: 100%; color: var(--sidebar-ink); font: 600 1.25rem/1.2 'Outfit', sans-serif; letter-spacing: -.03em; text-decoration: none; overflow-wrap: anywhere; }
+.sidebar-name { display: inline-block; max-width: 100%; color: var(--color-text); font: 600 1.25rem/1.2 'Outfit', sans-serif; letter-spacing: -.03em; text-decoration: none; overflow-wrap: anywhere; }
 .sidebar-brand-dot { color: var(--color-accent); }
 /* A portrait crop and offset paper mat; the original photo stays intact. */
 .sidebar-portrait-frame { position: relative; isolation: isolate; width: 78px; height: 96px; }
@@ -17,7 +17,7 @@
 .sidebar-portrait { width: 100%; height: 100%; display: block; object-fit: cover; object-position: 47% 40%; border-radius: 17px; border: 3px solid var(--color-surface); outline: 1px solid var(--color-border); }
 .sidebar-socials { display: flex; gap: 3px; align-items: center; margin-top: 10px; }
 .social-item { display: grid; place-items: center; position: relative; flex: 0 0 30px; width: 30px; min-height: 34px; padding: 0; border: 0; background: transparent; border-radius: 10px; }
-.social-tile { display: grid; place-items: center; width: 28px; height: 28px; background: var(--social-color); border: 1px solid rgb(255 255 255 / 35%); border-radius: 9px; box-shadow: 0 2px 4px rgb(12 69 100 / 12%), inset 0 1px 0 rgb(255 255 255 / 20%); transition: transform 160ms ease, box-shadow 160ms ease; }
+.social-tile { display: grid; place-items: center; width: 28px; height: 28px; background: var(--social-color); border: 1px solid color-mix(in srgb, var(--color-surface) 35%, transparent); border-radius: 9px; box-shadow: 0 2px 4px color-mix(in srgb, var(--color-text) 12%, transparent), inset 0 1px 0 color-mix(in srgb, var(--color-surface) 20%, transparent); transition: transform 160ms ease, box-shadow 160ms ease; }
 .social-instagram { --social-color: linear-gradient(145deg, #8545cf, #dd376c 62%, #f3a044); }
 .social-github { --social-color: #20374d; }
 .social-linkedin { --social-color: #0a66c2; }
@@ -25,12 +25,12 @@
 .social-xiaohongshu { --social-color: #ed2450; }
 .social-tile img { width: 16px; height: 16px; display: block; }
 .social-xiaohongshu .social-tile img { width: 21px; height: 21px; }
-.social-tooltip { position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%); z-index: 2; white-space: nowrap; background: var(--color-text); color: #fff; font-size: 12px; line-height: 1.5; padding: 5px 8px; border-radius: 5px; visibility: hidden; pointer-events: none; }
+.social-tooltip { position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%); z-index: 2; white-space: nowrap; background: var(--color-text); color: var(--color-surface); font-size: 12px; line-height: 1.5; padding: 5px 8px; border-radius: 5px; visibility: hidden; pointer-events: none; }
 .social-item:first-child .social-tooltip { left: 0; transform: none; }
 .social-item:focus-visible .social-tooltip { visibility: visible; }
 .sidebar-navigation { display: flex; flex-direction: column; gap: 8px; }
 .sidebar-nav-row { display: flex; min-height: 50px; align-items: stretch; border-radius: 13px; transition: background 170ms ease, box-shadow 170ms ease; }
-.sidebar-parent, .sidebar-account-link { color: var(--sidebar-ink); display: flex; align-items: center; gap: 13px; text-decoration: none; text-align: left; font: 500 .96875rem/1.45 var(--sidebar-type); border: 0; background: transparent; padding: 12px; min-width: 0; }
+.sidebar-parent, .sidebar-account-link { color: var(--color-text); display: flex; align-items: center; gap: 13px; text-decoration: none; text-align: left; font: 500 .96875rem/1.45 var(--sidebar-type); border: 0; background: transparent; padding: 12px; min-width: 0; }
 .sidebar-parent { flex: 1; border-radius: 13px 0 0 13px; }
 .sidebar-parent > span, .sidebar-account-link > span { min-width: 0; overflow-wrap: anywhere; }
 .sidebar-icon { width: 24px; height: 24px; flex: 0 0 24px; display: block; }
@@ -56,21 +56,21 @@
 .sidebar-footer { display: flex; align-items: center; gap: 10px; margin-top: auto; padding: 24px 8px 2px; color: var(--color-text-secondary); font: 400 11px/1.5 var(--sidebar-type); }
 .sidebar-footer-mark { font: 600 22px/1 'Outfit', sans-serif; letter-spacing: -1px; color: var(--color-text); }
 .shell-controls { position: fixed; z-index: 9998; top: max(18px,env(safe-area-inset-top)); right: max(24px,env(safe-area-inset-right)); display: flex; align-items: center; gap: 10px; }
-.sidebar-language { display: flex; padding: 4px; gap: 2px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 99px; box-shadow: 0 3px 12px rgb(18 54 87 / 5%); }
+.sidebar-language { display: flex; padding: 4px; gap: 2px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 99px; box-shadow: 0 3px 12px color-mix(in srgb, var(--color-text) 5%, transparent); }
 .sidebar-language button { min-width: 35px; min-height: 32px; border: 0; border-radius: 99px; background: transparent; color: var(--color-text); font: 500 13px/1 var(--sidebar-type); cursor: pointer; transition: background 160ms ease, color 160ms ease; }
 .sidebar-language button[aria-pressed='true'] { background: var(--color-primary); color: var(--color-surface); }
 .shell-controls .mobile-nav-toggle { position: static; display: none; margin: 0; width: 44px; height: 44px; background: var(--color-primary); border-radius: 50%; color: var(--color-surface); transition: transform 150ms ease; }
 .sidebar-mobile-tools { display: none; }
 .sidebar-close, .account-close { display: grid; place-items: center; width: 40px; height: 40px; background: transparent; border: 0; border-radius: 50%; color: var(--color-text); }
-.account-dialog { width: min(380px,calc(100vw - 32px)); max-height: calc(100dvh - 32px); overflow-y: auto; border: 1px solid var(--color-border); border-radius: 24px; padding: 28px; background: var(--color-page); color: var(--color-text); text-align: center; font-family: var(--sidebar-type); box-shadow: 0 24px 90px rgb(0 24 45 / 25%); }
-.account-dialog::backdrop { background: rgb(6 29 50 / 48%); backdrop-filter: blur(5px); }
+.account-dialog { width: min(380px,calc(100vw - 32px)); max-height: calc(100dvh - 32px); overflow-y: auto; border: 1px solid var(--color-border); border-radius: 24px; padding: 28px; background: var(--color-page); color: var(--color-text); text-align: center; font-family: var(--sidebar-type); box-shadow: 0 24px 90px color-mix(in srgb, var(--color-text) 25%, transparent); }
+.account-dialog::backdrop { background: color-mix(in srgb, var(--color-text) 48%, transparent); backdrop-filter: blur(5px); }
 .account-close { position: absolute; right: 12px; top: 12px; }
 .account-platform { width: 42px; height: 42px; border-radius: 13px; background: var(--social-color); display: grid; place-items: center; margin: 0 auto 10px; }
 .account-platform img { width: 25px; height: 25px; }
 .account-platform-name { margin: 0 0 5px; font-size: 13px; line-height: 1.5; }
 .account-dialog h2 { margin: 0; font: 600 22px/1.4 var(--sidebar-type); color: var(--color-text); }
 .account-id { margin: 7px 0 0; font-size: 14px; }
-.account-qr { position: relative; width: min(244px,100%); aspect-ratio: 1; overflow: hidden; background: #fff; border-radius: 12px; margin: 18px auto 12px; }
+.account-qr { position: relative; width: min(244px,100%); aspect-ratio: 1; overflow: hidden; background: var(--color-surface); border-radius: 12px; margin: 18px auto 12px; }
 .account-qr img { position: absolute; max-width: none; height: auto; }
 .qr-wechat img { width: 156.7164%; left: -28.3582%; top: -19.403%; }
 .qr-xiaohongshu img { width: 387.5758%; left: -257.5758%; top: -400%; }
@@ -84,7 +84,7 @@
 .account-feedback:empty { display: none; }
 .account-save { display: inline-flex; align-items: center; gap: 7px; padding: 12px 0 0; color: var(--color-text-secondary); font-size: 12px; }
 @media (hover: hover) and (pointer: fine) {
-  .social-item:hover .social-tile { transform: translateY(-2px); box-shadow: 0 4px 7px rgb(12 69 100 / 20%); }
+  .social-item:hover .social-tile { transform: translateY(-2px); box-shadow: 0 4px 7px color-mix(in srgb, var(--color-text) 20%, transparent); }
   .social-item:hover .social-tooltip { visibility: visible; }
   .sidebar-group:not(.is-active) .sidebar-nav-row:hover, .sidebar-account-link:hover { background: var(--color-selected); }
   .sidebar-children a:hover { color: var(--color-primary-hover); text-decoration: underline; text-underline-offset: 4px; }
