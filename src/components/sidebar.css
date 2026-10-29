@@ -45,12 +45,12 @@
 .sidebar-icon-tray { display: grid; place-items: center; width: 28px; height: 28px; flex: 0 0 28px; border-radius: 8px; }
 .sidebar-group.is-active .sidebar-icon-tray { background: color-mix(in srgb,var(--color-surface) 13%,transparent); box-shadow: inset 0 1px 0 color-mix(in srgb,var(--color-surface) 30%,transparent); }
 .sidebar-parent:active { transform: translateY(1px); }
-.sidebar-children { position: relative; list-style: none; margin: 0; padding: 12px 4px 5px 38px; }
+.sidebar-children { position: relative; list-style: none; margin: 0; padding: 0 4px 0 38px; }
 .sidebar-children-shell { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--motion-panel) ease-out; }
 .sidebar-children-shell.is-expanded { grid-template-rows: 1fr; }
 .sidebar-children-clip { min-height: 0; overflow: hidden; opacity: 0; transform: translateY(-8px); transition: opacity var(--motion-panel) ease-out, transform var(--motion-panel) ease-out; }
 .sidebar-children-shell.is-expanded .sidebar-children-clip { opacity: 1; transform: translateY(0); }
-.sidebar-children::before { content: ''; position: absolute; top: 18px; bottom: 12px; left: 24px; width: 1px; background: var(--color-border); }
+.sidebar-children::before { content: ''; position: absolute; top: 12px; bottom: 10px; left: 24px; width: 1px; background: var(--color-border); }
 .sidebar-children .sidebar-icon { width: 15px; height: 15px; flex-basis: 15px; }
 .sidebar-account-link { width: 100%; border-radius: 10px; }
 .sidebar-soon { font: 500 12px/1.5 var(--sidebar-type); margin: 3px 0 5px; color: var(--color-text-secondary); }
@@ -99,7 +99,6 @@
   .social-item { min-height: 44px; }
   .sidebar-socials { margin-top: 5px; }
   .sidebar-parent, .sidebar-account-link { font-size: 1rem; }
-  .sidebar-children > a { min-height: 44px; }
   .sidebar-language button { min-height: 36px; min-width: 36px; }
   .shell-controls { top: max(12px,env(safe-area-inset-top)); right: max(12px,env(safe-area-inset-right)); }
   .shell-controls .mobile-nav-toggle { display: inline-flex; }
