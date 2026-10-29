@@ -10,6 +10,7 @@ import Contact from './sections/Contact';
 import useContentNavigation from './hooks/useContentNavigation';
 import Hero from './sections/Hero';
 import ModelsTools from './sections/ModelsTools';
+import ModelUsage from './sections/ModelUsage';
 import AgencyBloom from './sections/AgencyBloom';
 import AgencyBloomSecond from './sections/AgencyBloomSecond';
 import AgencyBloomThird from './sections/AgencyBloomThird';
@@ -67,6 +68,8 @@ export default function App() {
     design: <DesignPortfolio />,
     data: <Projects />,
     contact: <Contact language={language} />,
+    'models-chatgpt': <ModelUsage language={language} tool="chatgpt" onNavigate={navigate} />,
+    'models-claude-code': <ModelUsage language={language} tool="claude-code" onNavigate={navigate} />,
     resume: <Resume />,
     favorites: (route.id === 'models' || route.id === 'model-skills') ? <ModelsTools id={route.id} language={language} onNavigate={navigate} /> : <section id={route.id} className="favorites-view" lang={language === 'zh' ? 'zh-CN' : 'en'}><div className="container"><div className="section-title"><h2>{favoritesTitle}</h2></div><p>{language === 'zh' ? '即将更新' : 'Coming soon'}</p></div></section>,
   };

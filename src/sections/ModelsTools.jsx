@@ -10,10 +10,10 @@ const content = {
     intro: '我用它们推敲想法、推进实现，也不断检查自己的判断。',
     skillsTitle: '我的 Skills 选集',
     skillsIntro: '把常用的方法，放进具体的工作里。',
-    usage: '我的使用方式', soon: '待补充', next: '团队与语录',
+    usage: '我的使用方式', next: '团队与语录',
     tools: [
       { name: 'ChatGPT', version: 'Astra 6', role: '思考 · 研究 · 表达', description: '把还没成形的想法带进对话，通过讨论、查证与修改，逐渐明确自己在意什么。', topics: ['产品方向', '方案推敲', '文字表达'] },
-      { name: 'Claude Code', role: '代码理解 · 功能实现 · 调试', description: '从阅读代码到推进功能，补充需求、检查改动，再回到真实页面与运行结果。', topics: ['代码梳理', '功能修改', '运行验证'] },
+      { name: 'Claude Code', role: '界面观察 · 交互优化 · 视觉验收', description: '我喜欢让 Claude Code 直接查看页面，从布局、排版到交互反馈，发现设计与实际呈现之间的差距，再通过代码把细节调整到位。', topics: ['界面观察', '交互优化', '视觉验收'] },
     ],
     skills: [
       ['把问题问清楚', 'GrillMe', '追问目标、前提与真正需要解决的问题。'],
@@ -29,10 +29,10 @@ const content = {
     intro: 'Tools I use to explore ideas, build things, and keep checking my own judgment.',
     skillsTitle: 'My Skills selection',
     skillsIntro: 'Useful methods, woven into everyday work.',
-    usage: 'How I use it', soon: 'Notes to come', next: 'Teams & quotes',
+    usage: 'How I use it', next: 'Teams & quotes',
     tools: [
       { name: 'ChatGPT', version: 'Astra 6', role: 'Thinking · Research · Writing', description: 'I bring unfinished ideas into conversation, then discuss, check, and revise them to clarify what matters to me.', topics: ['Product direction', 'Exploring options', 'Writing'] },
-      { name: 'Claude Code', role: 'Code · Implementation · Debugging', description: 'I read code, develop features, clarify requirements, and review changes against real pages and running results.', topics: ['Understanding code', 'Feature changes', 'Verification'] },
+      { name: 'Claude Code', role: 'UI observation · Interaction refinement · Visual review', description: 'I like asking Claude Code to inspect actual pages, from layout and typography to interaction feedback, then refine the code to close the gap between the design and what appears on screen.', topics: ['UI observation', 'Interaction refinement', 'Visual review'] },
     ],
     skills: [
       ['Ask better questions', 'GrillMe', 'Clarify goals, assumptions, and the real problem.'],
@@ -66,7 +66,10 @@ export default function ModelsTools({ language = 'zh', onNavigate, id = 'models'
           </header>
           <p className="model-description">{tool.description}</p>
           <ul className="model-topics">{tool.topics.map(topic => <li key={topic}>{topic}</li>)}</ul>
-          <p className="model-placeholder"><span>{t.usage}</span><span className="model-soon">{t.soon}</span></p>
+          <a className="model-usage-link" href={i === 0 ? '#models-chatgpt' : '#models-claude-code'} onClick={onNavigate} aria-label={t.usage + ' · ' + tool.name}>
+            <span>{t.usage}</span>
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 10h13m-5-5 5 5-5 5" /></svg>
+          </a>
         </article>)}
       </div>
       <section className="models-skills" aria-labelledby="models-skills-title">

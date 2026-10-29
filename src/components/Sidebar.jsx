@@ -102,7 +102,7 @@ export default function Sidebar({ isMobile, isOpen, activeSection, activeGroup, 
     setExpanded(previous => ({ ...previous, [key]: activeSection === target ? !previous[key] : true }));
     onClose(event);
   };
-  const child = (id, label, download = false) => <li><a href={download ? 'Annabelle Zhu Resume.pdf' : `#${id}`} download={download || undefined} aria-current={!download && (activeSection === id || (activeSection === 'skills' && id === 'about') || (activeSection === 'model-skills' && id === 'models')) ? 'page' : undefined} onClick={download ? undefined : onClose}><span>{label}</span>{download && <Icon name="download"/>}</a></li>;
+  const child = (id, label, download = false) => <li><a href={download ? 'Annabelle Zhu Resume.pdf' : `#${id}`} download={download || undefined} aria-current={!download && (activeSection === id || (activeSection === 'skills' && id === 'about') || (activeSection === 'model-skills' && id === 'models')) ? 'page' : ((activeSection === 'models-chatgpt' || activeSection === 'models-claude-code') && id === 'models') ? 'location' : undefined} onClick={download ? undefined : onClose}><span>{label}</span>{download && <Icon name="download"/>}</a></li>;
   const group = (key, target, children) => <li data-group={key} className={`sidebar-group${activeGroup === key ? ' is-active' : ''}`}>
     <div className="sidebar-nav-row">
       <a className="sidebar-parent" href={`#${target}`} onClick={event => openGroup(key, target, event)} aria-current={activeSection === target ? 'page' : undefined} aria-expanded={expanded[key]} aria-controls={`sidebar-${key}`}><span className="sidebar-icon-tray"><Icon name={key}/></span><span>{t[key]}</span></a>

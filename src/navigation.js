@@ -12,6 +12,8 @@ const views = {
   contact: ['contact', 'contact'],
   resume: ['resume', 'contact'],
   models: ['favorites', 'favorites'],
+  'models-chatgpt': ['models-chatgpt', 'favorites'],
+  'models-claude-code': ['models-claude-code', 'favorites'],
   quotes: ['favorites', 'favorites'],
   'model-skills': ['favorites', 'favorites'],
 };
