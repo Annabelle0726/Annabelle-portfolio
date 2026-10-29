@@ -9,6 +9,7 @@ export default function SidebarIcon({ name, className = '' }) {
     favorites: <><path className="icon-wash" d="M6 3h12v18l-6-4-6 4Z"/><path d="M8 3H6a1 1 0 0 0-1 1v17l7-4 7 4v-8M12 3h7v6"/><path className="icon-accent" d="m15 3 1.2 3.8L20 8l-3.8 1.2L15 13l-1.2-3.8L10 8l3.8-1.2z"/></>,
     contact: <><rect className="icon-wash" x="3" y="5" width="18" height="14" rx="3"/><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/><circle className="icon-accent" cx="19" cy="18" r="3"/></>,
     chevron: <path d="m9 5 7 7-7 7"/>,
+    qr: <><path d="M3 3h6v6H3zM15 3h6v6h-6zM3 15h6v6H3zM15 15h2v2h-2zM20 14v3M14 20h3v-1M20 20h1v1M12 3v2M3 12h2M8 12h4v4M12 9v1M18 12h3"/></>,
     external: <><path d="M8 5h11v11M19 5 5 19"/></>,
     close: <path d="m6 6 12 12M18 6 6 18"/>,
     menu: <><path d="M4 6h16M4 12h16M4 18h10"/><circle className="icon-accent" cx="19" cy="18" r="1"/></>,
