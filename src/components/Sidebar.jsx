@@ -99,13 +99,8 @@ export default function Sidebar({ isMobile, isOpen, activeSection, activeGroup, 
   }, [isMobile, isOpen]);
   const openGroup = (key, target, event) => {
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    if (activeSection === target) {
-      event.preventDefault();
-      setExpanded(previous => ({ ...previous, [key]: !previous[key] }));
-    } else {
-      setExpanded(previous => ({ ...previous, [key]: true }));
-      onClose(event);
-    }
+    setExpanded(previous => ({ ...previous, [key]: activeSection === target ? !previous[key] : true }));
+    onClose(event);
   };
   const child = (id, label, download = false) => <li><a href={download ? 'Annabelle Zhu Resume.pdf' : `#${id}`} download={download || undefined} aria-current={!download && (activeSection === id || (activeSection === 'skills' && id === 'about')) ? 'page' : undefined} onClick={download ? undefined : onClose}><span>{label}</span>{download && <Icon name="download"/>}</a></li>;
   const group = (key, target, children) => <li data-group={key} className={`sidebar-group${activeGroup === key ? ' is-active' : ''}`}>
