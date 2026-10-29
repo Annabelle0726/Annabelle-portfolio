@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import Sidebar, { LanguageSwitch, useNavigationLanguage } from './components/Sidebar';
+import SidebarIcon from './components/SidebarIcon';
 import About from './sections/About';
 import Skills from './sections/Skills';
 import Resume from './sections/Resume';
@@ -7,39 +9,7 @@ import DesignPortfolio from './sections/DesignPortfolio';
 import Projects from './sections/Projects';
 import Contact from './sections/Contact';
 
-const navigation = [
-  ['hero', 'Home', 'bx-home'],
-  ['about', 'About', 'bx-user'],
-  ['resume', 'Resume', 'bx-file-blank'],
-  ['portfolio', 'Portfolio', 'bx-book-content'],
-  ['services', 'Projects', 'bx-server'],
-  ['contact', 'Contact', 'bx-envelope'],
-];
-
-function Sidebar({ isMobile, isOpen, activeSection, onClose }) {
-  return (
-    <header id="header" inert={isMobile && !isOpen}>
-      <div className="d-flex flex-column">
-        <div className="profile">
-          <div className="profile-name">Annabelle Zhu</div>
-          <img className="profile-photo" src="assets/img/optimized/profile.webp" width="120" height="120" alt="Annabelle Zhu" fetchPriority="high" />
-          <div className="social-links mt-3 text-center">
-            <a href="https://www.instagram.com/0real_annabelle0/" aria-label="Instagram"><i className="bx bxl-instagram" aria-hidden="true" /></a>
-            <a href="https://github.com/Annabelle0726" aria-label="GitHub"><i className="bx bxl-github" aria-hidden="true" /></a>
-            <a href="https://www.linkedin.com/in/huizhu0726/" aria-label="LinkedIn"><i className="bx bxl-linkedin" aria-hidden="true" /></a>
-          </div>
-        </div>
-        <nav id="navbar" className="nav-menu navbar" aria-label="Main navigation">
-          <ul>
-            {navigation.map(([id, label, icon]) => (
-              <li key={id}><a href={'#' + id} className={'nav-link scrollto' + (activeSection === id ? ' active' : '')} aria-current={activeSection === id ? 'location' : undefined} onClick={onClose}><i className={'bx ' + icon} aria-hidden="true" /><span>{label}</span></a></li>
-            ))}
-          </ul>
-        </nav>
-      </div>
-    </header>
-  );
-}
+const navigation = ['hero', 'about', 'skills', 'resume', 'portfolio', 'XD', 'services', 'contact'];
 
 function Hero() {
   return (
@@ -57,6 +27,23 @@ export default function App() {
   const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 767px)').matches);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const [language, setLanguage] = useNavigationLanguage();
+  const menuButton = useRef(null);
+  const closeMenu = (event) => {
+    const destination = event?.currentTarget?.hash?.slice(1);
+    setMenuOpen(false);
+    if (isMobile) window.requestAnimationFrame(() => {
+      const target = destination && document.getElementById(destination);
+      if (target) {
+        const alreadyFocusable = target.hasAttribute('tabindex');
+        if (!alreadyFocusable) {
+          target.setAttribute('tabindex', '-1');
+          target.addEventListener('blur', () => target.removeAttribute('tabindex'), { once: true });
+        }
+        target.focus({ preventScroll: true });
+      } else menuButton.current?.focus();
+    });
+  };
 
   useEffect(() => {
     const media = window.matchMedia('(max-width: 767px)');
@@ -71,7 +58,7 @@ export default function App() {
   useEffect(() => {
     document.body.classList.toggle('mobile-nav-active', isMobile && menuOpen);
     const onKeyDown = (event) => {
-      if (event.key === 'Escape') setMenuOpen(false);
+      if (event.key === 'Escape' && !document.querySelector('dialog[open]')) closeMenu();
     };
     window.addEventListener('keydown', onKeyDown);
     return () => {
@@ -85,7 +72,7 @@ export default function App() {
     const updateActive = () => {
       frame = 0;
       let current = 'hero';
-      for (const [id] of navigation) {
+      for (const id of navigation) {
         const section = document.getElementById(id);
         if (section && section.getBoundingClientRect().top <= 140) current = id;
       }
@@ -119,11 +106,13 @@ export default function App() {
   return (
     <>
       <a className="skip-link" href="#main">Skip to main content</a>
-      <button className="mobile-nav-toggle" type="button" aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} aria-controls="header" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>
-        <i className={'bi ' + (menuOpen ? 'bi-x' : 'bi-list')} aria-hidden="true" />
-      </button>
-      {isMobile && menuOpen && <button className="nav-backdrop" type="button" aria-label="Close navigation" tabIndex={-1} onClick={() => setMenuOpen(false)} />}
-      <Sidebar isMobile={isMobile} isOpen={menuOpen} activeSection={activeSection} onClose={() => setMenuOpen(false)} />
+      <div className={`shell-controls${isMobile && menuOpen ? ' is-drawer-open' : ''}`}>
+        <LanguageSwitch language={language} onChange={setLanguage}/>
+        <button ref={menuButton} className="mobile-nav-toggle" type="button" aria-label={language === 'zh' ? '打开导航' : 'Open navigation'} aria-controls="header" aria-expanded={menuOpen} onClick={() => setMenuOpen(true)}><SidebarIcon name="menu"/></button>
+      </div>
+      {isMobile && menuOpen && <button className="nav-backdrop" type="button" aria-label={language === 'zh' ? '关闭导航' : 'Close navigation'} tabIndex={-1} onClick={closeMenu} />}
+      <Sidebar isMobile={isMobile} isOpen={menuOpen} activeSection={activeSection} onClose={closeMenu} language={language} onLanguageChange={setLanguage}/>
+      <div inert={isMobile && menuOpen}>
       <Hero />
       <main id="main">
         <About />
@@ -135,6 +124,7 @@ export default function App() {
         <Contact />
       </main>
       <a href="#hero" className="back-to-top-link" aria-label="Back to top"><i className="bi bi-arrow-up-short" aria-hidden="true" /></a>
+      </div>
     </>
   );
 }
