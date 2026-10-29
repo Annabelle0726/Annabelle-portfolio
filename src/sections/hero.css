@@ -1,0 +1,68 @@
+/* Art and copy share a canvas; a soft ivory veil protects the reading area. */
+#main.content-views #hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  min-height: 100svh;
+  height: auto;
+  padding: 100px 0 100px clamp(32px, 5vw, 88px);
+  overflow: hidden;
+  background: var(--color-ivory);
+}
+#hero .hero-container { position: relative; z-index: 1; width: min(100%, 470px); min-width: 0; padding: 30px 18px 30px 0; }
+#hero::after { content: ''; position: absolute; z-index: 0; inset: 0; background: radial-gradient(ellipse 64% 64% at 8% 50%, var(--color-ivory) 22%, color-mix(in srgb, var(--color-ivory) 96%, transparent) 46%, color-mix(in srgb, var(--color-ivory) 72%, transparent) 62%, color-mix(in srgb, var(--color-ivory) 22%, transparent) 82%, transparent 100%); pointer-events: none; }
+#hero h1 {
+  margin: 0 0 22px;
+  color: var(--color-ink-navy);
+  font-family: Georgia, 'Times New Roman', 'Songti SC', SimSun, serif;
+  font-size: clamp(30px, 3.1vw, 48px);
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -.035em;
+  overflow-wrap: normal;
+}
+#hero h1 span { white-space: nowrap; font-size: .88em; letter-spacing: 0; }
+#hero .hero-fields { margin: 0 0 44px; color: var(--color-deep-sapphire); font-family: inherit; font-size: clamp(14px, 1.15vw, 17px); line-height: 1.9; font-weight: 400; letter-spacing: .045em; }
+#hero .hero-description { max-width: 350px; margin: 0; color: var(--color-text-secondary); font-family: Georgia, 'Songti SC', SimSun, serif; font-size: 16px; line-height: 2; letter-spacing: .045em; }
+#hero .hero-about { display: inline-flex; align-items: center; gap: 22px; min-height: 52px; margin-top: 36px; color: var(--color-deep-sapphire); font-size: 14px; letter-spacing: .14em; text-decoration: none; border-radius: 2px; }
+.hero-about svg { width: 76px; height: 52px; overflow: visible; }
+.hero-arrow-orbit { stroke: var(--color-champagne-gold); stroke-width: .8; stroke-dasharray: 78 22; transform: rotate(-40deg); transform-origin: 49px 26px; transition: stroke-dasharray 500ms ease, transform 500ms ease; }
+.hero-arrow-shaft { stroke: currentColor; stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; transition: transform 350ms var(--ease-ui); }
+.hero-about:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 7px; }
+.hero-about:focus-visible .hero-arrow-shaft { transform: translateX(5px); }
+.hero-about:focus-visible .hero-arrow-orbit { stroke-dasharray: 100 0; transform: rotate(20deg); }
+@media (hover: hover) {
+  .hero-about:hover .hero-arrow-shaft { transform: translateX(5px); }
+  .hero-about:hover .hero-arrow-orbit { stroke-dasharray: 100 0; transform: rotate(20deg); }
+}
+.hero-about:active { opacity: .7; }
+#hero .hero-art-window { position: absolute; inset: 0 0 0 19%; overflow: hidden; pointer-events: none; mask-image: linear-gradient(90deg, transparent, #000 20%); }
+#hero .hero-ribbon-canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; }
+#hero .hero-ribbon-canvas[data-ready="true"] { opacity: 1; }
+#hero .hero-art-window:has(.hero-ribbon-canvas[data-ready="true"]) .hero-art { visibility: hidden; }
+#hero .hero-art { position: absolute; inset: -3%; background: url('../assets/hero-art.png') 55% center / cover no-repeat; animation: hero-breeze 24s ease-in-out infinite alternate; }
+#hero .hero-art::after { content: ''; position: absolute; inset: -20%; background: linear-gradient(115deg, transparent 38%, rgb(255 255 255 / .14) 49%, transparent 60%); mix-blend-mode: soft-light; animation: hero-sheen 32s ease-in-out infinite alternate; }
+@keyframes hero-breeze { from { transform: translate3d(-2%, -2%, 0) rotate(-1deg) scale(1.06); } to { transform: translate3d(2%, 2%, 0) rotate(1deg) scale(1.09); } }
+@keyframes hero-sheen { from { transform: translateX(-20%); opacity: .2; } to { transform: translateX(20%); opacity: .65; } }
+@media (min-width: 768px) and (max-width: 1099px) {
+  #main.content-views #hero { padding-right: 28px; }
+  #hero .hero-art-window { inset: 0 -20% 0 0; }
+}
+@media (max-width: 767px) {
+  #main.content-views #hero { align-content: center; padding: 110px 26px 100px; }
+  #hero .hero-container { padding: 28px 0; }
+  #hero::after { background: radial-gradient(ellipse 135% 58% at -18% 50%, var(--color-ivory) 32%, color-mix(in srgb, var(--color-ivory) 96%, transparent) 58%, color-mix(in srgb, var(--color-ivory) 80%, transparent) 72%, color-mix(in srgb, var(--color-ivory) 35%, transparent) 88%, transparent 100%); }
+  #hero h1 { font-size: clamp(29px, 7.5vw, 42px); margin-bottom: 20px; }
+  #hero .hero-fields { font-size: 14px; margin-bottom: 30px; }
+  #hero .hero-description { font-size: 15px; }
+  #hero .hero-about { margin-top: 26px; }
+  #hero .hero-art-window { inset: 0 -38% 0 -18%; mask-image: linear-gradient(90deg, transparent, #000 30%); }
+  #hero .hero-art { background-position: 55% center; }
+  #hero .hero-description { max-width: 280px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #hero .hero-art, #hero .hero-art::after { animation: none; }
+  #hero .hero-arrow-shaft, #hero .hero-arrow-orbit { transition: none; }
+}

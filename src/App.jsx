@@ -9,18 +9,7 @@ import DesignPortfolio from './sections/DesignPortfolio';
 import Projects from './sections/Projects';
 import Contact from './sections/Contact';
 import useContentNavigation from './hooks/useContentNavigation';
-
-function Hero() {
-  return (
-    <section id="hero" className="d-flex flex-column justify-content-center align-items-center">
-      <div className="hero-container">
-        <h2>Hi, this is</h2>
-        <h1>Annabelle Zhu</h1>
-        <p>I'm <span>Data Scientist, Tech-Enthusiast, UX/UI Designer</span></p>
-      </div>
-    </section>
-  );
-}
+import Hero from './sections/Hero';
 
 export default function App() {
   const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 767px)').matches);
@@ -66,7 +55,7 @@ export default function App() {
     'model-skills': language === 'zh' ? '模型 Skills' : 'Model skills',
   }[route.id];
   const views = {
-    home: <Hero />,
+    home: <Hero language={language} onNavigate={navigate} />,
     about: <><About /><Skills /></>,
     portfolio: <Portfolio />,
     design: <DesignPortfolio />,
