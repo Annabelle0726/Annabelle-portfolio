@@ -5,8 +5,9 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   align-items: center;
-  min-height: 100svh;
-  height: auto;
+  min-height: 0;
+  height: 100vh;
+  height: 100dvh;
   padding: 100px 0 100px clamp(32px, 5vw, 88px);
   overflow: hidden;
   background: var(--color-ivory);
@@ -68,4 +69,21 @@
 @media (prefers-reduced-motion: reduce) {
   #hero .hero-art, #hero .hero-art::after { animation: none; }
   #hero .hero-arrow-shaft, #hero .hero-arrow-orbit { transition: none; }
+}
+
+/* Keep short phones and landscape views within the same single-screen canvas. */
+@media (max-height: 700px) {
+  #main.content-views #hero { padding-top: 68px; padding-bottom: 28px; }
+  #hero .hero-container { padding-top: 0; padding-bottom: 0; }
+  #hero .hero-fields { margin-bottom: 24px; }
+  #hero .hero-about { margin-top: 20px; }
+}
+@media (max-height: 450px) {
+  #main.content-views #hero { padding-top: max(58px, env(safe-area-inset-top)); padding-bottom: max(12px, env(safe-area-inset-bottom)); }
+  #hero .hero-container { width: min(100%, 520px); }
+  #hero h1 { margin-bottom: 10px; font-size: 28px; line-height: 1.2; }
+  #hero .hero-fields { margin-bottom: 12px; font-size: 13px; line-height: 1.6; }
+  #hero .hero-description { max-width: 480px; font-size: 14px; line-height: 1.65; }
+  #hero .hero-about { margin-top: 8px; min-height: 44px; }
+  #hero .hero-about svg { width: 64px; height: 44px; }
 }
