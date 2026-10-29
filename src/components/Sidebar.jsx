@@ -114,7 +114,9 @@ export default function Sidebar({ isMobile, isOpen, activeSection, onClose, lang
             {['wechat','xiaohongshu'].map(key => <button type="button" key={key} className={`social-item social-${key}`} aria-label={t[key]} aria-haspopup="dialog" onClick={event => openAccount(key, event)}><span className="social-tile"><img src={accounts[key].icon} alt=""/></span><span className="social-tooltip">{t[key]}</span></button>)}
           </div>
         </div>
-        <img className="sidebar-portrait" src="assets/img/optimized/profile.webp" width="76" height="76" alt="Annabelle Zhu" fetchPriority="high"/>
+        <div className="sidebar-portrait-frame">
+          <img className="sidebar-portrait" src="assets/img/optimized/profile.webp" width="78" height="96" alt="Annabelle Zhu" fetchPriority="high"/>
+        </div>
       </div>
       <nav id="navbar" className="sidebar-navigation" aria-label={t.nav}>
         {group('home', 'hero', <>{child('hero', t.overview)}{child('about', t.about)}</>)}

@@ -1,0 +1,15 @@
+/* Shared semantic palette from docs/visual-style.md. */
+:root {
+  --color-page: #FAF8EE;
+  --color-text: #163961;
+  --color-primary: #173B6C;
+  --color-surface: #FFFFFF;
+  --color-accent: #E8BB3F;
+  --color-photo-mat: #F3D878;
+  --color-border: #DEDDD4;
+  --color-text-secondary: #425B70;
+  --color-selected: #E8EFF4;
+  --color-highlight: #FFF3C8;
+  --color-primary-hover: #102E55;
+  --color-focus: #173B6C;
+}
