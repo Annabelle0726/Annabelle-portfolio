@@ -1,5 +1,6 @@
 import React from 'react';
 import SectionHeader from '../components/SectionHeader';
+import ArticleFooter from '../components/ArticleFooter';
 import './agency-bloom.css';
 import image0 from '../assets/agency-bloom-third/0.webp';
 import image1 from '../assets/agency-bloom-third/1.webp';
@@ -12,8 +13,7 @@ const Heading = ({ number, children }) => <h3><span>{number}</span>{children}</h
 
 export default function AgencyBloomThird() {
   return <article className="agency-article" lang="zh-CN"><div className="article-page">
-    <SectionHeader eyebrow="AGENCY BLOOM" title="Agency Bloom" as="h1" />
-    <header className="article-header"><h2>暂时没有掌声也想继续做下去</h2></header>
+    <SectionHeader eyebrow="AGENCY BLOOM" title="暂时没有掌声也想继续做下去" as="h1" />
     <div className="article-body">
       <Heading number="01">在努力没有被看见的时候</Heading>
       <p>最近看了一段关于大学生求职的视频，里面谈到美国一些大学毕业生寻找工作的经历，也讨论了一个让我很在意的问题：</p>
@@ -39,7 +39,7 @@ export default function AgencyBloomThird() {
       <p>我不知道自己未来会走向怎样的职业道路，但至少现在，我还有想弄明白的问题，还有愿意认真完成的事情，也愿意继续听取真实的声音，慢慢修改、慢慢理解。掌声当然会让人高兴，我们都希望自己的努力能够被看见，也希望认真做出的东西能够得到认可。只是，暂时没有掌声的时候，我也想提醒自己：<strong>不必把沉默理解成否定。</strong></p>
       <p>比起急着证明自己已经找到了位置，我更希望在认真做事的过程中，积累判断力，也试着创造一些原本不存在的可能。如果一件事情仍然让我好奇，仍然有值得理解的问题，也还有现实条件允许我继续尝试，那么我愿意再往前走一点。<strong>不是因为坚持本身一定会带来成功，而是因为在这些真实的尝试里，我正在认识自己，理解别人，也学习怎样把一件在意的事情做好。</strong></p>
       <blockquote>Agency Bloom<br /><small>从一点好奇，走向一次小尝试</small></blockquote>
-      <footer className="article-footer"><span>Agency <em>Bloom</em></span><a href="https://mp.weixin.qq.com/s/pThuorA_l3hqmpPardULOg" target="_blank" rel="noopener noreferrer">阅读公众号原文 ↗</a></footer>
+      <ArticleFooter originalUrl="https://mp.weixin.qq.com/s/pThuorA_l3hqmpPardULOg" />
     </div>
   </div></article>;
 }

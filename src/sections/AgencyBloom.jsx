@@ -1,6 +1,7 @@
 import React from 'react';
 import './agency-bloom.css';
 import SectionHeader from '../components/SectionHeader';
+import ArticleFooter from '../components/ArticleFooter';
 import image0 from '../assets/agency-bloom/0.webp';
 import image1 from '../assets/agency-bloom/1.webp';
 import image2 from '../assets/agency-bloom/2.webp';
@@ -15,9 +16,9 @@ const Heading = ({ number, children }) => <h3><span>{number}</span>{children}</h
 export default function AgencyBloom() {
   return <article className="agency-article" lang="zh-CN">
     <div className="article-page">
-    <SectionHeader eyebrow="AGENCY BLOOM" title="Agency Bloom" as="h1" />
+    <SectionHeader eyebrow="AGENCY BLOOM" title="我们不断向前，究竟想抵达怎样的生活？" as="h1" />
     <header className="article-header">
-      <h2>我们不断向前，究竟想抵达怎样的生活？</h2>
+      
       <div className="article-cover-frame"><img className="article-cover" src={image0} alt="Agency Bloom 产品封面，远山与日出" /></div>
       <p className="article-cover-caption">Your Life. Your Direction. Your Agency.</p>
     </header>
@@ -69,7 +70,7 @@ export default function AgencyBloom() {
       <blockquote>Agency Bloom，愿每个人都能按照自己的节奏，慢慢生长<br /><small>🌱 更小的一步，也能通向更明亮的明天</small></blockquote>
       <Figure src={image6} alt="温暖的日出与自然风景" />
       <p>如果你也曾经在职业选择或人生方向面前感到迷茫，欢迎在评论区分享自己的经历。我尤其想知道：有没有哪一个时刻，让你突然意识到，自己真正想要的生活，和过去想象的并不一样？</p>
-      <footer className="article-footer"><span>Agency <em>Bloom</em></span><a href="https://mp.weixin.qq.com/s/xbY_lSzfr1YvotELeE3LsA" target="_blank" rel="noopener noreferrer">阅读公众号原文 ↗</a></footer>
+      <ArticleFooter originalUrl="https://mp.weixin.qq.com/s/xbY_lSzfr1YvotELeE3LsA" />
     </div>
     </div>
   </article>;

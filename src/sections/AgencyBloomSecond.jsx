@@ -1,5 +1,6 @@
 import React from 'react';
 import SectionHeader from '../components/SectionHeader';
+import ArticleFooter from '../components/ArticleFooter';
 import './agency-bloom.css';
 import image0 from '../assets/agency-bloom-second/0.webp';
 import image1 from '../assets/agency-bloom-second/1.webp';
@@ -11,8 +12,7 @@ const Heading = ({ number, topic, children }) => <><h3><span>{number}</span>{chi
 
 export default function AgencyBloomSecond() {
   return <article className="agency-article" lang="zh-CN"><div className="article-page">
-    <SectionHeader eyebrow="AGENCY BLOOM" title="Agency Bloom" as="h1" />
-    <header className="article-header"><h2>当技术让一切变得越来越容易，真正值得思考的是我们还能创造什么独特的价值</h2></header>
+    <SectionHeader eyebrow="AGENCY BLOOM" title="当技术让一切变得越来越容易，真正值得思考的是我们还能创造什么独特的价值" as="h1" />
     <div className="article-body">
       <div className="article-intro-label">前言</div>
       <p>关于选择、生长，与自己的方向</p>
@@ -39,7 +39,7 @@ export default function AgencyBloomSecond() {
       <p>一份方案可以做得很漂亮，但收到它的人，可能还需要有人听懂他的犹豫，把不明白的地方讲清楚，在事情出了岔子的时候，也愿意一起想办法。</p>
       <p>如果说有什么值得长久积累的“护城河”，我想，这也是其中一部分：你理解他所处的境况，也愿意把交到手里的事情认真做完。相处久了，他知道，有些问题可以放心和你商量。</p>
       <blockquote>方向也许就从这里，慢慢清楚起来<br /><small>Agency Bloom · 按照自己的节奏，慢慢生长</small></blockquote>
-      <footer className="article-footer"><span>Agency <em>Bloom</em></span><a href="https://mp.weixin.qq.com/s/byApMNE4pbO2M4OX62F4Cg" target="_blank" rel="noopener noreferrer">阅读公众号原文 ↗</a></footer>
+      <ArticleFooter originalUrl="https://mp.weixin.qq.com/s/byApMNE4pbO2M4OX62F4Cg" />
     </div>
   </div></article>;
 }
