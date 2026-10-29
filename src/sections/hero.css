@@ -24,8 +24,6 @@
   overflow-wrap: normal;
 }
 #hero .typed-character { color: inherit; font-size: inherit; font-weight: inherit; letter-spacing: inherit; border: 0; padding: 0; }
-#hero .is-typing .typed-character { animation: hero-character 1ms step-end both; animation-delay: var(--type-delay); }
-@keyframes hero-character { from { opacity: 0; } to { opacity: 1; } }
 #hero .is-typing .hero-about { visibility: hidden; opacity: 0; pointer-events: none; }
 #hero .typing-complete .hero-about { animation: hero-about-arrive 500ms ease-out both; }
 @keyframes hero-about-arrive { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
