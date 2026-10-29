@@ -69,6 +69,8 @@ export default function Sidebar({ isMobile, isOpen, activeSection, activeGroup, 
   const header = useRef(null);
   const { nav, indicator } = useNavigationIndicator(activeGroup);
   const [expanded, setExpanded] = useState({ home: true, projects: false, wechat: false, favorites: false, contact: false });
+  const [designExpanded, setDesignExpanded] = useState(activeSection === 'XD' || activeSection.startsWith('XD-'));
+  useEffect(() => { if (activeSection === 'XD' || activeSection.startsWith('XD-')) setDesignExpanded(true); }, [activeSection]);
   const [account, setAccount] = useState(null);
   const accountTrigger = useRef(null);
   const openAccount = (key, event) => {
@@ -130,7 +132,7 @@ export default function Sidebar({ isMobile, isOpen, activeSection, activeGroup, 
         <span ref={indicator} className="sidebar-selection" aria-hidden="true"/>
         <ul className="sidebar-menu">
         {group('home', 'hero', <>{child('hero', t.overview)}{child('about', t.about)}</>)}
-        {group('projects', 'portfolio', <>{child('portfolio', t.web)}{child('XD', t.design)}{child('services', t.data)}</>)}
+        {group('projects', 'portfolio', <>{child('portfolio', t.web)}<li className="sidebar-design-branch"><div className="sidebar-design-row"><a href="#XD" onClick={onClose} aria-current={activeSection === 'XD' ? 'page' : undefined} className={activeSection.startsWith('XD-') ? 'is-ancestor' : undefined}>{t.design}</a><button type="button" aria-label={`${designExpanded ? t.collapse : t.expand} ${t.design}`} aria-expanded={designExpanded} aria-controls="sidebar-design-projects" onClick={() => setDesignExpanded(value => !value)}><Icon name="chevron"/></button></div><ul id="sidebar-design-projects" className="sidebar-grandchildren" hidden={!designExpanded}>{child('XD-cupcakes', 'Cupcakes')}{child('XD-reverie', 'Reverie Reads')}{child('XD-travel', language === 'zh' ? '旅行探索' : 'Travel Discovery')}</ul></li>{child('services', t.data)}</>)}
         {group('wechat', 'agency-bloom', <>
               {['https://mp.weixin.qq.com/s/xbY_lSzfr1YvotELeE3LsA', 'https://mp.weixin.qq.com/s/byApMNE4pbO2M4OX62F4Cg', 'https://mp.weixin.qq.com/s/pThuorA_l3hqmpPardULOg', 'https://mp.weixin.qq.com/s/VSMctNqPAuP6FyYJsgE6_A'].map((url, index) => <li key={url}><a href={index === 0 ? '#agency-bloom' : index === 1 ? '#agency-bloom-value' : index === 2 ? '#agency-bloom-applause' : url} target={index < 3 ? undefined : '_blank'} rel={index < 3 ? undefined : 'noopener noreferrer'} aria-current={((index === 0 && activeSection === 'agency-bloom') || (index === 1 && activeSection === 'agency-bloom-value') || (index === 2 && activeSection === 'agency-bloom-applause')) ? 'page' : undefined} onClick={index < 3 ? onClose : undefined}><span>{index === 0 ? (language === 'zh' ? 'Agency Bloom：想抵达的生活' : 'Agency Bloom: A life of our own') : index === 1 ? (language === 'zh' ? '在变化中寻找自己的价值' : 'Finding our value') : index === 2 ? (language === 'zh' ? '暂时没有掌声也想继续做下去' : 'Continuing without applause') : `${language === 'zh' ? '文章' : 'Article'} ${String(index + 1).padStart(2, '0')}`}</span>{index >= 3 && <Icon name="external"/>}</a></li>)}
         </>)}

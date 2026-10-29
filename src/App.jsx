@@ -65,7 +65,7 @@ export default function App() {
     home: <Hero language={language} onNavigate={navigate} />,
     about: <About language={language} onNavigate={navigate} />,
     portfolio: <Portfolio />,
-    design: <DesignPortfolio />,
+    design: <DesignPortfolio language={language} projectId={route.id} onNavigate={navigate} />,
     data: <Projects />,
     contact: <Contact language={language} />,
     'models-chatgpt': <ModelUsage language={language} tool="chatgpt" onNavigate={navigate} />,
