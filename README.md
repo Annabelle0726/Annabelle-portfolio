@@ -1,25 +1,25 @@
 # Annabelle Portfolio
 
-个人作品集主页使用 React 和 Vite。`src/sections/` 包含主页各个区块，`src/components/` 包含可复用的交互组件；原有作品示例保留在各自的目录中。
+The personal portfolio homepage uses React and Vite. `src/sections/` contains homepage sections, and `src/components/` contains reusable interactive components. Original portfolio examples remain in their respective directories.
 
-## 本地开发
+## Local development
 
-使用 Node.js 20.19 或更高的 20.x 版本，或 22.12 及以上版本：
+Use Node.js 20.19 or newer in the 20.x series, or Node.js 22.12 or newer:
 
 ```bash
 npm install
 npm run dev
 ```
 
-打开终端显示的本地地址。手机与电脑在同一网络时，可运行 `npm run dev -- --host 0.0.0.0`，再用电脑的局域网地址从手机访问。
+Open the local URL printed in the terminal. To access the site from a phone on the same network, run `npm run dev -- --host 0.0.0.0` and open the computer's LAN address on the phone.
 
-## 构建与部署
+## Build and deployment
 
 ```bash
 npm run build
 npm run preview
 ```
 
-将 `dist/` 的**完整内容**上传到网站根目录；其中也包含主页链接到的原有作品页面、图片、简历和证书。开发用的 `index.html` 不能直接当作发布文件使用，需要先执行构建。
+Upload the **complete contents** of `dist/` to the site root. The build also includes linked legacy portfolio pages, images, the resume, and certificates. The development `index.html` cannot be used directly for deployment; build first.
 
-当前保留原有英文内容，已移除 Google Translate。中英文内容管理和默认中文将在后续阶段实现；当前没有接入语言切换。
+The original English content is retained and Google Translate has been removed. Chinese and English content management with Chinese as the default is planned for a later phase; the content itself does not yet have a language switch.
