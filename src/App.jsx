@@ -9,6 +9,7 @@ import Projects from './sections/Projects';
 import Contact from './sections/Contact';
 import useContentNavigation from './hooks/useContentNavigation';
 import Hero from './sections/Hero';
+import ModelsTools from './sections/ModelsTools';
 import AgencyBloom from './sections/AgencyBloom';
 import AgencyBloomSecond from './sections/AgencyBloomSecond';
 import AgencyBloomThird from './sections/AgencyBloomThird';
@@ -67,7 +68,7 @@ export default function App() {
     data: <Projects />,
     contact: <Contact language={language} />,
     resume: <Resume />,
-    favorites: <section id={route.id} className="favorites-view" lang={language === 'zh' ? 'zh-CN' : 'en'}><div className="container"><div className="section-title"><h2>{favoritesTitle}</h2></div><p>{language === 'zh' ? '即将更新' : 'Coming soon'}</p></div></section>,
+    favorites: (route.id === 'models' || route.id === 'model-skills') ? <ModelsTools id={route.id} language={language} onNavigate={navigate} /> : <section id={route.id} className="favorites-view" lang={language === 'zh' ? 'zh-CN' : 'en'}><div className="container"><div className="section-title"><h2>{favoritesTitle}</h2></div><p>{language === 'zh' ? '即将更新' : 'Coming soon'}</p></div></section>,
   };
 
   return (
@@ -83,7 +84,7 @@ export default function App() {
       <main id="main" tabIndex={-1} className={`content-views${route.view === 'home' ? ' is-home' : ''}`}>
         {views[route.view]}
       </main>
-      {route.view !== 'home' && route.view !== 'about' && route.view !== 'contact' && route.group !== 'wechat' && <button type="button" className="back-to-top-link" aria-label={language === 'zh' ? '回到顶部' : 'Back to top'} onClick={() => window.scrollTo({ top: 0, behavior: 'auto' })}><i className="bi bi-arrow-up-short" aria-hidden="true" /></button>}
+      {route.view !== 'home' && route.view !== 'about' && route.view !== 'contact' && route.id !== 'models' && route.id !== 'model-skills' && route.group !== 'wechat' && <button type="button" className="back-to-top-link" aria-label={language === 'zh' ? '回到顶部' : 'Back to top'} onClick={() => window.scrollTo({ top: 0, behavior: 'auto' })}><i className="bi bi-arrow-up-short" aria-hidden="true" /></button>}
       </div>
     </>
   );

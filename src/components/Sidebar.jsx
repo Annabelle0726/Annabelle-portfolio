@@ -102,7 +102,7 @@ export default function Sidebar({ isMobile, isOpen, activeSection, activeGroup, 
     setExpanded(previous => ({ ...previous, [key]: activeSection === target ? !previous[key] : true }));
     onClose(event);
   };
-  const child = (id, label, download = false) => <li><a href={download ? 'Annabelle Zhu Resume.pdf' : `#${id}`} download={download || undefined} aria-current={!download && (activeSection === id || (activeSection === 'skills' && id === 'about')) ? 'page' : undefined} onClick={download ? undefined : onClose}><span>{label}</span>{download && <Icon name="download"/>}</a></li>;
+  const child = (id, label, download = false) => <li><a href={download ? 'Annabelle Zhu Resume.pdf' : `#${id}`} download={download || undefined} aria-current={!download && (activeSection === id || (activeSection === 'skills' && id === 'about') || (activeSection === 'model-skills' && id === 'models')) ? 'page' : undefined} onClick={download ? undefined : onClose}><span>{label}</span>{download && <Icon name="download"/>}</a></li>;
   const group = (key, target, children) => <li data-group={key} className={`sidebar-group${activeGroup === key ? ' is-active' : ''}`}>
     <div className="sidebar-nav-row">
       <a className="sidebar-parent" href={`#${target}`} onClick={event => openGroup(key, target, event)} aria-current={activeSection === target ? 'page' : undefined} aria-expanded={expanded[key]} aria-controls={`sidebar-${key}`}><span className="sidebar-icon-tray"><Icon name={key}/></span><span>{t[key]}</span></a>
@@ -134,7 +134,7 @@ export default function Sidebar({ isMobile, isOpen, activeSection, activeGroup, 
         {group('wechat', 'agency-bloom', <>
               {['https://mp.weixin.qq.com/s/xbY_lSzfr1YvotELeE3LsA', 'https://mp.weixin.qq.com/s/byApMNE4pbO2M4OX62F4Cg', 'https://mp.weixin.qq.com/s/pThuorA_l3hqmpPardULOg', 'https://mp.weixin.qq.com/s/VSMctNqPAuP6FyYJsgE6_A'].map((url, index) => <li key={url}><a href={index === 0 ? '#agency-bloom' : index === 1 ? '#agency-bloom-value' : index === 2 ? '#agency-bloom-applause' : url} target={index < 3 ? undefined : '_blank'} rel={index < 3 ? undefined : 'noopener noreferrer'} aria-current={((index === 0 && activeSection === 'agency-bloom') || (index === 1 && activeSection === 'agency-bloom-value') || (index === 2 && activeSection === 'agency-bloom-applause')) ? 'page' : undefined} onClick={index < 3 ? onClose : undefined}><span>{index === 0 ? (language === 'zh' ? 'Agency Bloom：想抵达的生活' : 'Agency Bloom: A life of our own') : index === 1 ? (language === 'zh' ? '在变化中寻找自己的价值' : 'Finding our value') : index === 2 ? (language === 'zh' ? '暂时没有掌声也想继续做下去' : 'Continuing without applause') : `${language === 'zh' ? '文章' : 'Article'} ${String(index + 1).padStart(2, '0')}`}</span>{index >= 3 && <Icon name="external"/>}</a></li>)}
         </>)}
-        {group('favorites', 'models', <>{child('models', t.models)}{child('quotes', t.quotes)}{child('model-skills', t.skills)}</>)}
+        {group('favorites', 'models', <>{child('models', t.models)}{child('quotes', t.quotes)}</>)}
         {group('contact', 'contact', <>{child('contact', t.contactInfo)}{child('resume', t.resume)}{child(null, t.download, true)}</>)}
         </ul>
       </nav>
