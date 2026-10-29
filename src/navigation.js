@@ -2,6 +2,7 @@
 const views = {
   'agency-bloom': ['agency-bloom', 'wechat'],
   'agency-bloom-value': ['agency-bloom-value', 'wechat'],
+  'agency-bloom-applause': ['agency-bloom-applause', 'wechat'],
   hero: ['home', 'home'],
   about: ['about', 'home'],
   skills: ['about', 'home'],

@@ -12,6 +12,7 @@ import useContentNavigation from './hooks/useContentNavigation';
 import Hero from './sections/Hero';
 import AgencyBloom from './sections/AgencyBloom';
 import AgencyBloomSecond from './sections/AgencyBloomSecond';
+import AgencyBloomThird from './sections/AgencyBloomThird';
 
 export default function App() {
   const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 767px)').matches);
@@ -59,6 +60,7 @@ export default function App() {
   const views = {
     'agency-bloom': <AgencyBloom />,
     'agency-bloom-value': <AgencyBloomSecond />,
+    'agency-bloom-applause': <AgencyBloomThird />,
     home: <Hero language={language} onNavigate={navigate} />,
     about: <><About /><Skills /></>,
     portfolio: <Portfolio />,
