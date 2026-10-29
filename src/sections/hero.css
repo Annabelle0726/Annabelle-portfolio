@@ -23,7 +23,12 @@
   letter-spacing: -.035em;
   overflow-wrap: normal;
 }
-#hero h1 span { white-space: nowrap; font-size: .88em; letter-spacing: 0; }
+#hero .typed-character { color: inherit; font-size: inherit; font-weight: inherit; letter-spacing: inherit; border: 0; padding: 0; }
+#hero .is-typing .typed-character { animation: hero-character 1ms step-end both; animation-delay: var(--type-delay); }
+@keyframes hero-character { from { opacity: 0; } to { opacity: 1; } }
+#hero .is-typing .hero-about { visibility: hidden; opacity: 0; pointer-events: none; }
+#hero .typing-complete .hero-about { animation: hero-about-arrive 500ms ease-out both; }
+@keyframes hero-about-arrive { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 #hero .hero-fields { margin: 0 0 44px; color: var(--color-deep-sapphire); font-family: inherit; font-size: clamp(14px, 1.15vw, 17px); line-height: 1.9; font-weight: 400; letter-spacing: .045em; }
 #hero .hero-description { max-width: 350px; margin: 0; color: var(--color-text-secondary); font-family: Georgia, 'Songti SC', SimSun, serif; font-size: 16px; line-height: 2; letter-spacing: .045em; }
 #hero .hero-about { display: inline-flex; align-items: center; gap: 22px; min-height: 52px; margin-top: 36px; color: var(--color-deep-sapphire); font-size: 14px; letter-spacing: .14em; text-decoration: none; border-radius: 2px; }
