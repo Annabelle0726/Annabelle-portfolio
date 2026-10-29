@@ -100,7 +100,7 @@ export default function Sidebar({ isMobile, isOpen, activeSection, onClose, lang
   const child = (id, label, download = false) => <a href={download ? 'Annabelle Zhu Resume.pdf' : `#${id}`} download={download || undefined} aria-current={!download && activeSection === id ? 'location' : undefined} onClick={download ? undefined : onClose}><span>{label}</span>{download && <Icon name="download"/>}</a>;
   const group = (key, children) => <div className={`sidebar-group${activeGroup === key ? ' is-active' : ''}`}>
     <div className="sidebar-nav-row">
-      <button className="sidebar-parent" type="button" onClick={() => toggle(key)} aria-expanded={expanded[key]} aria-controls={`sidebar-${key}`}><Icon name={key}/><span>{t[key]}</span></button>
+      <button className="sidebar-parent" type="button" onClick={() => toggle(key)} aria-expanded={expanded[key]} aria-controls={`sidebar-${key}`}><span className="sidebar-icon-tray"><Icon name={key}/></span><span>{t[key]}</span></button>
     </div>
     <div id={`sidebar-${key}`} className="sidebar-children" hidden={!expanded[key]}>{children}</div>
   </div>;
@@ -109,7 +109,7 @@ export default function Sidebar({ isMobile, isOpen, activeSection, onClose, lang
       <div className="sidebar-mobile-tools"><LanguageSwitch language={language} onChange={onLanguageChange}/><button className="sidebar-close" type="button" aria-label={t.close} onClick={onClose}><Icon name="close"/></button></div>
       <div className="sidebar-identity">
         <div className="sidebar-identity-copy"><a className="sidebar-name" href="#hero" onClick={onClose}>Annabelle Zhu<span className="sidebar-brand-dot">.</span></a>
-          <p className="sidebar-tagline" lang="en">Data science · UX/UI</p>
+          <p className="sidebar-tagline">{language === 'zh' ? '软件开发者与产品设计者' : 'Software Developer & Product Designer'}</p>
           <div className="sidebar-socials" aria-label={language === 'zh' ? '社交账号' : 'Social profiles'}>
             {[[instagram, 'instagram', 'Instagram', 'https://www.instagram.com/0real_annabelle0/'], [github, 'github', 'GitHub', 'https://github.com/Annabelle0726'], [linkedin, 'linkedin', 'LinkedIn', 'https://www.linkedin.com/in/huizhu0726/']].map(([icon, key, label, url]) => <a key={key} className={`social-item social-${key}`} href={url} target="_blank" rel="noopener noreferrer" aria-label={label}><span className="social-tile"><span className="social-glyph" style={{ '--social-icon': `url("${icon}")` }}/></span><span className="social-tooltip">{label}</span></a>)}
             {['wechat','xiaohongshu'].map(key => <button type="button" key={key} className={`social-item social-${key}`} aria-label={t[key]} aria-haspopup="dialog" onClick={event => openAccount(key, event)}><span className="social-tile"><span className="social-glyph" style={{ '--social-icon': `url("${accounts[key].icon}")` }}/></span><span className="social-tooltip">{t[key]}</span></button>)}
@@ -122,7 +122,7 @@ export default function Sidebar({ isMobile, isOpen, activeSection, onClose, lang
       <nav id="navbar" className="sidebar-navigation" aria-label={t.nav}>
         {group('home', <>{child('hero', t.overview)}{child('about', t.about)}</>)}
         {group('projects', <>{child('portfolio', t.web)}{child('XD', t.design)}{child('services', t.data)}</>)}
-        <button className="sidebar-account-link" type="button" onClick={event => openAccount('wechat', event)} aria-haspopup="dialog"><Icon name="wechat"/><span>{t.wechat}</span><Icon name="qr" className="sidebar-qr-mark"/></button>
+        <button className="sidebar-account-link" type="button" onClick={event => openAccount('wechat', event)} aria-haspopup="dialog"><span className="sidebar-icon-tray"><Icon name="wechat"/></span><span>{t.wechat}</span><Icon name="qr" className="sidebar-qr-mark"/></button>
         {group('favorites', <><p className="sidebar-soon">{t.soon}</p><span>{t.models}</span><span>{t.quotes}</span><span>{t.skills}</span></>)}
         {group('contact', <>{child('contact', t.contactInfo)}{child('resume', t.resume)}{child(null, t.download, true)}</>)}
       </nav>

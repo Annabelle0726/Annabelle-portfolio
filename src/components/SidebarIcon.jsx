@@ -1,7 +1,14 @@
 import React from 'react';
 
-// One 24-unit grid, rounded 1.6-unit strokes, and a small warm accent.
+// Navigation uses one silhouette for its offset, fill, stroke and accent layers.
 export default function SidebarIcon({ name, className = '' }) {
+  const silhouettes = {
+    home: 'm4 10 8-6 8 6v10H4Z',
+    projects: 'M7 8h10a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-6a3 3 0 0 1 3-3Z',
+    wechat: 'M20 10c0 4-4 7-9 7l-6 3 1-5C1 10 5 3 12 3c5 0 8 3 8 7Z',
+    favorites: 'M6 3h12v18l-6-4-6 4Z',
+    contact: 'M6 5h12a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3Z',
+  };
   const art = {
     home: <><path className="icon-wash" d="m4 10 8-6 8 6v10H4Z"/><path d="m3 10 9-7 9 7M5 9v11h14V9M10 20v-6h4v6"/><path className="icon-accent" d="M15.5 8.5h2v2h-2z"/></>,
     projects: <><rect className="icon-wash" x="4" y="8" width="16" height="12" rx="3"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M4 13v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/><path d="M3 8h18v4l-7 3h-4l-7-3z"/><path className="icon-accent" d="M10 12h4v4h-4z"/></>,
@@ -17,5 +24,5 @@ export default function SidebarIcon({ name, className = '' }) {
     check: <path d="m5 12 4 4L19 6"/>,
     download: <><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></>,
   };
-  return <svg className={`sidebar-icon ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">{art[name]}</svg>;
+  return <svg className={`sidebar-icon ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={silhouettes[name] ? '1.75' : '1.6'} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">{silhouettes[name] && <path className="icon-shadow" transform="translate(1.1 1.1)" d={silhouettes[name]}/>} {art[name]}</svg>;
 }

@@ -1,9 +1,17 @@
 /* Shared semantic palette from docs/visual-style.md. */
 :root {
   --color-sapphire: #0055A4;
+  --color-royal-blue: #0042A8;
+  --color-deep-sapphire: #003B78;
+  --color-azure: #007BC4;
   --color-lake: #00A8B5;
+  --color-lagoon: #007E91;
+  --color-aqua-light: #D9F4F3;
   --color-champagne-gold: #D4A43A;
+  --color-imperial-gold: #B67B08;
+  --color-golden-sun: #E9B829;
   --color-pale-gold: #F4DA91;
+  --color-gold-light: #FFF2CC;
   --color-ivory: #FCFAF3;
   --color-ink-navy: #082D49;
   --color-page: var(--color-ivory);
@@ -12,10 +20,10 @@
   --color-surface: #FFFFFF;
   --color-accent: var(--color-champagne-gold);
   --color-photo-mat: var(--color-pale-gold);
-  --color-border: color-mix(in srgb, var(--color-champagne-gold) 48%, var(--color-ivory));
-  --color-text-secondary: var(--color-primary-hover);
+  --color-border: var(--color-pale-gold);
+  --color-text-secondary: var(--color-deep-sapphire);
   --color-selected: var(--color-sapphire);
-  --color-highlight: color-mix(in srgb, var(--color-lake) 12%, var(--color-ivory));
-  --color-primary-hover: color-mix(in srgb, var(--color-sapphire) 72%, var(--color-ink-navy));
+  --color-highlight: var(--color-aqua-light);
+  --color-primary-hover: var(--color-deep-sapphire);
   --color-focus: var(--color-sapphire);
 }
