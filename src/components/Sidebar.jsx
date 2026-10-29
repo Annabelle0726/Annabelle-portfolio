@@ -36,7 +36,7 @@ export function LanguageSwitch({ language, onChange }) {
   </div>;
 }
 
-function AccountDialog({ account, language, onClose }) {
+export function AccountDialog({ account, language, onClose }) {
   const ref = useRef(null);
   const [status, setStatus] = useState('');
   const t = copy[language];

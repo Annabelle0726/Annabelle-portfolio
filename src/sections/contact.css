@@ -1,0 +1,86 @@
+/* A viewport-sized contact view; About's shared heading remains unchanged. */
+html:has(#contact.contact-editorial) { overflow-y: hidden; }
+#main.content-views:has(.contact-editorial) { height: 100dvh; min-height: 0; box-sizing: border-box; background: var(--color-paper); }
+#contact.contact-editorial { box-sizing: border-box; height: 100%; min-height: 0; padding: 28px clamp(28px, 3vw, 56px) max(20px, env(safe-area-inset-bottom, 0px)); background: var(--color-paper); color: var(--color-text); font-family: system-ui, sans-serif; }
+#contact .contact-page { position: relative; width: 100%; height: 100%; max-width: 1120px; margin-inline: auto; display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; gap: 18px 32px; }
+#contact .section-header { grid-column: 1 / -1; margin-bottom: 0; position: relative; z-index: 1; }
+#contact .contact-copy { grid-column: 1; grid-row: 2 / 4; min-width: 0; min-height: 0; display: flex; flex-direction: column; align-items: stretch; }
+#contact .contact-intro { flex: none; max-width: 34em; margin: 0 0 18px; font-size: 15px; line-height: 1.8; text-wrap: pretty; }
+#contact .contact-label { display: block; margin: 0 0 5px; color: var(--color-text-secondary); font: 400 12px/1.5 system-ui, sans-serif; letter-spacing: .03em; }
+#contact .contact-email-block { flex: none; }
+#contact .contact-email { display: inline-block; max-width: 100%; color: var(--color-text); font: 500 24px/1.4 Georgia, serif; text-decoration: none; overflow-wrap: anywhere; }
+#contact .contact-email:hover { color: var(--color-sapphire); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+#contact .contact-art { position: absolute; right: 0; top: -8px; width: min(44%, 440px, calc(100dvh - 170px)); margin: 0; pointer-events: none; }
+#contact .contact-envelope { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; }
+#contact .contact-bottom { flex: none; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; padding-top: 16px; border-top: 1px solid color-mix(in srgb, var(--color-champagne-gold) 65%, transparent); }
+#contact .contact-detail { display: flex; align-items: flex-start; gap: 8px; min-width: 0; }
+#contact .contact-detail > svg { width: 18px; height: 18px; flex: none; margin-top: 2px; color: var(--color-imperial-gold); stroke: currentColor; stroke-width: 1.35; stroke-linecap: round; stroke-linejoin: round; }
+#contact .contact-value { display: block; color: var(--color-text); font: 400 14px/1.6 system-ui, sans-serif; text-decoration: none; font-variant-numeric: lining-nums tabular-nums; }
+#contact a.contact-value:hover { text-decoration: underline; text-underline-offset: 4px; }
+#contact .contact-remote { display: block; margin-top: 2px; color: var(--color-text-secondary); font-size: 12px; line-height: 1.5; }
+#contact .contact-footer { grid-column: 2; grid-row: 3; align-self: end; display: flex; justify-content: flex-end; }
+#contact .contact-social { text-align: right; }
+#contact .contact-social nav { display: flex; justify-content: flex-end; gap: 0; margin-right: -4px; }
+#contact .contact-social .social-item { width: 34px; min-height: 44px; flex-basis: 34px; }
+#contact .social-tooltip { top: auto; bottom: calc(100% + 6px); }
+#contact a:focus-visible, #contact button:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+#contact .contact-map { flex: 1 1 170px; display: flex; flex-direction: column; min-height: 70px; max-height: 200px; margin-top: 18px; width: 100%; }
+#contact .contact-map-toolbar { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 28px; }
+#contact .contact-map-toolbar span, #contact .contact-map-toggle { font: 400 11px/1.5 system-ui, sans-serif; color: var(--color-text-secondary); }
+#contact .contact-map-actions { display: flex; flex: none; justify-content: flex-end; min-height: 28px; }
+#contact .contact-map-toggle { border: 0; background: transparent; padding: 4px 0 4px 8px; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+#contact .contact-map-stage { position: relative; flex: 1; min-height: 0; overflow: hidden; border: 1px solid var(--color-border); border-radius: 3px; background: var(--color-paper); }
+#contact .contact-map-stage img { display: block; width: 100%; height: 100%; object-fit: contain; background: var(--color-paper); }
+#contact .contact-map-stage iframe { position: absolute; inset: 0; width: 100%; height: 100%; min-height: 0; border: 0; }
+#contact .contact-map-status { position: absolute; inset: auto 4px 4px; margin: 0; padding: 4px 8px; background: var(--color-paper); color: var(--color-text-secondary); font-size: 11px; }
+@media (max-width: 1100px) and (min-width: 768px) {
+  #contact .contact-page { grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); gap: 16px 20px; }
+  #contact .contact-art { width: min(32%, 320px); top: 80px; }
+  #contact .contact-email { font-size: 22px; }
+  #contact .contact-value { font-size: 13px; }
+}
+@media (max-width: 900px) and (min-width: 768px) {
+  #contact .contact-page { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 767px) {
+  #contact.contact-editorial { padding: 32px max(24px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(24px, env(safe-area-inset-left, 0px)); }
+  #contact .contact-page { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  #contact .contact-intro { font-size: 14px; line-height: 1.75; margin-bottom: 14px; }
+  #contact .contact-email { font-size: 21px; }
+  #contact .contact-value { font-size: 13px; }
+  #contact .contact-map { max-height: 230px; margin-top: 14px; }
+  #contact .contact-bottom { margin-top: 14px; padding-top: 12px; }
+}
+@media (max-height: 650px) {
+  #contact .contact-page { gap: 12px 28px; }
+  #contact .contact-intro { margin-bottom: 12px; font-size: 14px; line-height: 1.65; }
+  #contact .contact-bottom { margin-top: 12px; padding-top: 10px; }
+  #contact .contact-map { margin-top: 10px; min-height: 62px; }
+  #contact .contact-footer .contact-label { display: none; }
+}
+@media (max-width: 359px) {
+  #contact .contact-intro { font-size: 13px; }
+  #contact .contact-email { font-size: 19px; }
+  #contact .contact-label { font-size: 11px; }
+  #contact .contact-value { font-size: 12px; }
+  #contact .contact-detail { gap: 6px; }
+}
+
+/* Distribute spare height through the content, keeping the map and socials grounded. */
+@media (min-width: 901px) {
+  #contact .contact-intro { margin-bottom: clamp(18px, calc(10dvh - 44px), 42px); }
+  #contact .contact-bottom { margin-top: clamp(18px, calc(8dvh - 32px), 36px); padding-top: clamp(16px, 3dvh, 28px); }
+  #contact .contact-copy { justify-content: space-between; }
+  #contact .contact-map { flex: 0 1 200px; margin-top: 0; }
+  #contact .contact-bottom { margin-bottom: 18px; }
+}
+/* Like the home overview, artwork shares the text canvas with a soft reading veil. */
+@media (max-width: 900px) {
+  #contact .contact-page { isolation: isolate; }
+  #contact .contact-copy { grid-row: 2; justify-content: space-between; }
+  #contact .contact-map { flex-grow: 0; flex-basis: 230px; }
+  #contact .contact-footer { grid-column: 1; }
+  #contact .contact-copy, #contact .contact-footer { position: relative; z-index: 1; }
+  #contact .contact-art { position: absolute; z-index: 0; top: 42px; right: -24px; width: min(88%, 360px); opacity: .62; }
+  #contact .contact-art::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, var(--color-paper) 5%, color-mix(in srgb, var(--color-paper) 90%, transparent) 30%, color-mix(in srgb, var(--color-paper) 35%, transparent) 72%, transparent); pointer-events: none; }
+}

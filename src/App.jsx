@@ -65,7 +65,7 @@ export default function App() {
     portfolio: <Portfolio />,
     design: <DesignPortfolio />,
     data: <Projects />,
-    contact: <Contact />,
+    contact: <Contact language={language} />,
     resume: <Resume />,
     favorites: <section id={route.id} className="favorites-view" lang={language === 'zh' ? 'zh-CN' : 'en'}><div className="container"><div className="section-title"><h2>{favoritesTitle}</h2></div><p>{language === 'zh' ? '即将更新' : 'Coming soon'}</p></div></section>,
   };
@@ -83,7 +83,7 @@ export default function App() {
       <main id="main" tabIndex={-1} className={`content-views${route.view === 'home' ? ' is-home' : ''}`}>
         {views[route.view]}
       </main>
-      {route.view !== 'home' && route.view !== 'about' && route.group !== 'wechat' && <button type="button" className="back-to-top-link" aria-label={language === 'zh' ? '回到顶部' : 'Back to top'} onClick={() => window.scrollTo({ top: 0, behavior: 'auto' })}><i className="bi bi-arrow-up-short" aria-hidden="true" /></button>}
+      {route.view !== 'home' && route.view !== 'about' && route.view !== 'contact' && route.group !== 'wechat' && <button type="button" className="back-to-top-link" aria-label={language === 'zh' ? '回到顶部' : 'Back to top'} onClick={() => window.scrollTo({ top: 0, behavior: 'auto' })}><i className="bi bi-arrow-up-short" aria-hidden="true" /></button>}
       </div>
     </>
   );
