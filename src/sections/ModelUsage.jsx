@@ -1,3 +1,4 @@
+import WebProjectNav from '../components/WebProjectNav';
 import React from 'react';
 import SectionHeader from '../components/SectionHeader';
 import { modelUsage } from './model-usage';
@@ -37,7 +38,7 @@ export default function ModelUsage({ language = 'zh', tool = 'chatgpt', onNaviga
           <p>{detail.excerpt}</p>
         </aside>
       </article>
-      <footer className="model-usage-footer">{back}</footer>
+      <WebProjectNav en={language === 'en'} onNavigate={onNavigate} previous={{ href: '#models', label: language === 'en' ? 'Models & tools' : '模型与工具' }} />
     </div>
   </section>;
 }

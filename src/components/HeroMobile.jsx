@@ -19,8 +19,8 @@ export function HeroArrow() {
     <g className="hero-arrow-shaft"><path d="M5 26H56M48 18l8 8-8 8" /></g>
   </svg>;
 }
-export function HeroMobileActions({ language, onNavigate, ready }) {
-  return <div className="hero-mobile-actions"><a className="hero-about hero-projects" data-ready={ready} href="#portfolio" onClick={onNavigate} tabIndex={ready ? undefined : -1} aria-hidden={!ready || undefined}><span>{language === 'zh' ? '看项目' : 'View projects'}</span><HeroArrow /></a></div>;
+export function HeroProjectAction({ language, onNavigate, ready }) {
+  return <div className="hero-project-action"><a className="hero-about hero-projects" data-ready={ready} href="#portfolio" onClick={onNavigate} tabIndex={ready ? undefined : -1} aria-hidden={!ready || undefined}><span>{language === 'zh' ? '项目' : 'Projects'}</span><HeroArrow /></a></div>;
 }
 export function HeroSocials({ language }) {
   const [account, setAccount] = useState(null);

@@ -1,0 +1,39 @@
+/* Project headers keep the majority page-title scale and a compact subtitle. */
+#main.content-views .project-header { margin-bottom: 24px; }
+#main.content-views .project-header .project-subtitle {
+  margin: 8px 0 0;
+  max-width: 56em;
+  color: var(--color-text-secondary);
+  font: 400 16px/1.75 system-ui, sans-serif;
+  letter-spacing: normal;
+  text-wrap: pretty;
+}
+#main.content-views :is(.web-project-page, .belay-page, .somnia-page, .uxui-page, .data-page) :is(h2, h3, h4) {
+  font-family: Georgia, 'Songti SC', 'STSong', SimSun, serif;
+}
+/* Equivalent chapter headings: 20px is the most frequent existing size. */
+#main.content-views :is(.web-chapter-title h2, .belay-section-heading h2, .somnia-chapter h2, .data-chapters h2, .data-gallery-heading h2, .uxui-details h2) {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+#main.content-views :is(.belay-path-copy h3, .belay-work-grid h3, .somnia-screen-notes h3, .uxui-highlights h2) {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+#main.content-views .uxui-page { font-family: system-ui, sans-serif; }
+/* Overview titles had a three-way tie; reuse the shared page scale. */
+#main.content-views :is(.web-project-summary h2, .uxui-overview-summary h2, .data-card-heading h2) {
+  font-size: var(--section-title-size);
+  line-height: 1.3;
+}
+#main.content-views .uxui-details h2 { margin: 0 0 14px; }
+#main.content-views .uxui-highlights h2 { margin: 0 0 12px; }
+#main.content-views .belay-hero-copy { padding-top: 0; }
+#main.content-views .somnia-hero { padding-top: 0; }
+#main.content-views .data-detail-heading { max-width: none; }
+@media (max-width: 767px) {
+  #main.content-views .project-header { margin-bottom: 20px; }
+  #main.content-views :is(.web-project-summary h2, .uxui-overview-summary h2, .data-card-heading h2) { font-size: 32px; }
+}

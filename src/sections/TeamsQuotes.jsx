@@ -1,3 +1,4 @@
+import WebProjectNav from '../components/WebProjectNav';
 import React from 'react';
 import SectionHeader from '../components/SectionHeader';
 import './teams-quotes.css';
@@ -12,7 +13,7 @@ const sources = {
 const copy = {
   zh: {
     title: '团队与语录',
-    intro: '一些让我继续追问的文章、研究与片段。',
+    intro: '一些让我继续追问的文章、研究与片段',
     featured: '精选摘录',
     quote: '我想让这个任务做得更深，而不是做得更大。',
     quoteNote: '文中提示词节选 · 译文',
@@ -37,7 +38,7 @@ const copy = {
   },
   en: {
     title: 'Teams & quotes',
-    intro: 'Articles, research, and moments that keep me asking questions.',
+    intro: 'Articles, research, and moments that keep me asking questions',
     featured: 'Selected quote',
     quote: 'I want a deeper version of this task, not a bigger one.',
     quoteNote: 'An excerpt from a prompt in the article',
@@ -141,17 +142,7 @@ export default function TeamsQuotes({ language = 'zh', onNavigate }) {
           <div className="quotes-actions"><SourceLink href={sources.judgment} newTab={t.newTab}>{t.read}</SourceLink><a className="quotes-note-link" href="#notes-judgment" onClick={onNavigate}>{language === 'en' ? 'My reflections' : '我的思考'} <span aria-hidden="true">→</span></a></div>
         </article>
       </div>
-      <footer className="quotes-footer">
-        <a className="quotes-previous" href="#models" onClick={onNavigate}><span aria-hidden="true">←</span> {t.previous}</a>
-        <span className="quotes-footer-rule" aria-hidden="true" />
-        <a className="quotes-next" href="#contact" onClick={onNavigate}>
-          <span>{t.next}</span>
-          <svg viewBox="0 0 76 52" fill="none" aria-hidden="true">
-            <circle className="quotes-next-orbit" cx="49" cy="26" r="23" pathLength="100" />
-            <g className="quotes-next-arrow"><path d="M5 26H56M48 18l8 8-8 8" /></g>
-          </svg>
-        </a>
-      </footer>
+      <WebProjectNav en={language === 'en'} onNavigate={onNavigate} previous={{ href: '#models', label: t.previous }} next={{ href: '#contact', label: t.next }} />
     </div>
   </section>;
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './hero.css';
 import RibbonArt from '../components/RibbonArt';
-import { HeroPortrait, HeroMobileActions, HeroSocials, HeroArrow } from '../components/HeroMobile';
+import { HeroPortrait, HeroProjectAction, HeroSocials, HeroArrow } from '../components/HeroMobile';
 import './hero-mobile.css';
 
 function HeroCopy({ language, onNavigate }) {
@@ -44,7 +44,7 @@ function HeroCopy({ language, onNavigate }) {
         <span>{zh ? '关于我' : 'About me'}</span>
         <HeroArrow />
       </a>
-      <HeroMobileActions language={language} onNavigate={onNavigate} ready />
+      <HeroProjectAction language={language} onNavigate={onNavigate} ready />
       </div>
     </div>
   ;

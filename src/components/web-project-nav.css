@@ -1,11 +1,17 @@
-.web-project-nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; width: 100%; box-sizing: border-box; padding: 14px 72px 0 0; border-top: 1px solid var(--color-border); }
+.web-project-nav { position: relative; z-index: 1; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; width: 100%; box-sizing: border-box; margin: 24px 0 0; padding: 16px 72px 0 0; border-top: 1px solid var(--color-border); }
 .web-project-nav.is-compact { width: auto; max-width: 100%; margin-left: auto; border: 0; padding: 0 72px 0 0; }
-.web-project-nav .web-project-nav-link { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; color: var(--color-deep-sapphire); font: 12px/1.5 system-ui,sans-serif; text-decoration: none; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+.web-project-nav .web-project-nav-link { display: inline-flex; align-items: center; gap: 10px; min-width: 0; min-height: 44px; color: var(--color-deep-sapphire); font: 400 13px/1.5 system-ui,sans-serif; text-decoration: none; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 .web-project-nav .is-right { margin-left: auto; text-align: right; }
 .web-project-nav .web-project-nav-gem { display: flex; align-items: center; justify-content: center; flex: 0 0 32px; width: 32px; height: 32px; padding: 0; line-height: 0; box-sizing: border-box; color: var(--color-surface); background: radial-gradient(circle at 32% 20%,var(--color-azure),var(--color-royal-blue) 75%); border: 1px solid color-mix(in srgb,var(--color-azure) 45%,var(--color-surface)); border-radius: 50%; box-shadow: inset 0 1px 2px color-mix(in srgb,var(--color-surface) 55%,transparent),0 2px 5px color-mix(in srgb,var(--color-sapphire) 12%,transparent); transition: transform 180ms ease,filter 180ms ease; }
 .web-project-nav .web-project-nav-gem svg { display: block; flex: none; width: 18px; height: 18px; margin: 0; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .web-project-nav-link:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 5px; border-radius: 4px; }
 .web-project-nav-link:active .web-project-nav-gem { transform: scale(.94); filter: brightness(1.15); }
-@media (hover:hover) { .web-project-nav-link:hover .web-project-nav-gem { transform: translateY(-2px); } }
-@media (max-width:767px) { .web-project-nav .web-project-nav-link { font-size: 11px; gap: 9px; } }
+@media (hover:hover) and (pointer:fine) {
+  .web-project-nav-link.is-left:hover .web-project-nav-gem { transform: translateX(-2px); }
+  .web-project-nav-link.is-right:hover .web-project-nav-gem { transform: translateX(2px); }
+}
+/* One page-bottom spacing rule for every Projects view, including deep links. */
+#main.content-views > :is(.web-project-page,.belay-page,.somnia-page,.uxui-page,.data-page) { padding-bottom: max(32px,env(safe-area-inset-bottom,0px)); }
+.web-project-nav-link > span:not(.web-project-nav-gem) { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width:767px) { .web-project-nav .web-project-nav-link { gap: 9px; max-width: 100%; } }
 @media (prefers-reduced-motion:reduce) { .web-project-nav .web-project-nav-gem { transition: none; transform: none; } }

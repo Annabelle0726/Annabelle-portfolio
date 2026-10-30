@@ -16,6 +16,8 @@
 .belay-hero-copy > p:not(.belay-kicker) { color: var(--color-text-secondary); }
 .belay-page .belay-meta { font-size: 11px; line-height: 1.8; margin: 22px 0 12px; }
 .belay-actions { display: flex; flex-wrap: wrap; gap: 5px 18px; align-items: center; }
+#web-belay .belay-actions :is(button,.belay-gem) { transform: none; translate: none; transition: color 180ms ease,filter 180ms ease,box-shadow 180ms ease; }
+#web-belay .belay-actions button:active .belay-gem { filter: brightness(1.12); }
 .belay-explore { display: inline-flex; align-items: center; gap: 9px; padding: 4px 0; border: 0; background: transparent; color: var(--color-deep-sapphire); font-size: 12px !important; min-height: 44px; }
 .belay-gem { display: grid; place-items: center; flex: 0 0 32px; width: 32px; height: 32px; color: var(--color-surface); background: radial-gradient(circle at 32% 20%,var(--color-azure),var(--color-royal-blue) 75%); border: 1px solid color-mix(in srgb,var(--color-azure) 45%,var(--color-surface)); border-radius: 50%; box-shadow: inset 0 1px 2px color-mix(in srgb,var(--color-surface) 55%,transparent),0 2px 5px color-mix(in srgb,var(--color-sapphire) 12%,transparent); transition: transform 180ms ease; }
 .belay-gem svg { display: block; width: 18px; height: 18px; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
@@ -25,7 +27,7 @@
 .belay-ribbon { position: absolute; z-index: -1; pointer-events: none; width: min(48%,520px); height: 340px; right: 0; top: 0; overflow: hidden; opacity: .68; mix-blend-mode: multiply; transform: translate(var(--belay-dx,0px),var(--belay-dy,0px)); transition: transform 320ms ease-out; mask-image: radial-gradient(ellipse at 100% 0%,#000 8%,transparent 72%), linear-gradient(90deg,#000 90%,transparent 100%), linear-gradient(180deg,transparent 0%,#000 8%); mask-composite: intersect; }
 .belay-ribbon img { position: absolute; inset: -14px; width: calc(100% + 28px); max-width: none; height: calc(100% + 28px); object-fit: cover; object-position: 83% 34%; transform-origin: 85% 20%; animation: belay-drift 14s ease-in-out infinite alternate; }
 @keyframes belay-drift { from { transform: translate3d(-3px,3px,0) rotate(-.4deg) scale(1.01); } to { transform: translate3d(4px,-6px,0) rotate(.5deg) scale(1.025); } }
-.belay-stage { position: relative; min-width: 0; padding: 12px 0 24px; }
+.belay-stage { position: relative; z-index: 3; min-width: 0; padding: 12px 0 24px; }
 .belay-stage-media { display: grid; align-items: center; min-height: 290px; }
 .belay-screen { margin: 0; min-width: 0; }
 .belay-screen > button { display: block; position: relative; width: 100%; padding: 5px; background: var(--color-surface); border: 1px solid color-mix(in srgb,var(--color-sapphire) 14%,var(--color-surface)); border-radius: 8px; box-shadow: 0 8px 24px color-mix(in srgb,var(--color-ink-navy) 7%,transparent); overflow: hidden; }
@@ -98,7 +100,10 @@
  .belay-switch { margin-left: 0; }
 }
 @media (max-width:767px) {
- .belay-page { padding: 32px max(24px,env(safe-area-inset-right)) 24px max(24px,env(safe-area-inset-left)); }
+ /* Keep the text at its existing offset, but anchor the artwork to the page edges. */
+ #main.content-views:has(> #web-belay) { padding-top: 0; }
+ #web-belay.belay-page { position: relative; isolation: isolate; padding: calc(var(--content-top-space,56px) + 12px) max(24px,env(safe-area-inset-right)) 24px max(24px,env(safe-area-inset-left)); }
+ .belay-opening { position: static; isolation: auto; }
  .belay-hero { padding: 20px 0 14px; }
  .belay-hero-copy h2 { font-size: 22px; margin-bottom: 15px; }
  .belay-page p { font-size: 14px; }
@@ -107,8 +112,8 @@
  .belay-actions { gap: 2px 15px; }
  .belay-stage { padding: 4px 0 10px; }
  .belay-stage-media { min-height: 180px; }
- .belay-ribbon { width: 45%; height: 200px; opacity: .4; }
- .belay-ribbon img { animation: none; }
+ .belay-ribbon { top: 0; right: 0; width: min(100%,560px); height: auto; aspect-ratio: 1200 / 675; overflow: visible; opacity: .4; transform: none; mask-image: radial-gradient(ellipse at 100% 0%,#000 24%,transparent 100%); mask-composite: add; }
+ .belay-ribbon img { position: static; display: block; inset: auto; width: 100%; height: auto; object-fit: contain; object-position: right top; transform: none; animation: none; }
  .belay-stage-label { font-size: 9px; margin-top: 9px; }
  .belay-scene-controls { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); column-gap: 9px; padding-bottom: 12px; }
  .belay-scene-controls button { justify-content: center; flex-wrap: wrap; gap: 5px 8px; font-size: 12px; padding: 9px 0; }
@@ -135,5 +140,37 @@
  .belay-dialog-toolbar button { flex: 1; min-height: 44px; }
  .belay-dialog-image { max-height: calc(92dvh - 120px); }
 }
+@media (min-width:1100px) {
+ /* Let the ribbon reach the page top while preserving the shared header offset. */
+ #main.content-views:has(> #web-belay) { padding-top: 0; }
+ #web-belay.belay-page { position: relative; isolation: isolate; padding-top: calc(var(--content-top-space,24px) + 20px); }
+ .belay-opening { position: static; isolation: auto; }
+ .belay-ribbon { top: 0; right: clamp(28px,3vw,56px); transform: translateX(var(--belay-dx,0px)); mask-image: radial-gradient(ellipse at 100% 0%,#000 8%,transparent 72%), linear-gradient(90deg,#000 90%,transparent 100%); mask-composite: intersect; }
+ .belay-opening > .section-header .project-subtitle { max-width: calc((100% - clamp(26px,3vw,44px)) * .41); }
+ .belay-stage { align-self: start; margin-top: -64px; padding-top: 0; }
+ .belay-opening { min-height: 0; grid-template-rows: auto auto auto; }
+}
 @media (min-width:1100px) and (max-height:720px) { .belay-opening { min-height: 0; } .belay-hero { padding-top: 8px; } .belay-hero-copy h2 { margin-bottom: 12px; } .belay-stage-media { min-height: 230px; } }
 @media (prefers-reduced-motion:reduce) { .belay-page *, .belay-page *::before,.belay-page *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+
+/* Scene controls belong to the screenshot they operate. */
+.belay-opening { border-bottom: 1px solid var(--color-border); }
+.belay-stage .belay-scene-controls { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 10px; padding: 0; border: 0; }
+.belay-stage .belay-scene-controls button { justify-content: center; gap: 5px; min-height: 30px; padding: 4px 9px; border: 1px solid var(--color-border); border-radius: 6px; background: var(--color-paper); color: var(--color-deep-sapphire); font-size: 11px; transform: none; translate: none; }
+.belay-stage .belay-scene-controls button > span { font-size: 10px; }
+.belay-stage .belay-scene-controls button { line-height: 1.4; transition: background-color 160ms ease,border-color 160ms ease,box-shadow 160ms ease; }
+.belay-stage .belay-scene-controls button:hover { border-color: var(--color-sapphire); }
+.belay-stage .belay-scene-controls button:active { box-shadow: inset 0 1px 3px color-mix(in srgb,var(--color-ink-navy) 18%,transparent); }
+.belay-stage .belay-scene-controls button[aria-pressed=true] { background: var(--color-sapphire); border-color: var(--color-sapphire); color: var(--color-surface); }
+.belay-stage .belay-scene-controls button[aria-pressed=true] > span { color: inherit; }
+.belay-stage-label { padding: 5px 10px; border: 1px solid var(--color-border); border-radius: 7px; background: var(--color-paper); color: var(--color-text-secondary); font-size: 9px; }
+@media (min-width:1100px) { .belay-stage { margin-top: -104px; } }
+@media (max-width:767px) {
+ .belay-stage .belay-scene-controls { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 6px; }
+ .belay-stage .belay-scene-controls button { min-width: 0; min-height: 40px; padding: 5px 4px; gap: 4px; font-size: 11px; line-height: 1.4; }
+}
+
+/* Keep Belay detail controls and headings stationary in every interaction state. */
+#web-belay :is(h2,h3,button,a),
+#web-belay :is(button,a) > :is(span,strong,svg),
+#web-belay .belay-gem { transform: none !important; translate: none !important; }

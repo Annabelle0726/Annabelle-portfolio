@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import artwork from '../assets/hero-art.png';
+import mobileArtwork from '../assets/hero-ribbon-mobile.png';
 
 // Deform texture coordinates rather than moving a rigid rectangle. The source
 // artwork stays as a CSS fallback while the GPU renders the moving material.
@@ -40,15 +41,16 @@ export default function RibbonArt() {
         uniform vec2 pointer;
         uniform vec2 breezeOffset;
         uniform float hoverStrength;
+        uniform vec3 paperColor;
+        uniform float portrait;
         void main(){
           vec2 p=vec2(uv.x,1.-uv.y);
           float aspect=resolution.x/resolution.y;
           float imageAspect=imageSize.x/imageSize.y;
           vec2 crop=vec2(min(1.,aspect/imageAspect), min(1.,imageAspect/aspect));
-          // Several traveling waves give the folds independent, continuous motion.
-          float wave=sin(p.y*7.5-time*.85)+.35*sin(p.y*15.+p.x*3.+time*.6);
-          p.x+=.019*wave;
-          p.y+=.011*sin(p.x*7.+p.y*4.-time*.7);
+          // Slow, broad bends preserve the painted folds rather than rippling them.
+          p.x+=.006*sin(p.y*4.5-time*.6);
+          p.y+=.004*sin(p.x*4.+p.y*2.-time*.5);
           p=(p-.5)*.94+.5;
           // A soft, local bend in screen space, capped at a few CSS pixels.
           // The broad falloff keeps the painted folds supple without a ripple ring.
@@ -57,11 +59,24 @@ export default function RibbonArt() {
           float fold=sin(distanceToPointer.y*6.-distanceToPointer.x*3.+time*.7);
           p+=breezeOffset*influence*vec2(.65+.35*fold,-.55+.25*fold);
           vec2 sampleUV=p*crop+(1.-crop)*vec2(.55,.5);
-          vec3 color=texture2D(art,sampleUV).rgb;
+          // Fit the portrait to height and anchor top/right. Only transparent
+          // left-side breathing room is cropped on narrow phones, never the curl.
+          if(portrait>.5) sampleUV=vec2(1.-(1.-p.x)*aspect/imageAspect,p.y);
+          vec4 sampleColor=texture2D(art,clamp(sampleUV,0.,1.));
+          float inside=step(0.,sampleUV.x)*step(sampleUV.x,1.)*step(0.,sampleUV.y)*step(sampleUV.y,1.);
+          vec3 color=sampleColor.rgb;
+          if(portrait<.5){
+            // Replace only the bright neutral backing, preserving blue and gold.
+            float low=min(color.r,min(color.g,color.b));
+            float high=max(color.r,max(color.g,color.b));
+            float backing=smoothstep(.80,.96,low)*(1.-smoothstep(.04,.17,high-low));
+            color=mix(color,paperColor,backing);
+          }
           // Restrict the changing light to blue pigment; ivory stays quiet.
           float blue=smoothstep(.04,.3,color.b-color.r);
           color*=1.+blue*.045*sin(p.y*10.-p.x*4.-time);
           color*=1.+blue*.012*influence;
+          color=mix(paperColor,color,sampleColor.a*inside);
           gl_FragColor=vec4(color,1.);
         }`));
       gl.linkProgram(program);
@@ -91,6 +106,8 @@ export default function RibbonArt() {
     const pointerLocation = gl.getUniformLocation(program, 'pointer');
     const breezeLocation = gl.getUniformLocation(program, 'breezeOffset');
     const strengthLocation = gl.getUniformLocation(program, 'hoverStrength');
+    const paperLocation = gl.getUniformLocation(program, 'paperColor');
+    const portraitLocation = gl.getUniformLocation(program, 'portrait');
     const render = () => {
       if (!loaded || disposed || gl.isContextLost()) return;
       gl.viewport(0, 0, width, height);
@@ -129,6 +146,8 @@ export default function RibbonArt() {
       const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
       width = canvas.width = Math.max(1, Math.round(canvas.clientWidth * ratio));
       height = canvas.height = Math.max(1, Math.round(canvas.clientHeight * ratio));
+      const paper = getComputedStyle(hero).backgroundColor.match(/[\d.]+/g);
+      gl.uniform3f(paperLocation, ...paper.slice(0, 3).map(channel => Number(channel) / 255));
       render();
     };
     const observer = new ResizeObserver(resize);
@@ -139,14 +158,17 @@ export default function RibbonArt() {
     source.onload = () => {
       if (disposed || gl.isContextLost()) return;
       gl.bindTexture(gl.TEXTURE_2D, texture);
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, source);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, source);
       gl.uniform2f(gl.getUniformLocation(program, 'imageSize'), source.width, source.height);
+      gl.uniform1f(portraitLocation, mobile.matches ? 1 : 0);
       loaded = true;
       resize();
       canvas.dataset.ready = 'true';
       sync();
     };
-    source.src = artwork;
+    const loadArtwork = () => { source.src = mobile.matches ? mobileArtwork : artwork; };
+    loadArtwork();
+    mobile.addEventListener('change', loadArtwork);
     // Fade where the breeze was last felt, instead of sweeping back to the centre.
     const resetPointer = () => { pointer.targetStrength = 0; };
     const movePointer = event => {
@@ -182,6 +204,7 @@ export default function RibbonArt() {
       window.removeEventListener('blur', resetPointer);
       finePointer.removeEventListener('change', resetPointer);
       media.removeEventListener('change', resetPointer);
+      mobile.removeEventListener('change', loadArtwork);
       shaders.forEach(shader => gl.deleteShader(shader));
       gl.deleteTexture(texture);
       gl.deleteBuffer(buffer);

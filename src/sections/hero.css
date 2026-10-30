@@ -46,7 +46,7 @@
 #hero .hero-ribbon-canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; }
 #hero .hero-ribbon-canvas[data-ready="true"] { opacity: 1; }
 #hero .hero-art-window:has(.hero-ribbon-canvas[data-ready="true"]) .hero-art { visibility: hidden; }
-#hero .hero-art { position: absolute; inset: -3%; background: url('../assets/hero-art.png') 55% center / cover no-repeat; animation: hero-breeze 24s ease-in-out infinite alternate; }
+#hero .hero-art { position: absolute; inset: -3%; background: var(--color-paper) url('../assets/hero-art.png') 55% center / cover no-repeat; background-blend-mode: multiply; animation: hero-breeze 24s ease-in-out infinite alternate; }
 #hero .hero-art::after { content: ''; position: absolute; inset: -20%; background: linear-gradient(115deg, transparent 38%, rgb(255 255 255 / .14) 49%, transparent 60%); mix-blend-mode: soft-light; animation: hero-sheen 32s ease-in-out infinite alternate; }
 @keyframes hero-breeze { from { transform: translate3d(-2%, -2%, 0) rotate(-1deg) scale(1.06); } to { transform: translate3d(2%, 2%, 0) rotate(1deg) scale(1.09); } }
 @keyframes hero-sheen { from { transform: translateX(-20%); opacity: .2; } to { transform: translateX(20%); opacity: .65; } }

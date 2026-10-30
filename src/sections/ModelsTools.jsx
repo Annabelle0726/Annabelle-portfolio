@@ -8,7 +8,7 @@ import './models-tools.css';
 const content = {
   zh: {
     title: '模型与工具',
-    intro: '我用它们推敲想法、推进实现，也不断检查自己的判断。',
+    intro: '我用它们推敲想法、推进实现，也不断检查自己的判断',
     skillsTitle: '我的 Skills 选集',
     skillsIntro: '把常用的方法，放进具体的工作里。',
     usage: '我的使用方式', next: '团队与语录',
@@ -27,7 +27,7 @@ const content = {
   },
   en: {
     title: 'Models & tools',
-    intro: 'Tools I use to explore ideas, build things, and keep checking my own judgment.',
+    intro: 'Tools I use to explore ideas, build things, and keep checking my own judgment',
     skillsTitle: 'My Skills selection',
     skillsIntro: 'Useful methods, woven into everyday work.',
     usage: 'How I use it', next: 'Teams & quotes',

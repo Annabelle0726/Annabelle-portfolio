@@ -4,6 +4,14 @@ button, a { touch-action: manipulation; }
 button:focus-visible, a:focus-visible { outline: 3px solid #173b6c; outline-offset: 3px; }
 img { max-width: 100%; height: auto; }
 
+/* Subheadings beneath page headers use the same type scale. */
+:root { --page-subheading-size: clamp(24px, 2vw, 26px); }
+#main :is(.belay-hero-copy > h2, .somnia-intro > h2, .web-related-intro > h2, .data-detail-heading > h1, .uxui-project-heading h2) { font-family: Georgia, 'Songti SC', 'STSong', SimSun, serif; font-size: var(--page-subheading-size); font-weight: 500; line-height: 1.4; letter-spacing: .025em; }
+@media (max-width: 767px) { :root { --page-subheading-size: 22px; } }
+
+/* Short introductory subtitles share one typographic treatment. */
+#main :is(.web-overview-intro > p, .uxui-overview-lead, .uxui-intro > p, .data-intro > p, .models-intro, .quotes-intro) { font-family: system-ui, sans-serif; font-size: 16px; font-weight: 400; line-height: 1.75; }
+
 #main.content-views { min-height: 100vh; min-height: 100svh; padding-top: 64px; background: var(--color-paper); }
 #main.content-views > .section-bg { background: var(--color-paper); }
 #main.content-views.is-home { padding-top: 0; }

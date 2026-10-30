@@ -1,3 +1,4 @@
+import WebProjectNav from '../components/WebProjectNav';
 import React, { useEffect, useState } from 'react';
 import SectionHeader from '../components/SectionHeader';
 import { readingNotes } from './reading-notes';
@@ -78,10 +79,7 @@ export default function ReadingNote({ noteId, language = 'zh', onNavigate }) {
           {contents(false)}
         </aside>
       </div>
-      <footer className="quotes-footer note-footer">
-        <a className="quotes-previous" href="#quotes" onClick={onNavigate}>← {en ? 'Back to collection' : '返回团队与语录'}</a>
-        <a className="quotes-next" href="#contact" onClick={onNavigate}><span>{en ? 'Get in touch' : '联系我'}</span><svg viewBox="0 0 76 52" fill="none" aria-hidden="true"><circle className="quotes-next-orbit" cx="49" cy="26" r="23" pathLength="100" /><g className="quotes-next-arrow"><path d="M5 26H56M48 18l8 8-8 8" /></g></svg></a>
-      </footer>
+      <WebProjectNav en={en} onNavigate={onNavigate} previous={{ href: '#quotes', label: en ? 'Back to collection' : '返回团队与语录' }} next={{ href: '#contact', label: en ? 'Get in touch' : '联系我' }} />
     </div>
   </section>;
 }

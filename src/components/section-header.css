@@ -15,6 +15,7 @@
 .section-eyebrow::after { content: ''; height: 1px; width: var(--section-rule-width); flex-shrink: 0; background: var(--color-champagne-gold); opacity: .6; }
 .section-title-line { display: flex; align-items: center; gap: var(--section-title-gap); }
 .section-header .section-header-title { margin: 0; padding: 0; color: var(--color-text); font: 500 var(--section-title-size)/1.25 Georgia, 'Songti SC', 'STSong', SimSun, serif; letter-spacing: .025em; text-wrap: balance; }
+#main .section-header .section-header-title { font-family: Georgia, 'Songti SC', 'STSong', SimSun, serif; font-size: var(--section-title-size); }
 .section-signature { display: block; flex: 0 0 auto; width: var(--section-signature-width); height: var(--section-signature-height); margin: 0; overflow: visible; }
 .section-signature path { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 100; }
 .section-signature .signature-ink { stroke: var(--color-sapphire); }
