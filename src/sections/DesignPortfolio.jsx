@@ -12,6 +12,10 @@ import travelOverview from '../assets/uxui/travel-overview.webp';
 import travelPreferences from '../assets/uxui/travel-preferences.webp';
 import travelDestinations from '../assets/uxui/travel-destinations.webp';
 import './design-portfolio.css';
+import ribbonCascade from '../assets/web-overview/blue-silk-gold-bell.webp';
+import ribbonLoop from '../assets/uxui/ribbon-loop.webp';
+import ribbonWave from '../assets/uxui/ribbon-wave.webp';
+import './uxui-overview.css';
 
 const projects = [
   {
@@ -96,11 +100,47 @@ function ProjectDetail({ project, language }) {
 
 export default function DesignPortfolio({ language = 'zh', projectId = 'XD', onNavigate }) {
   const en = language === 'en';
+  if (projectId === 'XD') return <DesignOverview language={language} onNavigate={onNavigate} />;
   const project = projects.find(item => item.id === projectId) || projects[0];
   return <section id="XD" className="uxui-page" lang={en ? 'en' : 'zh-CN'}><div className="uxui-inner">
     <SectionHeader as="h1" eyebrow="UX / UI DESIGN" title={en ? 'UX/UI design' : 'UX/UI 设计'}/>
-    <div className="uxui-intro"><p>{en ? 'Interfaces to explore. Details to feel.' : '看见界面，也感受细节。'}<span>{en ? 'Three projects, with previews and small interactions to try here.' : '三个作品，用界面预览与轻交互，让想法更容易被看见。'}</span></p><span className="uxui-edition">03 <span>{en ? 'SELECTED WORKS' : '精选作品'}</span></span></div>
+    <a className="uxui-overview-back" href="#XD" onClick={onNavigate}>← {en ? 'All UX/UI projects' : 'UX/UI 作品总览'}</a>
+    <div className="uxui-intro"><p>{en ? 'Interfaces to explore. Details to feel.' : '看见界面，也感受细节。'}<span>{en ? 'Three projects, with previews and small interactions to try here.' : '三个作品，用界面预览与轻交互，让想法更容易被看见。'}</span></p></div>
     <nav className="uxui-project-nav" aria-label={en ? 'UX/UI projects' : 'UX/UI 作品'}>{projects.map((item, index) => <a key={item.id} href={`#${item.id}`} onClick={onNavigate} aria-current={project.id === item.id ? 'page' : undefined}><img src={item.screens[0].src} alt=""/><span><small>0{index + 1} / {pick(item.category, language)}</small><strong>{item.name}</strong></span><span className="uxui-nav-arrow" aria-hidden="true">↗</span></a>)}</nav>
     <ProjectDetail key={project.id} project={project} language={language}/>
   </div></section>;
+}
+
+const overviewArt = [ribbonCascade, ribbonLoop, ribbonWave];
+const overviewGestures = ['cascade', 'loop', 'wave'];
+const overviewSizes = [[1363, 936], [1808, 1031], [1348, 926]];
+// Excerpts from the existing descriptions, kept alongside the original detail content.
+const overviewCopy = [
+  ['Cupcakes 是一个以甜点选购为场景的品牌网站项目，将产品展示、品牌氛围与趣味互动结合。', 'Cupcakes is a brand website project that brings product discovery and playful interaction into the dessert-shopping experience.'],
+  ['Reverie Reads（现名 Midniht）是一款围绕个人阅读生活展开的产品，把书籍整理、阅读发现与未来计划连接起来。', 'Reverie Reads, now Midniht, brings a personal reading life together through library organization, book discovery, and flexible planning.'],
+  ['Travel Discovery 是一个面向旅行灵感与目的地选择的网站项目。以海滩、城市和山野三种旅行偏好作为入口，结合目的地卡片与视觉浏览，把「想出去走走」这样宽泛的愿望，转化为可以比较、继续探索的具体选项。', 'Travel Discovery is a website project for travel inspiration and destination exploration. Beach, city, and mountain preferences provide an approachable starting point; destination cards turn an open-ended wish to get away into concrete places to compare and explore.'],
+];
+
+function DesignOverview({ language, onNavigate }) {
+  const en = language === 'en';
+  const t = pair => pick(pair, language);
+  return <section id="XD" className="uxui-page uxui-overview" lang={en ? 'en' : 'zh-CN'}>
+    <img className="uxui-overview-art uxui-overview-top-art" src={ribbonCascade} alt="" aria-hidden="true" width="1024" height="1536" />
+    <div className="uxui-inner">
+      <SectionHeader as="h1" eyebrow="UX / UI DESIGN" title={en ? 'UX/UI design' : 'UX/UI 设计'} />
+      <p className="uxui-overview-lead">{en ? 'Interfaces to explore. Details to feel.' : '看见界面，也感受细节。'}</p>
+      <div className="uxui-overview-list">{projects.map((project, index) => <article key={project.id} className={`uxui-overview-project uxui-overview-${overviewGestures[index]}`} aria-labelledby={`${project.id}-overview-title`}>
+        {index > 0 && <img className="uxui-overview-art" src={overviewArt[index]} alt="" aria-hidden="true" decoding="async" />}
+        <div className="uxui-overview-summary">
+          <p className="uxui-overview-category">0{index + 1} / {t(project.category)}</p>
+          <h2 id={`${project.id}-overview-title`}><a href={`#${project.id}`} onClick={onNavigate}>{project.name}</a></h2>
+          <p className="uxui-overview-description">{t(overviewCopy[index])}</p>
+          <a className="uxui-overview-link" href={`#${project.id}`} onClick={onNavigate}>{en ? 'Explore the project' : '查看项目介绍'} <span aria-hidden="true">↗</span><span className="visually-hidden"> · {project.name}</span></a>
+        </div>
+        <a className="uxui-overview-cover" href={`#${project.id}`} onClick={onNavigate} aria-label={`${en ? 'Explore' : '查看'} ${project.name}`}>
+          <span className="uxui-overview-cover-window"><img src={project.screens[0].src} alt={t(project.screens[0].alt)} width={overviewSizes[index][0]} height={overviewSizes[index][1]} loading={index === 0 ? 'eager' : 'lazy'} decoding="async" /></span>
+        </a>
+      </article>)}</div>
+    </div>
+  </section>;
 }

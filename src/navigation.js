@@ -43,5 +43,6 @@ export function resolveNavigation(hash) {
 }
 
 export function sameContentView(first, second) {
+  if (first.view === 'design' && second.view === 'design' && (first.id === 'XD') !== (second.id === 'XD')) return false;
   return first.view === second.view && (first.view !== 'favorites' || first.id === second.id);
 }
