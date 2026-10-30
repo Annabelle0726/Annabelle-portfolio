@@ -1,15 +1,19 @@
 import { useLayoutEffect, useEffect, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { resolveNavigation, sameContentView } from '../navigation';
-import { durationMilliseconds } from '../motion';
 import '../navigation-motion.css';
 
 const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-function focusDestination(id, sameView) {
+function focusDestination(id, sameView, position) {
   const target = document.getElementById(id) || document.getElementById('main');
-  target.setAttribute('tabindex', '-1');
-  window.requestAnimationFrame(() => { if (target.isConnected) target.focus({ preventScroll: true }); });
+  const heading = target.querySelector('h1, h2') || target;
+  heading.setAttribute('tabindex', '-1');
+  window.requestAnimationFrame(() => { if (heading.isConnected) heading.focus({ preventScroll: true }); });
+  if (position) {
+    window.scrollTo({ ...position, behavior: 'instant' });
+    return;
+  }
   if (sameView || id === 'skills') target.scrollIntoView({ behavior: sameView && !reducedMotion() ? 'smooth' : 'instant', block: 'start' });
   else window.scrollTo({ top: 0, behavior: 'instant' });
 }
@@ -20,20 +24,31 @@ export default function useContentNavigation() {
   const rendered = useRef(null);
   const sequence = useRef(0);
   const transition = useRef(null);
-  const fallbackAnimation = useRef(null);
-  const nativeCommit = useRef(false);
+  const positions = useRef(new Map());
+  const entryKey = useRef(null);
+  const restorePosition = useRef(null);
 
-  const changeRoute = next => {
-    if (next.id === destination.current.id) return;
+  const savePosition = () => {
+    if (entryKey.current) positions.current.set(entryKey.current, { left: window.scrollX, top: window.scrollY });
+  };
+  const identifyEntry = () => {
+    let key = window.history.state?.portfolioEntry;
+    if (!key) {
+      key = crypto.randomUUID();
+      window.history.replaceState({ ...window.history.state, portfolioEntry: key }, '');
+    }
+    return key;
+  };
+
+  const changeRoute = (next, restoring = false) => {
+    if (next.id === destination.current.id && !restoring) return;
     const sameView = sameContentView(next, destination.current);
     destination.current = next;
     const request = ++sequence.current;
     transition.current?.skipTransition();
-    fallbackAnimation.current?.cancel();
     if (!sameView && !reducedMotion() && typeof document.startViewTransition === 'function') {
       const nextTransition = document.startViewTransition(() => {
         if (request !== sequence.current) return;
-        nativeCommit.current = true;
         flushSync(() => setRoute(next));
       });
       transition.current = nextTransition;
@@ -42,19 +57,26 @@ export default function useContentNavigation() {
         if (transition.current === nextTransition) transition.current = null;
       });
     } else {
-      nativeCommit.current = false;
       setRoute(next);
     }
   };
 
   useEffect(() => {
+    entryKey.current = identifyEntry();
     const onLocationChange = () => {
       const next = resolveNavigation(window.location.hash || '#hero');
-      if (next) changeRoute(next);
+      if (!next) return;
+      const key = identifyEntry();
+      // A traversal may emit both popstate and hashchange; handle it once.
+      if (key === entryKey.current && next.id === destination.current.id) return;
+      savePosition();
+      entryKey.current = key;
+      restorePosition.current = positions.current.get(key) || null;
+      changeRoute(next, true);
     };
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
     const stopMotion = () => {
-      if (media.matches) { transition.current?.skipTransition(); fallbackAnimation.current?.cancel(); }
+      if (media.matches) transition.current?.skipTransition();
     };
     const restoration = window.history.scrollRestoration;
     window.history.scrollRestoration = 'manual';
@@ -67,25 +89,16 @@ export default function useContentNavigation() {
       media.removeEventListener('change', stopMotion);
       window.history.scrollRestoration = restoration;
       transition.current?.skipTransition();
-      fallbackAnimation.current?.cancel();
     };
   }, []);
 
   useLayoutEffect(() => {
     const previous = rendered.current;
     const sameView = previous && sameContentView(previous, route);
-    if (previous || resolveNavigation(window.location.hash)) focusDestination(route.id, sameView);
-    if (previous && !sameView && !nativeCommit.current && !reducedMotion()) {
-      const main = document.getElementById('main');
-      const duration = durationMilliseconds(getComputedStyle(document.documentElement).getPropertyValue('--motion-content'), 200);
-      fallbackAnimation.current = main.animate(
-        [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'translateY(0)' }],
-        { duration, easing: 'ease-out' },
-      );
-    }
+    if (previous || resolveNavigation(window.location.hash)) focusDestination(route.id, sameView, restorePosition.current);
+    restorePosition.current = null;
     rendered.current = route;
-    nativeCommit.current = false;
-  }, [route.id]);
+  }, [route]);
 
   const navigate = event => {
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return false;
@@ -96,7 +109,10 @@ export default function useContentNavigation() {
       transition.current?.skipTransition();
       window.requestAnimationFrame(() => focusDestination(next.id, true));
     } else {
-      window.history.pushState(null, '', `#${next.id}`);
+      savePosition();
+      entryKey.current = crypto.randomUUID();
+      restorePosition.current = null;
+      window.history.pushState({ portfolioEntry: entryKey.current }, '', `#${next.id}`);
       changeRoute(next);
     }
     return true;

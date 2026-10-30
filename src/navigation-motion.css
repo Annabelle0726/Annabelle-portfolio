@@ -13,10 +13,10 @@
   .content-views:not(.is-home) > section { padding-top: 12px; scroll-margin-top: 56px; }
 }
 ::view-transition-group(main-content) { animation: none; }
-::view-transition-old(main-content) { animation: content-leave var(--motion-content-exit) ease-out both; }
-::view-transition-new(main-content) { animation: content-enter var(--motion-content) ease-out both; }
+::view-transition-old(main-content) { animation: content-leave var(--motion-content-exit) var(--ease-content) both; }
+::view-transition-new(main-content) { animation: content-enter var(--motion-content) var(--ease-content) both; }
 @keyframes content-leave { to { opacity: 0; } }
-@keyframes content-enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes content-enter { from { opacity: 0; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(main-content), ::view-transition-new(main-content) { animation: none !important; }
 }

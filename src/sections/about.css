@@ -3,7 +3,7 @@
 #about.about-editorial { background: var(--color-paper); color: var(--color-text); font-family: system-ui, sans-serif; padding: 28px clamp(28px, 3vw, 56px) max(40px, env(safe-area-inset-bottom, 0px)); overflow: visible; }
 #about .about-page { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px; }
 #about .about-opening { display: flow-root; }
-#about .about-heading-area { margin-bottom: 20px; animation: about-arrive 500ms var(--ease-ui) both; }
+#about .about-heading-area { margin-bottom: 20px; }
 #about .about-eyebrow:not(.section-eyebrow) { display: flex; align-items: center; gap: 14px; margin: 0 0 14px; color: var(--color-text-secondary); font: 400 11px/1.6 system-ui, sans-serif; letter-spacing: .16em; }
 #about .about-eyebrow:not(.section-eyebrow)::after { content: ''; height: 1px; width: 72px; flex-shrink: 0; background: var(--color-champagne-gold); opacity: .6; }
 #about .about-eyebrow span { color: var(--color-imperial-gold); }
@@ -15,12 +15,12 @@
 #about .signature-ink { stroke: var(--color-sapphire); animation: about-sign 800ms ease-out both; }
 #about .signature-gold { stroke: var(--color-champagne-gold); animation: about-sign 200ms 700ms ease-out both; }
 #about .about-prose { min-width: 0; display: flex; flex-direction: column; gap: 16px; }
-#about .about-introduction { display: block; animation: about-arrive 500ms 60ms var(--ease-ui) both; }
+#about .about-introduction { display: block; }
 #about .about-prose p { margin: 0; font-size: 16px; line-height: 1.8; overflow-wrap: break-word; }
 #about .about-introduction p { margin-bottom: 16px; }
 #about .about-introduction p:last-child { margin-bottom: 0; }
 #about .about-introduction p:first-child { font-size: 17px; line-height: 1.8; }
-#about .about-portrait { float: right; width: 36%; position: relative; margin: 0 0 16px 32px; isolation: isolate; animation: about-arrive 500ms 120ms var(--ease-ui) both; }
+#about .about-portrait { float: right; width: 36%; position: relative; margin: 0 0 16px 32px; isolation: isolate; }
 #about .about-photo-frame { position: relative; padding: 6px; border: 1px solid color-mix(in srgb, var(--color-champagne-gold) 70%, transparent); background: var(--color-paper); }
 #about .about-photo-frame img { display: block; width: 100%; height: auto; }
 #about .about-artwork { position: absolute; inset: var(--about-artwork-top, -140px) 0 0; z-index: -1; pointer-events: none; clip-path: inset(0 -120px -6px -20px); --about-artwork-fade-tail: 112px; }
@@ -70,7 +70,6 @@
   #about .about-project-link:hover .about-project-arrow { transform: translateX(5px); }
   #about .about-project-link:hover .about-project-orbit { stroke-dasharray: 100 0; transform: rotate(20deg); }
 }
-@keyframes about-arrive { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes about-sign { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
 @media (min-width: 768px) and (max-width: 1199px) {
   #about .about-profile-band { flex-wrap: wrap; gap: 8px; }

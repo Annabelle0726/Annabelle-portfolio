@@ -37,7 +37,8 @@
   --motion-quick: 160ms;
   --motion-panel: 200ms;
   --motion-nav: 230ms;
-  --motion-content: 200ms;
-  --motion-content-exit: 120ms;
+  --motion-content: 160ms;
+  --motion-content-exit: 160ms;
+  --ease-content: cubic-bezier(.2, .8, .2, 1);
   --ease-ui: cubic-bezier(.2,.8,.2,1);
 }
