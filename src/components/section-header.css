@@ -22,4 +22,5 @@
 @media (max-width: 767px) {
   :root { --section-title-size: 34px; --section-title-gap: 18px; --section-eyebrow-size: 10px; --section-eyebrow-tracking: .18em; --section-eyebrow-gap: 12px; --section-eyebrow-margin: 20px; --section-rule-width: 32px; --section-signature-width: 68px; --section-signature-height: 36px; }
   .section-header { margin-bottom: 0; }
+  .section-header .section-signature { display: none; }
 }

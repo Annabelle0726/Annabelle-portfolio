@@ -55,6 +55,19 @@ section { overflow: visible; }
 .carousel-dots button[aria-pressed="true"]::after { background: white; }
 .back-to-top-link { position: fixed; right: 15px; bottom: 15px; z-index: 90; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: #149ddd; color: white; font-size: 28px; text-decoration: none; }
 
+/* Reserve room for forward motion at the right edge of page-ending links. */
+#main :is(.about-project-link, .models-next, .quotes-next, .web-case-footer > a, .belay-footer a, .somnia-footer a, .data-related a) { padding-right: 8px; }
+:is(.web-case-footer > a, .belay-footer a, .somnia-footer a, .data-related a) { transition: color 180ms ease-out; }
+:is(.web-case-footer > a strong, .belay-footer a > span, .somnia-footer a > span, .data-related a strong) { display: inline-block; transition: transform 180ms ease-out; }
+@media (hover: hover) and (pointer: fine) {
+  :is(.web-case-footer > a, .belay-footer a, .somnia-footer a, .data-related a):hover { color: var(--color-primary); }
+  :is(.web-case-footer > a:hover strong, .belay-footer a:hover > span, .somnia-footer a:hover > span, .data-related a:hover strong) { transform: translateX(4px); }
+}
+:is(.web-case-footer > a:focus-visible strong, .belay-footer a:focus-visible > span, .somnia-footer a:focus-visible > span, .data-related a:focus-visible strong) { transform: translateX(4px); }
+@media (prefers-reduced-motion: reduce) {
+  :is(.web-case-footer > a strong, .belay-footer a > span, .somnia-footer a > span, .data-related a strong) { transition: none; transform: none !important; }
+}
+
 @media (min-width: 768px) and (max-width: 1199px) {
   #header { left: 0; }
   #main { margin-left: 300px; }
