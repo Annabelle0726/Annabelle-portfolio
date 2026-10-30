@@ -72,6 +72,7 @@
 .web-overview-ribbon-top { width: 540px; right: -30px; top: -80px; }
 .web-overview-ribbon-middle { width: 360px; left: 0; top: 60%; transform: rotate(-90deg); }
 .web-overview-ribbon-bottom { width: 420px; right: -95px; bottom: -90px; transform: rotate(30deg); opacity: .72; }
+.web-mobile-project-art { display: none; }
 .web-project-list { display: flex; flex-direction: column; gap: 0; }
 .web-project-row { min-width: 0; display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr); align-items: center; gap: clamp(30px,5vw,80px); padding: 42px 0 54px; border-bottom: 1px solid var(--color-border); }
 .web-project-row:first-child { padding-top: 8px; }
@@ -102,6 +103,9 @@
  .web-overview-ribbon-top { width: 240px; right: -60px; top: -5px; opacity: .7; }
  .web-overview-ribbon-middle { display: none; }
  .web-overview-ribbon-bottom { width: 270px; right: -150px; bottom: -30px; opacity: .5; }
+ /* Keep Belay's ornament in the reading flow, after its links in either language. */
+ .web-mobile-project-art { display: block; position: relative; height: 240px; margin: 0 -24px -32px; overflow: hidden; pointer-events: none; }
+ .web-mobile-project-art img { position: absolute; width: 240px; max-width: none; height: auto; top: -60px; left: 40px; transform: rotate(-90deg); opacity: .8; }
 }
 .web-project-summary { padding-top: 20px; }
 .web-project-summary h2 { font-size: 30px; margin: 0 0 12px; }
