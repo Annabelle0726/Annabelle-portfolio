@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Sidebar, { LanguageSwitch, useNavigationLanguage } from './components/Sidebar';
 import SidebarIcon from './components/SidebarIcon';
 import About from './sections/About';
+import BelayCase from './sections/BelayCase';
 import Resume from './sections/Resume';
 import Portfolio from './sections/Portfolio';
 import DesignPortfolio from './sections/DesignPortfolio';
@@ -64,6 +65,7 @@ export default function App() {
     'agency-bloom-applause': <AgencyBloomThird />,
     home: <Hero language={language} onNavigate={navigate} />,
     about: <About language={language} onNavigate={navigate} />,
+    'web-belay': <BelayCase language={language} onNavigate={navigate} />,
     portfolio: <Portfolio />,
     design: <DesignPortfolio language={language} projectId={route.id} onNavigate={navigate} />,
     data: <Projects />,

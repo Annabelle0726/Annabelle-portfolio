@@ -7,6 +7,7 @@ const views = {
   about: ['about', 'home'],
   skills: ['about', 'home'],
   portfolio: ['portfolio', 'projects'],
+  'web-belay': ['web-belay', 'projects'],
   XD: ['design', 'projects'],
   'XD-cupcakes': ['design', 'projects'],
   'XD-reverie': ['design', 'projects'],
