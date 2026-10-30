@@ -1,0 +1,31 @@
+.background-music { position:relative; flex:0 0 auto; }
+.music-toggle { position:relative; display:grid; place-items:center; width:42px; height:42px; padding:3px; border:1px solid var(--color-border); border-radius:9px; background:var(--color-surface); box-shadow:0 2px 0 var(--color-pale-gold); cursor:pointer; transition:background 160ms ease,box-shadow 160ms ease,transform 160ms ease; }
+.music-record { transform-origin:20px 30px; animation:record-turn 8s linear infinite; animation-play-state:paused; }
+.background-music[data-status=playing] .music-record { animation-play-state:running; }
+.record-body { fill:var(--color-ink-navy); }
+.record-groove { fill:none; stroke:var(--color-surface); stroke-opacity:.15; stroke-width:.6; }
+.record-shine { fill:none; stroke:var(--color-surface); stroke-opacity:.5; stroke-linecap:round; }
+.record-label { fill:var(--color-champagne-gold); }
+.record-hole { fill:var(--color-ink-navy); }
+.music-credit { position:absolute; top:100%; right:0; width:230px; padding:14px; display:flex; flex-direction:column; gap:6px; background:var(--color-paper); border:1px solid var(--color-border); border-radius:12px; box-shadow:0 8px 24px color-mix(in srgb,var(--color-ink-navy) 12%,transparent); color:var(--color-text); font:11px/1.5 system-ui; visibility:hidden; opacity:0; }
+.music-credit a { color:var(--color-primary); text-decoration:underline; }
+@media (hover:hover) and (pointer:fine) { .background-music:hover .music-credit { visibility:visible; opacity:1; } }
+.music-toggle:focus-visible { outline:2px solid var(--color-sapphire); outline-offset:4px; }
+@keyframes record-turn { to { transform:rotate(360deg); } }
+@media(max-width:767px) { .shell-controls .background-music { position:absolute; left:50px; top:2px; } .music-toggle { width:36px; height:36px; } .music-gramophone { width:30px; height:30px; } .music-credit { left:0; right:auto; } }
+@media(prefers-reduced-motion:reduce) { .music-record { animation:none; } }
+
+.music-gramophone { display:block; width:36px; height:36px; overflow:visible; }
+.gramophone-base { fill:var(--color-ink-navy); stroke:var(--color-champagne-gold); stroke-width:1; }
+.gramophone-pipe,.gramophone-rim { fill:none; stroke:var(--color-imperial-gold); stroke-width:2; stroke-linecap:round; }
+.gramophone-horn { fill:var(--color-pale-gold); stroke:var(--color-champagne-gold); stroke-width:1; }
+.gramophone-arm { fill:var(--color-champagne-gold); stroke:var(--color-champagne-gold); stroke-width:1.8; stroke-linecap:round; transform-origin:38px 27px; transform:rotate(-32deg); transition:transform 220ms ease; }
+.background-music[data-status=playing] .gramophone-arm { transform:rotate(0); }
+@media(max-width:767px) { .music-gramophone { width:30px; height:30px; } }
+@media(prefers-reduced-motion:reduce) { .gramophone-arm { transition:none; } }
+
+@media (hover:hover) and (pointer:fine) {
+  .music-toggle:hover { background:var(--color-gold-light); border-color:var(--color-champagne-gold); box-shadow:0 3px 0 var(--color-pale-gold); }
+}
+.music-toggle:active { transform:translateY(1px); box-shadow:0 1px 0 var(--color-pale-gold); }
+@media(prefers-reduced-motion:reduce) { .music-toggle { transition:none; } .music-toggle:active { transform:none; } }

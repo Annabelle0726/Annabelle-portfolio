@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Sidebar, { LanguageSwitch, useNavigationLanguage } from './components/Sidebar';
 import SidebarIcon from './components/SidebarIcon';
 import BackToTop from './components/BackToTop';
+import BackgroundMusic from './components/BackgroundMusic';
 import About from './sections/About';
 import WebProjects from './sections/WebProjects';
 import BelayCase from './sections/BelayCase';
@@ -101,6 +102,7 @@ export default function App() {
       <a className="skip-link" href="#main" onClick={event => { event.preventDefault(); document.getElementById('main').focus(); }}>Skip to main content</a>
       <div className={`shell-controls${isMobile && menuOpen ? ' is-drawer-open' : ''}${scrolled ? ' is-scrolled' : ''}`}>
         <MobileSignature onNavigate={navigate} />
+        <BackgroundMusic language={language} />
         <LanguageSwitch language={language} onChange={setLanguage}/>
         <button ref={menuButton} className="mobile-nav-toggle" type="button" aria-label={language === 'zh' ? '打开导航' : 'Open navigation'} aria-controls="header" aria-expanded={menuOpen} onClick={() => setMenuOpen(true)}><SidebarIcon name="menu"/></button>
       </div>
