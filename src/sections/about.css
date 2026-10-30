@@ -23,10 +23,11 @@
 #about .about-portrait { float: right; width: 36%; position: relative; margin: 0 0 16px 32px; isolation: isolate; animation: about-arrive 500ms 120ms var(--ease-ui) both; }
 #about .about-photo-frame { position: relative; padding: 6px; border: 1px solid color-mix(in srgb, var(--color-champagne-gold) 70%, transparent); background: var(--color-paper); }
 #about .about-photo-frame img { display: block; width: 100%; height: auto; }
-#about .about-artwork { position: absolute; inset: var(--about-artwork-top, -140px) 0 0; z-index: -1; pointer-events: none; clip-path: inset(0 -120px -6px -20px); }
+#about .about-artwork { position: absolute; inset: var(--about-artwork-top, -140px) 0 0; z-index: -1; pointer-events: none; clip-path: inset(0 -120px -6px -20px); --about-artwork-fade-tail: 112px; }
+/* Fade ends before the clip even after the 48px overscan and 40px scroll offset. */
 #about .about-artwork-motion { position: absolute; inset: -48px 0; }
-#about .about-portrait-ribbon { position: absolute; z-index: -2; inset: 0 -96px 0 15%; background: url('../assets/hero-art.png') 35% top / cover no-repeat; mix-blend-mode: multiply; mask-image: linear-gradient(90deg, transparent, #000 28%, #000 60%, transparent), linear-gradient(#000 0%, #000 65%, transparent 96%); mask-composite: intersect; opacity: .48; pointer-events: none; }
-#about .about-portrait-lines { position: absolute; z-index: -1; width: 115%; height: 100%; top: 0; right: -8%; overflow: visible; pointer-events: none; stroke: var(--color-champagne-gold); stroke-width: .65; opacity: .5; }
+#about .about-portrait-ribbon { position: absolute; z-index: -2; inset: 0 -96px 0 15%; background: url('../assets/hero-art.png') 35% top / cover no-repeat; mix-blend-mode: multiply; mask-image: linear-gradient(90deg, transparent, #000 28%, #000 60%, transparent), linear-gradient(#000 0%, #000 45%, transparent calc(100% - var(--about-artwork-fade-tail))); mask-composite: intersect; opacity: .48; pointer-events: none; }
+#about .about-portrait-lines { position: absolute; z-index: -1; width: 115%; height: 100%; top: 0; right: -8%; overflow: visible; pointer-events: none; stroke: var(--color-champagne-gold); stroke-width: .65; opacity: .5; mask-image: linear-gradient(#000 0%, #000 45%, transparent calc(100% - var(--about-artwork-fade-tail))); }
 #about .about-profile { padding: 0; overflow: visible; border-block: 1px solid color-mix(in srgb, var(--color-champagne-gold) 60%, transparent); }
 #about .about-profile-band { display: flex; align-items: center; gap: 28px; padding: 18px 0; }
 #about .about-profile-summary { display: grid; grid-template-columns: 1fr .7fr 1.6fr; flex: 1; gap: 24px; margin: 0; }
