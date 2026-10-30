@@ -26,7 +26,6 @@ function Screenshot({ src, label, en, className = '', eager = false }) {
   return <figure className={`web-screen ${className}`}>
     <button type="button" onClick={() => dialog.current.showModal()} aria-label={`${en ? 'Enlarge: ' : '放大查看：'}${label}`}>
       <img src={src} alt={label} width="944" height="2048" loading={eager ? 'eager' : 'lazy'} decoding="async" />
-      <span className="web-screen-zoom" aria-hidden="true">↗</span>
     </button>
     <figcaption>{label}</figcaption>
     <dialog ref={dialog} className="web-image-dialog" aria-label={label} onClick={event => {

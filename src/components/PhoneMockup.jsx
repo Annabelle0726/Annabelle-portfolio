@@ -11,7 +11,6 @@ export function PhoneStage({ children, className = '' }) {
     let visible = false;
     const reset = () => { stage.style.setProperty('--mx', 0); stage.style.setProperty('--my', 0); stage.classList.remove('is-pointing'); };
     const sync = () => {
-      stage.classList.toggle('is-floating', visible && !reduced.matches && pointer.matches);
       if (reduced.matches || !pointer.matches) { reset(); animations.forEach(a => a.cancel()); }
     };
     const observer = typeof IntersectionObserver === 'function' ? new IntersectionObserver(entries => {
