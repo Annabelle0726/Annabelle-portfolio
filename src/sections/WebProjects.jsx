@@ -13,6 +13,7 @@ import somniaHome from '../assets/somnia-case/home.webp';
 import somniaLibrary from '../assets/somnia-case/library.webp';
 import overviewRibbon from '../assets/web-overview/blue-silk-gold-bell.webp';
 import './web-projects.css';
+import PhoneMockup, { PhoneStage } from '../components/PhoneMockup';
 
 const projects = [
   { id: 'web-agency-bloom', name: 'Agency Bloom', type: ['独立产品 · 微信小程序', 'Independent product · WeChat mini program'], summary: ['围绕探索、选择与行动，把自己的想法带向真实的生活。', 'A space to explore, make choices, and carry your ideas into everyday life.'] },
@@ -74,10 +75,10 @@ function BloomCase({ en, onNavigate }) {
         <p className="web-status"><span aria-hidden="true" />{t('微信小程序 · 已上线', 'WeChat mini program · Launched')}</p>
       </div>
     </div>
-      <div className="web-hero-screens">
-        <Screenshot src={opening} label={t('从想过的生活出发', 'Start with the life you want')} en={en} eager />
-        <Screenshot src={progress} label={t('把尝试与进展留下来', 'Keep a record of your next steps')} en={en} eager />
-      </div>
+      <PhoneStage>
+        <PhoneMockup src={opening} variant="back" tone="dark" alt={t('Agency Bloom 生活探索引导：日出远山与向前的选择', 'Agency Bloom life exploration with a sunrise landscape')} onClick={() => jump(story)} />
+        <PhoneMockup src={progress} variant="front" alt={t('Agency Bloom 下一步行动卡与尝试进展记录', 'Agency Bloom next-step action card and progress journal')} onClick={() => jump(story)} />
+      </PhoneStage>
     <dl className="web-facts">
       <div><dt>{t('我的角色', 'My role')}</dt><dd>{t('产品构思 · 交互设计 · 前后端开发', 'Product concept · Interaction design · Frontend & backend')}</dd></div>
       <div><dt>{t('产品形态', 'Platform')}</dt><dd>{t('微信小程序', 'WeChat mini program')}</dd></div>
@@ -146,7 +147,7 @@ export default function WebProjects({ language = 'zh', projectId = 'portfolio', 
     {projectId !== 'web-agency-bloom' && <SectionHeader as="h1" eyebrow="PROJECTS / WEB & DESIGN" title={t('网站与设计', 'Web & design')}/>}
     {project ? <>{projectId !== 'web-agency-bloom' && <nav className="web-breadcrumb" aria-label={t('面包屑导航', 'Breadcrumb')}><a href="#portfolio" onClick={onNavigate}>{t('网站与设计', 'Web & design')}</a><span aria-hidden="true">/</span><span>{project.name}</span></nav>}{projectId === 'web-agency-bloom' ? <BloomCase en={en} onNavigate={onNavigate}/> : <RelatedCase project={project} en={en} onNavigate={onNavigate}/>}</> : <>
       <div className="web-overview-intro"><p>{t('从想法到体验，把产品做出来。', 'From an idea to an experience people can use.')}</p></div>
-      <div className="web-project-list">{projects.map((p, i) => <article key={p.id} className={`web-project-row${i === 1 ? ' web-project-row-reverse' : ''}`} ><a className="web-project-cover" href={'#' + p.id} onClick={onNavigate} aria-label={t('查看 ', 'Explore ') + p.name}>{i === 0 ? <div className="web-cover-pair"><img src={opening} alt={t('Agency Bloom 开场界面', 'Agency Bloom opening screen')}/><img src={progress} alt={t('Agency Bloom 行动记录', 'Agency Bloom action record')}/></div> : <ProjectPreview project={p} en={en} />}</a><div className="web-project-summary"><p className="web-kicker">0{i + 1} / {en ? p.type[1] : p.type[0]}</p><h2><a href={'#' + p.id} onClick={onNavigate}>{p.name}</a></h2><p>{en ? p.summary[1] : p.summary[0]}</p><a className="web-inline-link" href={'#' + p.id} onClick={onNavigate}>{t('查看项目介绍', 'Explore the project')} ↗</a></div>{i === 1 && <div className="web-mobile-project-art" aria-hidden="true"><img src={overviewRibbon} alt="" width="1024" height="1536" /></div>}</article>)}</div>
+      <div className="web-project-list">{projects.map((p, i) => <article key={p.id} className={`web-project-row${i === 1 ? ' web-project-row-reverse' : ''}`} ><a className="web-project-cover" href={'#' + p.id} onClick={onNavigate} aria-label={t('查看 ', 'Explore ') + p.name}>{i === 0 ? <PhoneStage><PhoneMockup src={opening} variant="back" tone="dark" alt={t('Agency Bloom 生活探索引导：日出远山与向前的选择', 'Agency Bloom life exploration with a sunrise landscape')} /><PhoneMockup src={progress} variant="front" alt={t('Agency Bloom 下一步行动卡与尝试进展记录', 'Agency Bloom next-step action card and progress journal')} /></PhoneStage> : <ProjectPreview project={p} en={en} />}</a><div className="web-project-summary"><p className="web-kicker">0{i + 1} / {en ? p.type[1] : p.type[0]}</p><h2><a href={'#' + p.id} onClick={onNavigate}>{p.name}</a></h2><p>{en ? p.summary[1] : p.summary[0]}</p><a className="web-inline-link" href={'#' + p.id} onClick={onNavigate}>{t('查看项目介绍', 'Explore the project')} ↗</a></div>{i === 1 && <div className="web-mobile-project-art" aria-hidden="true"><img src={overviewRibbon} alt="" width="1024" height="1536" /></div>}</article>)}</div>
     </>}
   </div></section>;
 }
