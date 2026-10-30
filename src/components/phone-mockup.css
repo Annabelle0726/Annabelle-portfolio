@@ -44,6 +44,11 @@
 .phone-caption { margin-top: 12px; text-align: center; font-size: 11px; color: var(--color-text-secondary); }
 .phone-stage.is-pointing .phone-device { will-change: transform; }
 /* Detail placement changes only the visual column. */
+.web-overview:has(.phone-stage) .web-overview-intro { margin-bottom: 12px; }
+.web-overview .web-project-row:first-child:has(.phone-stage) { padding-top: 0; padding-bottom: 24px; }
+.web-overview .web-project-cover:has(.phone-stage) { padding-top: 0; padding-bottom: 0; }
+.web-overview .phone-stage { height: calc(var(--phone-height) * 1.1); }
+.web-overview .phone-position { top: 2%; }
 #web-agency-bloom .phone-stage { grid-column: 2; grid-row: 1 / 3; align-self: start; --phone-height: clamp(300px, 54dvh, 580px); }
 @media (max-width: 1099px) { #web-agency-bloom .phone-stage { grid-column: 1; grid-row: 3; margin-top: 24px; } }
 @media (max-width: 767px) {
