@@ -1,3 +1,4 @@
+import WebProjectNav from '../components/WebProjectNav';
 import React from 'react';
 import SectionHeader from '../components/SectionHeader';
 import openai from '../assets/tool-icons/openai.svg';
@@ -85,16 +86,7 @@ export default function ModelsTools({ language = 'zh', onNavigate, id = 'models'
           </li>)}
         </ol>
       </section>
-      <footer className="models-footer">
-        <span className="models-footer-rule" aria-hidden="true" />
-        <a className="models-next" href="#quotes" onClick={onNavigate}>
-          <span>{t.next}</span>
-          <svg viewBox="0 0 76 52" fill="none" aria-hidden="true">
-            <circle className="models-next-orbit" cx="49" cy="26" r="23" pathLength="100" />
-            <g className="models-next-arrow"><path d="M5 26H56M48 18l8 8-8 8" /></g>
-          </svg>
-        </a>
-      </footer>
+      <WebProjectNav en={language === 'en'} onNavigate={onNavigate} previous={{ href: '#agency-bloom', label: language === 'en' ? 'WeChat articles' : '微信公众号' }} next={{ href: '#quotes', label: t.next }} />
     </div>
   </section>;
 }

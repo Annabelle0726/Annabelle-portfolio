@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import SectionHeader from '../components/SectionHeader';
+import ProjectPagination from '../components/ProjectPagination';
 import { dataProjects, localize } from './data-projects';
 import './data-projects.css';
 import './data-ribbon.css';
@@ -26,7 +27,6 @@ export default function Projects({language='zh',projectId='services',onNavigate}
  <div className={"data-detail-opening"+(!project.cover?" data-opening-energy":"")}><div className="data-opening-copy"><p>{t(project.intro)}</p><a className="data-source" href={project.source} target="_blank" rel="noopener noreferrer">{t(project.sourceLabel)} <span aria-hidden="true">↗</span></a></div>{!project.cover&&<EnergyCover en={en}/>}</div>
  <div className="data-chapters">{project.chapters.map(([heading,body],i)=><section key={heading[1]}><span className="data-number">0{i+1}</span><h2>{t(heading)}</h2><p>{t(body)}</p></section>)}</div>
  {project.figures.length>0&&<div className="data-gallery"><div className="data-gallery-heading"><h2>{en?'Inside the analysis':'走进分析'}</h2><p>{en?'Original figures · Select an image to enlarge':'原始图表 · 点击可放大阅读'}</p></div><div className="data-figure-grid">{project.figures.map(figure=><Figure key={figure.src} figure={figure} language={language}/>)}</div></div>}
- <nav className="data-related" aria-label={en?'Other data projects':'其他数据项目'}>{dataProjects.filter(item=>item.id!==project.id).map(item=><a key={item.id} href={'#'+item.id} onClick={onNavigate}><small>{en?'EXPLORE NEXT':'继续浏览'} / {item.number}</small><strong>{t(item.title)} <span aria-hidden="true">↗</span></strong></a>)}</nav>
  </> : <>
  <div className="data-intro"><p>{en?'Questions worth exploring. Evidence worth examining.':'从问题出发，让数据有迹可循。'}</p></div>
  <div className="data-project-grid">{dataProjects.map((item,i)=><article key={item.id} className={'data-card'+(i===0?' data-featured':'')}>
@@ -35,5 +35,6 @@ export default function Projects({language='zh',projectId='services',onNavigate}
    <div className="data-card-body"><p>{t(item.summary)}</p><span className="data-tools">{item.tools}</span><a className="data-link" href={'#'+item.id} onClick={onNavigate}>{en?'Explore the case':'查看项目介绍'} <span aria-hidden="true">→</span></a></div>
  </article>)}</div>
  </>}
+ <ProjectPagination routeId={project ? project.id : 'services'} en={en} onNavigate={onNavigate} />
  </div></section>;
 }
