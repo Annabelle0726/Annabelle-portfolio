@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './hero.css';
 import RibbonArt from '../components/RibbonArt';
+import { HeroPortrait, HeroMobileActions, HeroSocials } from '../components/HeroMobile';
+import './hero-mobile.css';
 
 function HeroCopy({ language, onNavigate }) {
   const zh = language === 'zh';
@@ -34,9 +36,11 @@ function HeroCopy({ language, onNavigate }) {
   });
 
   return <div className={`hero-container${typing ? ' is-typing' : ' typing-complete'}`}>
+      <HeroPortrait />
       <h1 aria-label={lines[0]}>{typeLine(lines[0], 0)}</h1>
       <p className="hero-fields" aria-label={lines[1]}>{typeLine(lines[1], 1)}</p>
       <p className="hero-description" aria-label={lines.slice(2).join('')}>{lines.slice(2).map((line, index) => <React.Fragment key={line}>{index > 0 && <br />}{typeLine(line, index + 2)}</React.Fragment>)}</p>
+      <div className="hero-entry-links">
       <a className="hero-about" href="#about" onClick={onNavigate} tabIndex={typing ? -1 : undefined} aria-hidden={typing || undefined}>
         <span>{zh ? '关于我' : 'About me'}</span>
         <svg viewBox="0 0 76 52" fill="none" aria-hidden="true">
@@ -44,6 +48,8 @@ function HeroCopy({ language, onNavigate }) {
           <g className="hero-arrow-shaft"><path d="M5 26H56M48 18l8 8-8 8" /></g>
         </svg>
       </a>
+      <HeroMobileActions language={language} onNavigate={onNavigate} />
+      </div>
     </div>
   ;
 }
@@ -51,6 +57,8 @@ function HeroCopy({ language, onNavigate }) {
 export default function Hero({ language, onNavigate }) {
   return <section id="hero" lang={language === 'zh' ? 'zh-CN' : 'en'}>
     <div className="hero-art-window" aria-hidden="true"><div className="hero-art" /><RibbonArt /></div>
+    <span className="hero-mobile-orb" aria-hidden="true" />
     <HeroCopy key={language} language={language} onNavigate={onNavigate} />
+    <HeroSocials language={language} />
   </section>;
 }

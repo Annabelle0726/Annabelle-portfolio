@@ -10,6 +10,7 @@ import Projects from './sections/Projects';
 import Contact from './sections/Contact';
 import useContentNavigation from './hooks/useContentNavigation';
 import Hero from './sections/Hero';
+import { MobileSignature } from './components/HeroMobile';
 import ModelsTools from './sections/ModelsTools';
 import ModelUsage from './sections/ModelUsage';
 import TeamsQuotes from './sections/TeamsQuotes';
@@ -99,6 +100,7 @@ export default function App() {
     <>
       <a className="skip-link" href="#main" onClick={event => { event.preventDefault(); document.getElementById('main').focus(); }}>Skip to main content</a>
       <div className={`shell-controls${isMobile && menuOpen ? ' is-drawer-open' : ''}${scrolled ? ' is-scrolled' : ''}`}>
+        <MobileSignature onNavigate={navigate} />
         <LanguageSwitch language={language} onChange={setLanguage}/>
         <button ref={menuButton} className="mobile-nav-toggle" type="button" aria-label={language === 'zh' ? '打开导航' : 'Open navigation'} aria-controls="header" aria-expanded={menuOpen} onClick={() => setMenuOpen(true)}><SidebarIcon name="menu"/></button>
       </div>
