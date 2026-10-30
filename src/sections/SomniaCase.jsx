@@ -3,7 +3,6 @@ import SectionHeader from '../components/SectionHeader';
 import home from '../assets/somnia-case/home.webp';
 import library from '../assets/somnia-case/library.webp';
 import match from '../assets/somnia-case/match.webp';
-import ribbon from '../assets/somnia-case/ribbon.webp';
 import './somnia-case.css';
 
 const screens = [
@@ -12,7 +11,7 @@ const screens = [
   { id: 'match', src: match, width: 756, height: 469, label: ['选书引导', 'Reading mood'], title: ['从今天想读的故事出发', 'Start with the story you are craving'], body: ['用具体的故事氛围帮助读者表达偏好：奇幻、浓烈、温暖，或轻快。这里展示首页中的选书引导预览，观察问题、选项与书籍线索如何组织在一起。', 'Concrete story moods help readers express a preference: sweeping fantasy, intensity, warmth, or something light. This is the matching preview shown on the homepage, highlighting how its question, choices, and book cues are arranged.'], details: [['具体的情境提问', 'A concrete mood question'], ['易于比较的选项', 'Options you can compare'], ['首页选书预览', 'Homepage matching preview']] },
 ];
 
-function ScreenImage({ screen, en, eager = false }) {
+function ScreenImage({ screen, en, eager = false, preview = false }) {
   const dialog = useRef(null);
   const label = screen.label[en ? 1 : 0];
   const closeOutside = event => {
@@ -23,7 +22,7 @@ function ScreenImage({ screen, en, eager = false }) {
   return <figure className="somnia-screen">
     <button type="button" className="somnia-image-trigger" aria-label={(en ? 'Enlarge: ' : '放大查看：') + label} onClick={() => dialog.current.showModal()}>
       <img src={screen.src} alt={(en ? 'Somnia Library — ' : 'Somnia Library：') + label} width={screen.width} height={screen.height} loading={eager ? 'eager' : 'lazy'} decoding="async" />
-      <span className="somnia-expand" aria-hidden="true">↗</span>
+      {!preview && <span className="somnia-expand" aria-hidden="true">↗</span>}
     </button>
     <dialog ref={dialog} className="somnia-dialog" aria-label={label} onClick={closeOutside}>
       <div className="somnia-dialog-bar"><span>{label}</span><button type="button" autoFocus onClick={() => dialog.current.close()}>{en ? 'Close ×' : '关闭 ×'}</button></div>
@@ -36,41 +35,17 @@ export default function SomniaCase({ language = 'zh', onNavigate }) {
   const en = language === 'en', lang = en ? 1 : 0;
   const t = (zh, english) => en ? english : zh;
   const [selected, setSelected] = useState(1);
-  const [paused, setPaused] = useState(false);
   const [reduced, setReduced] = useState(false);
-  const [visible, setVisible] = useState(true);
-  const opening = useRef(null), gallery = useRef(null), notes = useRef(null), tabs = useRef([]), pointerFrame = useRef(0);
-  const screen = screens[selected], moving = !paused && !reduced && visible;
+  const opening = useRef(null), gallery = useRef(null), notes = useRef(null), tabs = useRef([]);
+  const screen = screens[selected];
 
   useEffect(() => {
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
     const sync = () => setReduced(media.matches);
     sync(); media.addEventListener('change', sync);
-    let inView = true;
-    const show = () => setVisible(inView && !document.hidden);
-    const observer = new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; show(); });
-    observer.observe(opening.current);
-    document.addEventListener('visibilitychange', show);
-    return () => { media.removeEventListener('change', sync); observer.disconnect(); document.removeEventListener('visibilitychange', show); cancelAnimationFrame(pointerFrame.current); };
+    return () => media.removeEventListener('change', sync);
   }, []);
 
-  const resetPointer = () => {
-    cancelAnimationFrame(pointerFrame.current);
-    opening.current?.style.removeProperty('--somnia-dx');
-    opening.current?.style.removeProperty('--somnia-dy');
-  };
-  useEffect(() => { if (!moving) resetPointer(); }, [moving]);
-  const followPointer = event => {
-    if (!moving || event.pointerType === 'touch' || event.target.closest('dialog')) return;
-    const box = event.currentTarget.getBoundingClientRect();
-    const dx = ((event.clientX - box.left) / box.width - .5) * 10;
-    const dy = ((event.clientY - box.top) / box.height - .5) * 6;
-    cancelAnimationFrame(pointerFrame.current);
-    pointerFrame.current = requestAnimationFrame(() => {
-      opening.current?.style.setProperty('--somnia-dx', dx.toFixed(1) + 'px');
-      opening.current?.style.setProperty('--somnia-dy', dy.toFixed(1) + 'px');
-    });
-  };
   const jump = ref => {
     ref.current.focus({ preventScroll: true });
     ref.current.scrollIntoView({ block: 'start', behavior: reduced ? 'auto' : 'smooth' });
@@ -83,20 +58,22 @@ export default function SomniaCase({ language = 'zh', onNavigate }) {
 
   return <section id="web-somnia" className="somnia-page" lang={en ? 'en' : 'zh-CN'}>
     <div className="somnia-inner">
-      <div className="somnia-opening" ref={opening} data-moving={moving} onPointerMove={followPointer} onPointerLeave={resetPointer}>
+      <div className="somnia-opening" ref={opening}>
         <SectionHeader as="h1" eyebrow="READING & DESIGN" title="Somnia Library" />
         <div className="somnia-hero">
           <div className="somnia-intro"><p className="somnia-kicker">{t('个人书库 · 阅读体验', 'PERSONAL LIBRARY · READING EXPERIENCE')}</p>
             <h2>{t('让阅读，拥有自己的空间', 'A space of your own for reading')}</h2>
-            <p>{t('把想读、在读与读过的书，收进一处有个人风格的空间。从书库整理到下一本书的发现，让每一次打开都更接近自己的阅读兴趣。', 'Bring the books you want to read, are reading, and have finished into a space with its own personality. From organizing a collection to discovering the next story, the experience starts with your reading interests.')}</p>
-            <p className="somnia-credit">{t('基于 Greg Chism 的 Reverie 进行二次开发。', 'An adaptation of Reverie, originally created by Greg Chism.')}</p>
-            <div className="somnia-actions"><button type="button" className="somnia-primary" onClick={() => jump(gallery)}>{t('浏览界面', 'Explore the interface')} <span aria-hidden="true">↗</span></button><button type="button" className="somnia-text-button" onClick={() => jump(notes)}>{t('查看设计思路', 'Design notes')} <span aria-hidden="true">↓</span></button></div>
+            <p>{t('把想读、在读、读过的书收进一处，让每次打开都更接近自己的阅读兴趣。', 'Keep the books you want to read, are reading, and have finished in one place, shaped around your reading interests.')}</p>
+            <div className="somnia-actions"><button type="button" className="somnia-primary" onClick={() => jump(gallery)}>{t('浏览界面', 'Explore the interface')} <span aria-hidden="true">↗</span></button><button type="button" className="somnia-text-button" onClick={() => jump(notes)}>{t('查看设计思路', 'Design notes')} <span className="somnia-design-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 7v10m0 0-5-5m5 5 5-5" /></svg></span></button></div>
           </div>
-          <div className="somnia-hero-visual"><ScreenImage screen={screens[0]} en={en} eager /><span className="somnia-image-label">SOMNIA / THE SANCTUARY</span></div>
+          <div className="somnia-hero-visual"><ScreenImage screen={screens[1]} en={en} eager preview /><span className="somnia-image-label">{t('个人书架预览 · 点击图片放大', 'Personal library preview · Select image to enlarge')}</span></div>
         </div>
-        <div className="somnia-ribbon-position" aria-hidden="true"><img className="somnia-ribbon" src={ribbon} alt="" width="1600" height="403" /></div>
-        <div className="somnia-motion-row">{!reduced && <button className="somnia-motion-toggle" type="button" aria-pressed={paused} onClick={() => setPaused(value => !value)}>{paused ? t('播放飘带动效', 'Play ribbon motion') : t('暂停飘带动效', 'Pause ribbon motion')} <span aria-hidden="true">{paused ? '▷' : 'Ⅱ'}</span></button>}</div>
-        <dl className="somnia-facts"><div><dt>{t('项目类型', 'PROJECT')}</dt><dd>{t('阅读管理 Web 应用', 'Reading management web app')}</dd></div><div><dt>{t('我的工作', 'MY CONTRIBUTION')}</dt><dd>{t('首页与书籍界面 · 认证体验 · 移动端导航', 'Homepage & book interfaces · Authentication experience · Mobile navigation')}</dd></div><div><dt>{t('展示重点', 'FOCUS')}</dt><dd>{t('视觉层级 · 内容组织 · 跨屏体验', 'Visual hierarchy · Organization · Responsive experience')}</dd></div></dl>
+        <dl className="somnia-facts">
+          <div><dt>{t('项目类型', 'Project')}</dt><dd>{t('阅读管理 Web 应用', 'Reading management web app')}</dd></div>
+          <div><dt>{t('基础项目', 'Based on')}</dt><dd>Reverie · Greg Chism</dd></div>
+          <div><dt>{t('我的工作', 'My work')}</dt><dd>{[t('首页与书籍界面', 'Homepage & book interfaces'), t('认证体验', 'Authentication experience'), t('移动端导航', 'Mobile navigation')].map(item => <span className="somnia-fact-line" key={item}>{item}</span>)}</dd></div>
+          <div><dt>{t('展示重点', 'Focus')}</dt><dd>{t('视觉层级 · 内容组织 · 跨屏体验', 'Visual hierarchy · Organization · Responsive experience')}</dd></div>
+        </dl>
       </div>
       <section className="somnia-gallery somnia-chapter" ref={gallery} tabIndex={-1} aria-labelledby="somnia-gallery-title">
         <p className="somnia-kicker" lang="en">01 / EXPLORE THE INTERFACE</p>

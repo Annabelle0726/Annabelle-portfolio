@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import SectionHeader from '../components/SectionHeader';
 import SomniaCase from './SomniaCase';
-import BloomRibbon from '../components/BloomRibbon';
 import opening from '../assets/bloom-case/opening.webp';
 import concerns from '../assets/bloom-case/concerns.webp';
 import preferences from '../assets/bloom-case/preferences.webp';
@@ -66,12 +65,11 @@ function BloomCase({ en, onNavigate }) {
   return <>
     <div className="web-case-opening">
     <SectionHeader as="h1" eyebrow="INDEPENDENT PRODUCT" title="Agency Bloom" className="web-bloom-title" />
-    <BloomRibbon />
     <div className="web-case-hero">
       <div className="web-hero-copy">
         <p className="web-hero-line">{t('把自己的想法，带向真实的生活。', 'Bring your ideas into the life you want to live.')}</p>
         <p className="web-lead">{t('一款围绕探索、选择与行动展开的微信小程序。从工作、学习与生活中的具体困扰出发，帮助用户梳理想法、比较可能，并记录自己的尝试。', 'A WeChat mini program built around exploration, choice, and action. Starting with real questions about work, learning, and everyday life, it helps people organize their thoughts, explore possibilities, and record what they try.')}</p>
-        <div className="web-actions"><button className="web-button" type="button" onClick={() => jump(videoSection)}>{t('观看演示', 'Watch the demo')} <span aria-hidden="true">▷</span></button><button className="web-text-button" type="button" onClick={() => jump(story)}>{t('了解设计过程', 'Explore the design')} <span aria-hidden="true">↓</span></button></div>
+        <div className="web-actions"><button className="web-button" type="button" onClick={() => jump(videoSection)}>{t('观看演示', 'Watch the demo')} <svg className="web-play-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 6 9 6-9 6V6Z" /></svg></button><button className="web-text-button" type="button" onClick={() => jump(story)}>{t('了解设计过程', 'Explore the design')} <span className="web-design-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 7v10m0 0-5-5m5 5 5-5" /></svg></span></button></div>
         <p className="web-status"><span aria-hidden="true" />{t('微信小程序 · 已上线', 'WeChat mini program · Launched')}</p>
       </div>
     </div>
