@@ -2,12 +2,12 @@
 :root { view-transition-name: none; }
 ::view-transition { pointer-events: none; }
 #main.content-views { view-transition-name: main-content; }
-#main.content-views:not(.is-home) { padding-top: 24px; }
+#main.content-views:not(.is-home) { --content-top-space: 24px; padding-top: var(--content-top-space); }
 .content-views:not(.is-home) > section { padding-top: 20px; scroll-margin-top: 24px; }
 .content-views:not(.is-home) .section-title { padding-bottom: 16px; }
 .content-views:not(.is-home) .section-title h2 { margin-bottom: 12px; padding-bottom: 12px; }
 @media (max-width: 767px) {
-  #main.content-views:not(.is-home) { padding-top: 56px; }
+  #main.content-views:not(.is-home) { --content-top-space: 56px; padding-top: var(--content-top-space); }
   .content-views:not(.is-home) > section { padding-top: 12px; scroll-margin-top: 56px; }
 }
 ::view-transition-group(main-content) { animation: none; }

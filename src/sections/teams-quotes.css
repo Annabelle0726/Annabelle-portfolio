@@ -12,7 +12,7 @@
 .quotes-page { position: relative; max-width: 1120px; min-height: calc(100vh - 112px); min-height: calc(100dvh - 112px); margin: 0 auto; display: flex; flex-direction: column; gap: clamp(16px, 2vh, 24px); }
 .quotes-opening { position: relative; }
 .quotes-intro { margin: 0; font-size: 15px; line-height: 1.75; max-width: 720px; }
-.quotes-art { position: absolute; z-index: -1; pointer-events: none; top: 0; right: 0; width: min(43%, 470px); height: 280px; overflow: hidden; opacity: .64; mix-blend-mode: multiply; mask-image: radial-gradient(ellipse at 100% 0%, #000 8%, transparent 72%); }
+.quotes-art { position: absolute; z-index: -1; pointer-events: none; top: calc(-1 * var(--content-top-space, 0px)); right: 0; width: min(43%, 470px); height: calc(280px + var(--content-top-space, 0px)); overflow: hidden; opacity: .64; mix-blend-mode: multiply; mask-image: radial-gradient(ellipse at 100% 0%, #000 8%, transparent 72%); }
 .quotes-ribbon { position: absolute; inset: -14px; background: url('../assets/hero-art.png') 83% 34% / cover no-repeat; transform-origin: 85% 20%; animation: quotes-ribbon-float 14s ease-in-out infinite alternate; }
 @keyframes quotes-ribbon-float {
   from { transform: translate3d(-3px, 3px, 0) rotate(-.4deg) scale(1.01); }
@@ -88,7 +88,7 @@
   .quotes-page { min-height: calc(100vh - 120px); min-height: calc(100dvh - 120px); gap: 16px; }
   .quotes-opening { display: flex; flex-direction: column; gap: 20px; }
   .quotes-intro { font-size: 13px; line-height: 1.7; }
-  .quotes-art { width: 44%; height: 180px; opacity: .38; }
+  .quotes-art { width: 44%; height: calc(180px + var(--content-top-space, 0px)); opacity: .38; }
   .quotes-grid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
   .quotes-card { padding: 14px 16px; }
   .quotes-kicker { font-size: 11px; margin-bottom: 5px; }
