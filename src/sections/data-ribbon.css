@@ -1,0 +1,14 @@
+/* Shared home and inspiration brand artwork. */
+.data-page:has(> .data-ribbon-art) { position: relative; isolation: isolate; }
+.data-ribbon-art { position: absolute; z-index: -1; pointer-events: none; top: calc(-1 * var(--content-top-space, 0px)); right: 0; width: min(48%, 560px); height: 280px; overflow: hidden; mix-blend-mode: multiply; opacity: .7; mask-image: radial-gradient(ellipse at 100% 0%, #000 12%, transparent 74%); }
+.data-brand-ribbon { position: absolute; inset: -12px; background: url('../assets/hero-art.png') 83% 34% / cover no-repeat; transform-origin: 85% 20%; animation: data-ribbon-drift 16s ease-in-out infinite alternate; }
+@keyframes data-ribbon-drift {
+  from { transform: translate3d(-3px, 3px, 0) rotate(-.5deg) scale(1.02); }
+  to { transform: translate3d(4px, -5px, 0) rotate(.5deg) scale(1.04); }
+}
+@media (max-width: 767px) {
+  .data-ribbon-art { width: 48%; height: 290px; opacity: .45; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .data-brand-ribbon { animation: none; transform: none; }
+}

@@ -1,7 +1,5 @@
 #main.content-views:has(>.data-page){background:var(--color-paper)}
 #main.content-views:has(>.data-page)~.back-to-top-link{display:none}
-.data-page-end{display:flex;justify-content:flex-end;margin-top:16px}
-.data-page-end button{display:inline-flex;align-items:center;gap:12px;min-height:44px;padding:0 8px;border:0;background:transparent;color:var(--color-primary);font:inherit;font-size:13px;cursor:pointer}
 .data-page{padding:28px clamp(28px,3vw,56px) 28px;background:var(--color-paper);color:var(--color-text);font-family:system-ui,sans-serif}
 .data-inner{max-width:1120px;margin:auto}
 .data-page a{color:inherit}
@@ -17,9 +15,9 @@
 .data-card-heading{grid-area:heading;align-self:end;min-width:0}
 .data-card-heading h2{font:500 clamp(25px,2.2vw,32px)/1.3 Georgia,'Songti SC',serif;margin:10px 0 0;text-wrap:balance}
 .data-card-heading h2 a{text-decoration:none}
-.data-card-visual{grid-area:visual;display:block;min-width:0;align-self:center;border-radius:24px 48px 24px 24px;padding:14px;background:var(--color-aqua-light);transition:background-color .2s}
-.data-card:nth-child(2) .data-card-visual{border-radius:48px 24px 24px 24px;background:var(--color-gold-light)}
-.data-cover{position:relative;padding:14px 14px 32px;background:var(--color-surface);height:260px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:14px}
+.data-card-visual{grid-area:visual;display:block;min-width:0;align-self:center;border-radius:12px;padding:6px;background:var(--color-aqua-light);transition:background-color .2s}
+.data-card:nth-child(2) .data-card-visual{background:var(--color-gold-light)}
+.data-cover{position:relative;padding:6px 6px 28px;background:var(--color-surface);height:260px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:6px}
 .data-cover img{height:100%;width:100%;object-fit:contain;transition:transform .3s}
 .data-cover-label{position:absolute;bottom:10px;left:16px;font:10px/1.6 system-ui,sans-serif;letter-spacing:.1em;color:var(--color-text-secondary)}
 .data-card-body{grid-area:body;align-self:start;min-width:0;display:flex;flex-direction:column;align-items:flex-start}
@@ -27,7 +25,7 @@
 .data-kicker{margin:0}
 .data-card .data-tools{font-size:12px;letter-spacing:.02em}
 .data-card:nth-child(3) .data-card-visual{padding:0;background:transparent}
-.data-card .data-energy-cover{min-height:250px;border-radius:24px 48px 24px 24px;background:linear-gradient(125deg,var(--color-sapphire),var(--color-lagoon));color:var(--color-surface)}
+.data-card .data-energy-cover{min-height:250px;border-radius:12px;background:linear-gradient(125deg,var(--color-sapphire),var(--color-lagoon));color:var(--color-surface)}
 .data-card .data-energy-cover :is(.data-cover-label,small,.data-energy-orbits>span){color:var(--color-surface)}
 .data-card .data-energy-orbits i{border-color:var(--color-pale-gold)}
 .data-card .data-energy-orbits i:nth-child(2){border-color:var(--color-aqua-light)}
@@ -58,23 +56,33 @@
 .data-breadcrumb a{min-height:44px;display:inline-flex;align-items:center;text-decoration:none}
 .data-breadcrumb>span{align-self:center}
 .data-detail-heading{max-width:850px}
-.data-detail-heading h2{font:500 clamp(28px,3vw,42px)/1.3 Georgia,'Songti SC',serif;margin:12px 0 18px;text-wrap:balance}
+.data-detail-heading h1{font:500 clamp(28px,3vw,42px)/1.3 Georgia,'Songti SC',serif;margin:12px 0 18px;text-wrap:balance}
 .data-detail-heading>p:not(.data-kicker){font-size:18px;line-height:1.8;margin-bottom:14px}
-.data-detail-opening{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:45px;padding:28px 0 32px;margin-bottom:20px;border-bottom:1px solid var(--color-border)}
+.data-detail-opening{padding:22px 0 24px;margin-bottom:0;border-bottom:1px solid var(--color-border)}
+.data-opening-copy{max-width:780px}
+.data-opening-copy .data-source{margin-top:14px}
+.data-opening-energy{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,320px);gap:28px;align-items:center}
+.data-opening-energy .data-energy-cover{min-height:220px;padding:40px 16px 16px;gap:10px;border-radius:12px}
+.data-opening-energy .data-energy-orbits{height:100px}
+.data-opening-energy .data-energy-orbits i{width:90px;height:90px}
+.data-opening-energy .data-energy-orbits i:nth-child(3){width:60px;height:60px}
+.data-opening-energy .data-energy-factors{gap:12px;flex-wrap:wrap;justify-content:center}
+.data-detail .data-breadcrumb{margin:0 0 18px}
+.data-figure-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}
 .data-detail-opening p{font-size:16px;line-height:1.85;margin:0}
 .data-source{align-self:center;justify-self:start;overflow-wrap:anywhere}
 .data-chapters>section{padding:26px 0;display:grid;grid-template-columns:40px minmax(140px,.7fr) minmax(0,2fr);gap:22px;border-bottom:1px solid var(--color-border);overflow:visible}
 .data-number{font:italic 28px Georgia,serif;color:var(--color-imperial-gold)}
-.data-chapters h3{font:500 20px/1.5 Georgia,'Songti SC',serif;margin:0}
+.data-chapters h2{font:500 20px/1.5 Georgia,'Songti SC',serif;margin:0}
 .data-chapters p{font-size:15px;line-height:1.85;margin:0}
 .data-gallery{margin-top:42px}
 .data-gallery-heading{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:22px}
-.data-gallery-heading h3{font:500 26px Georgia,'Songti SC',serif;margin:0}
+.data-gallery-heading h2{font:500 26px Georgia,'Songti SC',serif;margin:0}
 .data-gallery-heading p{font-size:12px;color:var(--color-text-secondary)}
-.data-figure{margin:0 0 28px;border:1px solid var(--color-border);background:white}
-.data-figure>button{display:block;width:100%;border:0;background:white;padding:22px;cursor:zoom-in}
-.data-figure img{width:100%;height:auto;max-height:520px;object-fit:contain;display:block}
-.data-figure figcaption{padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:18px;font-size:13px;background:var(--color-surface);border-top:1px solid var(--color-border)}
+.data-figure{min-width:0;margin:0;border:1px solid var(--color-border);border-radius:8px;overflow:hidden;background:var(--color-surface)}
+.data-figure>button{display:block;width:100%;border:0;background:white;padding:8px;cursor:zoom-in}
+.data-figure img{width:100%;height:210px;object-fit:contain;display:block}
+.data-figure figcaption{padding:10px 12px;display:flex;align-items:flex-start;flex-direction:column;gap:4px;font-size:13px;background:var(--color-surface);border-top:1px solid var(--color-border)}
 .data-figure figcaption button,.data-image-dialog button{background:none;border:0;color:var(--color-sapphire);min-height:44px;cursor:pointer}
 .data-image-dialog{max-width:95vw;width:1100px;max-height:94dvh;padding:20px;border:1px solid var(--color-border);color:var(--color-text);background:var(--color-surface);overscroll-behavior:contain}
 .data-image-dialog button{flex-shrink:0;min-width:44px}
@@ -85,6 +93,6 @@
 .data-related a{display:flex;flex-direction:column;gap:12px;border-top:1px solid var(--color-champagne-gold);padding:22px 0;text-decoration:none}
 .data-related small{font-size:10px;letter-spacing:.1em;color:var(--color-text-secondary)}
 .data-related strong{font:500 20px/1.5 Georgia,'Songti SC',serif}
-@media(max-width:1099px){.data-chapters>section{grid-template-columns:35px 1fr}.data-chapters p{grid-column:2}.data-detail-opening{grid-template-columns:1fr;gap:18px}}
-@media(max-width:767px){.data-page{padding:32px max(24px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(24px,env(safe-area-inset-left))}.data-intro{align-items:flex-start;flex-direction:column;gap:10px}.data-card,.data-card:nth-child(2){grid-template-columns:minmax(0,1fr);grid-template-areas:"heading" "visual" "body";gap:18px;padding:26px 0}.data-card:first-child{padding-top:8px}.data-card:last-child{padding-bottom:0}.data-card-heading h2{font-size:27px}.data-card-visual{padding:10px}.data-cover{height:230px;padding:10px 10px 30px}.data-card .data-link{margin-top:8px}.data-energy-factors{gap:12px;flex-wrap:wrap;justify-content:center}.data-detail-heading>p:not(.data-kicker){font-size:16px}.data-chapters>section{gap:14px}.data-chapters p{grid-column:1/-1}.data-gallery-heading{display:block}.data-figure>button{padding:8px}.data-figure figcaption{padding:10px 12px;font-size:12px}.data-related{grid-template-columns:1fr;gap:8px}.data-tools{overflow-wrap:anywhere}.data-breadcrumb{margin:12px 0 22px}}
+@media(max-width:1099px){.data-figure-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.data-chapters>section{grid-template-columns:35px 1fr}.data-chapters p{grid-column:2}.data-detail-opening{grid-template-columns:1fr;gap:18px}}
+@media(max-width:767px){.data-figure-grid{grid-template-columns:1fr;gap:16px}.data-opening-energy{grid-template-columns:1fr}.data-opening-energy .data-energy-cover{max-width:360px;width:100%;justify-self:center}.data-detail .data-breadcrumb{margin:0 0 12px}.data-page{padding:32px max(24px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(24px,env(safe-area-inset-left))}.data-intro{align-items:flex-start;flex-direction:column;gap:10px}.data-card,.data-card:nth-child(2){grid-template-columns:minmax(0,1fr);grid-template-areas:"heading" "visual" "body";gap:18px;padding:26px 0}.data-card:first-child{padding-top:8px}.data-card:last-child{padding-bottom:0}.data-card-heading h2{font-size:27px}.data-card-visual{padding:6px}.data-cover{height:230px;padding:6px 6px 28px}.data-card .data-link{margin-top:8px}.data-energy-factors{gap:12px;flex-wrap:wrap;justify-content:center}.data-detail-heading>p:not(.data-kicker){font-size:16px}.data-chapters>section{gap:14px}.data-chapters p{grid-column:1/-1}.data-gallery-heading{display:block}.data-figure>button{padding:8px}.data-figure figcaption{padding:10px 12px;font-size:12px}.data-related{grid-template-columns:1fr;gap:8px}.data-tools{overflow-wrap:anywhere}.data-breadcrumb{margin:12px 0 22px}}
 @media(prefers-reduced-motion:reduce){.data-page *{transition:none!important}}
