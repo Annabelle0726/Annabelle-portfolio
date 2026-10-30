@@ -1,4 +1,6 @@
 /* Only main content participates in View Transitions. The sidebar stays live. */
+/* Route headings receive programmatic focus, but are not interactive controls. */
+#main :is(h1, h2)[tabindex="-1"]:focus { outline: none; }
 :root { view-transition-name: none; }
 ::view-transition { pointer-events: none; }
 #main.content-views { view-transition-name: main-content; }
