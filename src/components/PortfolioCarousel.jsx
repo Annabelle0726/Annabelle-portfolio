@@ -3,8 +3,6 @@ import React, { useRef, useState } from 'react';
 const slides = [
   { title: 'Sprinkles Cupcakes', href: 'Cupcakes/cupcake.html', image: 'assets/img/optimized/cupcakes.webp' },
   { title: 'Discover Your Dream Getaway: Marriott Bonvoy Hotels and Villas', href: 'PortfolioDigitalProduct/prototype.html', image: 'assets/img/optimized/hotel.webp' },
-  { title: 'Love Across Mythologies — Exploring Eternal Bonds in Classical Tales', href: 'Signature160D2/signature.html', image: 'assets/img/optimized/mythologies.webp' },
-  { title: 'Asian visual culture', href: 'ART%20150/index.html', image: 'assets/img/optimized/autobiography.webp' },
 ];
 
 export default function PortfolioCarousel() {

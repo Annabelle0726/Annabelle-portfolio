@@ -20,7 +20,6 @@ const views = {
   'data-visualization': ['data-visualization', 'projects'],
   'data-energy': ['data-energy', 'projects'],
   contact: ['contact', 'contact'],
-  resume: ['contact', 'contact'],
   models: ['favorites', 'favorites'],
   'models-chatgpt': ['models-chatgpt', 'favorites'],
   'models-claude-code': ['models-claude-code', 'favorites'],

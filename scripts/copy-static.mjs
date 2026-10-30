@@ -4,11 +4,8 @@ import { join } from 'node:path';
 // The linked portfolio examples remain independent static websites.
 const paths = [
   'assets/img',
-  'ART 150',
   'Cupcakes',
-  'GlobalTech_Portfolio',
   'PortfolioDigitalProduct',
-  'Signature160D2',
   'DataVizPortfolio.html',
   'Annabelle-Zhu_Certificate.png',
   '404.html',
