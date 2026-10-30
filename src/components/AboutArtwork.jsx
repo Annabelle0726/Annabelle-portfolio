@@ -7,6 +7,12 @@ export default function AboutArtwork() {
     const layer = ref.current.querySelector('.about-artwork-motion');
     const area = ref.current.closest('.about-opening');
     const section = area.closest('#about');
+    const portrait = ref.current.closest('.about-portrait');
+    const main = section.closest('main');
+    const alignToPage = () => {
+      const offset = main.getBoundingClientRect().top - portrait.getBoundingClientRect().top;
+      ref.current.style.setProperty('--about-artwork-top', `${offset.toFixed(2)}px`);
+    };
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     const compact = window.matchMedia('(max-width: 767px)');
     let frame = 0, previous = 0, visible = true;
@@ -41,6 +47,11 @@ export default function AboutArtwork() {
       if (visible) update(); else cancel();
     });
     observer.observe(area);
+    const resize = new ResizeObserver(alignToPage);
+    resize.observe(area);
+    resize.observe(portrait);
+    portrait.addEventListener('animationend', alignToPage);
+    alignToPage();
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update, { passive: true });
     reduced.addEventListener('change', update);
@@ -48,7 +59,8 @@ export default function AboutArtwork() {
     document.addEventListener('visibilitychange', onVisibility);
     update();
     return () => {
-      reset(); observer.disconnect();
+      reset(); observer.disconnect(); resize.disconnect();
+      portrait.removeEventListener('animationend', alignToPage);
       window.removeEventListener('scroll', update);
       window.removeEventListener('resize', update);
       reduced.removeEventListener('change', update);
