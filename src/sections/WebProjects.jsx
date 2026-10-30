@@ -8,6 +8,10 @@ import preferences from '../assets/bloom-case/preferences.webp';
 import progress from '../assets/bloom-case/progress.webp';
 import poster from '../assets/bloom-case/demo-poster.webp';
 import demo from '../assets/bloom-case/demo.mp4';
+import belayPreview from '../assets/belay-case/success.webp';
+import somniaHome from '../assets/somnia-case/home.webp';
+import somniaLibrary from '../assets/somnia-case/library.webp';
+import overviewRibbon from '../assets/web-overview/blue-silk-gold-bell.webp';
 import './web-projects.css';
 
 const projects = [
@@ -37,6 +41,18 @@ function Screenshot({ src, label, en, className = '', eager = false }) {
 
 function ChapterTitle({ number, eyebrow, children }) {
   return <header className="web-chapter-title"><p className="web-kicker">{number} / {eyebrow}</p><h2>{children}</h2></header>;
+}
+
+function ProjectPreview({ project, en }) {
+  const belay = project.id === 'web-belay';
+  return <div className={`web-preview-stage ${belay ? 'web-preview-belay' : 'web-preview-somnia'}`}>
+    <div className="web-preview-window">
+      <img src={belay ? belayPreview : somniaHome}
+        alt={belay ? (en ? 'Belay learning workspace with code, results, and AI feedback' : 'Belay 学习工作区：代码、运行结果与 AI 反馈') : (en ? 'Somnia Library homepage and reading discovery' : 'Somnia Library 首页与选书引导')}
+        width={belay ? 1900 : 1600} height={belay ? 1460 : 746} loading="lazy" decoding="async" />
+    </div>
+    {!belay && <img className="web-preview-inset" src={somniaLibrary} alt={en ? 'Somnia personal bookshelf' : 'Somnia 个人书架界面'} width="1600" height="741" loading="lazy" decoding="async" />}
+  </div>;
 }
 
 function BloomCase({ en, onNavigate }) {
@@ -125,11 +141,13 @@ export default function WebProjects({ language = 'zh', projectId = 'portfolio', 
   if (projectId === 'web-somnia') return <SomniaCase language={language} onNavigate={onNavigate} />;
   const en = language === 'en', t = (zh, english) => en ? english : zh;
   const project = projects.find(p => p.id === projectId);
-  return <section className="web-project-page" id={projectId} lang={en ? 'en' : 'zh-CN'}><div className="web-project-inner">
+  return <section className={`web-project-page${projectId === 'portfolio' ? ' web-overview' : ''}`} id={projectId} lang={en ? 'en' : 'zh-CN'}>
+    {projectId === 'portfolio' && <div className="web-overview-art" aria-hidden="true">{['top', 'middle', 'bottom'].map(position => <img key={position} className={`web-overview-ribbon web-overview-ribbon-${position}`} src={overviewRibbon} alt="" width="1024" height="1536" />)}</div>}
+    <div className="web-project-inner">
     {projectId !== 'web-agency-bloom' && <SectionHeader as="h1" eyebrow="PROJECTS / WEB & DESIGN" title={t('网站与设计', 'Web & design')}/>}
     {project ? <>{projectId !== 'web-agency-bloom' && <nav className="web-breadcrumb" aria-label={t('面包屑导航', 'Breadcrumb')}><a href="#portfolio" onClick={onNavigate}>{t('网站与设计', 'Web & design')}</a><span aria-hidden="true">/</span><span>{project.name}</span></nav>}{projectId === 'web-agency-bloom' ? <BloomCase en={en} onNavigate={onNavigate}/> : <RelatedCase project={project} en={en} onNavigate={onNavigate}/>}</> : <>
-      <div className="web-overview-intro"><p>{t('从想法到体验，把产品做出来。', 'From an idea to an experience people can use.')}</p><span>03 / SELECTED WORK</span></div>
-      <div className="web-project-list">{projects.map((p, i) => <article key={p.id} className={i === 0 ? 'web-featured-project' : ''}><a className="web-project-cover" href={'#' + p.id} onClick={onNavigate} aria-label={t('查看 ', 'Explore ') + p.name}>{i === 0 ? <div className="web-cover-pair"><img src={opening} alt={t('Agency Bloom 开场界面', 'Agency Bloom opening screen')}/><img src={progress} alt={t('Agency Bloom 行动记录', 'Agency Bloom action record')}/></div> : <div className="web-type-cover"><small>{i === 1 ? 'LEARNING / CONTINUITY' : 'READING / DISCOVERY'}</small><span>{p.name}</span><i aria-hidden="true">{i === 1 ? '↗' : '⌑'}</i></div>}</a><div className="web-project-summary"><p className="web-kicker">0{i + 1} / {en ? p.type[1] : p.type[0]}</p><h2><a href={'#' + p.id} onClick={onNavigate}>{p.name}</a></h2><p>{en ? p.summary[1] : p.summary[0]}</p><a className="web-inline-link" href={'#' + p.id} onClick={onNavigate}>{t('查看项目介绍', 'Explore the project')} ↗</a></div></article>)}</div>
+      <div className="web-overview-intro"><p>{t('从想法到体验，把产品做出来。', 'From an idea to an experience people can use.')}</p></div>
+      <div className="web-project-list">{projects.map((p, i) => <article key={p.id} className={`web-project-row${i === 1 ? ' web-project-row-reverse' : ''}`} ><a className="web-project-cover" href={'#' + p.id} onClick={onNavigate} aria-label={t('查看 ', 'Explore ') + p.name}>{i === 0 ? <div className="web-cover-pair"><img src={opening} alt={t('Agency Bloom 开场界面', 'Agency Bloom opening screen')}/><img src={progress} alt={t('Agency Bloom 行动记录', 'Agency Bloom action record')}/></div> : <ProjectPreview project={p} en={en} />}</a><div className="web-project-summary"><p className="web-kicker">0{i + 1} / {en ? p.type[1] : p.type[0]}</p><h2><a href={'#' + p.id} onClick={onNavigate}>{p.name}</a></h2><p>{en ? p.summary[1] : p.summary[0]}</p><a className="web-inline-link" href={'#' + p.id} onClick={onNavigate}>{t('查看项目介绍', 'Explore the project')} ↗</a></div></article>)}</div>
     </>}
   </div></section>;
 }
