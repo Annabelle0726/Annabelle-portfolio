@@ -104,7 +104,6 @@ export default function DesignPortfolio({ language = 'zh', projectId = 'XD', onN
   const project = projects.find(item => item.id === projectId) || projects[0];
   return <section id="XD" className="uxui-page" lang={en ? 'en' : 'zh-CN'}><div className="uxui-inner">
     <SectionHeader as="h1" eyebrow="UX / UI DESIGN" title={en ? 'UX/UI design' : 'UX/UI 设计'}/>
-    <a className="uxui-overview-back" href="#XD" onClick={onNavigate}>← {en ? 'All UX/UI projects' : 'UX/UI 作品总览'}</a>
     <div className="uxui-intro"><p>{en ? 'Interfaces to explore. Details to feel.' : '看见界面，也感受细节。'}<span>{en ? 'Three projects, with previews and small interactions to try here.' : '三个作品，用界面预览与轻交互，让想法更容易被看见。'}</span></p></div>
     <nav className="uxui-project-nav" aria-label={en ? 'UX/UI projects' : 'UX/UI 作品'}>{projects.map((item, index) => <a key={item.id} href={`#${item.id}`} onClick={onNavigate} aria-current={project.id === item.id ? 'page' : undefined}><img src={item.screens[0].src} alt=""/><span><small>0{index + 1} / {pick(item.category, language)}</small><strong>{item.name}</strong></span><span className="uxui-nav-arrow" aria-hidden="true">↗</span></a>)}</nav>
     <ProjectDetail key={project.id} project={project} language={language}/>
