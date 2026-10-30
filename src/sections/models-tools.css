@@ -17,9 +17,8 @@
 .model-identity { flex: 1; min-width: 0; }
 .model-name-line { display: flex; flex-wrap: wrap; align-items: center; gap: 7px 10px; }
 .model-name-line h3 { margin: 0; font: 500 clamp(22px, 2vw, 28px)/1.2 Georgia, serif; color: var(--color-text); }
-.model-version { padding: 2px 6px; border: 1px solid color-mix(in srgb, var(--color-sapphire) 50%, transparent); border-radius: 3px; color: var(--color-sapphire); font: 400 12px/1.4 Georgia, serif; white-space: nowrap; }
 .model-role { margin: 6px 0 0; color: var(--color-text-secondary); font-size: 12px; line-height: 1.5; }
-.model-index { align-self: flex-start; color: var(--color-imperial-gold); font: 400 15px/1.5 Georgia, serif; }
+.model-index { align-self: flex-start; color: var(--color-text-gold); font: 400 15px/1.5 Georgia, serif; }
 .model-description { margin: 0; font-size: 15px; line-height: 1.8; }
 .model-topics { display: flex; align-items: center; list-style: none; padding: 12px 0 0; margin: auto 0 0; border-top: 1px solid var(--color-border); }
 .model-topics li { flex: 1; min-width: 0; overflow-wrap: anywhere; padding: 0 8px; text-align: center; font-size: 12px; line-height: 1.5; }
@@ -34,13 +33,13 @@
 @media (prefers-reduced-motion: reduce) { .model-usage-link svg { transition: none; } }
 .models-skills { padding: 0; overflow: visible; }
 .models-skills-heading { display: flex; align-items: flex-end; gap: 14px 24px; margin-bottom: 14px; }
-.models-kicker { margin: 0 0 5px; font-size: 10px; line-height: 1.5; letter-spacing: .16em; color: var(--color-imperial-gold); }
+.models-kicker { margin: 0 0 5px; font-size: 10px; line-height: 1.5; letter-spacing: .16em; color: var(--color-text-gold); }
 .models-skills-heading h3 { margin: 0; font: 500 clamp(22px, 2vw, 28px)/1.3 Georgia, 'Songti SC', 'STSong', SimSun, serif; color: var(--color-text); }
 .models-skills-intro { margin: 0 0 2px; font-size: 13px; line-height: 1.6; color: var(--color-text-secondary); }
 .models-skills-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 28px; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--color-border); }
 .models-skills-grid > li { min-width: 0; padding: 12px 0; border-bottom: 1px solid var(--color-border); }
 .model-skill-title { display: flex; align-items: baseline; gap: 12px; }
-.model-skill-title > span { flex: 0 0 25px; font: 400 15px/1.5 Georgia, serif; color: var(--color-imperial-gold); }
+.model-skill-title > span { flex: 0 0 25px; font: 400 15px/1.5 Georgia, serif; color: var(--color-text-gold); }
 .model-skill-title h4 { margin: 0; font: 500 17px/1.5 Georgia, 'Songti SC', 'STSong', SimSun, serif; color: var(--color-text); }
 .model-skill-name { margin: 6px 0 0; color: var(--color-sapphire); font: 400 12px/1.5 system-ui, sans-serif; overflow-wrap: anywhere; }
 .model-skill-description { margin: 5px 0 0; font-size: 13px; line-height: 1.65; color: var(--color-text-secondary); }
@@ -85,10 +84,9 @@
   .model-card-heading { gap: 10px; }
   .model-logo { flex-basis: 30px; width: 30px; height: 30px; }
   .model-name-line h3 { font-size: 21px; }
-  .model-version { font-size: 10px; }
   .model-role { font-size: 11px; margin-top: 3px; }
   .model-index { font-size: 12px; }
-  .model-description { font-size: 13px; line-height: 1.65; }
+  .model-description { font-size: 14px; line-height: 1.75; }
   .model-topics { padding-top: 8px; }
   .model-topics li { font-size: 10px; }
   .models-skills-heading { align-items: baseline; margin-bottom: 8px; gap: 12px; }
@@ -101,7 +99,7 @@
   .model-skill-title > span { flex-basis: 19px; font-size: 12px; }
   .model-skill-title h4 { font-size: 15px; line-height: 1.45; }
   .model-skill-name { font-size: 10px; line-height: 1.4; margin-top: 4px; }
-  .model-skill-description { font-size: 12px; line-height: 1.55; margin-top: 3px; }
+  .model-skill-description { font-size: 14px; line-height: 1.75; margin-top: 3px; text-wrap: pretty; line-break: strict; }
   .models-next { font-size: 13px; min-height: 44px; gap: 10px; }
   .models-next svg { width: 64px; height: 44px; flex-basis: 64px; }
 }
@@ -115,4 +113,8 @@
 @media (max-width: 767px) and (max-height: 1000px) {
   .models-page { gap: 10px; }
   .models-intro, .model-topics { display: none; }
+}
+
+@media (max-width: 400px) {
+  .models-skills-grid { grid-template-columns: minmax(0, 1fr); }
 }
