@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import SectionHeader from '../components/SectionHeader';
+import WebProjectNav from '../components/WebProjectNav';
 import SomniaCase from './SomniaCase';
 import opening from '../assets/bloom-case/opening.webp';
 import concerns from '../assets/bloom-case/concerns.webp';
@@ -116,7 +117,7 @@ function BloomCase({ en, onNavigate }) {
       [t('界面与交互', 'Interface & interaction'), t('设计页面结构、主题与操作反馈，持续检查文字密度、选择状态、按钮响应和移动端阅读体验。', 'Designed page structure, themes, and interaction feedback, refining text density, selection states, button responses, and mobile readability.')],
       [t('开发与迭代', 'Development & iteration'), t('参与前后端实现、数据管理和功能验证，将产品上线，并通过实际使用继续检查会话衔接、信息保存与功能可靠性。', 'Worked across frontend and backend implementation, data management, and validation, launching the product and checking conversation continuity, saved information, and reliability through use.')],
     ].map(([title, body], i) => <article key={title}><span className="web-step-number">0{i + 1}</span><h4>{title}</h4><p>{body}</p></article>)}</div></section>
-    <footer className="web-case-footer"><div><small>AGENCY BLOOM</small><p>{t('探索、选择，然后亲自尝试。', 'Explore, choose, and try it for yourself.')}</p></div><a href="#web-belay" onClick={onNavigate}><small>{t('下一个项目', 'NEXT PROJECT')}</small><strong>Belay <span aria-hidden="true">→</span></strong></a></footer>
+    <footer className="web-case-footer"><div><small>AGENCY BLOOM</small><p>{t('探索、选择，然后亲自尝试。', 'Explore, choose, and try it for yourself.')}</p></div><WebProjectNav compact en={en} onNavigate={onNavigate} next={{ href: '#web-belay', label: 'Belay' }} /></footer>
   </>;
 }
 

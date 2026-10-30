@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import SectionHeader from '../components/SectionHeader';
+import WebProjectNav from '../components/WebProjectNav';
 import successImage from '../assets/belay-case/success.webp';
 import errorImage from '../assets/belay-case/error.webp';
 import ribbonImage from '../assets/belay-case/ribbon.webp';
@@ -160,7 +161,7 @@ export default function BelayCase({ language = 'zh', onNavigate }) {
       [t('让会话能够继续', 'Conversation continuity'), t('参与会话持久化、保存与恢复，让学习过程中的讨论能够继续，而不必每次重新开始。', 'Worked on conversation persistence, saving, and recovery so discussions can continue across sessions.')],
       [t('使用范围与运行管理', 'Access and operation'), t('围绕班级隔离、访问控制与模型调用预算，参与运行约束和集成方式的梳理。', 'Contributed to class separation, access control, model usage budgets, and integration constraints.')],
     ].map(([title, body]) => <article key={title}><h3>{title}</h3><p>{body}</p></article>)}</div></section>
-    <nav className="belay-footer" aria-label={t('其他项目', 'Other projects')}><a href="#web-agency-bloom" onClick={onNavigate}><GemArrow direction="left" />Agency Bloom</a><a href="#portfolio" onClick={onNavigate}>{t('全部网站与设计', 'All web and design projects')}</a><a href="#web-somnia" onClick={onNavigate}>Somnia Library<GemArrow direction="right" /></a></nav>
+    <WebProjectNav en={en} onNavigate={onNavigate} previous={{ href: '#web-agency-bloom', label: 'Agency Bloom' }} next={{ href: '#web-somnia', label: 'Somnia Library' }} />
     <ImageDialog image={image} onClose={() => setImage(null)} en={en} />
   </div></section>;
 }

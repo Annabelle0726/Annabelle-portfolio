@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import SectionHeader from '../components/SectionHeader';
+import WebProjectNav from '../components/WebProjectNav';
 import home from '../assets/somnia-case/home.webp';
 import library from '../assets/somnia-case/library.webp';
 import match from '../assets/somnia-case/match.webp';
@@ -90,7 +91,7 @@ export default function SomniaCase({ language = 'zh', onNavigate }) {
           [t('在不同屏幕上继续阅读', 'Carry the experience across screens'), t('我参与移动端导航与布局改进，关注屏幕变窄之后的信息顺序、按钮触达和文字阅读，让视觉风格延续到实际操作。', 'My work includes mobile navigation and layout improvements, with attention to reading order, reachable controls, and legible text as screens get narrower.')],
         ].map(([title, body], index) => <article key={title}><span className="somnia-note-number">0{index + 1}</span><h3>{title}</h3><p>{body}</p></article>)}</div>
       </section>
-      <footer className="somnia-footer"><a href="#web-belay" onClick={onNavigate}>← Belay</a><a href="#portfolio" onClick={onNavigate}>{t('返回作品目录', 'Back to projects')} ↗</a></footer>
+      <WebProjectNav en={en} onNavigate={onNavigate} previous={{ href: '#web-belay', label: 'Belay' }} next={{ href: '#portfolio', label: t('返回作品目录', 'Back to projects') }} />
     </div>
   </section>;
 }
