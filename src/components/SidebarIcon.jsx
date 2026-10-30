@@ -19,7 +19,7 @@ export default function SidebarIcon({ name, className = '' }) {
     qr: <><path d="M3 3h6v6H3zM15 3h6v6h-6zM3 15h6v6H3zM15 15h2v2h-2zM20 14v3M14 20h3v-1M20 20h1v1M12 3v2M3 12h2M8 12h4v4M12 9v1M18 12h3"/></>,
     external: <><path d="M8 5h11v11M19 5 5 19"/></>,
     close: <path d="m6 6 12 12M18 6 6 18"/>,
-    menu: <><path d="M4 6h16M4 12h16M4 18h10"/><circle className="icon-accent" cx="19" cy="18" r="1"/></>,
+    menu: <path d="M6 8.5h12M6 12h12M6 15.5h7"/>,
     copy: <><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M15 5V3H4v13h2"/></>,
     check: <path d="m5 12 4 4L19 6"/>,
     download: <><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></>,

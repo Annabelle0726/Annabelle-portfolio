@@ -4,7 +4,8 @@ button, a { touch-action: manipulation; }
 button:focus-visible, a:focus-visible { outline: 3px solid #173b6c; outline-offset: 3px; }
 img { max-width: 100%; height: auto; }
 
-#main.content-views { min-height: 100vh; min-height: 100svh; padding-top: 64px; background: var(--color-page); }
+#main.content-views { min-height: 100vh; min-height: 100svh; padding-top: 64px; background: var(--color-paper); }
+#main.content-views > .section-bg { background: var(--color-paper); }
 #main.content-views.is-home { padding-top: 0; }
 #main.content-views #hero { width: 100%; margin-left: 0; }
 .content-views > section:focus, #main.content-views:focus { outline: none; }
@@ -83,3 +84,6 @@ section { overflow: visible; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
+.contact-map { width: 100%; }
+.contact-map img { display: block; width: 100%; height: auto; border-radius: 8px; }
+.contact-map a { display: inline-block; margin-top: 12px; padding: 10px 16px; color: var(--color-deep-sapphire); font-weight: 600; }

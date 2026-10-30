@@ -1,0 +1,8 @@
+.back-top-sentinel { position: absolute; top: 0; left: 0; width: 1px; height: calc(100dvh * var(--show-after)); pointer-events: none; }
+.back-top { position: fixed; right: max(24px, env(safe-area-inset-right)); bottom: max(24px, env(safe-area-inset-bottom)); z-index: 90; display: grid; place-items: center; width: 46px; height: 46px; border: 1px solid var(--color-border); border-radius: 50%; color: var(--color-primary); background: rgb(252 250 243 / 78%); box-shadow: 0 6px 16px -8px rgb(0 59 120 / 35%); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(12px) scale(.9); transition: opacity 220ms cubic-bezier(.2,.8,.2,1), transform 220ms cubic-bezier(.2,.8,.2,1), visibility 0s linear 220ms, border-color 160ms ease-out; }
+.back-top.is-visible { opacity: 1; visibility: visible; pointer-events: auto; transform: none; transition-delay: 0s; }
+.back-top svg { width: 22px; height: 22px; transition: transform 160ms ease-out; }
+@media (hover: hover) { .back-top.is-visible:hover { border-color: var(--color-champagne-gold); transform: translateY(-2px); } .back-top:hover svg { transform: translateY(-2px); } }
+.back-top.is-visible:active { transform: translateY(1px); }
+.back-top:focus-visible { outline: 2px solid var(--color-champagne-gold); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .back-top, .back-top svg { transition: none; transform: none !important; } }

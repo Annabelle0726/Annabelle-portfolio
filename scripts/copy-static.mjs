@@ -10,7 +10,6 @@ const paths = [
   'PortfolioDigitalProduct',
   'Signature160D2',
   'DataVizPortfolio.html',
-  'Annabelle Zhu Resume.pdf',
   'Annabelle-Zhu_Certificate.png',
   '404.html',
 ];

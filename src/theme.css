@@ -1,6 +1,6 @@
 /* Shared semantic palette from docs/visual-style.md. */
 :root {
-  --color-paper: #FAF8F2;
+  --color-paper: #FFF9E3;
   --color-sapphire: #0055A4;
   --color-royal-blue: #0042A8;
   --color-deep-sapphire: #003B78;
@@ -13,7 +13,7 @@
   --color-golden-sun: #E9B829;
   --color-pale-gold: #F4DA91;
   --color-gold-light: #FFF2CC;
-  --color-ivory: #FCFAF3;
+  --color-ivory: #FCFAE7;
   --color-ink-navy: #082D49;
   --color-page: var(--color-ivory);
   --color-text: var(--color-ink-navy);

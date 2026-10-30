@@ -1,6 +1,6 @@
 # Portfolio direction and content review
 
-Recorded 2026-10-29. The user selected option 1, soft yellow and blue, and wants sidebar navigation between content views rather than one continuous scrolling page. This document records the direction and outstanding decisions; the documentation update does not implement the redesign.
+The user subsequently selected a richer jewel-blue, lake-turquoise and champagne-gold palette in place of the earlier soft yellow-and-blue sketch. They want sidebar navigation between content views rather than one continuous scrolling page. This document records the direction and outstanding decisions.
 
 ## Goal and direction
 
@@ -23,15 +23,16 @@ The About copy now follows the user's supplied Chinese and English text. Preserv
 
 ### Project selection
 
-The user says some historical work is outdated, but has not identified which. Listing the following current entries does **not** imply they should be hidden or deleted:
+On 2026-10-29 the user selected the three UX/UI projects below and requested removal of the outdated enterprise-system display. GlassMorphism, ClayMorphism and RAG are excluded from the selection. Entries still marked awaiting input are not authorized for removal:
 
 | Current entry | Decision |
 | --- | --- |
-| Sprinkles Cupcakes | Awaiting user input |
-| Marriott Bonvoy Hotels and Villas | Awaiting user input |
+| Sprinkles Cupcakes | Selected for UX/UI; web interaction study with inline previews |
+| Marriott Bonvoy Hotels and Villas | Selected for UX/UI as Travel Discovery; course prototype, not commissioned work |
 | Love Across Mythologies | Awaiting user input |
 | Asian visual culture | Awaiting user input |
-| UX/UI Portfolio (Adobe XD) | Awaiting user input |
+| UX/UI Portfolio (Adobe XD) | Removed from the UX/UI page at the user's request; replaced by the three selected projects |
+| Reverie Reads / Midniht | Selected for UX/UI; small collaboration contribution, two supplied screenshots |
 | Each Data Science project | Awaiting user input individually |
 
 For each project, the user can choose to feature it, retain it with lower priority, hide it from the homepage while preserving files and links, or explicitly request removal. Consider relevance, completion, available visuals and link availability. Verify roles, descriptions, outcomes and metrics.

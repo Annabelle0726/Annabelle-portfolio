@@ -1,0 +1,24 @@
+/* Independent artwork: keep the existing grid placement and occupied height. */
+.web-hero-copy,.web-hero-screens { position: relative; z-index: 1; }
+.bloom-ribbon { position: relative; width: 100%; min-width: 0; height: clamp(96px,17dvh,150px); padding: 8px 0; box-sizing: border-box; pointer-events: none; }
+.bloom-ribbon-svg { display: block; width: 100%; height: 100%; overflow: hidden; }
+.bloom-ribbon-layer { transform-box: view-box; transform-origin: 50% 50%; animation-play-state: var(--ribbon-play-state,paused) !important; }
+.bloom-ribbon-main { animation: bloom-silk-main 18s ease-in-out infinite; }
+.bloom-ribbon-rear { animation: bloom-silk-rear 20s ease-in-out infinite; }
+.bloom-ribbon-gold { animation: bloom-silk-gold 16s ease-in-out infinite; }
+@keyframes bloom-silk-main {
+  0%,100% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-1px) scaleY(.98); }
+}
+@keyframes bloom-silk-rear {
+  0%,100% { transform: translateY(-1px) skewY(-.15deg); }
+  50% { transform: translateY(2px) skewY(.15deg); }
+}
+@keyframes bloom-silk-gold {
+  0%,100% { transform: translateY(1px); }
+  50% { transform: translateY(-2px); }
+}
+@media (max-width:767px) { .bloom-ribbon { height: 72px; } }
+@media (prefers-reduced-motion:reduce) {
+  .bloom-ribbon-layer { animation: none !important; transform: none !important; }
+}

@@ -1,0 +1,131 @@
+/* Keep the shared SectionHeader and its original signature unchanged. */
+.quotes-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; width: 100%; margin-top: auto; padding-top: 9px; border-top: 1px solid var(--color-border); }
+.quotes-card .quotes-actions .quotes-source-link { margin: 0; border: 0; padding: 0; width: auto; }
+.quotes-note-link { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; color: var(--color-deep-sapphire); font-size: 13px; text-decoration: none; }
+.quotes-note-link span { color: var(--color-imperial-gold); }
+.quotes-note-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+.quotes-note-link:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 4px; }
+.quotes-video > .quotes-actions { grid-column: 1 / -1; }
+#main.content-views:has(.teams-quotes) { background: var(--color-paper); }
+.teams-quotes { position: relative; isolation: isolate; color: var(--color-text); background: var(--color-paper); padding: 28px clamp(28px, 3vw, 56px) max(20px, env(safe-area-inset-bottom, 0px)); font-family: system-ui, sans-serif; }
+.teams-quotes, .teams-quotes * { box-sizing: border-box; }
+.quotes-page { position: relative; max-width: 1120px; min-height: calc(100vh - 112px); min-height: calc(100dvh - 112px); margin: 0 auto; display: flex; flex-direction: column; gap: clamp(16px, 2vh, 24px); }
+.quotes-opening { position: relative; }
+.quotes-intro { margin: 0; font-size: 15px; line-height: 1.75; max-width: 720px; }
+.quotes-art { position: absolute; z-index: -1; pointer-events: none; top: 0; right: 0; width: min(43%, 470px); height: 280px; overflow: hidden; opacity: .64; mix-blend-mode: multiply; mask-image: radial-gradient(ellipse at 100% 0%, #000 8%, transparent 72%); }
+.quotes-ribbon { position: absolute; inset: -14px; background: url('../assets/hero-art.png') 83% 34% / cover no-repeat; transform-origin: 85% 20%; animation: quotes-ribbon-float 14s ease-in-out infinite alternate; }
+@keyframes quotes-ribbon-float {
+  from { transform: translate3d(-3px, 3px, 0) rotate(-.4deg) scale(1.01); }
+  to { transform: translate3d(4px, -6px, 0) rotate(.5deg) scale(1.025); }
+}
+.quotes-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.quotes-card { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; padding: clamp(18px, 1.7vw, 26px); border: 1px solid var(--color-border); border-radius: 8px; background: color-mix(in srgb, var(--color-surface) 55%, transparent); box-shadow: 0 8px 24px -24px color-mix(in srgb, var(--color-text) 22%, transparent); }
+.quotes-kicker { margin: 0 0 7px; color: var(--color-imperial-gold); font-size: 12px; line-height: 1.5; letter-spacing: .025em; }
+.quotes-kicker > span { font-family: Georgia, serif; }
+.quotes-byline { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; margin: 0 0 16px; color: var(--color-text-secondary); font-size: 12px; line-height: 1.5; }
+.quotes-byline time { white-space: nowrap; }
+.quotes-card h3 { margin: 0; color: var(--color-text); font: 500 clamp(20px, 1.65vw, 24px)/1.4 Georgia, 'Songti SC', 'STSong', SimSun, serif; overflow-wrap: anywhere; }
+.quotes-description { margin: 8px 0 16px; color: var(--color-text-secondary); font-size: 14px; line-height: 1.75; }
+.quotes-source-link { display: inline-flex; align-items: center; gap: 10px; margin-top: auto; min-height: 36px; color: var(--color-deep-sapphire); font-size: 13px; line-height: 1.5; text-decoration: none; }
+.quotes-source-link > span[aria-hidden] { display: inline-block; transition: transform 200ms ease; }
+.quotes-source-link:active { opacity: .7; }
+.quotes-source-link:focus-visible, .quotes-next:focus-visible, .quotes-previous:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 4px; border-radius: 2px; }
+.quotes-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.quotes-featured { position: relative; border-color: color-mix(in srgb, var(--color-champagne-gold) 40%, transparent); }
+.quotes-featured::before { content: ''; position: absolute; left: -1px; top: -1px; bottom: -1px; width: 3px; border-radius: 8px 0 0 8px; background: var(--color-champagne-gold); }
+.quotes-excerpt { position: relative; width: 100%; margin: auto 0; padding: 18px 0 22px 30px; }
+.quotes-mark { position: absolute; left: 0; top: 9px; color: var(--color-champagne-gold); font: 500 54px/1 Georgia, serif; }
+.quotes-excerpt blockquote { margin: 0; padding: 0; border: 0; }
+.quotes-excerpt blockquote p { margin: 0; color: var(--color-text); font: 500 clamp(23px, 2.1vw, 30px)/1.55 Georgia, 'Songti SC', 'STSong', SimSun, serif; overflow-wrap: anywhere; }
+.quotes-excerpt-note { margin: 12px 0 0; font-size: 11px; line-height: 1.6; color: var(--color-text-secondary); }
+.quotes-featured-source { width: 100%; border-top: 1px solid var(--color-border); padding-top: 14px; margin-bottom: 10px; }
+.quotes-featured-source h3 { font-size: 20px; }
+.quotes-featured-source p { margin: 4px 0 0; font-size: 12px; line-height: 1.6; color: var(--color-text-secondary); }
+.quotes-featured .quotes-source-link { margin-top: 0; }
+.quotes-video-copy { width: 100%; }
+.quotes-video-figure { width: 100%; margin: auto 0 8px; }
+.quotes-video-art { display: block; width: 100%; height: auto; max-height: 140px; border-radius: 6px; background: color-mix(in srgb, var(--color-aqua-light) 25%, var(--color-paper)); }
+.quotes-blueprint-grid { stroke: var(--color-sapphire); stroke-width: .5; opacity: .12; }
+.quotes-blueprint-wash { fill: var(--color-sapphire); opacity: .06; }
+.quotes-blueprint-blue { stroke: var(--color-sapphire); stroke-linecap: square; }
+.quotes-blueprint-gold { stroke: var(--color-champagne-gold); }
+.quotes-blueprint-dot { fill: var(--color-sapphire); opacity: .6; }
+.quotes-video-figure figcaption { margin-top: 3px; text-align: right; font-size: 10px; line-height: 1.5; color: var(--color-text-secondary); }
+.quotes-research .quotes-byline { margin-bottom: 12px; }
+.quotes-research .quotes-source-link { border-top: 1px solid var(--color-border); padding-top: 9px; width: 100%; }
+.quotes-footer { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: auto; }
+.quotes-footer-rule { flex: 1; min-width: 20px; height: 1px; background: var(--color-border); }
+.quotes-previous { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: var(--color-text-secondary); font-size: 12px; line-height: 1.5; text-decoration: none; }
+.quotes-next { display: inline-flex; align-items: center; gap: 16px; min-height: 52px; color: var(--color-deep-sapphire); font-size: 14px; line-height: 1.5; text-decoration: none; }
+.quotes-next svg { width: 76px; height: 52px; flex: 0 0 76px; overflow: visible; }
+.quotes-next-orbit { stroke: var(--color-champagne-gold); stroke-width: .8; stroke-dasharray: 78 22; transform: rotate(-40deg); transform-origin: 49px 26px; transition: stroke-dasharray 350ms ease, transform 350ms ease; }
+.quotes-next-arrow { stroke: currentColor; stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; transition: transform 250ms var(--ease-ui, ease); }
+.quotes-next:focus-visible .quotes-next-arrow { transform: translateX(5px); }
+.quotes-next:focus-visible .quotes-next-orbit { stroke-dasharray: 100 0; transform: rotate(20deg); }
+@media (hover: hover) and (pointer: fine) {
+  .quotes-source-link:hover { color: var(--color-sapphire); text-decoration: underline; text-underline-offset: 4px; }
+  .quotes-source-link:hover > span[aria-hidden] { transform: translate(2px, -2px); }
+  .quotes-previous:hover { color: var(--color-sapphire); }
+  .quotes-next:hover .quotes-next-arrow { transform: translateX(5px); }
+  .quotes-next:hover .quotes-next-orbit { stroke-dasharray: 100 0; transform: rotate(20deg); }
+}
+@media (min-width: 768px) and (max-width: 1099px) {
+  .quotes-grid { grid-template-columns: minmax(0, 1fr); }
+  .quotes-excerpt { padding-block: 12px 18px; }
+  .quotes-video-art { max-height: 120px; }
+}
+@media (min-width: 1100px) and (max-height: 850px) {
+  .quotes-page { gap: 16px; }
+  .quotes-card { padding: 16px 20px; }
+  .quotes-byline { margin-bottom: 10px; }
+  .quotes-excerpt { padding-block: 12px 16px; }
+  .quotes-video-art { max-height: 110px; }
+  .quotes-featured-source { padding-top: 10px; }
+  .quotes-description { font-size: 13px; margin-bottom: 12px; }
+}
+@media (max-width: 767px) {
+  .teams-quotes { padding: 32px max(24px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(24px, env(safe-area-inset-left, 0px)); }
+  .quotes-page { min-height: calc(100vh - 120px); min-height: calc(100dvh - 120px); gap: 16px; }
+  .quotes-opening { display: flex; flex-direction: column; gap: 20px; }
+  .quotes-intro { font-size: 13px; line-height: 1.7; }
+  .quotes-art { width: 44%; height: 180px; opacity: .38; }
+  .quotes-grid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .quotes-card { padding: 14px 16px; }
+  .quotes-kicker { font-size: 11px; margin-bottom: 5px; }
+  .quotes-byline { font-size: 11px; margin-bottom: 10px; }
+  .quotes-card h3 { font-size: 19px; line-height: 1.4; }
+  .quotes-excerpt { padding: 7px 0 13px 24px; }
+  .quotes-mark { top: 0; font-size: 44px; }
+  .quotes-excerpt blockquote p { font-size: 22px; line-height: 1.5; }
+  .quotes-excerpt-note { font-size: 10px; margin-top: 7px; }
+  .quotes-featured-source { padding-top: 9px; margin-bottom: 5px; }
+  .quotes-featured-source h3 { font-size: 16px; }
+  .quotes-featured-source p { font-size: 11px; }
+  .quotes-source-link { font-size: 12px; min-height: 36px; }
+  .quotes-description { font-size: 12px; line-height: 1.65; margin: 6px 0 10px; }
+  .quotes-video { display: grid; grid-template-columns: 88px minmax(0, 1fr); column-gap: 12px; align-items: start; }
+  .quotes-video > .quotes-kicker, .quotes-video > .quotes-byline, .quotes-video > .quotes-source-link { grid-column: 1 / -1; }
+  .quotes-video-copy { grid-column: 2; grid-row: 3; }
+  .quotes-video-figure { grid-column: 1; grid-row: 3; margin: 0; }
+  .quotes-video-art { height: 80px; object-fit: cover; }
+  .quotes-video-figure figcaption { font-size: 9px; text-align: left; }
+  .quotes-video-copy h3 { font-size: 17px; }
+  .quotes-research .quotes-byline { margin-bottom: 8px; }
+  .quotes-research .quotes-source-link { padding-top: 6px; }
+  .quotes-footer { gap: 8px; }
+  .quotes-footer-rule { min-width: 8px; }
+  .quotes-previous { font-size: 11px; }
+  .quotes-next { font-size: 13px; min-height: 44px; gap: 8px; }
+  .quotes-next svg { width: 64px; height: 44px; flex-basis: 64px; }
+}
+@media (max-width: 360px) {
+  .quotes-video { grid-template-columns: 68px minmax(0, 1fr); column-gap: 10px; }
+  .quotes-footer-rule { display: none; }
+  .quotes-footer { justify-content: space-between; }
+  .quotes-next { gap: 4px; }
+  .quotes-next svg { width: 52px; flex-basis: 52px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .quotes-ribbon { animation: none; transform: none; }
+  .quotes-next-arrow, .quotes-next-orbit, .quotes-source-link > span[aria-hidden] { transition: none; }
+}

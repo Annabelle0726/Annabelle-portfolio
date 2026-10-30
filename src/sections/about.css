@@ -4,13 +4,12 @@
 #about .about-page { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px; }
 #about .about-opening { display: flow-root; }
 #about .about-heading-area { margin-bottom: 20px; animation: about-arrive 500ms var(--ease-ui) both; }
-#about .about-eyebrow { display: flex; align-items: center; gap: 14px; margin: 0 0 14px; color: var(--color-text-secondary); font: 400 11px/1.6 system-ui, sans-serif; letter-spacing: .16em; }
-#about .about-eyebrow::after { content: ''; height: 1px; width: 72px; flex-shrink: 0; background: var(--color-champagne-gold); opacity: .6; }
+#about .about-eyebrow:not(.section-eyebrow) { display: flex; align-items: center; gap: 14px; margin: 0 0 14px; color: var(--color-text-secondary); font: 400 11px/1.6 system-ui, sans-serif; letter-spacing: .16em; }
+#about .about-eyebrow:not(.section-eyebrow)::after { content: ''; height: 1px; width: 72px; flex-shrink: 0; background: var(--color-champagne-gold); opacity: .6; }
 #about .about-eyebrow span { color: var(--color-imperial-gold); }
 #about h2, #about h3, #about h4 { padding: 0; color: var(--color-text); font-family: Georgia, 'Songti SC', 'STSong', SimSun, serif; font-weight: 500; text-wrap: balance; }
-#about h2 { margin: 0; font-size: clamp(34px, 3vw, 42px); line-height: 1.25; letter-spacing: .025em; }
+#about h2 { margin: 0; font-size: var(--section-title-size); line-height: 1.25; letter-spacing: .025em; }
 #about .about-title-line { display: flex; align-items: center; gap: 24px; }
-#about .about-signature { display: block; flex: 0 0 auto; width: 78px; height: 42px; margin: 0; overflow: visible; }
 
 #about .about-signature path { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 100; }
 #about .signature-ink { stroke: var(--color-sapphire); animation: about-sign 800ms ease-out both; }
@@ -87,14 +86,12 @@
   #about.about-editorial { padding: 32px max(24px, env(safe-area-inset-right, 0px)) max(40px, env(safe-area-inset-bottom, 0px)) max(24px, env(safe-area-inset-left, 0px)); }
   #about .about-page { gap: 28px; }
   #about .about-opening { display: flex; flex-direction: column; gap: 20px; }
-  #about .about-eyebrow { font-size: 10px; letter-spacing: .18em; gap: 12px; margin-bottom: 20px; }
-  #about .about-eyebrow::after { width: 32px; }
-
-  #about h2 { font-size: 34px; }
+  #about .about-eyebrow:not(.section-eyebrow) { font-size: 10px; letter-spacing: .18em; gap: 12px; margin-bottom: 20px; }
+  #about .about-eyebrow:not(.section-eyebrow)::after { width: 32px; }
+  
   #about .about-heading-area { margin: 0; }
   #about .about-title-line { gap: 18px; }
-  #about .about-signature { width: 68px; height: 36px; margin: 0; }
-
+  
   #about .about-portrait { width: min(100%, 400px); float: none; align-self: center; margin: 0; }
   #about .about-portrait-ribbon { inset: -70px -75px -12px 20%; opacity: .65; }
   #about .about-portrait-lines { width: 118%; right: -8%; }
@@ -121,7 +118,6 @@
   #about .about-heading-area, #about .about-introduction, #about .about-portrait, #about .about-signature path { animation: none; }
   #about .about-details, #about .about-details-toggle svg, #about .about-project-arrow, #about .about-project-orbit { transition: none; }
 }
-
 @media (prefers-reduced-motion: reduce) {
   #about .about-artwork-motion { transform: none !important; }
 }

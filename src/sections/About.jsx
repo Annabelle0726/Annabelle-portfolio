@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import brandMark from '../assets/brand-mark.svg';
 import AboutArtwork from '../components/AboutArtwork';
 import './about.css';
+import SectionHeader from '../components/SectionHeader';
 import { birthday, getAge } from './about-profile.js';
 
 const content = {
@@ -55,14 +56,7 @@ export default function About({ language = 'zh', onNavigate }) {
   return <section id="about" className="about about-editorial" lang={zh ? 'zh-CN' : 'en'}>
     <div className="about-page">
       <div className="about-opening">
-        <header className="about-heading-area">
-          <p className="about-eyebrow" lang="en">ANNABELLE ZHU <span>/</span> ABOUT</p>
-          <div className="about-title-line"><h2>{t.title}</h2>
-          <svg className="about-signature" viewBox="0 0 120 64" role="img" aria-label={zh ? 'Annabelle 的手写标识' : 'Annabelle’s handwritten mark'}>
-            <path className="signature-ink" pathLength="100" d="M51 45C43 56 16 57 11 44 5 28 18 10 33 10c16 0 20 14 20 27 0 10 4 14 10 12 10-3 20-19 35-29 6-4 12-5 13-1 1 4-8 10-17 17L78 49c8 4 20 4 29 0" />
-            <path className="signature-gold" pathLength="100" d="M107 49c3-1 5-3 7-5" />
-          </svg></div>
-        </header>
+        <SectionHeader eyebrow="ABOUT" title={t.title} className="about-heading-area" about />
         <figure className="about-portrait">
           <AboutArtwork />
           <div className="about-photo-frame"><img src="assets/img/about.jpg" alt={zh ? 'Annabelle Zhu 的照片' : 'Annabelle Zhu portrait'} width="1280" height="1227" decoding="async" fetchPriority="high" /></div>

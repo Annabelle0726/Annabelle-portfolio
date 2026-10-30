@@ -1,0 +1,46 @@
+.reading-note .quotes-page { gap: 0; }
+.note-back { align-self: flex-start; margin: 0 0 28px; }
+.note-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, .38fr); column-gap: clamp(32px, 4vw, 64px); }
+.note-introduction { grid-column: 1; }
+.note-introduction h1 { margin: 12px 0 22px; font: 500 clamp(28px, 2.6vw, 38px)/1.35 Georgia, 'Songti SC', 'STSong', SimSun, serif; }
+.note-quotation { display: flex; gap: 20px; }
+.note-quotation > span { color: var(--color-champagne-gold); font: 88px/.95 Georgia, serif; }
+.note-quotation blockquote { margin: 0; border: 0; padding: 0; }
+.note-quotation blockquote p { margin: 0; font: 500 clamp(23px, 2.2vw, 31px)/1.55 Georgia, 'Songti SC', 'STSong', SimSun, serif; }
+.note-quotation cite { display: block; margin-top: 12px; font: 12px/1.7 system-ui, sans-serif; color: var(--color-text-secondary); }
+.note-lead { font-size: 18px; line-height: 1.85; }
+.note-editorial-label { margin: 22px 0 30px; color: var(--color-text-secondary); font-size: 12px; line-height: 1.8; }
+.note-source { position: relative; grid-column: 2; grid-row: 1 / 3; padding: 6px 0 100px 28px; border-left: 1px solid var(--color-champagne-gold); overflow-wrap: anywhere; }
+.note-source p, .note-source time { font-size: 13px; line-height: 1.8; color: var(--color-text-secondary); }
+.note-source .note-source-eyebrow { margin: 0 0 20px; color: var(--color-imperial-gold); letter-spacing: .2em; font: 10px/1.6 Georgia, serif; }
+.note-source .note-author { margin-bottom: 8px; color: var(--color-text); font: 16px/1.6 Georgia, serif; }
+.note-source h2 { margin: 0 0 10px; font: 500 clamp(22px, 2vw, 28px)/1.3 Georgia, 'Songti SC', 'STSong', SimSun, serif; }
+.note-source .note-topic { margin: 24px 0 16px; padding-top: 20px; border-top: 1px solid var(--color-champagne-gold); }
+.note-bookmark { position: absolute; right: 12px; bottom: 25px; width: 28px; height: 70px; background: linear-gradient(120deg, var(--color-deep-sapphire), var(--color-azure)); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%); }
+.note-chapters { grid-column: 1; }
+.note-chapter { position: relative; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; padding: 26px 0 30px; }
+.note-chapter::before { content: ''; position: absolute; top: 0; left: 0; width: 36px; height: 1px; background: var(--color-champagne-gold); }
+.note-number { color: var(--color-imperial-gold); font: 27px/1.3 Georgia, serif; }
+.note-chapter h2 { margin: 0 0 16px; font: 500 23px/1.4 Georgia, 'Songti SC', 'STSong', SimSun, serif; }
+.note-chapter h3 { margin: 0 0 8px; font: 500 15px/1.7 system-ui, sans-serif; }
+.note-chapter p { margin: 0 0 14px; font-size: 14px; line-height: 1.9; color: var(--color-text-secondary); }
+.note-chapter .note-prompt { border-left: 2px solid var(--color-border); padding-left: 12px; font-size: 12px; }
+.note-footer { justify-content: space-between; border-top: 1px solid var(--color-champagne-gold); margin-top: 22px; padding-top: 14px; }
+@media (max-width: 1099px) {
+  .note-layout { grid-template-columns: minmax(0, 1fr); }
+  .note-source { grid-column: 1; grid-row: auto; border: 0; padding: 0 0 24px; margin-bottom: 20px; border-bottom: 1px solid var(--color-border); }
+  .note-source .note-source-eyebrow, .note-bookmark { display: none; }
+  .note-source .note-author { margin-top: 0; }
+  .note-source h2 { font-size: 21px; }
+  .note-source .note-topic { border: 0; padding: 0; margin: 12px 0 6px; }
+}
+@media (max-width: 767px) {
+  .note-back { margin: 20px 0 24px; }
+  .note-introduction h1 { font-size: 28px; }
+  .note-quotation { gap: 12px; }
+  .note-quotation > span { font-size: 64px; }
+  .note-quotation blockquote p { font-size: 23px; }
+  .note-chapter { grid-template-columns: 32px minmax(0, 1fr); gap: 14px; padding: 24px 0 28px; }
+  .note-chapter h2 { font-size: 22px; }
+  .note-chapter p { font-size: 13px; }
+}

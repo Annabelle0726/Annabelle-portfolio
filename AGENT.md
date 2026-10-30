@@ -17,7 +17,8 @@
 ## Portfolio direction and content review
 
 - Read [docs/portfolio-direction.md](docs/portfolio-direction.md) before planning visual or content changes. It records the direction discussed with the user and decisions still awaiting their input; it is not authorization to implement a redesign.
-- The user selected the soft yellow-and-blue direction and wants content accessed through the sidebar instead of one continuous scrolling page. Follow [docs/visual-style.md](docs/visual-style.md) and `src/AGENTS.md` when working on the main React site. The existing anchor-based page is the current implementation, not the desired final navigation model.
+- The user selected the jewel-blue, lake-turquoise and champagne-gold direction and wants content accessed through the sidebar instead of one continuous scrolling page. Follow [docs/visual-style.md](docs/visual-style.md) and `src/AGENTS.md` when working on the main React site. The current hash navigation switches content views; preserve that behavior.
+- For secondary sidebar views, follow [docs/section-header.md](docs/section-header.md): the existing About header is the visual baseline for the shared header.
 - Some historical work may be outdated. Do not guess which work to remove, change biographical details, or delete project files. Confirm the intended display and treatment of each project before changing it.
 
 ## Assets and publishing

@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Sidebar, { LanguageSwitch, useNavigationLanguage } from './components/Sidebar';
 import SidebarIcon from './components/SidebarIcon';
+import BackToTop from './components/BackToTop';
 import About from './sections/About';
+import WebProjects from './sections/WebProjects';
 import BelayCase from './sections/BelayCase';
-import Resume from './sections/Resume';
-import Portfolio from './sections/Portfolio';
 import DesignPortfolio from './sections/DesignPortfolio';
 import Projects from './sections/Projects';
 import Contact from './sections/Contact';
@@ -12,16 +12,26 @@ import useContentNavigation from './hooks/useContentNavigation';
 import Hero from './sections/Hero';
 import ModelsTools from './sections/ModelsTools';
 import ModelUsage from './sections/ModelUsage';
+import TeamsQuotes from './sections/TeamsQuotes';
+import ReadingNote from './sections/ReadingNote';
 import AgencyBloom from './sections/AgencyBloom';
 import AgencyBloomSecond from './sections/AgencyBloomSecond';
 import AgencyBloomThird from './sections/AgencyBloomThird';
+import AgencyBloomFourth from './sections/AgencyBloomFourth';
 
 export default function App() {
   const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 767px)').matches);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(() => window.scrollY > 16);
   const { route, navigate } = useContentNavigation();
   const [language, setLanguage] = useNavigationLanguage();
   const menuButton = useRef(null);
+  useEffect(() => {
+    const update = () => setScrolled(window.scrollY > 16);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
+  }, []);
   const closeMenu = (event) => {
     if (event?.metaKey || event?.ctrlKey || event?.shiftKey || event?.altKey) return;
     const destination = event?.currentTarget?.hash;
@@ -63,23 +73,32 @@ export default function App() {
     'agency-bloom': <AgencyBloom />,
     'agency-bloom-value': <AgencyBloomSecond />,
     'agency-bloom-applause': <AgencyBloomThird />,
+    'agency-bloom-ideas': <AgencyBloomFourth />,
     home: <Hero language={language} onNavigate={navigate} />,
     about: <About language={language} onNavigate={navigate} />,
+    portfolio: <WebProjects language={language} onNavigate={navigate} />,
+    'web-agency-bloom': <WebProjects language={language} projectId="web-agency-bloom" onNavigate={navigate} />,
     'web-belay': <BelayCase language={language} onNavigate={navigate} />,
-    portfolio: <Portfolio />,
+    'web-somnia': <WebProjects language={language} projectId="web-somnia" onNavigate={navigate} />,
     design: <DesignPortfolio language={language} projectId={route.id} onNavigate={navigate} />,
-    data: <Projects />,
+    data: <Projects language={language} onNavigate={navigate}/>,
+    'data-athub': <Projects language={language} projectId="data-athub" onNavigate={navigate}/>,
+    'data-visualization': <Projects language={language} projectId="data-visualization" onNavigate={navigate}/>,
+    'data-energy': <Projects language={language} projectId="data-energy" onNavigate={navigate}/>,
     contact: <Contact language={language} />,
     'models-chatgpt': <ModelUsage language={language} tool="chatgpt" onNavigate={navigate} />,
     'models-claude-code': <ModelUsage language={language} tool="claude-code" onNavigate={navigate} />,
-    resume: <Resume />,
-    favorites: (route.id === 'models' || route.id === 'model-skills') ? <ModelsTools id={route.id} language={language} onNavigate={navigate} /> : <section id={route.id} className="favorites-view" lang={language === 'zh' ? 'zh-CN' : 'en'}><div className="container"><div className="section-title"><h2>{favoritesTitle}</h2></div><p>{language === 'zh' ? '即将更新' : 'Coming soon'}</p></div></section>,
+    'notes-felix': <ReadingNote noteId="notes-felix" language={language} onNavigate={navigate} />,
+    'notes-video': <ReadingNote noteId="notes-video" language={language} onNavigate={navigate} />,
+    'notes-work': <ReadingNote noteId="notes-work" language={language} onNavigate={navigate} />,
+    'notes-judgment': <ReadingNote noteId="notes-judgment" language={language} onNavigate={navigate} />,
+    favorites: (route.id === 'models' || route.id === 'model-skills') ? <ModelsTools id={route.id} language={language} onNavigate={navigate} /> : route.id === 'quotes' ? <TeamsQuotes language={language} onNavigate={navigate} /> : <section id={route.id} className="favorites-view" lang={language === 'zh' ? 'zh-CN' : 'en'}><div className="container"><div className="section-title"><h2>{favoritesTitle}</h2></div><p>{language === 'zh' ? '即将更新' : 'Coming soon'}</p></div></section>,
   };
 
   return (
     <>
       <a className="skip-link" href="#main" onClick={event => { event.preventDefault(); document.getElementById('main').focus(); }}>Skip to main content</a>
-      <div className={`shell-controls${isMobile && menuOpen ? ' is-drawer-open' : ''}`}>
+      <div className={`shell-controls${isMobile && menuOpen ? ' is-drawer-open' : ''}${scrolled ? ' is-scrolled' : ''}`}>
         <LanguageSwitch language={language} onChange={setLanguage}/>
         <button ref={menuButton} className="mobile-nav-toggle" type="button" aria-label={language === 'zh' ? '打开导航' : 'Open navigation'} aria-controls="header" aria-expanded={menuOpen} onClick={() => setMenuOpen(true)}><SidebarIcon name="menu"/></button>
       </div>
@@ -89,7 +108,7 @@ export default function App() {
       <main id="main" tabIndex={-1} className={`content-views${route.view === 'home' ? ' is-home' : ''}`}>
         {views[route.view]}
       </main>
-      {route.view !== 'home' && route.view !== 'about' && route.view !== 'contact' && route.id !== 'models' && route.id !== 'model-skills' && route.group !== 'wechat' && <button type="button" className="back-to-top-link" aria-label={language === 'zh' ? '回到顶部' : 'Back to top'} onClick={() => window.scrollTo({ top: 0, behavior: 'auto' })}><i className="bi bi-arrow-up-short" aria-hidden="true" /></button>}
+      <BackToTop language={language} routeId={route.id} menuOpen={isMobile && menuOpen} />
       </div>
     </>
   );

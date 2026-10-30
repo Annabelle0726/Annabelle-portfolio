@@ -14,7 +14,7 @@ export default function useNavigationIndicator(activeGroup) {
       if (!target) return;
       const rect = target.getBoundingClientRect();
       const box = container.getBoundingClientRect();
-      const next = { y: rect.top - box.top, height: rect.height };
+      const next = { y: rect.top - box.top + container.scrollTop, height: rect.height };
       const previous = position.current;
       if (previous && Math.abs(next.y - previous.y) < .25 && Math.abs(next.height - previous.height) < .25) return;
       if (!animate || !previous) marker.style.transition = 'none';
