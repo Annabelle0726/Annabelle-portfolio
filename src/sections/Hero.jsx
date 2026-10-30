@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './hero.css';
 import RibbonArt from '../components/RibbonArt';
-import { HeroPortrait, HeroMobileActions, HeroSocials } from '../components/HeroMobile';
+import { HeroPortrait, HeroMobileActions, HeroSocials, HeroArrow } from '../components/HeroMobile';
 import './hero-mobile.css';
 
 function HeroCopy({ language, onNavigate }) {
@@ -11,6 +11,14 @@ function HeroCopy({ language, onNavigate }) {
   const interval = zh ? 95 : 55;
   const total = lines.join('').length;
   const typing = shown < total;
+  const [aboutReady, setAboutReady] = useState(false);
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const reveal = () => { if (!typing && media.matches) setAboutReady(true); };
+    reveal();
+    media.addEventListener('change', reveal);
+    return () => media.removeEventListener('change', reveal);
+  }, [typing]);
   useEffect(() => {
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
     let timer;
@@ -41,14 +49,11 @@ function HeroCopy({ language, onNavigate }) {
       <p className="hero-fields" aria-label={lines[1]}>{typeLine(lines[1], 1)}</p>
       <p className="hero-description" aria-label={lines.slice(2).join('')}>{lines.slice(2).map((line, index) => <React.Fragment key={line}>{index > 0 && <br />}{typeLine(line, index + 2)}</React.Fragment>)}</p>
       <div className="hero-entry-links">
-      <a className="hero-about" href="#about" onClick={onNavigate} tabIndex={typing ? -1 : undefined} aria-hidden={typing || undefined}>
+      <a className="hero-about" onAnimationEnd={event => { if (event.target === event.currentTarget && event.animationName === 'hero-about-arrive') setAboutReady(true); }} href="#about" onClick={onNavigate} tabIndex={typing ? -1 : undefined} aria-hidden={typing || undefined}>
         <span>{zh ? '关于我' : 'About me'}</span>
-        <svg viewBox="0 0 76 52" fill="none" aria-hidden="true">
-          <circle className="hero-arrow-orbit" cx="49" cy="26" r="23" pathLength="100" />
-          <g className="hero-arrow-shaft"><path d="M5 26H56M48 18l8 8-8 8" /></g>
-        </svg>
+        <HeroArrow />
       </a>
-      <HeroMobileActions language={language} onNavigate={onNavigate} />
+      <HeroMobileActions language={language} onNavigate={onNavigate} ready={aboutReady} />
       </div>
     </div>
   ;

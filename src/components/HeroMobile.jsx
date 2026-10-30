@@ -13,8 +13,14 @@ export function MobileSignature({ onNavigate }) {
 export function HeroPortrait() {
   return <div className="hero-mobile-portrait"><img src="assets/img/optimized/profile.webp" width="64" height="72" alt="Annabelle Zhu" /></div>;
 }
-export function HeroMobileActions({ language, onNavigate }) {
-  return <div className="hero-mobile-actions"><a href="#portfolio" onClick={onNavigate}>{language === 'zh' ? '看项目' : 'View projects'}<span aria-hidden="true">→</span></a></div>;
+export function HeroArrow() {
+  return <svg viewBox="0 0 76 52" fill="none" aria-hidden="true">
+    <circle className="hero-arrow-orbit" cx="49" cy="26" r="23" pathLength="100" />
+    <g className="hero-arrow-shaft"><path d="M5 26H56M48 18l8 8-8 8" /></g>
+  </svg>;
+}
+export function HeroMobileActions({ language, onNavigate, ready }) {
+  return <div className="hero-mobile-actions"><a className="hero-about hero-projects" data-ready={ready} href="#portfolio" onClick={onNavigate} tabIndex={ready ? undefined : -1} aria-hidden={!ready || undefined}><span>{language === 'zh' ? '看项目' : 'View projects'}</span><HeroArrow /></a></div>;
 }
 export function HeroSocials({ language }) {
   const [account, setAccount] = useState(null);
