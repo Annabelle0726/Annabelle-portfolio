@@ -40,11 +40,8 @@ img { max-width: 100%; height: auto; }
 section { overflow: visible; }
 .about .custom-list { overflow-wrap: anywhere; }
 .skills .progress-bar { min-width: 1px; }
-.resume img { max-width: 100%; height: auto; }
 .badge-description { display: flex; align-items: center; gap: 10px; }
 .badge-description img { flex: 0 0 204px; width: 204px; aspect-ratio: 1; }
-.resume-item h4 { line-height: 1.35; }
-.resume-item small { margin-left: .5rem; }
 .contact { margin-top: 0; }
 .contact iframe { display: block; width: 100%; max-width: 100%; min-height: 300px; }
 .contact .info p { overflow-wrap: anywhere; }
@@ -92,7 +89,6 @@ section { overflow: visible; }
   #hero h1 { font-size: clamp(2.3rem, 10vw, 3.5rem); line-height: 1.1; }
   #hero h2 { font-size: 1.3rem; }
   #hero p { font-size: 1.1rem; }
-  .resume-item h4 small { float: none !important; display: block; margin: .4rem 0 0; }
   .badge-description { flex-direction: column; align-items: flex-start; }
   .badge-description img { flex: 0 0 auto; }
   .services .icon-box > div[style] { margin-left: 0 !important; padding-top: 8px; clear: both; }

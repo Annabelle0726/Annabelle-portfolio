@@ -13,7 +13,7 @@ Help first-time visitors understand Annabelle's positioning and see her data ana
 - **Projects:** Prioritize clear previews, a brief problem or goal, personal role, outcomes and a clear link. Do not invent results or metrics.
 - **Color and typography:** Retain the yellow-and-blue identity with restrained saturation, quiet backgrounds and consistent type and spacing. See [visual-style.md](visual-style.md).
 - **Navigation and responsive behavior:** Show the selected view in the sidebar; provide an accessible mobile menu. Consider the existing sidebar plan and implementation without assuming it is complete. The current long-page anchor model needs to change.
-- **Long content:** Make resume, skills and project descriptions easy to scan. The user will decide what to shorten and how to present details.
+- **Long content:** Make skills and project descriptions easy to scan. The user will decide what to shorten and how to present details.
 
 ## Awaiting user input
 

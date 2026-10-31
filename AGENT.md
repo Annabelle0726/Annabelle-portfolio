@@ -4,7 +4,8 @@
 
 - This repository contains Annabelle Zhu's portfolio. The main page is a React application built with Vite; the linked portfolio examples are independent static websites.
 - React entry points are `src/main.jsx` and `src/App.jsx`. Main-page sections live in `src/sections/`, reusable components in `src/components/`, and styling in `src/styles.css` and the existing `assets/css/style.css`.
-- Keep the existing portfolio content, personal information, downloadable resume, and working project links intact unless the user asks to change them. Do not invent or silently update biographical details.
+- Keep the existing portfolio content, personal information and working project links intact unless the user asks to change them. Do not invent or silently update biographical details.
+- The current site has no resume view or navigation entry. Do not restore the retired `#resume` route.
 - Respect existing uncommitted changes and do not modify IDE files or unrelated work.
 
 ## Development and verification
