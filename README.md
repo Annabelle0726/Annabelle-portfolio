@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://annabelle0726.github.io/Annabelle-portfolio/#hero"><img src="assets/readme/portfolio-cover.webp" width="100%" alt="Annabelle Zhu — software development, product design and data science"></a>
+  <a href="https://annabelle0726.github.io/Annabelle-portfolio/#hero"><img src="assets/readme/annabelle-zhu-silk-refined-7s.gif" width="100%" alt="Animated silk signature of Annabelle Zhu"></a>
 </p>
 
 <h1 align="center">Annabelle Zhu</h1>
@@ -81,6 +81,10 @@ The essays behind Agency Bloom explore choice, personal agency, and making room 
 </details>
 
 *The gallery uses supplied presentation artwork. Open the portfolio for the current interfaces, project descriptions, and interaction demos.*
+
+<p align="center">
+  <a href="https://annabelle0726.github.io/Annabelle-portfolio/#hero"><img src="assets/readme/portfolio-cover.webp" width="100%" alt="Annabelle Zhu — software development, product design and data science"></a>
+</p>
 
 ## Run locally
 

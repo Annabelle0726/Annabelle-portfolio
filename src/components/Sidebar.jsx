@@ -130,7 +130,7 @@ export default function Sidebar({ isMobile, isOpen, activeSection, activeGroup, 
           </div>
         </div>
         <div className="sidebar-portrait-frame">
-          <img className="sidebar-portrait" src="assets/img/083550217d5b9d60c3331fddc2f8fdd.jpg" style={{ objectPosition: '58% 28%' }} width="64" height="80" alt="Annabelle Zhu" fetchPriority="high"/>
+          <img className="sidebar-portrait" src="assets/img/头像.png" width="64" height="80" alt="Annabelle Zhu" fetchPriority="high"/>
         </div>
       </div>
       <nav ref={nav} id="navbar" className="sidebar-navigation" aria-label={t.nav}>

@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://annabelle0726.github.io/Annabelle-portfolio/#hero"><img src="assets/readme/portfolio-cover.webp" width="100%" alt="Annabelle Zhu 个人作品集：软件开发、产品设计与数据科学"></a>
+  <a href="https://annabelle0726.github.io/Annabelle-portfolio/#hero"><img src="assets/readme/annabelle-zhu-silk-refined-7s.gif" width="100%" alt="Annabelle Zhu 的丝带签名动画"></a>
 </p>
 
 <h1 align="center">Annabelle Zhu</h1>
@@ -81,6 +81,10 @@
 </details>
 
 *以上配图为作品集展示素材。当前界面、项目说明与交互演示，请进入网站查看。*
+
+<p align="center">
+  <a href="https://annabelle0726.github.io/Annabelle-portfolio/#hero"><img src="assets/readme/portfolio-cover.webp" width="100%" alt="Annabelle Zhu 个人作品集：软件开发、产品设计与数据科学"></a>
+</p>
 
 ## 本地运行
 

@@ -59,7 +59,7 @@ export default function About({ language = 'zh', onNavigate }) {
         <SectionHeader eyebrow="ABOUT" title={t.title} className="about-heading-area" about />
         <figure className="about-portrait">
           <AboutArtwork />
-          <div className="about-photo-frame"><img src="assets/img/about.jpg" alt={zh ? 'Annabelle Zhu 的照片' : 'Annabelle Zhu portrait'} width="1280" height="1227" decoding="async" fetchPriority="high" /></div>
+          <div className="about-photo-frame"><img src="assets/img/resume.png" alt={zh ? 'Annabelle Zhu 的照片' : 'Annabelle Zhu portrait'} width="1122" height="1402" decoding="async" fetchPriority="high" /></div>
         </figure>
         <div className="about-prose about-introduction">{t.intro.map(p => <p key={p}>{p}</p>)}</div>
       </div>
