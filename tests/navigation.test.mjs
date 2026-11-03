@@ -28,7 +28,7 @@ test('anchors within About share a view, but separate Favorites pages do not', (
 });
 
 test('WeChat articles open independent content views', () => {
-  const ids = ['agency-bloom', 'agency-bloom-value', 'agency-bloom-applause', 'agency-bloom-ideas', 'design-care'];
+  const ids = ['agency-bloom', 'agency-bloom-value', 'agency-bloom-applause', 'agency-bloom-ideas', 'design-care', 'being-seen'];
   for (const id of ids) assert.deepEqual(resolveNavigation('#' + id), { id, view: id, group: 'wechat' });
   assert.equal(sameContentView(resolveNavigation('#agency-bloom'), resolveNavigation('#design-care')), false);
 });

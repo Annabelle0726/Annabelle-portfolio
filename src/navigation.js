@@ -5,6 +5,7 @@ const views = {
   'agency-bloom-applause': ['agency-bloom-applause', 'wechat'],
   'agency-bloom-ideas': ['agency-bloom-ideas', 'wechat'],
   'design-care': ['design-care', 'wechat'],
+  'being-seen': ['being-seen', 'wechat'],
   hero: ['home', 'home'],
   about: ['about', 'home'],
   skills: ['about', 'home'],

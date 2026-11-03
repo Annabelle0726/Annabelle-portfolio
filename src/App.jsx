@@ -21,6 +21,7 @@ import AgencyBloomSecond from './sections/AgencyBloomSecond';
 import AgencyBloomThird from './sections/AgencyBloomThird';
 import AgencyBloomFourth from './sections/AgencyBloomFourth';
 import DesignCareArticle from './sections/DesignCareArticle';
+import BeingSeenArticle from './sections/BeingSeenArticle';
 
 export default function App() {
   const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 767px)').matches);
@@ -78,6 +79,7 @@ export default function App() {
     'agency-bloom-applause': <AgencyBloomThird />,
     'agency-bloom-ideas': <AgencyBloomFourth />,
     'design-care': <DesignCareArticle />,
+    'being-seen': <BeingSeenArticle />,
     home: <Hero language={language} onNavigate={navigate} />,
     about: <About language={language} onNavigate={navigate} />,
     portfolio: <WebProjects language={language} onNavigate={navigate} />,

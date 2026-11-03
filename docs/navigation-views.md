@@ -11,7 +11,7 @@ The user authorized splitting the existing long page into independent content vi
 | `#XD` | Existing UX/UI section | Projects |
 | `#services` | Existing data projects | Projects |
 | `#contact` | Contact | Contact |
-| `#agency-bloom`, `#agency-bloom-value`, `#agency-bloom-applause`, `#agency-bloom-ideas`, `#design-care` | Independent article views | WeChat |
+| `#agency-bloom`, `#agency-bloom-value`, `#agency-bloom-applause`, `#agency-bloom-ideas`, `#design-care`, `#being-seen` | Independent article views | WeChat |
 | `#models`, `#quotes`, `#model-skills` | Corresponding Favorites heading and existing “Coming soon” status | Favorites |
 
 Native fragment links keep the existing GitHub Pages/subdirectory deployment and published deep links working without a new router dependency. `src/navigation.js` resolves supported fragments; unknown fragments do not replace the current view, and an unknown initial fragment falls back to Home. The skip link focuses the main content without adding a history entry.
