@@ -9,6 +9,8 @@ import wechat from '../assets/sidebar-icons/wechat.svg';
 import xiaohongshu from '../assets/sidebar-icons/xiaohongshu.svg';
 import { contactText } from './contact-content';
 import ContactMap from '../components/ContactMap';
+import chineseResume from '../assets/resumes/诸惠简历.pdf';
+import englishResume from '../assets/resumes/Annabelle_Zhu_Full_Stack_Resume_20261103.pdf';
 import './contact.css';
 
 const email = '0realannabelle0@gmail.com';
@@ -56,6 +58,10 @@ export default function Contact({ language = 'zh' }) {
               <span className="social-tile"><span className="social-glyph" style={{'--social-icon': `url("${icon}")`}}/></span><span className="social-tooltip">{label}</span>
             </button>)}
           </nav>
+        </div>
+        <div className="resume-downloads">
+          <a href={chineseResume} download="诸惠简历.pdf">{language === 'zh' ? '下载中文简历' : 'Download Chinese résumé'}</a>
+          <a href={englishResume} download="Annabelle_Zhu_Full_Stack_Resume_20261103.pdf">{language === 'zh' ? '下载英文简历' : 'Download English résumé'}</a>
         </div>
       </footer>
     </div>
