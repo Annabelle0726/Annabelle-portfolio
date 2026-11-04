@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Sidebar, { LanguageSwitch, useNavigationLanguage } from './components/Sidebar';
 import SidebarIcon from './components/SidebarIcon';
+import PortfolioQuestions from './components/PortfolioQuestions';
 import BackToTop from './components/BackToTop';
 import BackgroundMusic from './components/BackgroundMusic';
 import About from './sections/About';
@@ -116,6 +117,7 @@ export default function App() {
       <main id="main" tabIndex={-1} className={`content-views${route.view === 'home' ? ' is-home' : ''}`}>
         {views[route.view]}
       </main>
+      <PortfolioQuestions page={route.id} language={language} menuOpen={isMobile && menuOpen} navigate={navigate} />
       <BackToTop language={language} routeId={route.id} menuOpen={isMobile && menuOpen} />
       </div>
     </>

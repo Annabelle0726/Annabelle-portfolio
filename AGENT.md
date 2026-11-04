@@ -17,6 +17,8 @@
 
 ## Portfolio direction and content review
 
+- For portfolio Q&A (RAG), read [docs/portfolio-rag.md](docs/portfolio-rag.md) for the knowledge sources, rollout scope, session behavior, and verification status.
+- The user selected assistant direction B: a warm, conversational AI guide with an abstract blue/turquoise avatar. Keep assistant styling and behavior scoped to RAG; do not redesign the surrounding pages. Allow ordinary LLM conversation while grounding portfolio facts in registered public sources. Opening the assistant must not call the model or force the mobile keyboard.
 - Read [docs/portfolio-direction.md](docs/portfolio-direction.md) before planning visual or content changes. It records the direction discussed with the user and decisions still awaiting their input; it is not authorization to implement a redesign.
 - The user selected the jewel-blue, lake-turquoise and champagne-gold direction and wants content accessed through the sidebar instead of one continuous scrolling page. Follow [docs/visual-style.md](docs/visual-style.md) and `src/AGENTS.md` when working on the main React site. The current hash navigation switches content views; preserve that behavior.
 - For secondary sidebar views, follow [docs/section-header.md](docs/section-header.md): the existing About header is the visual baseline for the shared header.

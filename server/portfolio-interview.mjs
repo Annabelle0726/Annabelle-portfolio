@@ -1,0 +1,36 @@
+const card = (id, questions, zh, en) => ({id, questions, zh, en});
+export const interviewCards = {
+  'web-belay': [
+    card('belay-stack', ['作者用了什么框架实现的？','What framework did the team use to build Belay?'],
+      'Belay 的参考前端由 HTML、CSS 和 JavaScript 组成。以学习者发起请求为例，页面通过 JavaScript API 客户端访问 Python 后端；服务端用 FastAPI 提供接口，用 SQLAlchemy 访问关系数据库。模型调用也走后端，浏览器不用持有模型密钥。\n\n这是团队项目的技术栈。Annabelle 参与界面、会话保存与恢复，以及访问和预算约束，不能把整套架构都归为她个人的实现。',
+      'Belay’s reference frontend uses HTML, CSS and JavaScript. When a learner sends a request, a JavaScript API client calls the Python backend. FastAPI serves the endpoints and SQLAlchemy handles relational persistence. Model requests go through the backend, keeping provider keys out of the browser. Annabelle contributed to the interface, conversation recovery, access and budget controls within the team.'),
+    card('belay-restore', ['学生发完问题就刷新，怎么恢复会话，又避免重复提交？','If a student refreshes mid-request, how does recovery avoid submitting twice?'],
+      '启用会话保存后，客户端用已有的会话标识恢复服务端记录。如果刷新前有一轮还没完成，会话客户端先检查原请求的状态，再恢复历史；恢复分支不会重新提交同一道题。这样处理的关键是区分「读取已有结果」与「发起一次新调用」。',
+      'When saving is enabled, the client restores the server record using the existing conversation reference. For an unfinished turn, it checks the original request status and reloads the history instead of submitting the question again. Reading an existing result and starting another model call are distinct operations.'),
+    card('belay-quota', ['两个班同时调用模型，怎样避免把同一份额度花两次？','How do concurrent requests avoid spending the same model budget twice?'],
+      '预算逻辑在模型调用前预留额度，调用结束后再结算。团队的测试覆盖共享额度的并发预留、重复请求去重和余额不足时阻止下一次调用。面试时可以具体追问：如果先调用模型、再检查余额，两个同时通过的请求会发生什么？',
+      'The budget ledger reserves capacity before a model call and settles usage afterwards. The team tests concurrent reservations against a shared quota, duplicate reservations, and blocking a subsequent call when capacity is exhausted. Checking only after dispatch would let concurrent callers spend the same capacity.'),
+  ],
+  'web-agency-bloom': [
+    card('bloom-stack', ['微信小程序的页面、API 和数据存储分别用了什么？','What powers the mini program UI, API and storage?'],
+      '小程序端用 uni-app、Vue 3 和 TypeScript，构建目标是微信小程序。页面把请求交给 Python FastAPI 服务；后端负责模型调用，并将用户确认的卡片和记忆写入 SQLite 或 PostgreSQL。比如生成决策卡时，模型先给草稿，用户确认后才保存。',
+      'The client uses uni-app, Vue 3 and TypeScript and builds for WeChat. A Python FastAPI service handles model calls and persists confirmed cards and memories in SQLite or PostgreSQL. For a decision card, the model produces a draft first; saving the confirmed card is a separate step.'),
+    card('bloom-confirm', ['模型生成了一条错误记忆，系统怎么防止它直接写进长期记录？','What stops an incorrect model suggestion from becoming a long-term memory?'],
+      '模型给出的只是候选内容。长期记忆需要用户逐条确认，可以限定在单个探索，也可以设为全局。保存和用于回复是两个独立选择：即使已经保存，回复中使用该记忆的开关默认也是关闭的。',
+      'A model suggestion is a candidate. The person reviews each long-term memory and chooses a single exploration or global scope. Saving it and allowing it to inform replies are separate decisions; use in replies is off by default.'),
+    card('bloom-isolation', ['同时打开两个探索，未完成的回复和草稿怎么区分？','How are drafts and in-progress replies kept apart across explorations?'],
+      '每个探索有独立的会话工作区，草稿和进行中的回复按会话隔离。面试时可用一个具体情境验证：在探索 A 等待回复时切到 B，A 的回复应该仍属于 A；回到 A 可以接续，不应覆盖 B 的草稿。',
+      'Each exploration has its own conversation workspace. Drafts and in-flight replies are isolated by conversation. A useful test is switching to B while A is waiting: A’s response should stay in A, and returning to A should not overwrite B’s draft.'),
+  ],
+  'web-somnia': [
+    card('somnia-stack', ['从 Reverie 延续到 Somnia，用的是什么框架？','Which framework powers Somnia itself?'],
+      'Somnia 原应用的框架尚未核实。能确认的是它基于 Reverie 继续开发，Annabelle 参与首页、书籍界面、认证体验与移动端导航。这个作品集用 React 展示截图，不能据此断定 Somnia 本身也用了 React。',
+      'The original application’s framework has not been verified. Somnia builds on Reverie, and Annabelle worked on the homepage, book interfaces, authentication experience and mobile navigation. React renders this portfolio case study; that does not establish the original application’s stack.'),
+    card('somnia-touch', ['桌面卡片靠悬停展开，你会怎样验证手机也能读到同样的信息？','How would you test a hover-based card on a touch screen?'],
+      '案例录屏确认的是桌面悬停展开；它没有演示手机上的替代操作。如果作为面试测试题，我会在没有鼠标的手机上尝试打开、阅读和关闭详情，再用键盘验证焦点与内容顺序。这是建议的验证方法，不能当作 Somnia 已通过的测试。',
+      'The recording demonstrates desktop hover expansion. It does not demonstrate a touch equivalent. As a proposed test, try opening, reading and dismissing the detail on a touch-only phone, then verify focus and reading order with a keyboard. These are test suggestions, not verified Somnia results.'),
+    card('somnia-recommend', ['首页按阅读心情选书，能证明背后用了推荐算法吗？','Does the mood picker prove there is a recommendation algorithm?'],
+      '界面能证明的是读者可以选择具体故事氛围并看到书籍线索。它无法区分静态映射、规则排序或个性化模型。要回答实现方式，需要核对选书请求及结果生成代码。',
+      'The homepage shows mood choices and book cues. That evidence alone cannot distinguish a static mapping, ranking rules or a personalized model. Verifying the implementation requires the selection request and the code that produces its results.'),
+  ],
+};
