@@ -195,21 +195,22 @@ export default function PortfolioQuestions({page, language, menuOpen, navigate})
   const mode = !api || lastCompleted?.reply.offline
     ? t('作品资料模式 · 回答附案例出处','Case library · Answers link to the projects')
     : t('作品助手 · 项目事实附出处','Portfolio guide · Sources for project facts');
+  const title = t('作品问答','Ask about the work');
   return <div className="portfolio-qa">
     {!visible && <button type="button" className="qa-launch" ref={trigger} aria-haspopup="dialog" aria-expanded="false" onClick={() => setOpen(true)}>
-      <Avatar small/><span>{t('作品问答','Ask about the work')}</span>{unread && <span className="qa-unread">{t('新回复','New reply')}</span>}
+      <Avatar small/><span>{title}</span>{unread && <span className="qa-unread">{t('新回复','New reply')}</span>}
     </button>}
     {visible && <dialog className="qa-panel" ref={dialog} aria-labelledby="qa-heading" onCancel={event => {event.preventDefault();close();}} onKeyDown={event => {
       if (event.key === 'Escape') {event.preventDefault();event.stopPropagation();close();}
     }}>
       <header className="qa-header">
-        <Avatar/><div className="qa-heading"><h2 id="qa-heading" tabIndex="-1">{t('一起聊聊作品','Let’s talk about the work')}</h2><span>{mode}</span></div>
+        <Avatar/><div className="qa-heading"><h2 id="qa-heading" tabIndex="-1">{title}</h2><span>{mode}</span></div>
         <button type="button" className="qa-icon-button" aria-label={t('新对话','New chat')} title={t('新对话','New chat')} onClick={() => {
           if (session.turns.length || session.draft || pending !== null) setConfirmReset(value => !value); else reset();
         }}><Icon name="new"/></button>
         <button type="button" className="qa-icon-button" aria-label={t('收起问答','Minimize chat')} onClick={close}><Icon name="close"/></button>
       </header>
-      <div className="qa-context"><span/>{t('正在看','Viewing')} · {pageNames[page][zh ? 0 : 1] || pageNames[page][0]}</div>
+      <div className="qa-context">{t('正在看','Viewing')}<strong>{pageNames[page][zh ? 0 : 1] || pageNames[page][0]}</strong></div>
       <div className="qa-log" ref={log} role="log" aria-label={t('对话记录','Conversation')} aria-live="polite" aria-busy={pending !== null} aria-relevant="additions text" onScroll={event => {
         const element = event.currentTarget;
         scrollPosition.current = element.scrollTop;
@@ -249,7 +250,7 @@ export default function PortfolioQuestions({page, language, menuOpen, navigate})
         {confirmReset && <div className="qa-reset" role="group" aria-label={t('确认新对话','Confirm new chat')}>
           <p>{t('开始新对话？这段聊天和草稿会被清除。','Start fresh? This chat and draft will be cleared.')}</p><div><button type="button" onClick={reset}>{t('开始新对话','Start fresh')}</button><button type="button" onClick={() => setConfirmReset(false)}>{t('继续聊','Keep chatting')}</button></div>
         </div>}
-        {session.turns.length > 0 && <button type="button" className="qa-text-button qa-page-prompts" aria-expanded={samples} onClick={() => {setSamples(value => !value);latest();}}>{samples ? t('收起本页问题','Hide page questions') : t('看看本页问题','Explore page questions')}</button>}
+        {session.turns.length > 0 && <button type="button" className="qa-text-button qa-page-prompts" onClick={() => {setSamples(value => !value);latest();}} aria-expanded={samples}><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><path d="M4 5h16v12H9l-5 4zM8 9h8m-8 4h5"/></svg>{samples ? t('收起本页问题','Hide page questions') : t('看看本页问题','Explore page questions')}</button>}
         <form className="qa-input-wrap" onSubmit={event => {event.preventDefault();send(session.draft);}}>
           <textarea ref={input} rows="1" maxLength={2000} aria-label={t('你的问题','Your question')} placeholder={t('你想聊些什么？','What’s on your mind?')} value={session.draft} onChange={event => setSession(previous => ({...previous,draft:event.target.value}))} onKeyDown={event => {
             if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing && event.keyCode !== 229) {event.preventDefault();if (pending === null) send(session.draft);}
