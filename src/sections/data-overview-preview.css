@@ -1,22 +1,22 @@
-.data-preview { padding:0; border:1px solid color-mix(in srgb,var(--color-champagne-gold) 65%,transparent); border-radius:0; background:var(--color-paper); overflow:hidden; }
+.data-card .data-preview { padding:0; border:1px solid color-mix(in srgb,var(--color-champagne-gold) 65%,transparent); border-radius:0; background:var(--color-paper); overflow:hidden; }
 .data-card:nth-child(2) .data-preview { background:var(--color-paper); }
-.data-preview-topline { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:14px 16px 10px; font-size:10px; letter-spacing:.08em; color:var(--color-text-secondary); }
-.data-preview-options { display:flex; gap:6px; padding:0 12px 10px; flex-wrap:wrap; }
+.data-preview-topline { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:10px 12px 6px; font-size:10px; letter-spacing:.08em; color:var(--color-text-secondary); }
+.data-preview-options { display:flex; gap:6px; padding:0 10px 6px; flex-wrap:wrap; }
 .data-preview button { border:1px solid var(--color-border); background:transparent; color:var(--color-sapphire); min-height:44px; padding:7px 12px; cursor:pointer; font:inherit; font-size:12px; transition:background-color var(--motion-quick) var(--ease-ui),color var(--motion-quick) var(--ease-ui); touch-action:manipulation; }
 .data-preview button[aria-pressed="true"] { color:var(--color-surface); background:var(--color-sapphire); border-color:var(--color-sapphire); }
-.data-preview-image { display:flex; align-items:center; justify-content:center; height:260px; overflow:hidden; padding:8px; background:var(--color-surface); }
+.data-preview-image { display:flex; align-items:center; justify-content:center; height:240px; overflow:hidden; padding:4px; background:var(--color-surface); }
 .data-preview-image img { width:100%; height:100%; object-fit:contain; }
-.data-preview-caption { padding:14px 16px 18px; min-height:104px; }
+.data-preview-caption { padding:10px 12px 12px; min-height:76px; }
 .data-preview h3 { font:500 16px/1.5 Georgia,'Songti SC',serif; margin:0 0 6px; }
 .data-preview p { font-size:12px; line-height:1.8; margin:0; color:var(--color-text-secondary); }
 .data-preview :focus-visible { outline:2px solid var(--color-sapphire); outline-offset:-3px; }
 .data-card .data-factor-preview { padding:0; background:var(--color-paper); }
-.data-card .data-factor-preview .data-energy-cover { border-radius:0; padding:12px 16px 20px; min-height:390px; gap:18px; }
+.data-card .data-factor-preview .data-energy-cover { border-radius:0; padding:8px 12px 14px; min-height:320px; gap:12px; }
 .data-factor-preview .data-energy-factors { width:100%; display:flex; gap:6px; justify-content:center; flex-wrap:wrap; }
 .data-factor-preview .data-energy-factors button { display:flex; align-items:center; gap:6px; border-color:color-mix(in srgb,var(--color-surface) 45%,transparent); color:var(--color-surface); }
 .data-factor-preview .data-energy-factors button[aria-pressed="true"] { background:var(--color-surface); color:var(--color-sapphire); border-color:var(--color-surface); }
 .data-card .data-factor-preview .data-energy-factors button small { color:inherit; }
-.data-factor-copy { width:100%; min-height:100px; text-align:center; }
+.data-factor-copy { width:100%; min-height:76px; text-align:center; }
 .data-factor-copy h3,.data-factor-copy p { color:var(--color-surface); }
 .data-factor-copy p { max-width:32em; margin:auto; }
 .data-factor-preview .data-energy-orbits i { opacity:.35; transition:opacity var(--motion-quick) var(--ease-ui); }
@@ -26,9 +26,9 @@
   .data-factor-preview button:not([aria-pressed="true"]):hover { background:color-mix(in srgb,var(--color-surface) 15%,transparent); }
 }
 @media(max-width:767px) {
-  .data-preview-image { height:230px; }
-  .data-preview-caption { min-height:108px; }
-  .data-card .data-factor-preview .data-energy-cover { min-height:360px; padding:12px 12px 20px; }
+  .data-preview-image { height:210px; }
+  .data-preview-caption { min-height:76px; }
+  .data-card .data-factor-preview .data-energy-cover { min-height:300px; padding:8px 10px 14px; }
   .data-factor-preview .data-energy-factors button { padding:7px 9px; }
 }
 @media(prefers-reduced-motion:reduce) {
