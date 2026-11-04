@@ -3,16 +3,15 @@ import SectionHeader from '../components/SectionHeader';
 import ProjectIntroLink from '../components/ProjectIntroLink';
 import ProjectPagination from '../components/ProjectPagination';
 import SomniaCase from './SomniaCase';
-import BelaySessionDemo from './BelaySessionDemo';
 import opening from '../assets/bloom-case/opening.webp';
 import concerns from '../assets/bloom-case/concerns.webp';
 import preferences from '../assets/bloom-case/preferences.webp';
 import progress from '../assets/bloom-case/progress.webp';
 import poster from '../assets/bloom-case/demo-poster.webp';
 import demo from '../assets/bloom-case/demo.mp4';
-import belayPreview from '../assets/belay-case/success.webp';
-import somniaHome from '../assets/somnia-case/home.webp';
-import somniaLibrary from '../assets/somnia-case/library.webp';
+import BelaySessionDemo from './BelaySessionDemo';
+import BloomOpening from './BloomOpening';
+import { SomniaShelf } from './WebOverviewDemos';
 import overviewRibbon from '../assets/web-overview/blue-silk-gold-bell.webp';
 import './web-projects.css';
 import PhoneMockup, { PhoneStage } from '../components/PhoneMockup';
@@ -61,16 +60,18 @@ function BelayConnectorRibbon() {
   </svg>;
 }
 
-function ProjectPreview({ project, en }) {
-  const belay = project.id === 'web-belay';
-  return <div className={`web-preview-stage ${belay ? 'web-preview-belay' : 'web-preview-somnia'}`}>
-    <div className="web-preview-window">
-      <img src={belay ? belayPreview : somniaHome}
-        alt={belay ? (en ? 'Belay learning workspace with code, results, and AI feedback' : 'Belay 学习工作区：代码、运行结果与 AI 反馈') : (en ? 'Somnia Library homepage and reading discovery' : 'Somnia Library 首页与选书引导')}
-        width={belay ? 1900 : 1600} height={belay ? 1460 : 746} loading="lazy" decoding="async" />
+function BelayOverview({ en }) {
+  const [open, setOpen] = useState(false);
+  return <section className="web-project-cover belay-overview">
+    <div className="belay-proof" hidden={open}>
+      <div className="proof-code"><small>BELAY　/　practice.py</small><pre><code>group = df.groupby(<b>"category"</b>)<br />group["value"].mean()</code></pre></div>
+      <div className="proof-output"><small>OUTPUT</small><samp>A　3.0<br />B　8.0</samp></div>
     </div>
-    {!belay && <img className="web-preview-inset" src={somniaLibrary} alt={en ? 'Somnia personal bookshelf' : 'Somnia 个人书架界面'} width="1600" height="741" loading="lazy" decoding="async" />}
-  </div>;
+    <button className="proof-toggle" type="button" aria-expanded={open} aria-controls="belay-overview-workspace" onClick={() => setOpen(!open)}>
+      {open ? (en ? 'Close workspace' : '收起练习台') : (en ? 'Try the workspace' : '打开练习台')} <span aria-hidden="true">{open ? '↑' : '↗'}</span>
+    </button>
+    <div hidden={!open} id="belay-overview-workspace">{open && <BelaySessionDemo en={en} detail />}</div>
+  </section>;
 }
 
 function ProjectList({ en, t, onNavigate }) {
@@ -107,7 +108,7 @@ function ProjectList({ en, t, onNavigate }) {
     list.addEventListener('focusin', interact);
     return () => { observer.disconnect(); cancel(); media.removeEventListener('change', stop); list.removeEventListener('pointerdown', interact); list.removeEventListener('focusin', interact); };
   }, []);
-  return <div className="web-project-list" ref={root}>{projects.map((p, i) => <article key={p.id} className={`web-project-row${i === 1 ? ' web-project-row-reverse' : ''}`} >{i === 1 && <BelayConnectorRibbon />}{p.id === 'web-belay' ? <BelaySessionDemo en={en} /> : <a className="web-project-cover" href={'#' + p.id} onClick={onNavigate} aria-label={t('查看 ', 'Explore ') + p.name}>{i === 0 ? <PhoneStage><PhoneMockup src={opening} variant="back" tone="dark" alt={t('Agency Bloom 生活探索引导：日出远山与向前的选择', 'Agency Bloom life exploration with a sunrise landscape')} /><PhoneMockup src={progress} variant="front" alt={t('Agency Bloom 下一步行动卡与尝试进展记录', 'Agency Bloom next-step action card and progress journal')} /></PhoneStage> : <ProjectPreview project={p} en={en} />}</a>}<div className="web-project-summary"><p className="web-kicker">0{i + 1} / {en ? p.type[1] : p.type[0]}</p><h2><a href={'#' + p.id} onClick={onNavigate}>{p.name}</a></h2><p>{en ? p.summary[1] : p.summary[0]}</p><ProjectIntroLink href={'#' + p.id} onNavigate={onNavigate} en={en} projectName={p.name} /><div className="web-mobile-project-art" aria-hidden="true"><img src={overviewRibbon} alt="" width="1024" height="1536" /></div></div></article>)}</div>;
+  return <div className="web-project-list" ref={root}>{projects.map((p, i) => <article key={p.id} className={`web-project-row${i === 1 ? ' web-project-row-reverse' : ''}`} >{i === 1 && <BelayConnectorRibbon />}{p.id === 'web-belay' ? <BelayOverview en={en} /> : i === 0 ? <BloomOpening en={en} onNavigate={onNavigate} /> : <SomniaShelf en={en} />}<div className="web-project-summary"><p className="web-kicker">0{i + 1} / {en ? p.type[1] : p.type[0]}</p><h2><a href={'#' + p.id} onClick={onNavigate}>{p.name}</a></h2><p>{en ? p.summary[1] : p.summary[0]}</p><ProjectIntroLink href={'#' + p.id} onNavigate={onNavigate} en={en} projectName={p.name} /><div className="web-mobile-project-art" aria-hidden="true"><img src={overviewRibbon} alt="" width="1024" height="1536" /></div></div></article>)}</div>;
 }
 
 function BloomCase({ en, onNavigate }) {
