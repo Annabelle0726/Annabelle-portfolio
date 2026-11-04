@@ -27,7 +27,7 @@
 .uxui-preview-bar > span > span { padding: 0 8px; color: var(--color-imperial-gold); }
 .uxui-preview-bar button, .uxui-dialog-bar button { border: 0; background: transparent; color: var(--color-primary); min-height: 36px; padding: 6px 8px; white-space: nowrap; }
 .uxui-image-button { display: block; width: 100%; padding: 0; border: 0; background: var(--color-surface); cursor: zoom-in; }
-.uxui-image-button img { display: block; width: 100%; height: auto; max-height: 600px; object-fit: contain; }
+.uxui-image-button img, .uxui-preview > img { display: block; width: 100%; height: auto; max-height: 600px; object-fit: contain; }
 .uxui-preview figcaption { border-top: 1px solid var(--color-border); flex-wrap: wrap; }
 .uxui-counter { margin-left: 10px; font-variant-numeric: tabular-nums; color: var(--color-primary); }
 .uxui-screen-options, .uxui-filters { display: flex; gap: 6px; flex-wrap: wrap; }
@@ -90,3 +90,4 @@ html:has(.uxui-image-dialog[open]) { overflow: hidden; }
 .uxui-highlights > div > p:last-child { margin: 0; font-size: 13px; line-height: 1.85; color: var(--color-text-secondary); }
 @media (max-width: 900px) { .uxui-highlights { grid-template-columns: 1fr; gap: 24px; } }
 @media (max-width: 767px) { .uxui-screen-options button { flex: 1 1 calc(50% - 4px); } }
+.uxui-overview-return { display: inline-flex; gap: 6px; align-items: center; min-height: 44px; color: var(--color-primary); font-size: 14px; }

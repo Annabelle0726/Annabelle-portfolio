@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import SectionHeader from '../components/SectionHeader';
 import ProjectIntroLink from '../components/ProjectIntroLink';
 import ProjectPagination from '../components/ProjectPagination';
-import { destinationsFor } from './uxui-demo';
+import TravelSelector from './TravelSelector';
 import cupcakesOverview from '../assets/uxui/cupcakes-overview.webp';
 import cupcakesBefore from '../assets/uxui/cupcakes-before.webp';
 import cupcakesAfter from '../assets/uxui/cupcakes-after.webp';
@@ -69,7 +69,6 @@ function ProjectDetail({ project, language }) {
   const en = language === 'en';
   const [screenIndex, setScreenIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
-  const [preference, setPreference] = useState('all');
   const [discovery, setDiscovery] = useState(0);
   const dialog = useRef(null);
   const screen = project.screens[screenIndex];
@@ -79,23 +78,24 @@ function ProjectDetail({ project, language }) {
     [['此刻的心情', 'A mood I’m in'], ['先想想此刻想感受到什么，再缩小找书的方向。', 'Choose how you want to feel before narrowing your search.']],
     [['一点新鲜感', 'Something different'], ['暂时离开熟悉的书架，给不同的故事一个机会。', 'Step outside your usual shelf and make room for a different story.']],
   ];
+  const canEnlarge = project.id !== 'XD-cupcakes';
+  const previewImage = <img src={screen.src} alt={t(screen.alt)} width={project.id === 'XD-reverie' ? (screenIndex === 0 ? 1808 : 1902) : 1348} height={project.id === 'XD-reverie' ? (screenIndex === 0 ? 1031 : 887) : 926}/>;
   return <article className="uxui-project" aria-labelledby="uxui-project-title" tabIndex={-1}>
     <figure className="uxui-preview">
-      <div className="uxui-preview-bar"><span>{project.name} <span aria-hidden="true">/</span> {t(screen.label)}</span><button type="button" onClick={() => dialog.current.showModal()}>{en ? 'Enlarge image' : '放大图片'} <span aria-hidden="true">↗</span></button></div>
-      <button type="button" className="uxui-image-button" onClick={() => dialog.current.showModal()} aria-label={en ? 'Enlarge current screenshot' : '放大当前截图'}><img src={screen.src} alt={t(screen.alt)} width={project.id === 'XD-reverie' ? (screenIndex === 0 ? 1808 : 1902) : 1348} height={project.id === 'XD-reverie' ? (screenIndex === 0 ? 1031 : 887) : 926}/></button>
+      <div className="uxui-preview-bar"><span>{project.name} <span aria-hidden="true">/</span> {t(screen.label)}</span>{canEnlarge && <button type="button" onClick={() => dialog.current.showModal()}>{en ? 'Enlarge image' : '放大图片'} <span aria-hidden="true">↗</span></button>}</div>
+      {canEnlarge ? <button type="button" className="uxui-image-button" onClick={() => dialog.current.showModal()} aria-label={en ? 'Enlarge current screenshot' : '放大当前截图'}>{previewImage}</button> : previewImage}
       <figcaption><span>{en ? 'Screen preview' : '界面预览'} <span className="uxui-counter">0{screenIndex + 1} / 0{project.screens.length}</span></span><div className="uxui-screen-options" role="group" aria-label={en ? 'Choose a screenshot' : '选择截图'}>{project.screens.map((item, index) => <button type="button" key={item.src} aria-pressed={screenIndex === index} onClick={() => setScreenIndex(index)}>{t(item.label)}</button>)}</div></figcaption>
     </figure>
     {project.highlights && <div className="uxui-highlights" aria-label={en ? 'Product experience' : '产品体验'}>{project.highlights.map((item, index) => <div key={item.title[1]}><p className="uxui-kicker">0{index + 1}</p><h2>{t(item.title)}</h2><p>{t(item.text)}</p></div>)}</div>}
     <div className="uxui-details">
       <div className="uxui-story"><h2>{en ? 'About the project' : '项目介绍'}</h2><p>{t(project.description)}</p><dl><dt>{en ? 'My involvement' : '我的参与'}</dt><dd>{t(project.role)}</dd><dt>{en ? 'Interaction focus' : '交互重点'}</dt><dd>{t(project.focus)}</dd></dl></div>
-      <div className="uxui-demo"><p className="uxui-kicker">{en ? 'TRY THE INTERACTION' : '动手体验'}</p>
+      {project.id !== 'XD-travel' && <div className="uxui-demo"><p className="uxui-kicker">{en ? 'TRY THE INTERACTION' : '动手体验'}</p>
         {project.id === 'XD-cupcakes' && <><h2>{en ? 'A small, sweet surprise' : '揭晓一份小惊喜'}</h2><p>{en ? 'Click to move from anticipation to the revealed flavor' : '点一下，让等待变成清楚可见的反馈'}</p><div className="uxui-flavor" aria-live="polite"><span aria-hidden="true">{revealed ? '✦' : '?'}</span><strong>{revealed ? 'S’mores' : en ? 'What’s inside?' : '今天会是什么口味？'}</strong><small>{revealed ? (en ? 'The flavor is revealed' : '口味已经揭晓') : (en ? 'A flavor worth discovering' : '留一点好奇，等你发现')}</small></div><button className="uxui-action" type="button" onClick={() => { setRevealed(!revealed); setScreenIndex(revealed ? 1 : 2); }}>{revealed ? (en ? 'Try again' : '再体验一次') : (en ? 'Reveal the flavor' : '揭晓今日口味')} <span aria-hidden="true">→</span></button></>}
         {project.id === 'XD-reverie' && <><h2>{en ? 'Where would you begin?' : '你想从哪里开始？'}</h2><p>{en ? 'Explore the intent behind the three discovery paths' : '选一条路径，看看它如何引导阅读意图'}</p><div className="uxui-choice-list" role="group" aria-label={en ? 'Discovery starting point' : '阅读发现起点'}>{paths.map((path, index) => <button type="button" key={index} aria-pressed={discovery === index} onClick={() => { setDiscovery(index); setScreenIndex(1); }}><span>0{index + 1}</span>{t(path[0])}<span aria-hidden="true">{discovery === index ? '✓' : '↗'}</span></button>)}</div><p className="uxui-demo-result" role="status">{t(paths[discovery][1])}</p></>}
-        {project.id === 'XD-travel' && <><h2>{en ? 'What kind of escape?' : '这次，想去哪里？'}</h2><p>{en ? 'Choose a preference to narrow six sample destinations' : '选一种偏好，筛选六个示例目的地'}</p><div className="uxui-filters" role="group" aria-label={en ? 'Travel preference' : '旅行偏好'}>{[['all', ['全部', 'All']], ['beach', ['海滩', 'Beach']], ['city', ['城市', 'City']], ['mountains', ['山野', 'Mountains']]].map(([key, label]) => <button type="button" key={key} aria-pressed={preference === key} onClick={() => setPreference(key)}>{t(label)}</button>)}</div><p className="uxui-result-count" role="status">{destinationsFor(preference).length} {en ? 'destinations' : '个目的地'}</p><ul className="uxui-destinations">{destinationsFor(preference).map(place => <li key={place.name}><strong>{place.name}</strong><span>{place.location}</span></li>)}</ul></>}
         <p className="uxui-demo-note">{en ? 'Portfolio interaction demo. Screenshots document the original interface; this local example illustrates the flow.' : '作品集交互演示：截图展示原界面，下方示例用于体验操作流程'}</p>
-      </div>
+      </div>}
     </div>
-    <dialog ref={dialog} className="uxui-image-dialog" aria-label={en ? 'Enlarged screenshot' : '截图大图'} onClick={event => { if (event.target === event.currentTarget) dialog.current.close(); }}><div className="uxui-dialog-bar"><span>{project.name} · {t(screen.label)}</span><button type="button" autoFocus onClick={() => dialog.current.close()}>{en ? 'Close' : '关闭'} <span aria-hidden="true">×</span></button></div><img src={screen.src} alt={t(screen.alt)}/></dialog>
+    {canEnlarge && <dialog ref={dialog} className="uxui-image-dialog" aria-label={en ? 'Enlarged screenshot' : '截图大图'} onClick={event => { if (event.target === event.currentTarget) dialog.current.close(); }}><div className="uxui-dialog-bar"><span>{project.name} · {t(screen.label)}</span><button type="button" autoFocus onClick={() => dialog.current.close()}>{en ? 'Close' : '关闭'} <span aria-hidden="true">×</span></button></div><img src={screen.src} alt={t(screen.alt)}/></dialog>}
   </article>;
 }
 
@@ -105,6 +105,10 @@ export default function DesignPortfolio({ language = 'zh', projectId = 'XD', onN
   const project = projects.find(item => item.id === projectId) || projects[0];
   return <section id={project.id} className="uxui-page" lang={en ? 'en' : 'zh-CN'}><div className="uxui-inner">
     <SectionHeader as="h1" titleId="uxui-project-title" eyebrow="UX / UI DESIGN" title={project.name} subtitle={pick(project.subtitle, language)}/>
+    {project.id === 'XD-travel' && <TravelSelector en={en} />}
+    <a className="uxui-overview-return" href="#XD" onClick={onNavigate}>
+      <span aria-hidden="true">← </span>{en ? 'All UX/UI projects' : '全部 UX/UI 作品'}
+    </a>
     <nav className="uxui-project-nav" aria-label={en ? 'UX/UI projects' : 'UX/UI 作品'}>{projects.map((item, index) => <a key={item.id} href={`#${item.id}`} onClick={onNavigate} aria-current={project.id === item.id ? 'page' : undefined}><img src={item.screens[0].src} alt=""/><span><small>0{index + 1} / {pick(item.category, language)}</small><strong>{item.name}</strong></span><span className="uxui-nav-arrow" aria-hidden="true">↗</span></a>)}</nav>
     <ProjectDetail key={project.id} project={project} language={language}/>
     <ProjectPagination routeId={project.id} en={en} onNavigate={onNavigate} />
