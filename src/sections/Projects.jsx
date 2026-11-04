@@ -1,17 +1,12 @@
 import React, { useRef } from 'react';
 import SectionHeader from '../components/SectionHeader';
+import DataOverviewPreview from './DataOverviewPreview';
 import ProjectIntroLink from '../components/ProjectIntroLink';
 import ProjectPagination from '../components/ProjectPagination';
 import { dataProjects, localize } from './data-projects';
 import './data-projects.css';
 import './data-ribbon.css';
 
-function EnergyCover({ en }) {
- return <div className="data-energy-cover"><span className="data-cover-label">ENERGY / PLACE / POSSIBILITY</span><div className="data-energy-orbits" aria-hidden="true"><i/><i/><i/><span>↗</span></div><div className="data-energy-factors">{(en ? ['Energy','Location','Cost'] : ['能源条件','地域差异','成本约束']).map((label,i)=><span key={label}><small>0{i+1}</small>{label}</span>)}</div><small>{en ? 'Analytical framework' : '分析框架'}</small></div>;
-}
-function Cover({ project, en }) {
- return project.cover ? <div className="data-cover"><img src={project.cover} alt={localize(project.coverAlt,en?'en':'zh')}/><span className="data-cover-label">{en ? 'FROM THE ORIGINAL ANALYSIS' : '原始分析图表'}</span></div> : <EnergyCover en={en}/>;
-}
 function Figure({ figure, language }) {
  const dialog=useRef(null), en=language==='en', label=localize(figure.label,language);
  return <figure className="data-figure"><button type="button" onClick={()=>dialog.current.showModal()} aria-label={en?'Enlarge: '+label:'放大：'+label}><img loading="lazy" src={figure.src} alt={label}/></button><figcaption>{label}<button type="button" onClick={()=>dialog.current.showModal()}>{en?'Enlarge ↗':'放大查看 ↗'}</button></figcaption><dialog className="data-image-dialog" ref={dialog} aria-label={label} onClick={event=>{if(event.target===event.currentTarget)dialog.current.close();}}><div><span>{label}</span><button type="button" autoFocus onClick={()=>dialog.current.close()}>{en?'Close ×':'关闭 ×'}</button></div><img src={figure.src} alt={label}/></dialog></figure>;
@@ -31,7 +26,7 @@ export default function Projects({language='zh',projectId='services',onNavigate}
  </> : <>
  <div className="data-project-grid">{dataProjects.map((item,i)=><article key={item.id} className={'data-card'+(i===0?' data-featured':'')}>
    <header className="data-card-heading"><p className="data-kicker">{item.number} / {t(item.category)}</p><h2><a href={'#'+item.id} onClick={onNavigate}>{t(item.title)}</a></h2></header>
-   <a className="data-card-visual" href={'#'+item.id} onClick={onNavigate} aria-label={(en?'Explore ':'查看')+t(item.title)}><Cover project={item} en={en}/></a>
+   <DataOverviewPreview project={item} language={language} onNavigate={onNavigate} />
    <div className="data-card-body"><p>{t(item.summary)}</p><span className="data-tools">{item.tools}</span><ProjectIntroLink href={'#' + item.id} onNavigate={onNavigate} en={en} projectName={t(item.title)} /></div>
  </article>)}</div>
  </>}

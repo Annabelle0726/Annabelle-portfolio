@@ -107,6 +107,32 @@ class ProjectNavigation(unittest.TestCase):
                 page.locator('.qa-launch').click()
                 expect(page.locator('.qa-turn')).to_have_count(2)
 
+    def test_data_overview_previews_can_be_explored_without_leaving_the_page(self):
+        for width in (390,1440):
+            with self.subTest(width=width):
+                page = self.browser.new_page(viewport={'width':width,'height':840})
+                self.addCleanup(page.close)
+                page.goto(f'http://127.0.0.1:{self.server.server_port}/#services')
+                cards = page.locator('.data-card')
+                for index in (0,1):
+                    preview = cards.nth(index).locator('.data-preview')
+                    initial = preview.locator('img').get_attribute('src')
+                    preview.locator('.data-preview-options button').nth(1).click()
+                    expect(preview.locator('.data-preview-options button').nth(1)).to_have_attribute('aria-pressed','true')
+                    self.assertNotEqual(preview.locator('img').get_attribute('src'),initial)
+                    preview.locator('.data-preview-options button').nth(2).click()
+                    expect(preview.locator('.data-preview-options button').nth(2)).to_have_attribute('aria-pressed','true')
+                    self.assertTrue(page.url.endswith('#services'))
+                energy = cards.nth(2)
+                energy.get_by_role('button',name='03 成本约束').click()
+                expect(energy.locator('.data-factor-copy')).to_contain_text('成本')
+                self.assertTrue(page.url.endswith('#services'))
+                self.assertTrue(page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
+                energy.locator('.project-intro-link').click()
+                page.wait_for_selector('#data-energy')
+                expect(page.locator('.data-preview')).to_have_count(0)
+                expect(page.locator('.data-chapters section')).to_have_count(3)
+
     def test_follow_source_once_preserving_history_and_other_project_links(self):
         page = self.overview(390)
         page.locator('.qa-launch').click()
