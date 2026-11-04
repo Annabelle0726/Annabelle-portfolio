@@ -6,7 +6,7 @@
 .belay-page button:focus-visible,.belay-page a:focus-visible,.belay-page summary:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 5px; }
 .belay-page h2,.belay-page h3 { color: var(--color-text); font-family: Georgia,'Songti SC','STSong',SimSun,serif; font-weight: 500; }
 .belay-page p { font-size: 14px; line-height: 1.85; margin: 0 0 14px; }
-.belay-opening { position: relative; isolation: isolate; display: grid; grid-template-rows: auto 1fr auto; min-height: min(820px,calc(100dvh - 56px)); }
+.belay-opening { position: relative; isolation: isolate; display: grid; grid-template-rows: auto 1fr auto; min-height: 0; }
 .belay-opening > .section-header { position: relative; z-index: 2; }
 .belay-opening .section-eyebrow { flex-wrap: wrap; }
 .belay-hero { display: grid; grid-template-columns: minmax(0,.82fr) minmax(0,1.18fr); gap: clamp(26px,3vw,44px); align-items: center; padding: 20px 0 30px; }

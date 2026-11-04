@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import BelaySessionDemo from './BelaySessionDemo';
 import SectionHeader from '../components/SectionHeader';
 import ProjectPagination from '../components/ProjectPagination';
 import successImage from '../assets/belay-case/success.webp';
@@ -111,13 +112,10 @@ function Ribbon({ host }) {
 export default function BelayCase({ language = 'zh', onNavigate }) {
   const en = language === 'en';
   const t = (zh, english) => en ? english : zh;
-  const [scene, setScene] = useState(0);
   const [outcome, setOutcome] = useState('success');
   const [quoteOpen, setQuoteOpen] = useState(false);
   const [image, setImage] = useState(null);
   const opening = useRef(null), paths = useRef(null);
-  const sceneLabels = [t('写代码', 'Write code'), t('看结果', 'Check results'), t('继续追问', 'Ask further')];
-  const sceneCaptions = [t('练习、代码与反馈，在同一工作区', 'Exercise, code, and feedback in one workspace'), t('查看输出与练习检查结果', 'Inspect the output and exercise checks'), t('从运行成功，继续追问原理', 'Move from a successful run to understanding why')];
   const goToPaths = () => {
     paths.current.focus({ preventScroll: true });
     paths.current.scrollIntoView({ block: 'start', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
@@ -133,13 +131,7 @@ export default function BelayCase({ language = 'zh', onNavigate }) {
           <p className="belay-meta">{t('学习工具 · 协作开发 · 数据科学', 'Learning tools · Collaborative development · Data science')}</p>
           <div className="belay-actions"><button type="button" className="belay-explore" onClick={goToPaths}><GemArrow />{t('探索学习场景', 'Explore the learning scenes')}</button><button type="button" className="belay-text-action" onClick={() => setImage({ src: successImage, label: t('完整学习工作区', 'Full learning workspace') })}><GemArrow />{t('查看完整界面', 'View the full workspace')}</button></div>
         </div>
-        <div className="belay-stage">
-          <div className="belay-scene-controls" role="group" aria-label={t('学习场景', 'Learning scenes')}>{sceneLabels.map((label, index) => <button type="button" key={index} aria-pressed={scene === index} aria-controls="belay-scene-panel" onClick={() => setScene(index)}><span aria-hidden="true">0{index + 1}</span>{label}</button>)}</div>
-          <div id="belay-scene-panel" aria-live="polite" aria-atomic="true">
-          <div className={`belay-stage-media belay-scene-${scene}`}><Screen eager showZoom={false} crop={scene === 1 ? crops.result : scene === 2 ? crops.feedback : [0, .22, 1, .52]} label={sceneCaptions[scene]} onZoom={setImage} /></div>
-          </div>
-          <span className="belay-stage-label">{t('代码 · 运行 · 反馈', 'CODE · RUN · REFLECT')}</span>
-        </div>
+        <div className="belay-live-stage"><BelaySessionDemo en={en} detail /></div>
       </div>
     </div>
 
