@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Icon from './SidebarIcon';
+import SidebarPortrait from './SidebarPortrait';
 import useNavigationIndicator from '../hooks/useNavigationIndicator';
 import brandMark from '../assets/brand-mark.svg';
 import instagram from '../assets/sidebar-icons/instagram.svg';
@@ -129,9 +130,7 @@ export default function Sidebar({ isMobile, isOpen, activeSection, activeGroup, 
             {['wechat','xiaohongshu'].map(key => <button type="button" key={key} className={`social-item social-${key}`} aria-label={t[key]} aria-haspopup="dialog" onClick={event => openAccount(key, event)}><span className="social-tile"><span className="social-glyph" style={{ '--social-icon': `url("${accounts[key].icon}")` }}/></span><span className="social-tooltip">{t[key]}</span></button>)}
           </div>
         </div>
-        <div className="sidebar-portrait-frame">
-          <img className="sidebar-portrait" src="assets/img/头像.png" width="64" height="80" alt="Annabelle Zhu" fetchPriority="high"/>
-        </div>
+        <SidebarPortrait language={language} onNavigate={onClose} />
       </div>
       <nav ref={nav} id="navbar" className="sidebar-navigation" aria-label={t.nav}>
         <span ref={indicator} className="sidebar-selection" aria-hidden="true"/>
