@@ -3,6 +3,7 @@ import SectionHeader from '../components/SectionHeader';
 import ProjectIntroLink from '../components/ProjectIntroLink';
 import ProjectPagination from '../components/ProjectPagination';
 import SomniaCase from './SomniaCase';
+import BelaySessionDemo from './BelaySessionDemo';
 import opening from '../assets/bloom-case/opening.webp';
 import concerns from '../assets/bloom-case/concerns.webp';
 import preferences from '../assets/bloom-case/preferences.webp';
@@ -106,7 +107,7 @@ function ProjectList({ en, t, onNavigate }) {
     list.addEventListener('focusin', interact);
     return () => { observer.disconnect(); cancel(); media.removeEventListener('change', stop); list.removeEventListener('pointerdown', interact); list.removeEventListener('focusin', interact); };
   }, []);
-  return <div className="web-project-list" ref={root}>{projects.map((p, i) => <article key={p.id} className={`web-project-row${i === 1 ? ' web-project-row-reverse' : ''}`} >{i === 1 && <BelayConnectorRibbon />}<a className="web-project-cover" href={'#' + p.id} onClick={onNavigate} aria-label={t('查看 ', 'Explore ') + p.name}>{i === 0 ? <PhoneStage><PhoneMockup src={opening} variant="back" tone="dark" alt={t('Agency Bloom 生活探索引导：日出远山与向前的选择', 'Agency Bloom life exploration with a sunrise landscape')} /><PhoneMockup src={progress} variant="front" alt={t('Agency Bloom 下一步行动卡与尝试进展记录', 'Agency Bloom next-step action card and progress journal')} /></PhoneStage> : <ProjectPreview project={p} en={en} />}</a><div className="web-project-summary"><p className="web-kicker">0{i + 1} / {en ? p.type[1] : p.type[0]}</p><h2><a href={'#' + p.id} onClick={onNavigate}>{p.name}</a></h2><p>{en ? p.summary[1] : p.summary[0]}</p><ProjectIntroLink href={'#' + p.id} onNavigate={onNavigate} en={en} projectName={p.name} /><div className="web-mobile-project-art" aria-hidden="true"><img src={overviewRibbon} alt="" width="1024" height="1536" /></div></div></article>)}</div>;
+  return <div className="web-project-list" ref={root}>{projects.map((p, i) => <article key={p.id} className={`web-project-row${i === 1 ? ' web-project-row-reverse' : ''}`} >{i === 1 && <BelayConnectorRibbon />}{p.id === 'web-belay' ? <BelaySessionDemo en={en} /> : <a className="web-project-cover" href={'#' + p.id} onClick={onNavigate} aria-label={t('查看 ', 'Explore ') + p.name}>{i === 0 ? <PhoneStage><PhoneMockup src={opening} variant="back" tone="dark" alt={t('Agency Bloom 生活探索引导：日出远山与向前的选择', 'Agency Bloom life exploration with a sunrise landscape')} /><PhoneMockup src={progress} variant="front" alt={t('Agency Bloom 下一步行动卡与尝试进展记录', 'Agency Bloom next-step action card and progress journal')} /></PhoneStage> : <ProjectPreview project={p} en={en} />}</a>}<div className="web-project-summary"><p className="web-kicker">0{i + 1} / {en ? p.type[1] : p.type[0]}</p><h2><a href={'#' + p.id} onClick={onNavigate}>{p.name}</a></h2><p>{en ? p.summary[1] : p.summary[0]}</p><ProjectIntroLink href={'#' + p.id} onNavigate={onNavigate} en={en} projectName={p.name} /><div className="web-mobile-project-art" aria-hidden="true"><img src={overviewRibbon} alt="" width="1024" height="1536" /></div></div></article>)}</div>;
 }
 
 function BloomCase({ en, onNavigate }) {
