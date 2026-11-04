@@ -61,7 +61,7 @@
 .belay-session { container-type: inline-size; }
 .belay-session .belay-lab-canvas { min-height: 245px; }
 .belay-session .lab-run-bar > span { max-width: 170px; }
-@container (min-width: 500px) {
+@container (min-width: 440px) {
   .belay-lab-canvas { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); align-items: start; }
   .belay-saved-record { grid-column: 1 / -1; }
 }
@@ -72,7 +72,7 @@
 .belay-session .lab-terminal { min-height: 64px; padding: 9px 12px; }
 .belay-session button { font: 500 12px/1.4 system-ui,sans-serif; }
 @media (min-width: 1100px) {
-  .belay-live-stage { width: 96%; justify-self: end; margin-top: -36px; }
+  .belay-live-stage { width: 92%; justify-self: start; margin-left: -8px; }
   .belay-live-stage .belay-lab-canvas { padding: 12px 14px; min-height: 230px; }
   .belay-live-stage .belay-session-shell footer { padding-block: 4px; }
 }
