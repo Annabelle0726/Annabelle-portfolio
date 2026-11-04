@@ -2,8 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { suggestions, interviewCards, localAnswer } from '../src/portfolio-search.js';
 const ask = (question, extra={}) => localAnswer({question,page:'web-agency-bloom',language:'zh',history:[],...extra});
-test('all four pages have three evidenced questions in both languages', () => {
-  assert.equal(Object.keys(suggestions).length,4);
+test('all supported pages have three evidenced questions in both languages', () => {
+  assert.equal(Object.keys(suggestions).length,12);
   for(const [page, rows] of Object.entries(suggestions)){
     assert.equal(rows.length,3);
     for(const row of rows) for(const language of ['zh','en']){
@@ -115,4 +115,50 @@ test('each interview prompt retrieves its own authored answer in either language
       }
     }
   }
+});
+
+test('data overview and all three cases each offer three bilingual samples and keep evidence inside the relevant group',()=>{
+  for(const page of ['services','data-athub','data-visualization','data-energy']){
+    assert.equal(suggestions[page]?.length,3);
+    if(page!=='services') assert.equal(interviewCards[page]?.length,3);
+    for(const sample of suggestions[page]) for(const lang of ['zh','en']){
+      const reply=ask(sample[lang],{page,language:lang});
+      assert.ok(reply.sources.length && reply.sources.every(s=>s.href.startsWith('#data-')));
+    }
+  }
+  assert.equal(ask('AtHub 用了什么技术栈？',{page:'data-energy'}).sources[0].href,'#data-athub');
+  assert.match(ask('介绍一下这个项目',{page:'data-energy'}).text,/选址/);
+  assert.match(ask('项目最终选了哪个城市？',{page:'data-energy'}).text,/排名|推荐地点/);
+});
+
+test('data overview questions give a visitor-facing answer and cite only the relevant cases', () => {
+  const routes = [['data-athub','data-visualization','data-energy'],['data-athub'],['data-visualization']];
+  suggestions.services.forEach((sample, i) => {
+    for (const language of ['zh','en']) {
+      const reply = ask(sample[language], {page:'services', language});
+      assert.equal(reply.status,'answer');
+      assert.deepEqual([...new Set(reply.sources.map(s => s.href))],routes[i].map(r => '#' + r));
+      assert.doesNotMatch(reply.text,/面试|interview|Total\.Fatalities|scale_y_log10/i);
+    }
+  });
+});
+
+test('UX overview guides visitors with authored answers, distinct from project interview questions',()=>{
+  const routes=['XD-cupcakes','XD-reverie','XD-travel'];
+  assert.equal(suggestions.XD?.length,3);
+  for(const [index,q] of suggestions.XD.entries()){
+    for(const lang of ['zh','en']){
+      const reply=ask(q[lang],{page:'XD',language:lang});
+      assert.equal(reply.text,q.reply[lang]);
+      assert.ok(reply.sources.length && reply.sources.every(s=>routes.includes(s.href.slice(1))));
+      assert.doesNotMatch(reply.text,/面试|interview/i);
+    }
+  }
+  for(const page of routes){
+    assert.equal(suggestions[page].length,3);
+    assert.equal(interviewCards[page].length,3);
+    assert.equal(ask('介绍一下这个项目',{page}).sources[0].href,'#'+page);
+    assert.equal(ask('技术栈是什么？',{page}).sources[0].href,'#'+page);
+  }
+  assert.equal(ask('Midniht 是什么？',{page:'web-somnia'}).sources[0].href,'#XD-reverie');
 });

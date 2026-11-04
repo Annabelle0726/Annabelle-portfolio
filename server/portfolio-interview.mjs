@@ -1,5 +1,53 @@
 const card = (id, questions, zh, en) => ({id, questions, zh, en});
 export const interviewCards = {
+  'XD-cupcakes': [
+    card('cupcakes-reveal',['礼盒揭晓前后，用户分别能看到什么？','What does the visitor see before and after opening a gift box?'],
+      '在作品集演示里，盒面显示编号和口味线索，例如「一抹莓红」。点击后，同一张卡片翻到口味照片和名称「草莓」；再点一次合上。提示、操作与结果都留在这只礼盒上。','In the portfolio demo, a numbered box offers a clue such as “A little blush.” Selecting it reveals the strawberry photo and name on the same card. A second press wraps it up again. The cue, action and result stay together.'),
+    card('cupcakes-stack',['打开第二只礼盒，会不会把第一只也合上？这个状态存在哪里？','Does opening another box close the first one? Where is that state kept?'],
+      '作品集演示为每张礼盒卡片单独保存打开状态。按下哪一张，就切换哪一张；按钮的按下状态和朗读名称也随之改变。仓库另保留了独立的 HTML 和 JavaScript 甜点网站，不能把演示组件当作原站的实现。','Each card in the portfolio demo owns its open state. Pressing it toggles that card, its pressed state and its accessible name. The original dessert website has separate HTML and JavaScript source; the demo component is a distinct implementation.'),
+    card('cupcakes-check',['如果动画看不清，怎样检查访客还能知道揭晓结果？','How would you test the reveal without relying on the flip animation?'],
+      '我会用键盘打开礼盒，再检查焦点是否仍在同一按钮、朗读内容是否从线索变成口味名称、第二次操作能否合上。这是根据演示提出的验证方法；案例没有提供真实用户的测试结果。','A proposed check is to open a box by keyboard, verify focus remains on the button, check that its accessible name changes from clue to flavor, then press it again to close. This is a test proposal, not a reported user-study result.'),
+  ],
+  'XD-reverie': [
+    card('reverie-discover',['既然能按书名搜索，为什么还给三种选书起点？','Why provide three discovery paths alongside book search?'],
+      '读者知道书名、作者或 ISBN 时可以直接搜索。只有模糊偏好时，可以从喜欢的一本书、当下心情或想试点不同的东西开始。这三条入口帮助读者表达意图；截图本身不能说明背后用了哪种推荐算法。','Readers who know the title, author or ISBN can search directly. Someone without a title can start from a loved book, a mood or a desire for something different. The screens show ways to express intent, not a particular recommendation algorithm.'),
+    card('reverie-plan',['把一本书从计划里移走，为什么要和阅读记录分开？','Why keep a changed reading plan separate from reading history?'],
+      '计划描述接下来想读什么，记录描述已经读过什么。Planner 允许调整顺序或移除计划，同时保留已有阅读记录；一本书也可以属于多个书架。这些是产品案例展示的行为，不能由此推断实际数据库的表结构。','Plans describe what the reader intends to do; history records what already happened. Reordering or removing a plan leaves reading history intact, and a book can appear on several shelves. These product behaviors do not establish a database schema.'),
+    card('reverie-stack',['这套阅读产品用了什么框架？哪些界面是 Annabelle 独立完成的？','What framework did Reverie use, and which screens did Annabelle build independently?'],
+      '公开案例确认的是 Annabelle 参与协作开发支持与局部改进。展示的书架、发现和计划页用来说明整体产品体验，不能据此把每个界面都归为她独立完成。案例没有给出原应用框架。','Annabelle contributed development support and focused improvements. The library, discovery and planner screens provide product context; they do not establish sole authorship of each screen. The case does not identify the original application framework.'),
+  ],
+  'XD-travel': [
+    card('travel-filter',['选择「海滩」后，用户怎么确认筛选生效？','How can visitors tell that the beach filter took effect?'],
+      '在作品集演示里，被选中的偏好带勾，结果数量和目的地卡片同时更新。选择「海滩」会留下 Algarve 和 Bali；选择「全部」可以恢复六张卡片。用户可以直接换条件，不必返回首页重来。','In the portfolio demo, the selected preference gains a checkmark and both the count and cards update. Beach leaves Algarve and Bali. All restores the six cards, so the visitor can change course without starting again.'),
+    card('travel-stack',['如果数量显示两个，页面却还有六张卡，你会查哪段逻辑？','If the count says two but six cards remain, what would you inspect?'],
+      '先检查数量和卡片是不是读了同一组筛选结果。作品集演示根据当前偏好得到 places，数量用它的长度，列表也遍历它；「查看全部」恢复全部结果并把焦点还给第一个筛选按钮。原课程原型另有 HTML 和 JavaScript 文件。','Check whether the count and cards read the same filtered list. In the portfolio demo, both use places derived from the selected preference. Reset restores all results and returns focus to the first filter. The original course prototype has separate HTML and JavaScript files.'),
+    card('travel-rolecheck',['用了 Marriott 素材，能把它写成客户项目吗？','Does using Marriott materials make this commissioned work?'],
+      '这是使用 Marriott Homes & Villas 素材的课程原型。Annabelle 参与目的地卡片和偏好选择的交互实现；材料没有证明品牌委托、真实预订或上线转化率。','This is a course prototype using Marriott Homes & Villas materials. Annabelle contributed to destination cards and preference-selection interactions. The materials do not establish a commission, live bookings or conversion results.'),
+  ],
+  'data-athub': [
+    card('athub-labels',['没有现成的异常标签，你怎么给每个交易日打标？','How do you label an anomalous trading day without a supplied label?'],
+      '案例把价格变化和成交量条件组合成阈值标签，再用技术指标训练分类器。改变阈值就改变了“异常”的定义，比较模型时需要先对齐标签和预测窗口。它衡量的是对这一定义的识别能力。','The case combines price-change and volume thresholds to label days, then trains classifiers on technical indicators. Changing thresholds changes the target. Model comparisons need a common label definition and forecast horizon.'),
+    card('athub-alerts',['模型几乎抓住所有异常，为什么还可能没法用来预警？','Why might a high-recall model make a poor alert system?'],
+      '如果几乎每天都报警，异常日很少漏掉，但正常日也会大量误报。原报告的多日预测出现高召回、低精确率。面试时我会同时检查漏报和误报，并在相同窗口下比较阈值；这些分类指标不能直接换算成交易收益。','An alarm on nearly every day misses few anomalies but flags many normal days. The multi-day experiment reports high recall and low precision. Compare missed events and false alarms at the same horizon; neither metric establishes trading returns.'),
+    card('athub-shap',['SHAP 排第一的指标，可以说是它导致了异常吗？','Does the top SHAP feature cause the anomaly?'],
+      'SHAP 解释某个特征对模型输出的贡献，不能单独证明它导致市场异常。应先区分解释的是哪一个模型和预测窗口，再结合误报样本检查模型究竟在响应什么。','SHAP attributes a model output to input features; this is not evidence of market causation. Identify the model and horizon first, then inspect false positives to see what the model responded to.'),
+  ],
+  'data-visualization': [
+    card('visualization-spill',['泄漏记录怎样变成水体排名？为什么图上的等距不等于等量？','How does the spill chart rank water bodies, and what does equal spacing mean?'],
+      'R 代码过滤空水体名、缺失量和非正数量，统一名称大小写，按水体分组求和，再降序取前十。ggplot2 的 scale_y_log10() 把数量放在对数轴上，等距对应相同倍数。图里比较的是记录的累计量，不能直接解释为居民风险。','The R pipeline removes missing or empty names and nonpositive or missing quantities, normalizes name casing, groups by water body, sums and selects the top ten. On the log10 axis, equal distances mean equal ratios. Cumulative recorded volume is not resident risk.'),
+    card('visualization-count',['职业安全桑基图里，怎么避免把“总计”重复算进死亡原因？','How do you keep totals out of the occupational fatality Sankey?'],
+      '清洗时先排除 Total.Fatalities 及其大小写变体，再按行业、原因、年份汇总死亡数。否则汇总行会和明细一起参与求和。桑基图的连线宽度表示记录数，无法证明行业本身导致某类死亡。','The code excludes the two total-fatalities labels before summing fatalities by industry, cause and year. Mixing total rows with component rows would double count. Link widths represent recorded counts, not a causal effect of industry.'),
+    card('visualization-trade',['为什么用同一时间轴画进口和出口，而不用桑基图？','Why plot imports and exports on a common time axis instead of a Sankey?'],
+      '贸易图关注同一时期两条序列的变化，把年份对齐才能读出走势和差距。桑基图适合职业安全案例中行业与原因之间的数量分布，不能同样清楚地呈现逐年趋势。','Aligning years lets readers compare the direction and gap between imports and exports over time. A Sankey fits category-to-category counts in the safety case, but is a poor substitute for seeing year-by-year trends.'),
+  ],
+  'data-energy': [
+    card('energy-tradeoff',['一个地点电价低，另一个能源条件好，你怎么比较？','How would you compare cheaper power with better energy conditions?'],
+      '案例把能源供给、地域条件和成本放在一起比较。作为面试方案，我会先把供电可用性等硬约束与可权衡的成本分开，再说明不同优先级是否改变结论。这里没有已核实的权重、评分或获选地点。','The case compares energy supply, geography and costs. As an interview proposal, I would separate binding availability constraints from costs that can be traded off, then check whether priorities change the conclusion. No weights, measured scores or winning location have been verified.'),
+    card('energy-join',['如果要用 SQL 合并成本和 GIS 区域，怎样检查没有重复计数？','How would you check a SQL join between costs and GIS regions for double counting?'],
+      '这是建议的验证方法：先说明每张表一行代表什么，统一地点、时间与单位，再检查关联键的唯一性。比较连接前后的行数、未匹配记录和成本合计。项目页列出了 SQL、Tableau 和 GIS，没有提供可核实的表结构或这条查询的运行结果。','Proposed checks: define each table’s grain, align location, time and units, and inspect key uniqueness. Compare row counts, unmatched records and cost totals before and after joining. The portfolio lists SQL, Tableau and GIS, but provides no verified schema or query result.'),
+    card('energy-ranking',['怎么验证选址排名稳定？这个项目最后选了哪座城市？','How would you test ranking stability, and which city actually won?'],
+      '可以设定不同能源价格和成本权重，检查候选地点的次序是否翻转。这是可采用的敏感性分析；已公开页面没有经过核对的排名、推荐城市或投资回报率，不能给出获选地点。','A proposed sensitivity analysis would vary energy prices and cost weights and check for rank reversals. The published material does not establish a site ranking, recommended city or return on investment.'),
+  ],
   'web-belay': [
     card('belay-stack', ['作者用了什么框架实现的？','What framework did the team use to build Belay?'],
       'Belay 的参考前端由 HTML、CSS 和 JavaScript 组成。以学习者发起请求为例，页面通过 JavaScript API 客户端访问 Python 后端；服务端用 FastAPI 提供接口，用 SQLAlchemy 访问关系数据库。模型调用也走后端，浏览器不用持有模型密钥。\n\n这是团队项目的技术栈。Annabelle 参与界面、会话保存与恢复，以及访问和预算约束，不能把整套架构都归为她个人的实现。',

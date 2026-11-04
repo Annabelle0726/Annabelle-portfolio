@@ -1,6 +1,7 @@
 import { askPortfolio } from './portfolio-qa.mjs';
 import { passages } from './portfolio-passages.mjs';
 
+const supportedPages = new Set(['portfolio','services','XD',...passages.map(p => p.route)]);
 const sourceIds = new Set(passages.map(passage => passage.id));
 const validHistory = history => Array.isArray(history) && history.length <= 6 && history.every(turn =>
   turn && typeof turn.question === 'string' && turn.question.length <= 2000 &&
@@ -35,7 +36,7 @@ export function portfolioApi(answer = askPortfolio) {
         chunks.push(chunk);
       }
       const {question,page,language,history} = JSON.parse(Buffer.concat(chunks).toString());
-      if (!['portfolio','web-agency-bloom','web-belay','web-somnia'].includes(page) ||
+      if (!supportedPages.has(page) ||
         typeof question !== 'string' || !question.trim() || question.length > 2000 ||
         !['zh','en'].includes(language) || !validHistory(history)) return send(400,{error:'input'});
       requests++;

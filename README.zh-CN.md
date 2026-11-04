@@ -21,10 +21,10 @@
 
 ## 精选作品
 
-### 01 / 网站与设计
+### 01 / 全栈项目
 
 <p align="center">
-  <a href="https://annabelle0726.github.io/Annabelle-portfolio/#portfolio"><img src="assets/readme/web-design.webp" width="100%" alt="网站与设计作品：Agency Bloom、Belay 与 Somnia Library"></a>
+  <a href="https://annabelle0726.github.io/Annabelle-portfolio/#portfolio"><img src="assets/readme/web-design.webp" width="100%" alt="全栈项目作品：Agency Bloom、Belay 与 Somnia Library"></a>
 </p>
 
 **[Agency Bloom](https://annabelle0726.github.io/Annabelle-portfolio/#web-agency-bloom)** — 独立开发的微信小程序，围绕探索、选择与行动，帮助人们梳理想法、比较可能，并迈出下一步。我的工作覆盖产品构思、交互设计、前后端开发与持续迭代。项目介绍包含界面细节和产品演示。

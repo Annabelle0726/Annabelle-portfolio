@@ -39,3 +39,13 @@ test('malformed and oversized history is rejected before model use', async () =>
     assert.equal(response.code,400);
   }
 });
+
+test('data overview and details accept the same conversation API',async()=>{
+  for(const page of ['services','data-athub','data-visualization','data-energy'])
+    assert.equal((await request({...input,page})).code,200);
+});
+
+test('UI design overview and details accept conversation requests',async()=>{
+  for(const page of ['XD','XD-cupcakes','XD-reverie','XD-travel'])
+    assert.equal((await request({...input,page})).code,200);
+});

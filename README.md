@@ -21,10 +21,10 @@ The site pairs sapphire blue, turquoise, and champagne gold with a warm paper ba
 
 ## Selected work
 
-### 01 / Web & design
+### 01 / Full-stack projects
 
 <p align="center">
-  <a href="https://annabelle0726.github.io/Annabelle-portfolio/#portfolio"><img src="assets/readme/web-design.webp" width="100%" alt="Web and design showcase: Agency Bloom, Belay and Somnia Library"></a>
+  <a href="https://annabelle0726.github.io/Annabelle-portfolio/#portfolio"><img src="assets/readme/web-design.webp" width="100%" alt="Full-stack projects: Agency Bloom, Belay and Somnia Library"></a>
 </p>
 
 **[Agency Bloom](https://annabelle0726.github.io/Annabelle-portfolio/#web-agency-bloom)** — An independent WeChat mini program for exploring possibilities, considering choices, and taking a next step. My work spans product conception, interaction design, front-end and back-end development, and iteration. The case study includes interface details and a product demo.

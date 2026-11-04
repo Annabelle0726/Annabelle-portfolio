@@ -1,3 +1,5 @@
+import { uxCases } from '../src/sections/ux-case-content.mjs';
+import { dataProjectContent } from '../src/sections/data-project-content.mjs';
 import { interviewCards } from './portfolio-interview.mjs';
 
 export const passages = [
@@ -20,6 +22,24 @@ export const passages = [
   ['somnia-role', 'web-somnia', 'Somnia Library', 'Somnia 基于 Greg 的 Reverie 继续开发。Annabelle 参与首页、书籍界面、认证体验与移动端导航改进。', 'Somnia builds on Greg’s Reverie. Annabelle contributed to the homepage, book interfaces, authentication experience and mobile navigation.'],
   ['somnia-cards', 'web-somnia', 'Somnia Library', '桌面录屏展示功能卡片在悬停时展开，显示更多介绍。', 'The desktop recording shows feature cards expanding on hover to reveal more details.'],
 ].map(([id, route, title, zh, en]) => ({id, route, title, zh, en}));
+
+for (const project of dataProjectContent) {
+  const prefix = project.id.slice('data-'.length);
+  const facts = {overview:project.intro, flow:project.chapters[1][1], limits:project.chapters[2][1], stack:[
+    project.title[0] + '使用的工具：' + project.tools + '。' + project.chapters[1][1][0],
+    project.title[1] + ' uses ' + project.tools + '. ' + project.chapters[1][1][1],
+  ]};
+  for (const [kind,[zh,en]] of Object.entries(facts)) {
+    passages.push({id:prefix + '-' + kind, route:project.id, title:project.title[0], zh, en});
+  }
+}
+
+for (const project of uxCases) {
+  const prefix = project.id.slice(3);
+  for (const [kind,[zh,en]] of Object.entries({overview:project.description, flow:project.focus, role:project.role})) {
+    passages.push({id:prefix + '-' + kind, route:project.id, title:project.name, zh, en});
+  }
+}
 
 for (const [route, cards] of Object.entries(interviewCards)) {
   const {title} = passages.find(p => p.route === route);

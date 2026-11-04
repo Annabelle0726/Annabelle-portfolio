@@ -196,8 +196,8 @@ export default function WebProjects({ language = 'zh', projectId = 'portfolio', 
   return <section className={`web-project-page${projectId === 'portfolio' ? ' web-overview' : ''}`} id={projectId} lang={en ? 'en' : 'zh-CN'}>
     {projectId === 'portfolio' && <div className="web-overview-art" aria-hidden="true">{['top', 'bottom'].map(position => <img key={position} className={`web-overview-ribbon web-overview-ribbon-${position}`} src={overviewRibbon} alt="" width="1024" height="1536" />)}</div>}
     <div className="web-project-inner">
-    {projectId !== 'web-agency-bloom' && <SectionHeader as="h1" eyebrow="PROJECTS / WEB & DESIGN" title={t('网站与设计', 'Web & design')} subtitle={t('从想法到体验，把产品做出来', 'From an idea to an experience people can use')}/>}
-    {project ? <>{projectId !== 'web-agency-bloom' && <nav className="web-breadcrumb" aria-label={t('面包屑导航', 'Breadcrumb')}><a href="#portfolio" onClick={onNavigate}>{t('网站与设计', 'Web & design')}</a><span aria-hidden="true">/</span><span>{project.name}</span></nav>}{projectId === 'web-agency-bloom' ? <BloomCase en={en} onNavigate={onNavigate}/> : <RelatedCase project={project} en={en} onNavigate={onNavigate}/>}</> : <>
+    {projectId !== 'web-agency-bloom' && <SectionHeader as="h1" eyebrow="PROJECTS / FULL-STACK PROJECTS" title={t('全栈项目', 'Full-stack projects')} subtitle={t('从想法到体验，把产品做出来', 'From an idea to an experience people can use')}/>}
+    {project ? <>{projectId !== 'web-agency-bloom' && <nav className="web-breadcrumb" aria-label={t('面包屑导航', 'Breadcrumb')}><a href="#portfolio" onClick={onNavigate}>{t('全栈项目', 'Full-stack projects')}</a><span aria-hidden="true">/</span><span>{project.name}</span></nav>}{projectId === 'web-agency-bloom' ? <BloomCase en={en} onNavigate={onNavigate}/> : <RelatedCase project={project} en={en} onNavigate={onNavigate}/>}</> : <>
       <ProjectList en={en} t={t} onNavigate={onNavigate} />
       <ProjectPagination routeId="portfolio" en={en} onNavigate={onNavigate} />
     </>}

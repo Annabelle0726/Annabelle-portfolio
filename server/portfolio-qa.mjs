@@ -5,8 +5,8 @@ import { portfolioProvider } from './portfolio-provider.mjs';
 const messages = {
   invalid: ['请输入 1–2000 个字符的问题。', 'Please enter a question of up to 2,000 characters.'],
   insufficient: ['这部分公开案例没有写，我还没法确认。可以一起看看已有的项目资料。', 'The published cases don’t cover that detail, so I can’t confirm it. We can look at what is documented.'],
-  clarify: ['你想问哪个项目：Agency Bloom、Belay 还是 Somnia Library？', 'Which project do you mean: Agency Bloom, Belay or Somnia Library?'],
-  outside: ['这里可以讨论 Agency Bloom、Belay 和 Somnia Library 的设计与开发。', 'I can help with the design and development of Agency Bloom, Belay and Somnia Library.'],
+  clarify: ['你想了解哪个案例？可以告诉我项目名称。', 'Which project do you mean? You can name a full-stack, UX/UI or data case.'],
+  outside: ['可以问全栈、UX/UI 或数据与 AI 案例的设计、方法和局限。', 'I can discuss full-stack projects such as Belay, UX/UI design cases such as Cupcakes, and data projects such as AtHub, including their methods and limitations.'],
   unavailable: ['现在暂时连不上 AI。刚才的问题还在，可以稍后重试。', 'I can’t connect to AI right now. Your question is still here; you can try again shortly.'],
 };
 

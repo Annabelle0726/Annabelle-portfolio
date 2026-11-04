@@ -6,11 +6,8 @@ import { dataProjects, localize } from './data-projects';
 import './data-projects.css';
 import './data-ribbon.css';
 
-function EnergyCover({ en }) {
- return <div className="data-energy-cover"><span className="data-cover-label">ENERGY / PLACE / POSSIBILITY</span><div className="data-energy-orbits" aria-hidden="true"><i/><i/><i/><span>↗</span></div><div className="data-energy-factors">{(en ? ['Energy','Location','Cost'] : ['能源条件','地域差异','成本约束']).map((label,i)=><span key={label}><small>0{i+1}</small>{label}</span>)}</div><small>{en ? 'Analytical framework' : '分析框架'}</small></div>;
-}
 function Cover({ project, en }) {
- return project.cover ? <div className="data-cover"><img src={project.cover} alt={localize(project.coverAlt,en?'en':'zh')}/><span className="data-cover-label">{en ? 'FROM THE ORIGINAL ANALYSIS' : '原始分析图表'}</span></div> : <EnergyCover en={en}/>;
+ return <div className="data-cover"><img src={project.cover} alt={localize(project.coverAlt,en?'en':'zh')}/><span className="data-cover-label">{en ? 'FROM THE ORIGINAL ANALYSIS' : '原始分析图表'}</span></div>;
 }
 function Figure({ figure, language }) {
  const dialog=useRef(null), en=language==='en', label=localize(figure.label,language);
@@ -18,20 +15,20 @@ function Figure({ figure, language }) {
 }
 export default function Projects({language='zh',projectId='services',onNavigate}) {
  const en=language==='en', t=value=>localize(value,language), project=dataProjects.find(item=>item.id===projectId);
- return <section id={project?project.id:'services'} className={"data-page"+(project?" data-detail":"")} lang={en?'en':'zh-CN'}>
+ return <section id={project?project.id:'services'} className={"data-page"+(project?" data-detail":"")+(project?.presentation === "text" ? " data-text-detail" : "")} lang={en?'en':'zh-CN'}>
  {!project && <div className="data-ribbon-art" aria-hidden="true"><div className="data-brand-ribbon" /></div>}
  <div className="data-inner">
  {!project && <SectionHeader as="h1" eyebrow="PROJECTS / DATA & AI" title={en?'Data & AI':'数据与 AI'} subtitle={en?'Questions worth exploring, evidence worth examining':'从问题出发，让数据有迹可循'}/>}
  {project ? <>
  <nav className="data-breadcrumb" aria-label={en?'Breadcrumb':'面包屑导航'}><a href="#services" onClick={onNavigate}>{en?'← All three projects':'← 返回精选项目'}</a><span>{project.number} / 03</span></nav>
  <div className="data-detail-heading"><SectionHeader as="h1" eyebrow="PROJECTS / DATA & AI" title={t(project.title)} subtitle={t(project.summary)} /><p className="data-kicker">{t(project.category)}</p><span className="data-tools">{project.tools}</span></div>
- <div className={"data-detail-opening"+(!project.cover?" data-opening-energy":"")}><div className="data-opening-copy"><p>{t(project.intro)}</p><a className="data-source" href={project.source} target="_blank" rel="noopener noreferrer">{t(project.sourceLabel)} <span aria-hidden="true">↗</span></a></div>{!project.cover&&<EnergyCover en={en}/>}</div>
+ <div className="data-detail-opening"><div className="data-opening-copy"><p>{t(project.intro)}</p>{project.source && <a className="data-source" href={project.source} target="_blank" rel="noopener noreferrer">{t(project.sourceLabel)} <span aria-hidden="true">↗</span></a>}</div></div>
  <div className="data-chapters">{project.chapters.map(([heading,body],i)=><section key={heading[1]}><span className="data-number">0{i+1}</span><h2>{t(heading)}</h2><p>{t(body)}</p></section>)}</div>
  {project.figures.length>0&&<div className="data-gallery"><div className="data-gallery-heading"><h2>{en?'Inside the analysis':'走进分析'}</h2><p>{en?'Original figures · Select an image to enlarge':'原始图表 · 点击可放大阅读'}</p></div><div className="data-figure-grid">{project.figures.map(figure=><Figure key={figure.src} figure={figure} language={language}/>)}</div></div>}
  </> : <>
- <div className="data-project-grid">{dataProjects.map((item,i)=><article key={item.id} className={'data-card'+(i===0?' data-featured':'')}>
+ <div className="data-project-grid">{dataProjects.map((item,i)=><article key={item.id} className={'data-card'+(i===0?' data-featured':'')+(item.presentation === 'text' ? ' data-text-card' : '')}>
    <header className="data-card-heading"><p className="data-kicker">{item.number} / {t(item.category)}</p><h2><a href={'#'+item.id} onClick={onNavigate}>{t(item.title)}</a></h2></header>
-   <a className="data-card-visual" href={'#'+item.id} onClick={onNavigate} aria-label={(en?'Explore ':'查看')+t(item.title)}><Cover project={item} en={en}/></a>
+   {item.cover && <a className="data-card-visual" href={'#'+item.id} onClick={onNavigate} aria-label={(en?'Explore ':'查看')+t(item.title)}><Cover project={item} en={en}/></a>}
    <div className="data-card-body"><p>{t(item.summary)}</p><span className="data-tools">{item.tools}</span><ProjectIntroLink href={'#' + item.id} onNavigate={onNavigate} en={en} projectName={t(item.title)} /></div>
  </article>)}</div>
  </>}

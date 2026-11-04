@@ -13,7 +13,7 @@
 .uxui-overview-link span[aria-hidden] { transition: transform var(--motion-quick) var(--ease-ui); }
 .uxui-overview-cover { grid-column: 1; grid-row: 1; position: relative; z-index: 1; display: block; box-sizing: border-box; padding: clamp(4px, .8vw, 6px); border: 1px solid color-mix(in srgb, var(--color-champagne-gold) 70%, transparent); background: var(--color-paper); }
 .uxui-overview-cover-window { display: block; overflow: hidden; }
-.uxui-overview-cover img { display: block; width: 100%; height: auto; transition: transform var(--motion-panel) var(--ease-ui); }
+.uxui-overview-cover-window > img { display: block; width: 100%; height: auto; transition: transform var(--motion-panel) var(--ease-ui); }
 .uxui-overview-art { position: absolute; pointer-events: none; user-select: none; z-index: 0; max-width: none; height: auto; }
 .uxui-overview-top-art { width: 490px; right: -80px; top: -45px; }
 .uxui-overview-loop { padding-left: 36px; padding-bottom: 36px; }
@@ -28,7 +28,7 @@
   .uxui-overview-loop .uxui-overview-art { left: auto; right: -100px; bottom: -40px; transform: scaleX(-1); }
 }
 @media (hover:hover) {
-  .uxui-overview-cover:hover img { transform: scale(1.035); }
+  .uxui-overview-cover-window:hover > img { transform: scale(1.035); }
   .uxui-overview-link:hover span[aria-hidden] { transform: translate(2px,-2px); }
 }
 @media (min-width:768px) and (max-width:1099px) {
@@ -52,7 +52,21 @@
   .uxui-overview-wave { padding-bottom: 40px; }
   .uxui-overview-wave .uxui-overview-art { width: calc(100% + 120px); left: -60px; bottom: -5px; }
 }
+@keyframes uxui-preview-enter {
+  from { opacity: .82; scale: 1.025; }
+  to { opacity: 1; scale: 1; }
+}
+@media (prefers-reduced-motion:no-preference) {
+  @supports (animation-timeline: view()) and (animation-range: entry 0% entry 75%) {
+    .uxui-overview-cover-window { overflow: clip; }
+    .uxui-overview-cover-window > img {
+      animation: uxui-preview-enter auto linear both;
+      animation-timeline: view(block);
+      animation-range: entry 0% entry 75%;
+    }
+  }
+}
 @media (prefers-reduced-motion:reduce) {
-  .uxui-overview-cover img,.uxui-overview-link span[aria-hidden] { transition: none; }
-  .uxui-overview-cover:hover img,.uxui-overview-link:hover span[aria-hidden] { transform: none; }
+  .uxui-overview-cover-window > img,.uxui-overview-link span[aria-hidden] { transition: none; }
+  .uxui-overview-cover-window:hover > img,.uxui-overview-link:hover span[aria-hidden] { transform: none; }
 }

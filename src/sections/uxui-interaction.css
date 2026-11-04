@@ -1,0 +1,53 @@
+.overview-sampler { min-width: 0; }
+.sampler-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 44px; padding: 8px 12px; color: var(--color-primary); border: 0; background: var(--color-ivory); font: 600 14px/1.4 system-ui,sans-serif; cursor: pointer; }
+.sampler-toggle:hover { background: var(--color-highlight); }
+.overview-sampler .cupcake-stage { margin: 0; padding: clamp(12px,2vw,20px); }
+.overview-sampler .cupcake-stage h2 { font-size: 22px; }
+.overview-sampler .cupcake-caption { padding: 8px; }
+.overview-sampler .cupcake-caption strong { font-size: clamp(14px,1.3vw,20px); }
+.overview-sampler .travel-selector { display: block; margin: 0; padding: 12px; }
+.reading-deck { background: linear-gradient(145deg,#17192f,#302d46); color: #fcf4e4; padding: clamp(16px,3vw,32px); border-radius: 8px; }
+.reading-deck .deck-eyebrow { color: #d8c8a9; font: 600 11px/1.5 system-ui,sans-serif; letter-spacing: .15em; margin: 0 0 8px; }
+.uxui-page .reading-deck h3 { color: inherit; margin: 0; font: 500 clamp(21px,2.5vw,32px)/1.4 Georgia,'Songti SC',serif; }
+.deck-hand { display: flex; justify-content: center; padding: 26px 8px 12px; }
+.deck-hand button { flex: 1; max-width: 150px; min-width: 0; min-height: 82px; padding: 10px 3px; color: #efe5cd; background: #302b46; border: 1px solid #a294ad; border-radius: 4px 8px 4px 3px; box-shadow: inset 4px 0 #50475f, 0 5px 8px #17142580; cursor: pointer; transform: rotate(var(--angle)); transform-origin: 50% 130%; }
+.deck-hand button + button { margin-left: -3px; }
+.deck-hand button[aria-pressed=true] { position: relative; z-index: 1; transform: translateY(-12px) rotate(0deg); background: #e8ddc5; color: #332a42; }
+.deck-hand small,.deck-hand strong { display: block; }
+.deck-hand small { font: 10px system-ui,sans-serif; letter-spacing: .12em; margin-bottom: 6px; }
+.deck-hand strong { font: 500 clamp(14px,1.6vw,19px) Georgia,'Songti SC',serif; }
+.reading-deck .deck-page { background: #141422; border: 1px solid #665e71; border-radius: 5px; overflow: hidden; }
+.deck-page img { display: block; width: 100%; aspect-ratio: 1.95; object-fit: contain; }
+.reading-deck .deck-note { margin: 12px 0 0; color: #eadfcf; font-size: 14px; line-height: 1.65; }
+.deck-enlarge { min-height: 44px; padding: 6px 0; background: none; border: 0; color: #f9ebbb; cursor: pointer; text-decoration: underline; }
+.uxui-page .reading-deck button:focus-visible { outline: 3px solid #ffcc65; outline-offset: 2px; }
+@media (prefers-reduced-motion:no-preference) {
+  .deck-hand button { transition: transform .42s cubic-bezier(.22,.82,.28,1.13), background-color .2s; }
+  .deck-page { animation: deck-page-open .35s ease-out; }
+  @keyframes deck-page-open { from { clip-path: inset(0 55% 0 0); opacity: .55; } to { clip-path: inset(0); opacity: 1; } }
+}
+.flavor-week { padding: clamp(14px,2vw,24px); background: #fff6eb; color: #552c28; }
+.week-edition { margin: 0 0 6px; font: 600 10px/1.5 system-ui,sans-serif; letter-spacing: .14em; color: #90445a; }
+.flavor-week h3 { font: 500 clamp(20px,2vw,30px)/1.3 Georgia,'Songti SC',serif; margin: 0 0 12px; color: inherit; }
+.week-days { display: grid; grid-template-columns: repeat(7,minmax(0,1fr)); border-block: 1px solid #d9baba; }
+.week-days button { background: transparent; border: 0; min-height: 44px; padding: 0; color: inherit; font: 600 13px system-ui,sans-serif; cursor: pointer; }
+.week-days button[aria-pressed=true] { background: #85364b; color: white; box-shadow: inset 0 -3px #582333; }
+.flavor-week figure { margin: 14px 0 0; }
+.flavor-week img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+.flavor-week figcaption { display: flex; align-items: baseline; gap: 12px; padding-top: 10px; min-height: 44px; }
+.flavor-week figcaption strong { font: 500 clamp(17px,2vw,24px)/1.3 Georgia,'Songti SC',serif; }
+.postcard-album { padding: clamp(12px,2vw,22px); background: #fffaf0; color: #173e47; }
+.postal-strip,.postal-address,.postal-controls { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.postal-strip { margin-bottom: 12px; font: 600 11px/1.5 system-ui,sans-serif; letter-spacing: .16em; }
+.postal-photo { display: block; overflow: hidden; aspect-ratio: 3/2; background: #e1e9e5; }
+.postal-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.postal-address { min-height: 80px; padding: 10px 0; border-bottom: 1px dashed #a7aba0; }
+.postal-address small,.postal-address strong { display: block; }
+.postal-address strong { font: 500 clamp(21px,2.6vw,32px)/1.25 Georgia,'Songti SC',serif; }
+.postal-address > span { font: 11px/1.5 ui-monospace,monospace; text-align: right; }
+.postal-controls button { min-width: 44px; min-height: 44px; padding: 4px 8px; border: 0; background: transparent; color: var(--color-primary); font: 600 14px system-ui,sans-serif; cursor: pointer; }
+.postal-controls button:hover { background: var(--color-highlight); }
+@media (prefers-reduced-motion:no-preference) {
+  .postal-photo img { animation: postal-arrival .28s ease-out; }
+  @keyframes postal-arrival { from { opacity: .65; clip-path: inset(0 10% 0 0); } to { opacity: 1; clip-path: inset(0); } }
+}

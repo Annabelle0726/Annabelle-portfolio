@@ -6,7 +6,7 @@ import { revealReply } from '../portfolio-reveal';
 import './portfolio-questions.css';
 
 const storeKey = 'portfolio.questions.v1';
-const pageNames = {portfolio:['全栈项目','Full-stack projects'],'web-agency-bloom':['Agency Bloom'],'web-belay':['Belay'],'web-somnia':['Somnia Library']};
+const pageNames = {XD:['UX/UI 设计','UX/UI design'],'XD-cupcakes':['Cupcakes'],'XD-reverie':['Reverie Reads'],'XD-travel':['Travel Discovery'],services:['数据与 AI','Data & AI'],'data-athub':['AtHub 异常检测','AtHub anomaly detection'],'data-visualization':['公共数据可视化','Public data visualization'],'data-energy':['可持续数据中心选址','Sustainable data-center siting'],portfolio:['全栈项目','Full-stack projects'],'web-agency-bloom':['Agency Bloom'],'web-belay':['Belay'],'web-somnia':['Somnia Library']};
 const shortPrompts = {
   portfolio:[['比较回应方式','Compare response styles'],['留给用户的选择','Choices for the user'],['她负责了什么','Annabelle’s role']],
   'web-agency-bloom':[['先倾听，还是给建议','Listening before advice'],['从纠结到小小行动','From dilemma to action'],['改变主意之后呢','What if I change my mind?']],
@@ -57,6 +57,19 @@ export default function PortfolioQuestions({page, language, menuOpen, navigate})
   },[session]);
   useEffect(() => { setOpen(false); setSamples(false); setConfirmReset(false); },[page,menuOpen]);
   useEffect(() => () => controller.current?.abort(),[]);
+  useLayoutEffect(() => {
+    const button = trigger.current;
+    if (!button || visible || !enabled || menuOpen) return;
+    const reserve = () => document.documentElement.style.setProperty('--qa-control-width', button.getBoundingClientRect().width + 'px');
+    reserve();
+    const observer = new ResizeObserver(reserve);
+    observer.observe(button);
+    return () => {
+      observer.disconnect();
+      document.documentElement.style.removeProperty('--qa-control-width');
+    };
+  }, [visible, enabled, menuOpen, language]);
+
   useEffect(() => {
     if (confirmReset) dialog.current?.querySelector('.qa-reset button')?.focus({preventScroll:true});
   },[confirmReset]);
@@ -220,15 +233,15 @@ export default function PortfolioQuestions({page, language, menuOpen, navigate})
             {reply.offline && api && index === session.turns.length-1 && reply.status !== 'generating' && <button type="button" className="qa-text-button" disabled={pending !== null} onClick={() => send(question,index)}>{reply.interrupted ? t('重新生成','Generate again') : t('重试在线回答','Retry online answer')}</button>}
             {reply.sources.length > 0 && <div className="qa-sources" aria-label={t('回答出处','Answer sources')}>
               {[...new Map(reply.sources.map(source => [source.href,source])).values()].map(source => source.href === '#' + page
-                ? <span className="qa-current-source" key={source.href}>{t('本页出处','On this page')} · {source.title}</span>
-                : <a key={source.href} href={source.href} onClick={event => {if (navigate(event)) setOpen(false);}}>{source.title}<Icon name="arrow"/></a>)}
+                ? <span className="qa-current-source" key={source.href}>{t('本页出处','On this page')} · {pageNames[source.href.slice(1)]?.[zh ? 0 : 1] || source.title}</span>
+                : <a key={source.href} href={source.href} onClick={event => {if (navigate(event)) setOpen(false);}}>{pageNames[source.href.slice(1)]?.[zh ? 0 : 1] || source.title}<Icon name="arrow"/></a>)}
             </div>}
           </div></div>
         </article>)}
         {(!session.turns.length || samples) && <div className="qa-suggestions">
           <span className="qa-suggestion-label">{t('可以从这里开始','A few places to start')}</span>
-          <div className="qa-samples">{suggestions[page].map((row,index) => <button type="button" key={row.en} disabled={pending !== null} title={row[language]} onClick={() => send(row[language])}>{shortPrompts[page][index][zh ? 0 : 1]}<Icon name="arrow"/></button>)}</div>
-          {interviewCards[page] && <details className="qa-interview" key={page}><summary>{t('面试官怎么问 · 技术实现','Interview questions · Implementation')}</summary><div className="qa-samples">{interviewCards[page].map(card => <button type="button" key={card.id} disabled={pending !== null} onClick={() => send(card.questions[zh ? 0 : 1])}>{card.questions[zh ? 0 : 1]}<Icon name="arrow"/></button>)}</div></details>}
+          <div className="qa-samples">{suggestions[page].map((row,index) => <button type="button" key={row.en} disabled={pending !== null} title={row[language]} onClick={() => send(row[language])}>{shortPrompts[page]?.[index]?.[zh ? 0 : 1] || row[language]}<Icon name="arrow"/></button>)}</div>
+          {interviewCards[page] && <details className="qa-interview" key={page}><summary>{page.startsWith('XD-') ? t('面试官怎么问 · 设计取舍','Interview questions · Design decisions') : t('面试官怎么问 · 技术实现','Interview questions · Implementation')}</summary><div className="qa-samples">{interviewCards[page].map(card => <button type="button" key={card.id} disabled={pending !== null} onClick={() => send(card.questions[zh ? 0 : 1])}>{card.questions[zh ? 0 : 1]}<Icon name="arrow"/></button>)}</div></details>}
         </div>}
       </div>
       {showLatest && <button className="qa-latest" type="button" onClick={latest}>{t('回到最新消息 ↓','Latest messages ↓')}</button>}

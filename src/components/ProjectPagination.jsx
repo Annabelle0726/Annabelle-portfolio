@@ -2,7 +2,7 @@ import React from 'react';
 import WebProjectNav from './WebProjectNav';
 
 const groups = [
-  { id: 'portfolio', label: ['网站与设计', 'Web & design'], items: [['web-agency-bloom', 'Agency Bloom'], ['web-belay', 'Belay'], ['web-somnia', 'Somnia Library']] },
+  { id: 'portfolio', label: ['全栈项目', 'Full-stack projects'], items: [['web-agency-bloom', 'Agency Bloom'], ['web-belay', 'Belay'], ['web-somnia', 'Somnia Library']] },
   { id: 'XD', label: ['UX/UI 设计', 'UX/UI design'], items: [['XD-cupcakes', 'Cupcakes'], ['XD-reverie', 'Reverie Reads'], ['XD-travel', 'Travel Discovery']] },
   { id: 'services', label: ['数据与 AI', 'Data & AI'], items: [['data-athub', ['AtHub 异常检测', 'AtHub anomaly detection']], ['data-visualization', ['公共数据可视化', 'Public data visualization']], ['data-energy', ['可持续数据中心选址', 'Sustainable data-center siting']]] },
 ];
