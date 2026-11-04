@@ -6,8 +6,11 @@ import { dataProjects, localize } from './data-projects';
 import './data-projects.css';
 import './data-ribbon.css';
 
+function EnergyCover({ en }) {
+ return <div className="data-energy-cover"><span className="data-cover-label">ENERGY / PLACE / POSSIBILITY</span><div className="data-energy-orbits" aria-hidden="true"><i/><i/><i/><span>↗</span></div><div className="data-energy-factors">{(en ? ['Energy','Location','Cost'] : ['能源条件','地域差异','成本约束']).map((label,i)=><span key={label}><small>0{i+1}</small>{label}</span>)}</div><small>{en ? 'Analytical framework' : '分析框架'}</small></div>;
+}
 function Cover({ project, en }) {
- return <div className="data-cover"><img src={project.cover} alt={localize(project.coverAlt,en?'en':'zh')}/><span className="data-cover-label">{en ? 'FROM THE ORIGINAL ANALYSIS' : '原始分析图表'}</span></div>;
+ return project.cover ? <div className="data-cover"><img src={project.cover} alt={localize(project.coverAlt,en?'en':'zh')}/><span className="data-cover-label">{en ? 'FROM THE ORIGINAL ANALYSIS' : '原始分析图表'}</span></div> : <EnergyCover en={en}/>;
 }
 function Figure({ figure, language }) {
  const dialog=useRef(null), en=language==='en', label=localize(figure.label,language);
@@ -26,9 +29,9 @@ export default function Projects({language='zh',projectId='services',onNavigate}
  <div className="data-chapters">{project.chapters.map(([heading,body],i)=><section key={heading[1]}><span className="data-number">0{i+1}</span><h2>{t(heading)}</h2><p>{t(body)}</p></section>)}</div>
  {project.figures.length>0&&<div className="data-gallery"><div className="data-gallery-heading"><h2>{en?'Inside the analysis':'走进分析'}</h2><p>{en?'Original figures · Select an image to enlarge':'原始图表 · 点击可放大阅读'}</p></div><div className="data-figure-grid">{project.figures.map(figure=><Figure key={figure.src} figure={figure} language={language}/>)}</div></div>}
  </> : <>
- <div className="data-project-grid">{dataProjects.map((item,i)=><article key={item.id} className={'data-card'+(i===0?' data-featured':'')+(item.presentation === 'text' ? ' data-text-card' : '')}>
+ <div className="data-project-grid">{dataProjects.map((item,i)=><article key={item.id} className={'data-card'+(i===0?' data-featured':'')}>
    <header className="data-card-heading"><p className="data-kicker">{item.number} / {t(item.category)}</p><h2><a href={'#'+item.id} onClick={onNavigate}>{t(item.title)}</a></h2></header>
-   {item.cover && <a className="data-card-visual" href={'#'+item.id} onClick={onNavigate} aria-label={(en?'Explore ':'查看')+t(item.title)}><Cover project={item} en={en}/></a>}
+   <a className="data-card-visual" href={'#'+item.id} onClick={onNavigate} aria-label={(en?'Explore ':'查看')+t(item.title)}><Cover project={item} en={en}/></a>
    <div className="data-card-body"><p>{t(item.summary)}</p><span className="data-tools">{item.tools}</span><ProjectIntroLink href={'#' + item.id} onNavigate={onNavigate} en={en} projectName={t(item.title)} /></div>
  </article>)}</div>
  </>}
