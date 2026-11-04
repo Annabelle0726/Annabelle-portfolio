@@ -2,6 +2,7 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { interviewCards, localAnswer, suggestions } from '../portfolio-search';
 import { caseIntroduction } from '../../server/portfolio-conversation.mjs';
 import { restoreSession, conversationHistory } from '../portfolio-session';
+import { revealReply } from '../portfolio-reveal';
 import './portfolio-questions.css';
 
 const storeKey = 'portfolio.questions.v1';
@@ -126,6 +127,7 @@ export default function PortfolioQuestions({page, language, menuOpen, navigate})
     const question = raw.trim();
     if (!question || controller.current) return;
     const request = new AbortController();
+    const startedAt = performance.now();
     controller.current = request;
     const index = retryIndex ?? session.turns.length;
     const origin = retryIndex === null ? {page,language} : session.turns[index].origin || {page,language};
@@ -154,13 +156,29 @@ export default function PortfolioQuestions({page, language, menuOpen, navigate})
       reply = {...localAnswer(payload), offline:true};
     }
     if (controller.current !== request || request.signal.aborted) return;
+    try {
+      await revealReply(reply,{
+        signal:request.signal,
+        thinkingMs:Math.max(0,220-(performance.now()-startedAt)),
+        reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches,
+        onUpdate:partial => {
+          if (controller.current !== request || request.signal.aborted) return;
+          setSession(previous => controller.current !== request ? previous : ({...previous,
+            turns:previous.turns.map((old,i) => i === index ? {...old,reply:partial} : old)}));
+        },
+      });
+    } catch {
+      if (request.signal.aborted) return;
+      // A presentation failure must not discard an otherwise valid answer.
+    }
+    if (controller.current !== request || request.signal.aborted) return;
     setSession(previous => ({...previous,turns:previous.turns.map((old,i) => i === index ? {...old,reply} : old)}));
     if (!visibleRef.current) setUnread(true);
     controller.current = null;
     setPending(null);
   }
   if (!enabled || menuOpen) return null;
-  const lastCompleted = session.turns.findLast(turn => turn.reply.status !== 'pending');
+  const lastCompleted = session.turns.findLast(turn => !['pending','generating'].includes(turn.reply.status));
   const mode = !api || lastCompleted?.reply.offline
     ? t('作品资料模式 · 回答附案例出处','Case library · Answers link to the projects')
     : t('作品助手 · 项目事实附出处','Portfolio guide · Sources for project facts');
@@ -179,7 +197,7 @@ export default function PortfolioQuestions({page, language, menuOpen, navigate})
         <button type="button" className="qa-icon-button" aria-label={t('收起问答','Minimize chat')} onClick={close}><Icon name="close"/></button>
       </header>
       <div className="qa-context"><span/>{t('正在看','Viewing')} · {pageNames[page][zh ? 0 : 1] || pageNames[page][0]}</div>
-      <div className="qa-log" ref={log} role="log" aria-label={t('对话记录','Conversation')} aria-live="polite" aria-relevant="additions text" onScroll={event => {
+      <div className="qa-log" ref={log} role="log" aria-label={t('对话记录','Conversation')} aria-live="polite" aria-busy={pending !== null} aria-relevant="additions text" onScroll={event => {
         const element = event.currentTarget;
         scrollPosition.current = element.scrollTop;
         follow.current = element.scrollHeight-element.scrollTop-element.clientHeight < 48;
@@ -192,13 +210,14 @@ export default function PortfolioQuestions({page, language, menuOpen, navigate})
           <p className="qa-user"><span className="qa-sr-only">{t('你：','You: ')}</span>{question}</p>
           <div className="qa-assistant"><Avatar small/><div className="qa-response">
             <div className={reply.status === 'pending' ? 'qa-assistant-bubble qa-pending' : 'qa-assistant-bubble'}>
-              {reply.status === 'pending' ? <span role="status">{t('我在想…','Thinking…')}<span className="qa-thinking" aria-hidden="true"><i/><i/><i/></span></span> : <>
-                {reply.status === 'matches' && <span className="qa-reply-label">{t('找到的相关资料','Related published passages')}</span>}
-                {reply.status === 'analysis' && <span className="qa-reply-label">{t('我的分析与建议','My analysis and suggestions')}</span>}
-                <p className="qa-answer">{reply.text}</p>
+              {reply.status === 'pending' ? <span role="status">{t('思考中…','Thinking…')}<span className="qa-thinking" aria-hidden="true"><i/><i/><i/></span></span> : <>
+                {reply.status === 'generating' && <span className="qa-generating-label" role="status">{t('正在生成…','Writing…')}</span>}
+                {(reply.kind || reply.status) === 'matches' && <span className="qa-reply-label">{t('找到的相关资料','Related published passages')}</span>}
+                {(reply.kind || reply.status) === 'analysis' && <span className="qa-reply-label">{t('我的分析与建议','My analysis and suggestions')}</span>}
+                <p className={reply.status === 'generating' ? 'qa-answer qa-answer-generating' : 'qa-answer'}>{reply.text}</p>
               </>}
             </div>
-            {reply.offline && api && index === session.turns.length-1 && <button type="button" className="qa-text-button" disabled={pending !== null} onClick={() => send(question,index)}>{t('重试在线回答','Retry online answer')}</button>}
+            {reply.offline && api && index === session.turns.length-1 && reply.status !== 'generating' && <button type="button" className="qa-text-button" disabled={pending !== null} onClick={() => send(question,index)}>{reply.interrupted ? t('重新生成','Generate again') : t('重试在线回答','Retry online answer')}</button>}
             {reply.sources.length > 0 && <div className="qa-sources" aria-label={t('回答出处','Answer sources')}>
               {[...new Map(reply.sources.map(source => [source.href,source])).values()].map(source => source.href === '#' + page
                 ? <span className="qa-current-source" key={source.href}>{t('本页出处','On this page')} · {source.title}</span>

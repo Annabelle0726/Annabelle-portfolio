@@ -45,3 +45,12 @@ test('long Chinese conversations stay below the HTTP body limit and keep the new
   assert.ok(new TextEncoder().encode(JSON.stringify(history)).length <= 48000);
   assert.ok(history.at(-1).answer.endsWith('5'));
 });
+
+test('refresh during progressive output preserves partial text but never restores a permanent generating state',()=>{
+  const restored=restoreSession(JSON.stringify({draft:'next draft',turns:[{question:'q',reply:{status:'generating',text:'已经显示的一部分',sources:[]},origin:{language:'zh',page:'portfolio'}}]}));
+  assert.equal(restored.turns[0].reply.status,'unavailable');
+  assert.match(restored.turns[0].reply.text,/已经显示的一部分/);
+  assert.equal(restored.turns[0].reply.interrupted,true);
+  assert.equal(restored.draft,'next draft');
+  assert.deepEqual(conversationHistory([{question:'q',reply:{status:'generating',text:'partial',sources:[]}}]),[]);
+});
