@@ -5,9 +5,9 @@
 .belay-session-shell header small { font-size: 10px; font-weight: 400; }
 .belay-session-shell header i { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--color-pale-gold); margin-right: 4px; }
 .belay-lab-steps { display: flex; list-style: none; gap: 0; margin: 0 16px; padding: 0; border-bottom: 1px solid var(--color-border); }
-.belay-lab-steps li { flex: 1; display: flex; align-items: center; gap: 7px; padding: 9px 0; font: 600 11px/1.5 system-ui,sans-serif; color: var(--lab-muted); border-bottom: 2px solid transparent; }
+.belay-lab-steps li { flex: 1; display: flex; align-items: center; gap: 7px; padding: 10px 0; font: 600 11px/1.5 system-ui,sans-serif; color: var(--lab-muted); border-bottom: 2px solid transparent; }
 .belay-lab-steps li[data-active=true] { color: var(--color-primary); border-color: var(--color-primary); }
-.belay-lab-steps li > span { font: italic 15px Georgia,serif; }
+.belay-lab-steps li > span { font: 500 11px/1.5 system-ui,sans-serif; font-variant-numeric: tabular-nums; color: var(--lab-muted); }
 .belay-lab-canvas { padding: 14px 16px; display: grid; gap: 14px; min-width: 0; }
 .belay-session-editor { border-radius: 7px; background: var(--color-ink-navy); color: var(--color-surface); overflow: hidden; min-width: 0; }
 .belay-editor-bar { padding: 9px 12px; border-bottom: 1px solid color-mix(in srgb,var(--color-aqua-light) 24%,transparent); color: var(--color-aqua-light); font: 11px monospace; }
@@ -19,22 +19,22 @@
 .lab-line[data-error=true] { background: color-mix(in srgb,var(--color-champagne-gold) 24%,transparent); }
 .lab-run-bar { padding: 4px 10px 8px; gap: 6px; }
 .lab-run-bar > span { font: 10px/1.5 system-ui,sans-serif; color: var(--color-aqua-light); }
-.belay-session-shell button { min-height: 44px; cursor: pointer; font: 500 12px/1.4 system-ui,sans-serif; }
+.belay-session .belay-session-shell button { min-height: 44px; cursor: pointer; font: 500 12px/1.4 system-ui,sans-serif; }
 .belay-session-shell .lab-run { border: 1px solid var(--color-aqua-light); background: transparent; color: var(--color-surface); padding: 4px 12px; border-radius: 5px; white-space: nowrap; }
 .lab-terminal { padding: 12px; border-top: 1px solid color-mix(in srgb,var(--color-aqua-light) 24%,transparent); min-height: 76px; }
 .lab-terminal small { display: block; margin-bottom: 7px; font: 10px system-ui,sans-serif; letter-spacing: .1em; color: var(--color-pale-gold); }
 .lab-terminal samp { display: block; font: 12px/1.6 ui-monospace,monospace; overflow-wrap: anywhere; }
 .lab-terminal[data-result=success] samp { color: var(--color-aqua-light); }
-.belay-lab-coach { border-left: 2px solid var(--color-champagne-gold); padding-left: 12px; min-width: 0; }
-.belay-lab-coach > p { font-size: 13px; line-height: 1.7; margin: 8px 0; color: var(--lab-ink); }
-.belay-lab-coach .lab-coach-label { font: 600 10px/1.6 system-ui,sans-serif; letter-spacing: .08em; color: var(--lab-muted); margin: 0; }
+.belay-lab-coach { border-left: 1px solid var(--color-champagne-gold); padding-left: 12px; min-width: 0; }
+.belay-session .belay-lab-coach > p { font-size: 12px; line-height: 1.75; margin: 8px 0; color: var(--lab-ink); }
+.belay-session .belay-lab-coach .lab-coach-label { font: 600 10px/1.6 system-ui,sans-serif; letter-spacing: .08em; color: var(--lab-muted); margin: 0; }
 .lab-coach-label span { color: var(--color-imperial-gold); }
 .lab-next { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 10px; width: 100%; border: 1px solid var(--color-border); border-radius: 5px; color: var(--color-primary); background: var(--color-ivory); text-align: left; }
 .lab-next:disabled { cursor: default; opacity: .45; }
 .belay-lab-coach .lab-answer { background: var(--color-highlight); padding: 10px; border-radius: 5px; }
 .belay-session-shell footer { padding: 6px 16px; border-top: 1px solid var(--color-border); flex-wrap: wrap; }
 .lab-save { border: 0; background: var(--color-primary); color: var(--color-surface); padding: 8px 14px; border-radius: 5px; }
-.lab-reset { color: var(--lab-muted); border: 0; background: transparent; padding: 6px 0; }
+.lab-reset { text-decoration: none; color: var(--lab-muted); border: 0; background: transparent; padding: 6px 0; }
 .belay-saved-record { min-height: 220px; align-content: center; padding: 20px; border: 1px solid var(--color-border); background: var(--color-ivory); border-radius: 8px; }
 .lab-record-icon { display: block; font: 46px Georgia,serif; color: var(--color-primary); }
 .belay-saved-record > small { color: var(--lab-muted); font: 10px/1.5 system-ui,sans-serif; letter-spacing: .08em; }
@@ -65,14 +65,24 @@
   .belay-lab-canvas { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); align-items: start; }
   .belay-saved-record { grid-column: 1 / -1; }
 }
-.belay-session .lab-answer { font-size: 12px; }
+.belay-session .belay-lab-coach .lab-answer { font-size: 12px; margin-bottom: 0; }
 .belay-live-stage > .belay-session { padding: 0; margin: 0; }
 .belay-session .lab-code { padding-block: 10px; }
 .belay-session .lab-line { font: 12px/1.7 ui-monospace,monospace; }
 .belay-session .lab-terminal { min-height: 64px; padding: 9px 12px; }
-.belay-session button { font: 500 12px/1.4 system-ui,sans-serif; }
 @media (min-width: 1100px) {
   .belay-live-stage { width: 92%; justify-self: start; margin-left: -8px; }
   .belay-live-stage .belay-lab-canvas { padding: 12px 14px; min-height: 230px; }
   .belay-live-stage .belay-session-shell footer { padding-block: 4px; }
 }
+
+.belay-session .belay-session-shell :is(.lab-run,.lab-save,.lab-next) { border-radius: 5px; }
+.belay-session .lab-run { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-width: 66px; }
+.belay-session .lab-next { gap: 8px; }
+.belay-session .lab-save { display: inline-flex; align-items: center; gap: 10px; }
+.belay-session .lab-reset { font-size: 12px; color: var(--lab-muted); text-underline-offset: 3px; }
+.belay-session .lab-reset:hover { text-decoration: underline; }
+.belay-session .lab-save:hover { background: var(--color-primary-hover); }
+.belay-session .lab-next:not(:disabled):hover { background: var(--color-highlight); }
+.belay-session .lab-run:hover { background: color-mix(in srgb,var(--color-aqua-light) 12%,transparent); }
+.lab-icon { display: inline-block; flex: 0 0 14px; width: 14px; height: 14px; vertical-align: -2px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
