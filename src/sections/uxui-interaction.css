@@ -23,8 +23,6 @@
 .uxui-page .reading-deck button:focus-visible { outline: 3px solid #ffcc65; outline-offset: 2px; }
 @media (prefers-reduced-motion:no-preference) {
   .deck-hand button { transition: transform .42s cubic-bezier(.22,.82,.28,1.13), background-color .2s; }
-  .deck-page { animation: deck-page-open .35s ease-out; }
-  @keyframes deck-page-open { from { clip-path: inset(0 55% 0 0); opacity: .55; } to { clip-path: inset(0); opacity: 1; } }
 }
 .flavor-week { padding: clamp(14px,2vw,24px); background: #fff6eb; color: #552c28; }
 .week-edition { margin: 0 0 6px; font: 600 10px/1.5 system-ui,sans-serif; letter-spacing: .14em; color: #90445a; }
@@ -70,3 +68,6 @@
 @media (prefers-reduced-motion:reduce) {
   .postal-card.is-front { transform: none; }
 }
+
+.uxui-image-fold { position: relative; isolation: isolate; }
+.uxui-image-fold > .paper-fold, .overview-sampler > .paper-fold { z-index: 4; }

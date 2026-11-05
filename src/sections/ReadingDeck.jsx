@@ -1,4 +1,5 @@
 import React from 'react';
+import AboutTextFold from '../components/AboutTextFold';
 
 const notes = [
   ['按兴趣或心情寻找下一本书。', 'Find a next read through a favorite book or a mood.'],
@@ -19,8 +20,9 @@ export default function ReadingDeck({ screens, en, selected, onSelect, onEnlarge
         <small lang="en">VOL. 0{i + 1}</small><strong>{card.label[lang]}</strong>
       </button>)}
     </div>
-    <div className="deck-page" key={screen.src}>
+    <div className="deck-page uxui-image-fold" key={screen.src}>
       <img src={screen.src} alt={screen.alt[lang]} />
+      <AboutTextFold fromLeft />
     </div>
     <p className="deck-note" role="status">{selected ? notes[selected - 1][lang] :
       en ? 'Pick a volume to explore its screen.' : '选一卷看它的界面，再点一次回到阅读首页。'}</p>

@@ -1,4 +1,5 @@
 import React, { useId, useLayoutEffect, useRef } from 'react';
+import './paper-fold.css';
 
 // Clip a sheet against the diagonal fold x - y = crease.
 function clipSheet(corners, crease, foldedSide) {
@@ -24,7 +25,7 @@ function clipSheet(corners, crease, foldedSide) {
 }
 const pointsAttribute = points => points.map(point => point.x + ',' + point.y).join(' ');
 
-export default function AboutTextFold({ reverseDirection = false, chapter = false }) {
+export default function AboutTextFold({ reverseDirection = false, chapter = false, fromLeft = false }) {
   const svg = useRef(null);
   const cover = useRef(null);
   const reverse = useRef(null);
@@ -36,6 +37,7 @@ export default function AboutTextFold({ reverseDirection = false, chapter = fals
     const page = layer.parentElement;
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (media.matches) return;
+    const gentle = chapter || fromLeft;
     let frame = 0;
     let delay = 0;
     let progress = 0;
@@ -54,6 +56,13 @@ export default function AboutTextFold({ reverseDirection = false, chapter = fals
       layer.setAttribute('viewBox', `0 0 ${width} ${height}`);
     };
     const paint = () => {
+      if (fromLeft) {
+        const crease = progress * width;
+        cover.current.setAttribute('points', `${crease},0 ${width},0 ${width},${height} ${crease},${height}`);
+        reverse.current.setAttribute('points', `${crease},0 ${2 * crease},0 ${2 * crease},${height} ${crease},${height}`);
+        creaseLine.current.setAttribute('d', `M${crease},0 L${crease},${height}`);
+        return;
+      }
       if (chapter) {
         const crease = progress * height;
         cover.current.setAttribute('points', `0,${crease} ${width},${crease} ${width},${height} 0,${height}`);
@@ -79,7 +88,7 @@ export default function AboutTextFold({ reverseDirection = false, chapter = fals
       layer.style.display = 'none';
     };
     const finishEarly = () => {
-      if (finishing) return;
+      if (complete || finishing) return;
       finishing = true;
       window.clearTimeout(delay);
       window.cancelAnimationFrame(frame);
@@ -106,8 +115,8 @@ export default function AboutTextFold({ reverseDirection = false, chapter = fals
             frame = requestAnimationFrame(tick);
             return;
           }
-          const elapsed = Math.min(1, (now - beginning) / (chapter ? 1800 : 850));
-          progress = chapter
+          const elapsed = Math.min(1, (now - beginning) / (gentle ? 1800 : 850));
+          progress = gentle
             ? elapsed ** 3 * (elapsed * (6 * elapsed - 15) + 10)
             : elapsed * elapsed * (3 - 2 * elapsed);
           paint();
@@ -115,16 +124,16 @@ export default function AboutTextFold({ reverseDirection = false, chapter = fals
           else finish();
         };
         frame = requestAnimationFrame(tick);
-      }, chapter ? 0 : 160);
+      }, gentle ? 0 : 160);
     };
     const bounds = page.getBoundingClientRect();
-    if (chapter && bounds.top >= window.innerHeight) {
+    if (gentle && bounds.top >= window.innerHeight) {
       measure();
       paint();
       layer.style.display = 'block';
     }
     if (bounds.bottom <= 0) finish();
-    else if (bounds.top < window.innerHeight - (chapter ? 24 : 0) && bounds.bottom > 0) start();
+    else if (bounds.top < window.innerHeight - (gentle ? 24 : 0) && bounds.bottom > 0) start();
     const observer = new IntersectionObserver(entries => {
       if (entries.some(entry => entry.isIntersecting)) {
         const current = page.getBoundingClientRect();
@@ -132,7 +141,7 @@ export default function AboutTextFold({ reverseDirection = false, chapter = fals
         else finish();
         observer.disconnect();
       }
-    }, { threshold: chapter ? .16 : .08 });
+    }, { threshold: gentle ? .16 : .08 });
     const onScroll = () => {
       if (complete || finishing) return;
       const current = page.getBoundingClientRect();
@@ -146,10 +155,14 @@ export default function AboutTextFold({ reverseDirection = false, chapter = fals
         observer.disconnect();
       }
     };
-    if (chapter) window.addEventListener('scroll', onScroll, { passive: true });
+    if (gentle) window.addEventListener('scroll', onScroll, { passive: true });
+    if (fromLeft) {
+      page.addEventListener('pointerdown', finishEarly);
+      page.addEventListener('focusin', finishEarly);
+    }
     observer.observe(page);
     const resize = new ResizeObserver(() => {
-      if (!complete && (started || chapter)) { measure(); paint(); }
+      if (!complete && (started || gentle)) { measure(); paint(); }
     });
     resize.observe(page);
     const motionChange = () => { if (media.matches) finish(); };
@@ -157,21 +170,25 @@ export default function AboutTextFold({ reverseDirection = false, chapter = fals
     return () => {
       finish();
       observer.disconnect();
-      if (chapter) window.removeEventListener('scroll', onScroll);
+      if (gentle) window.removeEventListener('scroll', onScroll);
+      if (fromLeft) {
+        page.removeEventListener('pointerdown', finishEarly);
+        page.removeEventListener('focusin', finishEarly);
+      }
       resize.disconnect();
       media.removeEventListener('change', motionChange);
     };
-  }, [chapter]);
+  }, [chapter, fromLeft]);
 
-  return <svg ref={svg} className={'about-text-fold' + (reverseDirection ? ' is-reversed' : '') + (chapter ? ' is-chapter' : '')} aria-hidden="true" focusable="false">
+  return <svg ref={svg} className={'paper-fold about-text-fold' + (reverseDirection ? ' is-reversed' : '') + (chapter ? ' is-chapter' : '') + (fromLeft ? ' is-from-left' : '')} aria-hidden="true" focusable="false">
     <defs>
-      <linearGradient id={gradientId} x1={chapter ? "0%" : "100%"} y1="0%" x2="0%" y2="100%">
-        <stop offset="0" stopColor="var(--color-paper)" />
-        <stop offset=".42" stopColor="var(--color-paper)" />
+      <linearGradient id={gradientId} x1={chapter || fromLeft ? "0%" : "100%"} y1="0%" x2={fromLeft ? "100%" : "0%"} y2={fromLeft ? "0%" : "100%"}>
+        <stop offset="0" stopColor="var(--fold-paper, var(--color-paper))" />
+        <stop offset=".42" stopColor="var(--fold-paper, var(--color-paper))" />
         <stop offset="1" stopColor="var(--color-pale-gold)" stopOpacity=".55" />
       </linearGradient>
     </defs>
-    <polygon ref={cover} fill="var(--color-paper)" />
+    <polygon ref={cover} fill="var(--fold-paper, var(--color-paper))" />
     <polygon ref={reverse} fill={`url(#${gradientId})`} className="about-fold-reverse" />
     <path ref={creaseLine} className="about-fold-crease" />
   </svg>;

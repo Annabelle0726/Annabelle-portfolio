@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import SectionHeader from '../components/SectionHeader';
 import ProjectIntroLink from '../components/ProjectIntroLink';
 import ProjectPagination from '../components/ProjectPagination';
+import AboutTextFold from '../components/AboutTextFold';
 import ReadingDeck from './ReadingDeck';
 import './uxui-interaction.css';
 import CupcakeReveal from './CupcakeReveal';
@@ -44,12 +45,13 @@ function FullPagePreview({ en, travel }) {
         {en ? 'Open original page ↗' : '打开原网页 ↗'}
       </a>
     </figcaption>
-    <div className="cupcake-page-scroll" role="region" aria-label={title} tabIndex={0}>
+    <div className="cupcake-page-scroll uxui-image-fold" role="region" aria-label={title} tabIndex={0}>
       <picture>
         <source media="(max-width: 767px)" srcSet={travel ? travelPageMobile : cupcakePageMobile} width="780" height={travel ? 9492 : 7886} />
         <img src={travel ? travelPageDesktop : cupcakePageDesktop} width="2380" height={travel ? 4136 : 6180} loading="lazy"
           alt={travel ? (en ? 'Travel homepage: search, recommended destinations, a static map and footer.' : '旅行首页：搜索、目的地推荐、静态地图和页脚。') : en ? 'Sprinkles homepage from top to bottom: ordering options, promotion, flavor of the day, product categories and footer.' : 'Sprinkles 首页从上到下依次为选购入口、活动横幅、今日口味、产品分类和页脚。'} />
       </picture>
+      <AboutTextFold key={en ? 'en' : 'zh'} fromLeft />
     </div>
   </figure>;
 }
@@ -114,8 +116,8 @@ function OverviewPreview({ project, language, onNavigate }) {
   const en = language === 'en';
   const t = pair => pick(pair, language);
   const previewId = project.id + '-preview';
-  if (project.id === 'XD-cupcakes') return <div className="uxui-overview-cover overview-sampler"><FlavorWeek en={en} /></div>;
-  if (project.id === 'XD-travel') return <div className="uxui-overview-cover overview-sampler"><TravelPostcards en={en} onNavigate={onNavigate} /></div>;
+  if (project.id === 'XD-cupcakes') return <div className="uxui-overview-cover overview-sampler"><FlavorWeek en={en} /><AboutTextFold key={language} fromLeft /></div>;
+  if (project.id === 'XD-travel') return <div className="uxui-overview-cover overview-sampler"><TravelPostcards en={en} onNavigate={onNavigate} /><AboutTextFold key={language} fromLeft /></div>;
   return <div className="uxui-overview-cover overview-sampler">
     <button type="button" className="sampler-toggle" aria-expanded={trying} aria-controls={previewId}
       onClick={() => setTrying(!trying)}>
@@ -129,6 +131,7 @@ function OverviewPreview({ project, language, onNavigate }) {
           height="1031" loading="lazy" />
       </a> : <ReadingDeck screens={project.screens} en={en} selected={reading} onSelect={setReading} />}
     </div>
+    <AboutTextFold key={language} fromLeft />
   </div>;
 }
 
