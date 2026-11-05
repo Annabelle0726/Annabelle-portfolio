@@ -1,7 +1,7 @@
 import React from 'react';
 import './web-project-nav.css';
 
-export default function WebProjectNav({ previous, next, onNavigate, en = false, compact = false }) {
+export default function WebProjectNav({ previous, next, onNavigate, en = false, compact = false, ariaLabel }) {
   const link = (item, direction) => item && <a className={'web-project-nav-link is-' + direction} href={item.href} onClick={onNavigate}>
     {direction === 'right' && <span>{item.label}</span>}
     <span className="web-project-nav-gem" aria-hidden="true">
@@ -11,7 +11,7 @@ export default function WebProjectNav({ previous, next, onNavigate, en = false, 
     </span>
     {direction === 'left' && <span>{item.label}</span>}
   </a>;
-  return <nav className={'web-project-nav' + (compact ? ' is-compact' : '')} aria-label={en ? 'Other projects' : '其他项目'}>
+  return <nav className={'web-project-nav' + (compact ? ' is-compact' : '')} aria-label={ariaLabel || (en ? 'Other projects' : '其他项目')}>
     {link(previous, 'left')}
     {link(next, 'right')}
   </nav>;

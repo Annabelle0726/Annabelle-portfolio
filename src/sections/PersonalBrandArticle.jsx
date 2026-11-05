@@ -10,7 +10,7 @@ import closingAnimation from '../assets/article-being-seen/4.gif';
 
 const Figure = ({ src, alt, height = 540 }) => <figure className="article-figure"><img src={src} alt={alt} width={1080} height={height} loading="lazy" /></figure>;
 
-export default function PersonalBrandArticle() {
+export default function PersonalBrandArticle({ language = 'zh', onNavigate }) {
   return <article className="agency-article" lang="zh-CN"><div className="article-page">
     <SectionHeader eyebrow="AI & PERSONAL BRAND" title="AI 时代的个人品牌：你靠什么被记住？" as="h1" />
     <div className="article-body">
@@ -35,7 +35,7 @@ export default function PersonalBrandArticle() {
       <p>回到最初的问题，AI 时代，普通人靠什么被记住？我的理解是，持续关注一个自己在意的问题，用真实经历支撑自己的看法，再以适合自己的方式表达出来。一次次分享连在一起，别人才能看清我们的特点。品牌感就在这个过程中形成：读者知道我们是谁，也知道为什么愿意再来看看。</p>
       <p>参考：Dan Koe 英文原文</p>
       <Figure src={closingAnimation} height={360} alt="文章结尾的原文动图" />
-      <ArticleFooter originalUrl="https://mp.weixin.qq.com/s/T3nqKyPfPkaxoG8pD8Cvjw" />
+      <ArticleFooter routeId="personal-brand" language={language} onNavigate={onNavigate} />
     </div>
   </div></article>;
 }

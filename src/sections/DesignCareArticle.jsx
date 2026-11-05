@@ -10,7 +10,7 @@ import image3 from '../assets/article-design-care/3.webp';
 const Figure = ({ src, alt, width, height, portrait = false }) => <figure className={`article-figure${portrait ? ' article-figure-portrait' : ''}`}><img src={src} alt={alt} width={width} height={height} loading="lazy" /></figure>;
 const Heading = ({ number, children }) => <h3><span>{number}</span>{children}</h3>;
 
-export default function DesignCareArticle() {
+export default function DesignCareArticle({ language = 'zh', onNavigate }) {
   return <article className="agency-article" lang="zh-CN"><div className="article-page">
     <SectionHeader eyebrow="DESIGN & EXPERIENCE" title="好看，想让你多看一眼；用心，想让你心动" as="h1" />
     <div className="article-body">
@@ -39,7 +39,7 @@ export default function DesignCareArticle() {
       <p>美感让初次相遇令人心动，而长久的吸引，来自一次次相处时的理解与回应。我想，这也是我喜欢设计的原因。一处留白，可以让阅读轻松一些；一个清楚的提示，可以替人省去一点猜测；一次恰好的反馈，可以让伸出去的手，不至于落空。那些关于颜色、布局和操作的选择，最后都会变成某个人真实感受到的片刻。也许只是觉得：“这里看着很舒服。”或者：“嗯，我知道接下来怎么做了。”能带来这样的感受，我就会很开心。</p>
       <p>最近，我把自己开发和参与的作品，慢慢整理到了一起。有明亮的画面，也有安静的角落；有已经成形的想法，也有还在继续打磨的细节。今天，想把这间小小的房子的门打开。请你进来坐坐，看看有没有一处风景，刚好让你喜欢。</p>
       <Figure src={image3} width={1080} height={1080} alt="邀请读者走进个人网站的文章配图" />
-      <ArticleFooter />
+      <ArticleFooter routeId="design-care" language={language} onNavigate={onNavigate} />
     </div>
   </div></article>;
 }

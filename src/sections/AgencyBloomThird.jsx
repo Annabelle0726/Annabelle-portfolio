@@ -11,7 +11,7 @@ import image4 from '../assets/agency-bloom-third/4.webp';
 const Figure = ({ src, alt, caption, portrait = false }) => <figure className={`article-figure${portrait ? ' article-figure-portrait' : ''}`}><img src={src} alt={alt} loading="lazy" />{caption && <figcaption className="article-cover-caption">{caption}</figcaption>}</figure>;
 const Heading = ({ number, children }) => <h3><span>{number}</span>{children}</h3>;
 
-export default function AgencyBloomThird() {
+export default function AgencyBloomThird({ language = 'zh', onNavigate }) {
   return <article className="agency-article" lang="zh-CN"><div className="article-page">
     <SectionHeader eyebrow="AGENCY BLOOM" title="暂时没有掌声也想继续做下去" as="h1" />
     <div className="article-body">
@@ -39,7 +39,7 @@ export default function AgencyBloomThird() {
       <p>我不知道自己未来会走向怎样的职业道路，但至少现在，我还有想弄明白的问题，还有愿意认真完成的事情，也愿意继续听取真实的声音，慢慢修改、慢慢理解。掌声当然会让人高兴，我们都希望自己的努力能够被看见，也希望认真做出的东西能够得到认可。只是，暂时没有掌声的时候，我也想提醒自己：<strong>不必把沉默理解成否定。</strong></p>
       <p>比起急着证明自己已经找到了位置，我更希望在认真做事的过程中，积累判断力，也试着创造一些原本不存在的可能。如果一件事情仍然让我好奇，仍然有值得理解的问题，也还有现实条件允许我继续尝试，那么我愿意再往前走一点。<strong>不是因为坚持本身一定会带来成功，而是因为在这些真实的尝试里，我正在认识自己，理解别人，也学习怎样把一件在意的事情做好。</strong></p>
       <blockquote>Agency Bloom<br /><small>从一点好奇，走向一次小尝试</small></blockquote>
-      <ArticleFooter originalUrl="https://mp.weixin.qq.com/s/pThuorA_l3hqmpPardULOg" />
+      <ArticleFooter routeId="agency-bloom-applause" language={language} onNavigate={onNavigate} />
     </div>
   </div></article>;
 }

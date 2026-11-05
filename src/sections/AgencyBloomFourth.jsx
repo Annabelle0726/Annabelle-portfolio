@@ -11,7 +11,7 @@ import image4 from '../assets/agency-bloom-fourth/4.webp';
 const Figure = ({ src, alt, portrait = false }) => <figure className={`article-figure${portrait ? ' article-figure-portrait' : ''}`}><img src={src} alt={alt} loading="lazy" /></figure>;
 const Heading = ({ number, children }) => <h3><span>{number}</span>{children}</h3>;
 
-export default function AgencyBloomFourth() {
+export default function AgencyBloomFourth({ language = 'zh', onNavigate }) {
   return <article className="agency-article" lang="zh-CN"><div className="article-page">
     <SectionHeader eyebrow="AGENCY BLOOM" title="给那些还没敢开始的想法，一次认真的尝试" as="h1" />
     <div className="article-body">
@@ -50,7 +50,7 @@ export default function AgencyBloomFourth() {
       <p>给那些还没敢开始的想法，一次认真的尝试。让它离开收藏夹和备忘录，成为一个能被打开、使用、质疑和改进的东西。</p>
       <p>我们未必知道它最终会走多远，也无法保证每一份努力都有回应。但至少，在认真尝试之后，我们可以带着新的发现继续向前，而不是一直停留在“如果当初试过，会不会不一样”的遗憾里。</p>
       <blockquote>愿我们都能把心里那个“我想试试”，变成现实里一件真正发生的事。</blockquote>
-      <ArticleFooter originalUrl="https://mp.weixin.qq.com/s/VSMctNqPAuP6FyYJsgE6_A" />
+      <ArticleFooter routeId="agency-bloom-ideas" language={language} onNavigate={onNavigate} />
     </div>
   </div></article>;
 }

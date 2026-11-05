@@ -1,6 +1,9 @@
 import React from 'react';
-import logo from '../assets/agency-bloom-logo.png';
+import WebProjectNav from './WebProjectNav';
+import { articlePageLinks } from './article-pagination';
 
-export default function ArticleFooter({ originalUrl }) {
-  return <footer className="article-footer"><div className="article-footer-brand"><img src={logo} alt="" /><span>Agency Bloom</span></div>{originalUrl && <a href={originalUrl} target="_blank" rel="noopener noreferrer">阅读公众号原文 ↗</a>}</footer>;
+export default function ArticleFooter({ routeId, language = 'zh', onNavigate }) {
+  const en = language === 'en';
+  const links = articlePageLinks(routeId, en);
+  return links && <WebProjectNav {...links} en={en} onNavigate={onNavigate} ariaLabel={en ? 'Article navigation' : '文章翻页'} />;
 }

@@ -10,7 +10,7 @@ import image3 from '../assets/agency-bloom-second/3.webp';
 const Figure = ({ src, alt, portrait = false }) => <figure className={`article-figure${portrait ? ' article-figure-portrait' : ''}`}><img src={src} alt={alt} loading="lazy" /></figure>;
 const Heading = ({ number, topic, children }) => <><h3><span>{number}</span>{children}</h3><p className="article-topic">{topic}</p></>;
 
-export default function AgencyBloomSecond() {
+export default function AgencyBloomSecond({ language = 'zh', onNavigate }) {
   return <article className="agency-article" lang="zh-CN"><div className="article-page">
     <SectionHeader eyebrow="AGENCY BLOOM" title="当技术让一切变得越来越容易，真正值得思考的是我们还能创造什么独特的价值" as="h1" />
     <div className="article-body">
@@ -39,7 +39,7 @@ export default function AgencyBloomSecond() {
       <p>一份方案可以做得很漂亮，但收到它的人，可能还需要有人听懂他的犹豫，把不明白的地方讲清楚，在事情出了岔子的时候，也愿意一起想办法。</p>
       <p>如果说有什么值得长久积累的“护城河”，我想，这也是其中一部分：你理解他所处的境况，也愿意把交到手里的事情认真做完。相处久了，他知道，有些问题可以放心和你商量。</p>
       <blockquote>方向也许就从这里，慢慢清楚起来<br /><small>Agency Bloom · 按照自己的节奏，慢慢生长</small></blockquote>
-      <ArticleFooter originalUrl="https://mp.weixin.qq.com/s/byApMNE4pbO2M4OX62F4Cg" />
+      <ArticleFooter routeId="agency-bloom-value" language={language} onNavigate={onNavigate} />
     </div>
   </div></article>;
 }

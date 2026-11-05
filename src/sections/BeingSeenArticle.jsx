@@ -11,7 +11,7 @@ import image4 from '../assets/article-being-seen/4.gif';
 const Figure = ({ src, alt, width = 1080, height = 720 }) => <figure className="article-figure"><img src={src} alt={alt} width={width} height={height} loading="lazy" /></figure>;
 const Heading = ({ number, children }) => <h3><span>{number}</span>{children}</h3>;
 
-export default function BeingSeenArticle() {
+export default function BeingSeenArticle({ language = 'zh', onNavigate }) {
   return <article className="agency-article" lang="zh-CN"><div className="article-page">
     <SectionHeader eyebrow="LIFE & CONNECTION" title="想被看见，也想看见你" as="h1" />
     <div className="article-body">
@@ -35,7 +35,7 @@ export default function BeingSeenArticle() {
       <p>想到这里，我也想把自己的欣赏说得更清楚。读到喜欢的段落，让写下它的人知道；留意到一个用心的细节，就不只在心里觉得不错。那些我们以为微不足道的回应，到了对方那里，可能恰好有了不一样的分量。我想被看见，也想看见你。看见作品背后的心思，看见表达里的犹豫，看见一个人还没有拿出漂亮结果时，已经付出的认真。如果你也记得某次被认真理解、被具体鼓励的经历，欢迎留言告诉我。那句对方或许已经忘记的话，你为什么一直记到现在？</p>
       <Figure src={image4} height={360} alt="文章结尾的原文动图" />
       <p>如果这篇文章让你想起某个被理解的瞬间，欢迎点赞，也欢迎关注「独钓江雪9447」，一起分享更多想法。</p>
-      <ArticleFooter />
+      <ArticleFooter routeId="being-seen" language={language} onNavigate={onNavigate} />
     </div>
   </div></article>;
 }
