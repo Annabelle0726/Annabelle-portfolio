@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import brandMark from '../assets/brand-mark.svg';
+import AboutTextFold from '../components/AboutTextFold';
 import AboutArtwork from '../components/AboutArtwork';
 import './about.css';
 import SectionHeader from '../components/SectionHeader';
@@ -59,9 +60,9 @@ export default function About({ language = 'zh', onNavigate }) {
         <SectionHeader eyebrow="ABOUT" title={t.title} className="about-heading-area" about />
         <figure className="about-portrait">
           <AboutArtwork />
-          <div className="about-photo-frame"><img src="assets/img/resume.png" alt={zh ? 'Annabelle Zhu 的照片' : 'Annabelle Zhu portrait'} width="1122" height="1402" decoding="async" fetchPriority="high" /></div>
+          <div className="about-photo-frame"><img src="assets/img/resume.png" alt={zh ? 'Annabelle Zhu 的照片' : 'Annabelle Zhu portrait'} width="1122" height="1402" decoding="async" fetchPriority="high" /><AboutTextFold key={language} reverseDirection /></div>
         </figure>
-        <div className="about-prose about-introduction">{t.intro.map(p => <p key={p}>{p}</p>)}</div>
+        <div className="about-prose about-introduction">{t.intro.map(p => <p key={p}>{p}</p>)}<AboutTextFold key={language} /></div>
       </div>
       <section className="about-profile" aria-label={t.personal}>
         <div className="about-profile-band">
