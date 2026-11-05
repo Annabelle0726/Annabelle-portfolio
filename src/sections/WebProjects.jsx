@@ -95,7 +95,7 @@ function ProjectList({ en, t, onNavigate }) {
         });
       }
     }, { threshold: .08, rootMargin: '0px 0px -4% 0px' });
-    root.current.querySelectorAll('.web-project-cover').forEach(el => observer.observe(el));
+    root.current.querySelectorAll('.bloom-opening, .belay-overview').forEach(el => observer.observe(el));
     const cancel = () => { animations.forEach(animation => animation.cancel()); animations.clear(); };
     const stop = () => { if (media.matches) { observer.disconnect(); cancel(); } };
     const interact = event => {

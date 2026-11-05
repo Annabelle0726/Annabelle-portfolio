@@ -70,7 +70,7 @@
 .web-overview-art { position: absolute; z-index: 0; inset: 0; pointer-events: none; overflow: hidden; }
 .web-overview-ribbon { position: absolute; display: block; max-width: none; height: auto; opacity: .9; }
 .web-overview-ribbon-top { width: 540px; right: -30px; top: -80px; }
-.web-belay-connector { position: absolute; z-index: -1; pointer-events: none; width: 78%; max-width: none; height: auto; left: -60px; bottom: -62px; opacity: .9; }
+.web-belay-connector { position: absolute; z-index: -1; pointer-events: none; width: 65%; max-width: none; height: auto; left: -60px; bottom: -50px; opacity: .44; }
 .web-overview-ribbon-bottom { width: 420px; right: -95px; bottom: -90px; transform: rotate(30deg); opacity: .72; }
 .web-mobile-project-art { display: none; }
 .web-project-list { display: flex; flex-direction: column; gap: 0; }
@@ -92,6 +92,8 @@
 .web-overview .web-project-summary { padding: 0; }
 .web-overview .web-project-summary h2 { font-size: clamp(32px,3.1vw,44px); line-height: 1.3; }
 .web-overview .web-project-summary > p:not(.web-kicker) { max-width: 30em; line-height: 1.9; }
+.web-overview:lang(zh) .web-project-row:first-child .web-project-summary > p:not(.web-kicker) { max-inline-size: 21em; text-wrap: balance; }
+#portfolio .web-project-nav { padding-inline-end: calc(var(--qa-control-width, 180px) + 36px); }
 .web-overview-link { display: inline-flex; align-items: center; gap: 14px; min-height: 48px; padding: 6px 0; color: var(--color-deep-sapphire); font-size: 14px; line-height: 1.5; text-decoration: none; margin-top: 8px; }
 .web-overview-link .web-design-arrow { width: 40px; height: 40px; flex-basis: 40px; }
 .web-overview-link:active .web-design-arrow { transform: scale(.94); }
@@ -120,6 +122,8 @@
  .web-project-row-reverse .web-project-cover { position: relative; z-index: 1; }
  .web-project-row-reverse .web-mobile-project-art { inset: -48px -24px -125px 0; overflow: visible; mask-image: none; }
  .web-project-row-reverse .web-mobile-project-art img { width: auto; height: 100%; top: 0; right: -12px; transform: none; opacity: .44; }
+ #main > #portfolio.web-overview { padding-bottom: calc(140px + env(safe-area-inset-bottom)); }
+ #portfolio .web-project-nav { padding-inline-end: 0; }
 }
 .web-project-summary { padding-top: 20px; }
 .web-project-summary h2 { font-size: 30px; margin: 0 0 12px; }
