@@ -36,18 +36,37 @@
 .flavor-week img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
 .flavor-week figcaption { display: flex; align-items: baseline; gap: 12px; padding-top: 10px; min-height: 44px; }
 .flavor-week figcaption strong { font: 500 clamp(17px,2vw,24px)/1.3 Georgia,'Songti SC',serif; }
-.postcard-album { padding: clamp(12px,2vw,22px); background: #fffaf0; color: #173e47; }
+.postcard-album { padding: clamp(8px,1.3vw,16px); padding-bottom: 4px; background: #fffaf0; color: #173e47; min-width: 0; }
+.postal-instruction { margin: 2px 8px 6px; font: 400 12px/1.6 system-ui,sans-serif; color: var(--color-text-secondary); }
+.postal-viewport { display: block; width: 100%; box-sizing: border-box; border: 0; background: transparent; color: inherit; font: inherit; text-align: left; overflow: hidden; padding: 14px 14px 6px 8px; touch-action: manipulation; cursor: pointer; user-select: none; -webkit-user-select: none; border-radius: 6px; }
+.postal-viewport[aria-disabled=true] { cursor: default; }
+.postal-stack { display: block; position: relative; isolation: isolate; }
+.postal-stack::before, .postal-stack::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: #fffaf0; border: 1px solid #c8b997; border-radius: 3px; z-index: -1; }
+.postal-stack::before { transform: translate(9px,-9px); }
+.postal-stack::after { transform: translate(5px,-5px); }
+.postal-card { display: block; box-sizing: border-box; padding: clamp(8px,1.2vw,14px); border: 1px solid #c8b997; border-radius: 3px; background: #fffaf0; box-shadow: 0 5px 8px rgb(48 41 29 / .12); }
+.postal-card.is-front { position: relative; z-index: 1; transform-origin: 50% 80%; }
+.postal-card.is-under { position: absolute; inset: 0; }
 .postal-strip,.postal-address,.postal-controls { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.postal-strip { margin-bottom: 12px; font: 600 11px/1.5 system-ui,sans-serif; letter-spacing: .16em; }
-.postal-photo { display: block; overflow: hidden; aspect-ratio: 3/2; background: #e1e9e5; }
+.postal-strip { margin-bottom: 10px; font: 600 11px/1.5 system-ui,sans-serif; letter-spacing: .16em; }
+.postal-photo { display: block; overflow: hidden; aspect-ratio: 3/2; background: #e1e9e5; pointer-events: none; }
 .postal-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.postal-address { min-height: 80px; padding: 10px 0; border-bottom: 1px dashed #a7aba0; }
+.postal-address { height: 96px; min-height: 96px; padding: 10px 0 2px; }
 .postal-address small,.postal-address strong { display: block; }
 .postal-address strong { font: 500 clamp(21px,2.6vw,32px)/1.25 Georgia,'Songti SC',serif; }
-.postal-address > span { font: 11px/1.5 ui-monospace,monospace; text-align: right; }
-.postal-controls button { min-width: 44px; min-height: 44px; padding: 4px 8px; border: 0; background: transparent; color: var(--color-primary); font: 600 14px system-ui,sans-serif; cursor: pointer; }
+.postal-address > span:last-child { font: 10px/1.5 ui-monospace,monospace; text-align: right; max-width: 47%; }
+.postal-controls { padding: 0 6px; }
+.postal-controls button { min-width: 44px; min-height: 28px; padding: 4px; border: 0; background: transparent; color: var(--color-primary); font: 600 20px system-ui,sans-serif; cursor: pointer; }
 .postal-controls button:hover { background: var(--color-highlight); }
-@media (prefers-reduced-motion:no-preference) {
-  .postal-photo img { animation: postal-arrival .28s ease-out; }
-  @keyframes postal-arrival { from { opacity: .65; clip-path: inset(0 10% 0 0); } to { opacity: 1; clip-path: inset(0); } }
+.postal-controls button[aria-disabled=true] { cursor: default; }
+.postal-dots { display: flex; }
+.postal-dots button { display: grid; place-items: center; min-width: 30px; }
+.postal-dots span { display: block; width: 8px; height: 8px; border: 1px solid var(--color-text-gold); border-radius: 50%; }
+.postal-dots button[aria-current] span { background: var(--color-text); border-color: var(--color-text); }
+.postal-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+@media (pointer: coarse) {
+  .postal-controls button { min-height: 44px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .postal-card.is-front { transform: none; }
 }
