@@ -87,7 +87,7 @@ export default function About({ language = 'zh', onNavigate }) {
         </header>
         <ol className="about-chapters">{t.more.map((p, i) => <li key={t.chapters[i]}>
           <span className="about-chapter-number" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-          <h4>{t.chapters[i]}</h4><p>{p}</p>
+          <h4>{t.chapters[i]}</h4><div className="about-chapter-copy"><p>{p}</p><AboutTextFold key={language} chapter /></div>
         </li>)}</ol>
       </section>
       <div className="about-closing"><span aria-hidden="true" /><img src={brandMark} alt="" /><a href="#portfolio" onClick={onNavigate} className="about-project-link">{zh ? '看看我的项目' : 'Explore my projects'}<svg viewBox="0 0 76 52" fill="none" aria-hidden="true"><circle className="about-project-orbit" cx="49" cy="26" r="23" pathLength="100" /><g className="about-project-arrow"><path d="M5 26H56M48 18l8 8-8 8" /></g></svg></a></div>
