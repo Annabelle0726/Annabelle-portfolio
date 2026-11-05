@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { AccountDialog } from '../components/Sidebar';
 import SectionHeader from '../components/SectionHeader';
 import ContactEnvelope from '../components/ContactEnvelope';
@@ -29,19 +29,6 @@ function ContactIcon({ name }) {
 export default function Contact({ language = 'zh' }) {
   const t = contactText[language];
   const [account, setAccount] = useState(null);
-  const [copyStatus, setCopyStatus] = useState('');
-  const feedbackTimer = useRef(null);
-  useEffect(() => () => window.clearTimeout(feedbackTimer.current), []);
-  const copyEmail = async () => {
-    window.clearTimeout(feedbackTimer.current);
-    try {
-      await navigator.clipboard.writeText(email);
-      setCopyStatus('copied');
-      feedbackTimer.current = window.setTimeout(() => setCopyStatus(''), 2200);
-    } catch {
-      setCopyStatus('failed');
-    }
-  };
   const trigger = useRef(null);
   const openAccount = (name, event) => { trigger.current = event.currentTarget; setAccount(name); };
   const closeAccount = () => { setAccount(null); requestAnimationFrame(() => trigger.current?.focus()); };
@@ -53,11 +40,6 @@ export default function Contact({ language = 'zh' }) {
           <div className="contact-email-block">
             <span className="contact-label">{t.email}</span>
             <a className="contact-email" href={`mailto:${email}`}>0realannabelle0<wbr/>@gmail.com</a>
-            <div className="contact-email-actions">
-              <a className="contact-primary" href={`mailto:${email}`}>{t.write} <span aria-hidden="true">↗</span></a>
-              <button type="button" className="contact-copy-email" onClick={copyEmail}>{copyStatus === 'copied' ? t.copied + ' ✓' : t.copy}</button>
-            </div>
-            <p className="contact-copy-feedback" role="status"><span className={copyStatus === 'copied' ? 'contact-sr-only' : undefined}>{copyStatus ? t[copyStatus] : ''}</span></p>
           </div>
           <div className="contact-bottom">
         <div className="contact-detail"><ContactIcon name="phone"/><div><span className="contact-label">{t.phone}</span><a className="contact-value" href="tel:+8617621800415">+86 176 2180 0415</a></div></div>
