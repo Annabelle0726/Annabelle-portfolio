@@ -11,7 +11,7 @@ export function MobileSignature({ onNavigate }) {
   return <a className="mobile-signature" href="#hero" onClick={onNavigate} aria-label="Annabelle Zhu"><img src={brandMark} alt="Annabelle Zhu" width="56" height="32" /></a>;
 }
 export function HeroPortrait() {
-  return <div className="hero-mobile-portrait"><img src="assets/img/optimized/profile.webp" width="64" height="72" alt="Annabelle Zhu" /></div>;
+  return <div className="hero-mobile-portrait"><img src="assets/img/头像.png" width="64" height="72" alt="Annabelle Zhu" /></div>;
 }
 export function HeroArrow() {
   return <svg viewBox="0 0 76 52" fill="none" aria-hidden="true">
