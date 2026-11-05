@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AccountDialog } from '../components/Sidebar';
 import SectionHeader from '../components/SectionHeader';
 import ContactEnvelope from '../components/ContactEnvelope';
@@ -29,6 +29,19 @@ function ContactIcon({ name }) {
 export default function Contact({ language = 'zh' }) {
   const t = contactText[language];
   const [account, setAccount] = useState(null);
+  const [copyStatus, setCopyStatus] = useState('');
+  const feedbackTimer = useRef(null);
+  useEffect(() => () => window.clearTimeout(feedbackTimer.current), []);
+  const copyEmail = async () => {
+    window.clearTimeout(feedbackTimer.current);
+    try {
+      await navigator.clipboard.writeText(email);
+      setCopyStatus('copied');
+      feedbackTimer.current = window.setTimeout(() => setCopyStatus(''), 2200);
+    } catch {
+      setCopyStatus('failed');
+    }
+  };
   const trigger = useRef(null);
   const openAccount = (name, event) => { trigger.current = event.currentTarget; setAccount(name); };
   const closeAccount = () => { setAccount(null); requestAnimationFrame(() => trigger.current?.focus()); };
@@ -40,6 +53,11 @@ export default function Contact({ language = 'zh' }) {
           <div className="contact-email-block">
             <span className="contact-label">{t.email}</span>
             <a className="contact-email" href={`mailto:${email}`}>0realannabelle0<wbr/>@gmail.com</a>
+            <div className="contact-email-actions">
+              <a className="contact-primary" href={`mailto:${email}`}>{t.write} <span aria-hidden="true">↗</span></a>
+              <button type="button" className="contact-copy-email" onClick={copyEmail}>{copyStatus === 'copied' ? t.copied + ' ✓' : t.copy}</button>
+            </div>
+            <p className="contact-copy-feedback" role="status"><span className={copyStatus === 'copied' ? 'contact-sr-only' : undefined}>{copyStatus ? t[copyStatus] : ''}</span></p>
           </div>
           <div className="contact-bottom">
         <div className="contact-detail"><ContactIcon name="phone"/><div><span className="contact-label">{t.phone}</span><a className="contact-value" href="tel:+8617621800415">+86 176 2180 0415</a></div></div>
@@ -47,9 +65,9 @@ export default function Contact({ language = 'zh' }) {
           </div>
           <ContactMap language={language}/>
       </div>
-      <ContactEnvelope />
+      <ContactEnvelope language={language} email={email} />
       <footer className="contact-footer">
-        <div className="contact-social">
+        <div className="contact-social"><p className="contact-label">{t.social}</p>
           <nav aria-label={t.social}>
             {profiles.map(([icon, key, label, url]) => <a className={`social-item social-${key}`} key={key} href={url} target="_blank" rel="noopener noreferrer" aria-label={label}>
               <span className="social-tile"><span className="social-glyph" style={{'--social-icon': `url("${icon}")`}}/></span><span className="social-tooltip">{label}</span>
@@ -60,8 +78,8 @@ export default function Contact({ language = 'zh' }) {
           </nav>
         </div>
         <div className="resume-downloads">
-          <a href={chineseResume} download="诸惠简历.pdf">{language === 'zh' ? '下载中文简历' : 'Download Chinese résumé'}</a>
-          <a href={englishResume} download="Annabelle_Zhu_Full_Stack_Resume_20261103.pdf">{language === 'zh' ? '下载英文简历' : 'Download English résumé'}</a>
+          <a href={chineseResume} download="诸惠简历.pdf"><span>{language === 'zh' ? '中文简历' : 'Chinese résumé'}</span><small>PDF ↓</small></a>
+          <a href={englishResume} download="Annabelle_Zhu_Full_Stack_Resume_20261103.pdf"><span>{language === 'zh' ? '英文简历' : 'English résumé'}</span><small>PDF ↓</small></a>
         </div>
       </footer>
     </div>

@@ -62,10 +62,24 @@ function BelayConnectorRibbon() {
 
 function BelayOverview({ en }) {
   const [open, setOpen] = useState(false);
+  const [run, setRun] = useState(0);
   return <section className="web-project-cover belay-overview">
     <div className="belay-proof" hidden={open}>
-      <div className="proof-code"><small>BELAY　/　practice.py</small><pre><code>group = df.groupby(<b>"category"</b>)<br />group["value"].mean()</code></pre></div>
-      <div className="proof-output"><small>OUTPUT</small><samp>A　3.0<br />B　8.0</samp></div>
+      <div className="proof-code">
+        <header><span className="proof-window-dots" aria-hidden="true"><i /><i /><i /></span><small>practice.py</small>
+          <button className="proof-run" type="button" onClick={() => setRun(n => n + 1)}>
+            <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1v10l9-5Z" /></svg>
+            {en ? 'Run' : '运行'}
+          </button>
+        </header>
+        <pre key={run} className={run ? 'is-running' : undefined}><code><span>group = df.groupby(<b>"category"</b>)</span><span>group[<b>"value"</b>].mean()</span></code></pre>
+      </div>
+      {run > 0 && <div className="proof-feed">
+        <div key={run} className="proof-output is-printing">
+          <small>OUTPUT</small><samp>A　3.0<br />B　8.0</samp>
+        </div>
+      </div>}
+      <span className="visually-hidden" role="status">{run > 0 && (en ? 'Run ' + run + ' complete. A: 3.0, B: 8.0' : '第 ' + run + ' 次运行完成。A：3.0，B：8.0')}</span>
     </div>
     <button className="proof-toggle" type="button" aria-expanded={open} aria-controls="belay-overview-workspace" onClick={() => setOpen(!open)}>
       {open ? (en ? 'Close workspace' : '收起练习台') : (en ? 'Try the workspace' : '打开练习台')} <span aria-hidden="true">{open ? '↑' : '↗'}</span>
@@ -95,7 +109,8 @@ function ProjectList({ en, t, onNavigate }) {
         });
       }
     }, { threshold: .08, rootMargin: '0px 0px -4% 0px' });
-    root.current.querySelectorAll('.bloom-opening, .belay-overview').forEach(el => observer.observe(el));
+    const opening = root.current.querySelector('.bloom-opening');
+    if (opening) observer.observe(opening);
     const cancel = () => { animations.forEach(animation => animation.cancel()); animations.clear(); };
     const stop = () => { if (media.matches) { observer.disconnect(); cancel(); } };
     const interact = event => {

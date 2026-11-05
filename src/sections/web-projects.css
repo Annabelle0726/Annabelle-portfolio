@@ -72,6 +72,10 @@
 .web-overview-ribbon-top { width: 540px; right: -30px; top: -80px; }
 .web-belay-connector { position: absolute; z-index: -1; pointer-events: none; width: 65%; max-width: none; height: auto; left: -60px; bottom: -50px; opacity: .44; }
 .web-overview-ribbon-bottom { width: 420px; right: -95px; bottom: -90px; transform: rotate(30deg); opacity: .72; }
+.web-overview-ribbon-bottom,
+.web-project-row:last-child .web-mobile-project-art img {
+  mask-image: linear-gradient(to bottom, transparent 1%, rgb(0 0 0 / .12) 7%, black 20%);
+}
 .web-mobile-project-art { display: none; }
 .web-project-list { display: flex; flex-direction: column; gap: 0; }
 .web-project-row { min-width: 0; display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr); align-items: center; gap: clamp(30px,5vw,80px); padding: 42px 0 54px; border-bottom: 1px solid var(--color-border); }

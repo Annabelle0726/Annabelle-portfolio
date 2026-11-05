@@ -7,7 +7,6 @@ const paths = [
   'Cupcakes',
   'PortfolioDigitalProduct',
   'DataVizPortfolio.html',
-  'Annabelle-Zhu_Certificate.png',
   '404.html',
 ];
 

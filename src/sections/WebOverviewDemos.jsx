@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import library from '../assets/somnia-case/library.webp';
 import './web-overview-demos.css';
 
 // Store only choices from these examples, for the lifetime of the current tab.
@@ -18,10 +17,10 @@ function useDemoChoices(key, options) {
 }
 
 const books = [
-  { title: 'Fifty Shades of Grey', x: 380, cloth: '#33515c' },
-  { title: 'Fifty Shades Darker', x: 617, cloth: '#534061' },
-  { title: 'Grey', x: 852, cloth: '#364943' },
-  { title: 'Fifty Shades Freed', x: 1088, cloth: '#73494c' },
+  { title: 'Fifty Shades of Grey', cloth: '#33515c' },
+  { title: 'Fifty Shades Darker', cloth: '#534061' },
+  { title: 'Grey', cloth: '#364943' },
+  { title: 'Fifty Shades Freed', cloth: '#73494c' },
 ];
 const titles = books.map(book => book.title);
 
@@ -78,7 +77,6 @@ export function SomniaShelf({ en }) {
           <span className="shelf-spine" aria-hidden="true"><span>{book.title}</span></span>
           <span className="shelf-jacket" aria-hidden="true">
             <span className="shelf-jacket-title">{book.title}</span>
-            <span className="shelf-illustration" style={{ backgroundImage: 'url(' + library + ')', backgroundPositionX: (book.x + 20) / (1600 - 164) * 100 + '%' }} />
             <span className="shelf-author">E L James</span>
           </span>
         </button>)}
