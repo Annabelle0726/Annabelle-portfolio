@@ -14,4 +14,18 @@
 #main.content-views > :is(.web-project-page,.belay-page,.somnia-page,.uxui-page,.data-page) { padding-bottom: max(32px,env(safe-area-inset-bottom,0px)); }
 .web-project-nav-link > span:not(.web-project-nav-gem) { min-width: 0; overflow-wrap: anywhere; }
 @media (max-width:767px) { .web-project-nav .web-project-nav-link { gap: 9px; max-width: 100%; } }
+@media (max-width:767px) {
+  :is(.agency-article, #portfolio) .web-project-nav {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    margin-top: 16px;
+    padding: 12px 0 64px;
+  }
+  :is(.agency-article, #portfolio) .web-project-nav .is-left { align-self: flex-start; }
+  :is(.agency-article, #portfolio) .web-project-nav .is-right { align-self: flex-end; }
+  /* The full-stack overview also has the assistant below the back-to-top control. */
+  #portfolio .web-project-nav { padding-bottom: 120px; }
+  #main.content-views > #portfolio.web-project-page { padding-bottom: max(16px,env(safe-area-inset-bottom,0px)); }
+}
 @media (prefers-reduced-motion:reduce) { .web-project-nav .web-project-nav-gem { transition: none; transform: none; } }
