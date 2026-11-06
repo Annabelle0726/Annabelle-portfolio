@@ -20,7 +20,8 @@
 .article-body blockquote { margin: 1.8em 0; padding: .7em 1.2em; border-left: 2px solid var(--color-champagne-gold); background: color-mix(in srgb, var(--color-aqua-light) 45%, transparent); color: var(--color-ink-navy); font-size: 1em; line-height: 1.8; }
 .article-body blockquote small { display: inline-block; margin-top: .4em; font-size: .9em; }
 @media (max-width: 767px) {
-  .agency-article { padding: 32px max(24px, env(safe-area-inset-right, 0px)) max(32px, env(safe-area-inset-bottom, 0px)) max(24px, env(safe-area-inset-left, 0px)); }
+  .agency-article { padding: 32px max(24px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(24px, env(safe-area-inset-left, 0px)); }
+  .article-body > .web-project-nav { margin-top: 16px; padding-top: 12px; }
   .article-page > .section-header { margin-bottom: 30px; }
   .article-header h2 { font-size: 21px; margin-bottom: 14px; }
   .article-header { margin-bottom: 20px; }
