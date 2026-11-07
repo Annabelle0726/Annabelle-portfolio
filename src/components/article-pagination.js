@@ -6,6 +6,7 @@ const articles = [
   ['design-care', '好看，想让你多看一眼；用心，想让你心动'],
   ['being-seen', '想被看见，也想看见你'],
   ['personal-brand', 'AI 时代的个人品牌：你靠什么被记住？'],
+  ['understanding-needs', '从短剧爆火，看懂人们真正需要什么'],
 ];
 
 export function articlePageLinks(routeId, en = false) {

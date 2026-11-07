@@ -4,7 +4,7 @@ import { articlePageLinks } from '../src/components/article-pagination.js';
 import { resolveNavigation } from '../src/navigation.js';
 
 test('article pagination follows sidebar order in both directions', () => {
-  const ids = ['agency-bloom', 'agency-bloom-value', 'agency-bloom-applause', 'agency-bloom-ideas', 'design-care', 'being-seen', 'personal-brand'];
+  const ids = ['agency-bloom', 'agency-bloom-value', 'agency-bloom-applause', 'agency-bloom-ideas', 'design-care', 'being-seen', 'personal-brand', 'understanding-needs'];
   for (let i = 0; i < ids.length; i++) {
     const links = articlePageLinks(ids[i]);
     assert.equal(links.previous.href, '#' + (ids[i - 1] || 'services'));
